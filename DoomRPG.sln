@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG", "DoomRPG\DoomRPG.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Graphics", "DoomRPG.Graphics\DoomRPG.Graphics.csproj", "{068FEAFF-52D5-431B-BDC4-F1B72638837F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Primitives", "DoomRPG.Primitives\DoomRPG.Primitives.csproj", "{315F4B7E-D17D-407B-A468-4BB05755C902}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Models", "DoomRPG.Models\DoomRPG.Models.csproj", "{DCDAF30E-E632-49BD-AD3D-C3216152A234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.DataAccess", "DoomRPG.DataAccess\DoomRPG.DataAccess.csproj", "{4DACA400-E5D5-47BD-B0B6-CF6088E12E3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +25,14 @@ Global
 		{068FEAFF-52D5-431B-BDC4-F1B72638837F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{068FEAFF-52D5-431B-BDC4-F1B72638837F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{068FEAFF-52D5-431B-BDC4-F1B72638837F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{315F4B7E-D17D-407B-A468-4BB05755C902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{315F4B7E-D17D-407B-A468-4BB05755C902}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{315F4B7E-D17D-407B-A468-4BB05755C902}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{315F4B7E-D17D-407B-A468-4BB05755C902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDAF30E-E632-49BD-AD3D-C3216152A234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDAF30E-E632-49BD-AD3D-C3216152A234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDAF30E-E632-49BD-AD3D-C3216152A234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDAF30E-E632-49BD-AD3D-C3216152A234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DACA400-E5D5-47BD-B0B6-CF6088E12E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DACA400-E5D5-47BD-B0B6-CF6088E12E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DACA400-E5D5-47BD-B0B6-CF6088E12E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DACA400-E5D5-47BD-B0B6-CF6088E12E3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

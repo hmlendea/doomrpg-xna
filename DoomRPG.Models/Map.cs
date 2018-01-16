@@ -1,4 +1,6 @@
-﻿using NuciXNA.Primitives;
+﻿using System.Collections.Generic;
+
+using NuciXNA.Primitives;
 
 namespace DoomRPG.Models
 {
@@ -39,5 +41,11 @@ namespace DoomRPG.Models
         /// </summary>
         /// <value>The floor colour.</value>
         public Colour FloorColour { get; set; }
+
+        /// <summary>
+        /// Gets or sets the walls.
+        /// </summary>
+        /// <value>The walls.</value>
+        public IEnumerable<WallInstance> Walls { get; set; }
     }
 }

@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4DACA400-E5D5-47BD-B0B6-CF6088E12E3C}</ProjectGuid>
+    <ProjectGuid>{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DoomRPG.DataAccess</RootNamespace>
-    <AssemblyName>DoomRPG.DataAccess</AssemblyName>
+    <RootNamespace>DoomRPG.GameLogic</RootNamespace>
+    <AssemblyName>DoomRPG.GameLogic</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,9 @@
     <Reference Include="NuciXNA.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NuciXNA.DataAccess.1.0.0\lib\net45\NuciXNA.DataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="NuciXNA.Primitives, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuciXNA.Primitives.1.0.1\lib\net45\NuciXNA.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,12 +47,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataObjects\MapEntity.cs" />
-    <Compile Include="DataObjects\WallEntity.cs" />
-    <Compile Include="DataObjects\WallInstanceEntity.cs" />
+    <Compile Include="Mapping\MapMappingExtensions.cs" />
+    <Compile Include="Mapping\WallMappingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\MapRepository.cs" />
-    <Compile Include="Repositories\WallRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DoomRPG.DataAccess\DoomRPG.DataAccess.csproj">
+      <Project>{4daca400-e5d5-47bd-b0b6-cf6088e12e3c}</Project>
+      <Name>DoomRPG.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DoomRPG.Models\DoomRPG.Models.csproj">
+      <Project>{dcdaf30e-e632-49bd-ad3d-c3216152a234}</Project>
+      <Name>DoomRPG.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.DataAccess", "DoomR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Data", "DoomRPG.Data\DoomRPG.Data.csproj", "{2D91A65A-B805-4F71-BF3C-51FCDAC87ABB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.GameLogic", "DoomRPG.GameLogic\DoomRPG.GameLogic.csproj", "{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2D91A65A-B805-4F71-BF3C-51FCDAC87ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D91A65A-B805-4F71-BF3C-51FCDAC87ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D91A65A-B805-4F71-BF3C-51FCDAC87ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -42,6 +42,6 @@ namespace DoomRPG.DataAccess.DataObjects
         /// <value>The floor colour.</value>
         public string FloorColourHex { get; set; }
 
-        List<WallInstanceEntity> Walls { get; set; }
+        public IEnumerable<WallInstanceEntity> Walls { get; set; }
     }
 }

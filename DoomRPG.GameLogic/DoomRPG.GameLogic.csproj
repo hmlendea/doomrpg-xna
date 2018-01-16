@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mapping\MapMappingExtensions.cs" />
+    <Compile Include="Mapping\WallInstanceMappingExtensions.cs" />
     <Compile Include="Mapping\WallMappingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -28,7 +28,5 @@ namespace DoomRPG.Models
         /// </summary>
         /// <value>True if the wall is removable, false otherwise.</value>
         public bool IsRemovable { get; set; }
-
-        public I
     }
 }

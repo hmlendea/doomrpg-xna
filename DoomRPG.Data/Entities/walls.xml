@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWorldObjectEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WorldObjectEntity>
+    <Id>metal_wall</Id>
+    <Name>Metal Wall</Name>
+    <Description>It's a wall made out of metal</Description>
+    <SpritesheetName>metal-wall</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>metal_wall_pipes</Id>
+    <Name>Metal Wall Pipes</Name>
+    <Description>There are some pipes going along this metal wall</Description>
+    <SpritesheetName>metal-wall</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>metal_wall_pipes2</Id>
+    <Name>Metal Wall Pipes</Name>
+    <Description>There are some pipes going along this metal wall</Description>
+    <SpritesheetName>metal-wall</SpritesheetName>
+    <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>stone_wall</Id>
+    <Name>Stone Wall</Name>
+    <Description>There's something very strange about it, and it looks incredibly ancient...</Description>
+    <SpritesheetName>stone-wall</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>stone_wall_window</Id>
+    <Name>Stone Wall Window</Name>
+    <Description>I wonder where it leads...</Description>
+    <SpritesheetName>stone-wall</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+  </WorldObjectEntity>
+</ArrayOfWorldObjectEntity>

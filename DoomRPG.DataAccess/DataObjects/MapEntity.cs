@@ -1,15 +1,9 @@
-﻿using NuciXNA.DataAccess;
+﻿using NuciXNA.DataAccess.DataObjects;
 
 namespace DoomRPG.DataAccess.DataObjects
 {
-    public sealed class MapEntity 
+    public sealed class MapEntity : EntityBase
     {
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>The identifier.</value>
-        public string Id { get; set; }
-
         /// <summary>
         /// Gets or sets the name.
         /// </summary>

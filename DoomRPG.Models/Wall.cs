@@ -21,9 +21,15 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the texture.
+        /// Gets or sets the spritsheet used to draw this wall.
         /// </summary>
-        /// <value>The texture.</value>
-        public string Texture { get; set; }
+        /// <value>The name of thr spritesheet.</value>
+        public string SpritesheetName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the texture index of this wall.
+        /// </summary>
+        /// <value>The texture index.</value>
+        public int SpritesheetTextureIndex { get; set; }
     }
 }

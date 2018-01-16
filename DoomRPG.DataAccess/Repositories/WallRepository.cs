@@ -38,7 +38,8 @@ namespace DoomRPG.DataAccess.Repositories
 
             wallEntityToUpdate.Name = wallEntity.Name;
             wallEntityToUpdate.Description = wallEntity.Description;
-            wallEntityToUpdate.Texture = wallEntity.Texture;
+            wallEntityToUpdate.SpritesheetName = wallEntity.SpritesheetName;
+            wallEntityToUpdate.SpritesheetTextureIndex = wallEntity.SpritesheetTextureIndex;
 
             XmlFile.SaveEntities(Entities);
         }

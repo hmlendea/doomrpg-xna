@@ -23,6 +23,12 @@ namespace DoomRPG.Models
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets the size.
+        /// </summary>
+        /// <value>The size.</value>
+        public Size2D Size { get; set; }
+
+        /// <summary>
         /// Gets or sets the ceiling colour.
         /// </summary>
         /// <value>The ceiling colour.</value>

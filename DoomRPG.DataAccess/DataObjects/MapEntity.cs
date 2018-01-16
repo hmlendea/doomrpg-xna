@@ -1,4 +1,6 @@
-﻿using NuciXNA.DataAccess.DataObjects;
+﻿using System.Collections.Generic;
+
+using NuciXNA.DataAccess.DataObjects;
 
 namespace DoomRPG.DataAccess.DataObjects
 {
@@ -17,6 +19,18 @@ namespace DoomRPG.DataAccess.DataObjects
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets the width.
+        /// </summary>
+        /// <value>The width.</value>
+        public int Width { get; set; }
+
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
+        /// <value>The height.</value>
+        public int Height { get; set; }
+
+        /// <summary>
         /// Gets or sets the ceiling colour in hexadecimal format.
         /// </summary>
         /// <value>The ceiling colour.</value>
@@ -27,5 +41,7 @@ namespace DoomRPG.DataAccess.DataObjects
         /// </summary>
         /// <value>The floor colour.</value>
         public string FloorColourHex { get; set; }
+
+        List<WallInstanceEntity> Walls { get; set; }
     }
 }

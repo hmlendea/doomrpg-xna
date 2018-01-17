@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.GameLogic", "DoomRP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Gui", "DoomRPG.Gui\DoomRPG.Gui.csproj", "{C664CCC3-7D21-482B-A782-52742F6FEBE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Settings", "DoomRPG.Settings\DoomRPG.Settings.csproj", "{C7A4DE34-5AFD-4C9F-BC6E-9B7720C1F5BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{C664CCC3-7D21-482B-A782-52742F6FEBE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C664CCC3-7D21-482B-A782-52742F6FEBE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C664CCC3-7D21-482B-A782-52742F6FEBE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7A4DE34-5AFD-4C9F-BC6E-9B7720C1F5BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7A4DE34-5AFD-4C9F-BC6E-9B7720C1F5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7A4DE34-5AFD-4C9F-BC6E-9B7720C1F5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7A4DE34-5AFD-4C9F-BC6E-9B7720C1F5BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

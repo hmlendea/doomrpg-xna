@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DoomRPG.Graphics")]
+[assembly: AssemblyTitle("DoomRPG.Settings")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DoomRPG.Graphics")]
+[assembly: AssemblyProduct("DoomRPG.Settings")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("068feaff-52d5-431b-bdc4-f1b72638837f")]
+[assembly: Guid("c7a4de34-5afd-4c9f-bc6e-9b7720c1f5be")]
 
 // Version information for an assembly consists of the following four values:
 //

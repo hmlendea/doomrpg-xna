@@ -79,9 +79,17 @@
       <Project>{ed25ebc5-4d72-41e8-8247-6bed8e43c3fe}</Project>
       <Name>DoomRPG.GameLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DoomRPG.Gui\DoomRPG.Gui.csproj">
+      <Project>{c664ccc3-7d21-482b-a782-52742f6febe4}</Project>
+      <Name>DoomRPG.Gui</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DoomRPG.Models\DoomRPG.Models.csproj">
       <Project>{dcdaf30e-e632-49bd-ad3d-c3216152a234}</Project>
       <Name>DoomRPG.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DoomRPG.Settings\DoomRPG.Settings.csproj">
+      <Project>{c7a4de34-5afd-4c9f-bc6e-9b7720c1f5be}</Project>
+      <Name>DoomRPG.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

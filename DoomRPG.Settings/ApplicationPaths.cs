@@ -41,7 +41,7 @@ namespace DoomRPG.Settings
                     localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 }
 
-                return Path.Combine(localAppData, "GielinorAdventures");
+                return Path.Combine(localAppData, "DoomRPG");
             }
         }
         

@@ -3,9 +3,11 @@ using NuciXNA.Graphics.SpriteEffects;
 using NuciXNA.Input.Events;
 using NuciXNA.Primitives;
 
+using NuciXNA.Gui;
 using NuciXNA.Gui.GuiElements;
+using NuciXNA.Gui.Screens;
 
-namespace NuciXNA.Gui.Screens
+namespace DoomRPG.Gui.Screens
 {
     /// <summary>
     /// Splash screen.

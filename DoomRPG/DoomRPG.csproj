@@ -75,12 +75,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
-      <Link>MonoGame.Framework.dll.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="app.manifest" />
     <None Include="packages.config" />
+    <None Include="MonoGame.Framework.dll.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DoomRPG.DataAccess\DoomRPG.DataAccess.csproj">

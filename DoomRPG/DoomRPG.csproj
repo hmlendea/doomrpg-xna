@@ -79,10 +79,6 @@
       <Project>{ed25ebc5-4d72-41e8-8247-6bed8e43c3fe}</Project>
       <Name>DoomRPG.GameLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DoomRPG.Graphics\DoomRPG.Graphics.csproj">
-      <Project>{068feaff-52d5-431b-bdc4-f1b72638837f}</Project>
-      <Name>DoomRPG.Graphics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DoomRPG.Models\DoomRPG.Models.csproj">
       <Project>{dcdaf30e-e632-49bd-ad3d-c3216152a234}</Project>
       <Name>DoomRPG.Models</Name>

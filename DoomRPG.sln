@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG", "DoomRPG\DoomRPG.csproj", "{164BDFD4-1DBF-449E-8C30-24EFAF9C9D79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Graphics", "DoomRPG.Graphics\DoomRPG.Graphics.csproj", "{068FEAFF-52D5-431B-BDC4-F1B72638837F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Models", "DoomRPG.Models\DoomRPG.Models.csproj", "{DCDAF30E-E632-49BD-AD3D-C3216152A234}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.DataAccess", "DoomRPG.DataAccess\DoomRPG.DataAccess.csproj", "{4DACA400-E5D5-47BD-B0B6-CF6088E12E3C}"
@@ -14,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Data", "DoomRPG.Data\DoomRPG.Data.csproj", "{2D91A65A-B805-4F71-BF3C-51FCDAC87ABB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.GameLogic", "DoomRPG.GameLogic\DoomRPG.GameLogic.csproj", "{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomRPG.Gui", "DoomRPG.Gui\DoomRPG.Gui.csproj", "{C664CCC3-7D21-482B-A782-52742F6FEBE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{164BDFD4-1DBF-449E-8C30-24EFAF9C9D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{164BDFD4-1DBF-449E-8C30-24EFAF9C9D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{164BDFD4-1DBF-449E-8C30-24EFAF9C9D79}.Release|Any CPU.Build.0 = Release|Any CPU
-		{068FEAFF-52D5-431B-BDC4-F1B72638837F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{068FEAFF-52D5-431B-BDC4-F1B72638837F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{068FEAFF-52D5-431B-BDC4-F1B72638837F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{068FEAFF-52D5-431B-BDC4-F1B72638837F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DCDAF30E-E632-49BD-AD3D-C3216152A234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DCDAF30E-E632-49BD-AD3D-C3216152A234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCDAF30E-E632-49BD-AD3D-C3216152A234}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED25EBC5-4D72-41E8-8247-6BED8E43C3FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C664CCC3-7D21-482B-A782-52742F6FEBE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C664CCC3-7D21-482B-A782-52742F6FEBE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C664CCC3-7D21-482B-A782-52742F6FEBE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C664CCC3-7D21-482B-A782-52742F6FEBE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

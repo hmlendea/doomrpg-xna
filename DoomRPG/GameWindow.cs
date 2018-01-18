@@ -7,6 +7,7 @@ using NuciXNA.Gui.Screens;
 using NuciXNA.Input;
 
 using DoomRPG.Gui;
+using DoomRPG.Gui.Screens;
 using DoomRPG.Settings;
 
 namespace DoomRPG
@@ -65,6 +66,7 @@ namespace DoomRPG
             SettingsManager.Instance.LoadContent();
 
             ScreenManager.Instance.SpriteBatch = spriteBatch;
+            ScreenManager.Instance.StartingScreenType = typeof(SplashScreen);
             ScreenManager.Instance.LoadContent();
 
             fpsIndicator.LoadContent();

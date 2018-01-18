@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using NuciXNA.Graphics.SpriteEffects;
 using NuciXNA.Input.Events;
 using NuciXNA.Primitives;
 
@@ -19,19 +18,7 @@ namespace DoomRPG.Gui.Screens
         /// </summary>
         /// <value>The delay.</value>
         public float Delay { get; set; }
-
-        /// <summary>
-        /// Gets or sets the background.
-        /// </summary>
-        /// <value>The background.</value>
-        public GuiImage BackgroundImage { get; set; }
-
-        /// <summary>
-        /// Gets or sets the overlay.
-        /// </summary>
-        /// <value>The overlay.</value>
-        public GuiImage OverlayImage { get; set; }
-
+        
         /// <summary>
         /// Gets or sets the logo.
         /// </summary>
@@ -52,33 +39,11 @@ namespace DoomRPG.Gui.Screens
         /// </summary>
         public override void LoadContent()
         {
-            BackgroundImage = new GuiImage
-            {
-                ContentFile = "SplashScreen/Background",
-                RotationEffect = new RotationEffect
-                {
-                    Speed = 0.1f,
-                    MaximumRotation = 0.2f
-                },
-                ZoomEffect = new ZoomEffect
-                {
-                    Speed = 0.1f,
-                    MinimumZoom = 1.25f,
-                    MaximumZoom = 2.00f
-                },
-                EffectsActive = true
-            };
-            OverlayImage = new GuiImage { ContentFile = "SplashScreen/Overlay" };
             LogoImage = new GuiImage { ContentFile = "SplashScreen/Logo" };
-
-            GuiManager.Instance.GuiElements.Add(BackgroundImage);
-            GuiManager.Instance.GuiElements.Add(OverlayImage);
+            
             GuiManager.Instance.GuiElements.Add(LogoImage);
 
             base.LoadContent();
-
-            BackgroundImage.RotationEffect.Activate();
-            BackgroundImage.ZoomEffect.Activate();
         }
 
         /// <summary>
@@ -94,10 +59,6 @@ namespace DoomRPG.Gui.Screens
 
         protected override void SetChildrenProperties()
         {
-            OverlayImage.Size = ScreenManager.Instance.Size;
-
-            BackgroundImage.Location = new Point2D((ScreenManager.Instance.Size.Width - BackgroundImage.ClientRectangle.Width) / 2,
-                                                   (ScreenManager.Instance.Size.Height - BackgroundImage.ClientRectangle.Height) / 2);
             LogoImage.Location = new Point2D((ScreenManager.Instance.Size.Width - LogoImage.Size.Width) / 2,
                                              (ScreenManager.Instance.Size.Height - LogoImage.Size.Height) / 2);
         }

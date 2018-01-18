@@ -42,6 +42,9 @@ namespace DoomRPG.DataAccess.Repositories
             mapEntityToUpdate.Height = mapEntity.Height;
             mapEntityToUpdate.CeilingColourHex = mapEntity.CeilingColourHex;
             mapEntityToUpdate.FloorColourHex = mapEntity.FloorColourHex;
+            mapEntityToUpdate.SpawnX = mapEntity.SpawnX;
+            mapEntityToUpdate.SpawnY = mapEntity.SpawnY;
+            mapEntityToUpdate.Walls = mapEntity.Walls;
 
             XmlFile.SaveEntities(Entities);
         }

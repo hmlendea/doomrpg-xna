@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NuciXNA.Primitives, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NuciXNA.Primitives.1.0.1\lib\net45\NuciXNA.Primitives.dll</HintPath>
+    <Reference Include="NuciXNA.Primitives, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuciXNA.Primitives.1.0.2\lib\net45\NuciXNA.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Map.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WallInstance.cs" />

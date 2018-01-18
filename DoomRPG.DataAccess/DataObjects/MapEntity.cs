@@ -42,6 +42,10 @@ namespace DoomRPG.DataAccess.DataObjects
         /// <value>The floor colour.</value>
         public string FloorColourHex { get; set; }
 
+        public int SpawnX { get; set; }
+
+        public int SpawnY { get; set; }
+
         public IEnumerable<WallInstanceEntity> Walls { get; set; }
     }
 }

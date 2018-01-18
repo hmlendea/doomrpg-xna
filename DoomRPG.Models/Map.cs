@@ -42,6 +42,8 @@ namespace DoomRPG.Models
         /// <value>The floor colour.</value>
         public Colour FloorColour { get; set; }
 
+        public Point2D SpawnPosition { get; set; }
+
         /// <summary>
         /// Gets or sets the walls.
         /// </summary>

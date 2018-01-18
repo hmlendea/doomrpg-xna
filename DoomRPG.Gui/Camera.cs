@@ -6,11 +6,7 @@ namespace DoomRPG.Gui
     {
         public Vector2 Position { get; set; }
 
-        public Vector2 Direction { get; set; }
-
         public float Radius { get; set; }
-
-        public float MovementSpeed { get; set; }
 
         public float RotationSpeed { get; set; }
 
@@ -18,7 +14,6 @@ namespace DoomRPG.Gui
         {
             Radius = 0.3f;
 
-            MovementSpeed = 3f;
             RotationSpeed = 3f;
         }
 

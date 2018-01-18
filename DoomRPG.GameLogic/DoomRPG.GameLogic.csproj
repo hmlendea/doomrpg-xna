@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameManagers\GameManager.cs" />
+    <Compile Include="GameManagers\Interfaces\IGameManager.cs" />
     <Compile Include="GameManagers\Interfaces\IPlayerManager.cs" />
     <Compile Include="GameManagers\PlayerManager.cs" />
     <Compile Include="Mapping\MapMappingExtensions.cs" />

@@ -16,14 +16,24 @@ namespace DoomRPG.GameLogic.GameManagers
         /// <summary>
         /// Loads the content.
         /// </summary>
-        /// <param name="id">Level identifier.</param>
-        public void LoadContent(string id)
+        /// <param name="levelId">Level identifier.</param>
+        public void LoadContent(string levelId)
         {
             string levelPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "maps.xml");
 
             MapRepository levelRepository = new MapRepository(levelPath);
 
-            currentLevel = levelRepository.Get(id).ToDomainModel();
+            currentLevel = levelRepository.Get(levelId).ToDomainModel();
+        }
+
+        public void UnloadContent()
+        {
+
+        }
+
+        public void Update(float elapsedSeconds)
+        {
+
         }
 
         /// <summary>

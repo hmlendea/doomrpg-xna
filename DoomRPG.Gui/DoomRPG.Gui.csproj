@@ -55,6 +55,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="FpsIndicator.cs" />
     <Compile Include="Helpers\FramerateCounter.cs" />
+    <Compile Include="Screens\GameplayScreen.cs" />
     <Compile Include="Screens\SplashScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DoomRPG.GameLogic\DoomRPG.GameLogic.csproj">
+      <Project>{ed25ebc5-4d72-41e8-8247-6bed8e43c3fe}</Project>
+      <Name>DoomRPG.GameLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DoomRPG.Models\DoomRPG.Models.csproj">
       <Project>{dcdaf30e-e632-49bd-ad3d-c3216152a234}</Project>
       <Name>DoomRPG.Models</Name>

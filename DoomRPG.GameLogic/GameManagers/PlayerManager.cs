@@ -23,6 +23,11 @@ namespace DoomRPG.GameLogic.GameManagers
         {
 
         }
+
+        public void UnloadContent()
+        {
+
+        }
         
         public void Update(float elapsedSeconds)
         {
@@ -51,7 +56,12 @@ namespace DoomRPG.GameLogic.GameManagers
 
             Player.Position = newPosition;
         }
-        
+
+        void SetPlayerMovementDirection(MovementDirection direction)
+        {
+            Player.MovementDirection = direction;
+        }
+
         private PointF2D GetMovement(float elapsedSeconds)
         {
             switch (Player.MovementDirection)

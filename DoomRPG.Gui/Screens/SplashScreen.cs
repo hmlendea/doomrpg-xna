@@ -31,7 +31,7 @@ namespace DoomRPG.Gui.Screens
         public SplashScreen()
         {
             Delay = 3;
-            BackgroundColour = Colour.FromArgb(88, 109, 157);
+            BackgroundColour = Colour.Black;
         }
 
         /// <summary>

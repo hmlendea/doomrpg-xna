@@ -61,6 +61,16 @@ namespace DoomRPG.GameLogic.GameManagers
             return levelManager.GetSize();
         }
 
+        public Colour GetLevelCeilingColour()
+        {
+            return levelManager.GetCeilingColour();
+        }
+
+        public Colour GetLevelFloorColour()
+        {
+            return levelManager.GetFloorColour();
+        }
+
         public IEnumerable<Wall> GetLevelWallDefinitions()
         {
             IEnumerable<WallInstance> walls = levelManager.GetWalls();

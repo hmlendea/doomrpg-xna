@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NuciXNA.DataAccess.Resources;
+using NuciXNA.Graphics.Enumerations;
 using NuciXNA.Gui.GuiElements;
 using NuciXNA.Primitives;
 
@@ -20,6 +20,9 @@ namespace DoomRPG.Gui.GuiElements
         Camera camera;
         Player player;
 
+        GuiImage ceiling;
+        GuiImage floor;
+
         WallSlice[] wallSlices;
 
         Dictionary<string, Texture2D> wallTextures;
@@ -28,6 +31,21 @@ namespace DoomRPG.Gui.GuiElements
         {
             camera = new Camera();
             camera.AssociatePlayer(player);
+
+            ceiling = new GuiImage
+            {
+                ContentFile = "ScreenManager/FillImage",
+                SourceRectangle = new Rectangle2D(0, 0, 1, 1),
+                TintColour = game.GetLevelCeilingColour(),
+                TextureLayout = TextureLayout.Tile
+            };
+            floor = new GuiImage()
+            {
+                ContentFile = "ScreenManager/FillImage",
+                SourceRectangle = new Rectangle2D(0, 0, 1, 1),
+                TintColour = game.GetLevelFloorColour(),
+                TextureLayout = TextureLayout.Tile
+            };
 
             wallSlices = new WallSlice[Size.Width];
             wallTextures = new Dictionary<string, Texture2D>();
@@ -43,12 +61,18 @@ namespace DoomRPG.Gui.GuiElements
                 }
             }
 
+            ceiling.LoadContent();
+            floor.LoadContent();
+
             base.LoadContent();
         }
 
         public override void UnloadContent()
         {
             base.UnloadContent();
+
+            ceiling.UnloadContent();
+            floor.UnloadContent();
 
             wallSlices = null;
             wallTextures.Clear();
@@ -57,8 +81,18 @@ namespace DoomRPG.Gui.GuiElements
         public override void Update(GameTime gameTime)
         {
             camera.Update(gameTime);
+            ceiling.Update(gameTime);
+            floor.Update(gameTime);
 
             base.Update(gameTime);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+
+            ceiling.Draw(spriteBatch);
+            floor.Draw(spriteBatch);
         }
 
         // TODO: Handle this better
@@ -76,6 +110,12 @@ namespace DoomRPG.Gui.GuiElements
         protected override void SetChildrenProperties()
         {
             base.SetChildrenProperties();
+
+            ceiling.Location = new Point2D(0, 0);
+            ceiling.Size = new Size2D(Size.Width, Size.Height / 2);
+
+            floor.Location = new Point2D(0, Size.Height / 2);
+            floor.Size = new Size2D(Size.Width, Size.Height / 2);
         }
     }
 }

@@ -19,6 +19,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         Size2D GetLevelSize();
 
+        Colour GetLevelCeilingColour();
+
+        Colour GetLevelFloorColour();
+
         IEnumerable<Wall> GetLevelWallDefinitions();
 
         IEnumerable<WallInstance> GetWalls();

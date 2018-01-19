@@ -20,6 +20,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         Size2D GetSize();
 
+        Colour GetCeilingColour();
+
+        Colour GetFloorColour();
+
         IEnumerable<WallInstance> GetWalls();
 
         /// <summary>

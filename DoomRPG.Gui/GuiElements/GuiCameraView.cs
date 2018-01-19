@@ -19,20 +19,21 @@ namespace DoomRPG.Gui.GuiElements
         IGameManager game;
         Camera camera;
         Player player;
-        
+
         WallSlice[] wallSlices;
 
         Dictionary<string, Texture2D> wallTextures;
-        
+
         public override void LoadContent()
         {
             camera = new Camera();
+            camera.AssociatePlayer(player);
 
             wallSlices = new WallSlice[Size.Width];
             wallTextures = new Dictionary<string, Texture2D>();
 
             IEnumerable<Wall> walls = game.GetLevelWallDefinitions();
-            
+
             foreach (Wall wall in walls)
             {
                 if (!wallTextures.ContainsKey(wall.SpritesheetName))
@@ -41,7 +42,7 @@ namespace DoomRPG.Gui.GuiElements
                     wallTextures.Add(wall.SpritesheetName, texture);
                 }
             }
-            
+
             base.LoadContent();
         }
 
@@ -55,9 +56,8 @@ namespace DoomRPG.Gui.GuiElements
 
         public override void Update(GameTime gameTime)
         {
-            player.Direction = camera.Direction;
             camera.Update(gameTime);
-            
+
             base.Update(gameTime);
         }
 
@@ -72,12 +72,10 @@ namespace DoomRPG.Gui.GuiElements
 
             player = game.GetPlayer();
         }
-        
+
         protected override void SetChildrenProperties()
         {
             base.SetChildrenProperties();
-
-            camera.Size = Size;
         }
     }
 }

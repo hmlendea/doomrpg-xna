@@ -70,7 +70,7 @@ namespace DoomRPG.Gui.Screens
 
         protected override void SetChildrenProperties()
         {
-            cameraView.Size = new Size2D(600, 600);
+            cameraView.Size = ScreenManager.Instance.Size;
         }
     }
 }

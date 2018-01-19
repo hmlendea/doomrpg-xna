@@ -20,6 +20,7 @@ namespace DoomRPG.GameLogic.Mapping
         {
             Wall wall = new Wall
             {
+                Id = wallEntity.Id,
                 Name = wallEntity.Name,
                 Description = wallEntity.Description,
                 SpritesheetName = wallEntity.SpritesheetName,
@@ -38,6 +39,7 @@ namespace DoomRPG.GameLogic.Mapping
         {
             WallEntity wallEntity = new WallEntity
             {
+                Id = wall.Id,
                 Name = wall.Name,
                 Description = wall.Description,
                 SpritesheetName = wall.SpritesheetName,

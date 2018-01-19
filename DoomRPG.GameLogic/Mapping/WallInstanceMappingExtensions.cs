@@ -23,7 +23,7 @@ namespace DoomRPG.GameLogic.Mapping
             WallInstance wallInstance = new WallInstance
             {
                 Id = wallInstanceEntity.Id,
-                WallId = wallInstanceEntity.Id,
+                WallId = wallInstanceEntity.WallId,
                 Position = new Point2D(wallInstanceEntity.X, wallInstanceEntity.Y),
                 IsRemovable = wallInstanceEntity.IsRemovable
             };
@@ -41,7 +41,7 @@ namespace DoomRPG.GameLogic.Mapping
             WallInstanceEntity wallInstanceEntity = new WallInstanceEntity
             {
                 Id = wallInstance.Id,
-                WallId = wallInstance.Id,
+                WallId = wallInstance.WallId,
                 X = wallInstance.Position.X,
                 Y = wallInstance.Position.Y,
                 IsRemovable = wallInstance.IsRemovable

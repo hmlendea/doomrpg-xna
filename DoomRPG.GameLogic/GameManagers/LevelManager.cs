@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 
+using NuciXNA.Primitives;
+
 using DoomRPG.DataAccess.Repositories;
 using DoomRPG.GameLogic.GameManagers.Interfaces;
 using DoomRPG.GameLogic.Mapping;
@@ -35,6 +37,11 @@ namespace DoomRPG.GameLogic.GameManagers
         public void Update(float elapsedSeconds)
         {
 
+        }
+
+        public Size2D GetSize()
+        {
+            return currentLevel.Size;
         }
 
         public IEnumerable<WallInstance> GetWalls()

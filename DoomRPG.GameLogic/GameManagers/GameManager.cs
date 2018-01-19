@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 
+using NuciXNA.Primitives;
+
 using DoomRPG.DataAccess.Repositories;
 using DoomRPG.GameLogic.GameManagers.Interfaces;
 using DoomRPG.GameLogic.Mapping;
@@ -52,6 +54,11 @@ namespace DoomRPG.GameLogic.GameManagers
         public void MovePlayer(MovementDirection direction)
         {
             playerManager.SetPlayerMovementDirection(direction);
+        }
+
+        public Size2D GetLevelSize()
+        {
+            return levelManager.GetSize();
         }
 
         public IEnumerable<Wall> GetLevelWallDefinitions()

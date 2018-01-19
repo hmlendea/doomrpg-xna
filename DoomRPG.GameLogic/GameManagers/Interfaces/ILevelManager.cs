@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using NuciXNA.Primitives;
+
 using DoomRPG.Models;
 
 namespace DoomRPG.GameLogic.GameManagers.Interfaces
@@ -15,6 +17,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         void UnloadContent();
 
         void Update(float elapsedSeconds);
+
+        Size2D GetSize();
 
         IEnumerable<WallInstance> GetWalls();
 

@@ -1,19 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
-using NuciXNA.Primitives;
+
+using DoomRPG.Models;
 
 namespace DoomRPG.Gui
 {
     public class Camera
     {
-        public PointF2D Position { get; set; }
+        Player player;
 
-        public Size2D Size { get; set; }
-
-        // TODO: Change to Vector2D
-        public PointF2D Direction { get; set; }
-
-        // TODO: Change to Vector2D
-        public PointF2D Plane { get; set; }
+        public Vector2 Position { get; set; }
+        
+        public Vector2 Direction { get; set; }
+        
+        public Vector2 Plane { get; set; }
 
         public float Radius { get; set; }
 
@@ -22,13 +21,18 @@ namespace DoomRPG.Gui
         public Camera()
         {
             Radius = 0.3f;
-
             RotationSpeed = 3f;
         }
         
         public void Update(GameTime gameTime)
         {
+            Direction = new Vector2(player.Direction.X, player.Direction.Y);
+            Position = new Vector2(player.Position.X, player.Position.Y);
+        }
 
+        public void AssociatePlayer(Player player)
+        {
+            this.player = player;
         }
     }
 }

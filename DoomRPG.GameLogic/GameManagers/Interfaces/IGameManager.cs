@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using NuciXNA.Primitives;
+
 using DoomRPG.Models;
 using DoomRPG.Models.Enumerations;
 
@@ -14,6 +16,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         void Update(float elapsedSeconds);
 
         void MovePlayer(MovementDirection direction);
+
+        Size2D GetLevelSize();
 
         IEnumerable<Wall> GetLevelWallDefinitions();
 

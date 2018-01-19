@@ -6,8 +6,8 @@
     <Description>This is just a test map. Nothing to see here. Move along.</Description>
     <Width>8</Width>
     <Height>8</Height>
-    <CeilingColour>#898E8C</CeilingColour>
-    <FloorColour>#898E8C</FloorColour>
+    <CeilingColourHex>#898E8C</CeilingColourHex>
+    <FloorColourHex>#898E8C</FloorColourHex>
     <Walls>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>3</X><Y>0</Y></WallInstanceEntity>

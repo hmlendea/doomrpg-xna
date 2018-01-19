@@ -12,11 +12,13 @@ namespace DoomRPG.GameLogic.GameManagers
     {
         ILevelManager levelManager;
 
-        public Player Player { get; set; }
+        Player player;
 
         public PlayerManager(ILevelManager levelManager)
         {
             this.levelManager = levelManager;
+
+            player = new Player();
         }
 
         public void LoadContent()
@@ -32,11 +34,11 @@ namespace DoomRPG.GameLogic.GameManagers
         public void Update(float elapsedSeconds)
         {
             PointF2D movement = GetMovement(elapsedSeconds);
-            PointF2D newPosition = Player.Position;
+            PointF2D newPosition = player.Position;
 
             if (movement.X != 0)
             {
-                WallInstance wall = levelManager.GetWall((int)(Player.Position.X + movement.X), (int)Player.Position.Y);
+                WallInstance wall = levelManager.GetWall((int)(player.Position.X + movement.X), (int)player.Position.Y);
 
                 if (wall == null)
                 {
@@ -46,7 +48,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
             if (movement.Y != 0)
             {
-                WallInstance wall = levelManager.GetWall((int)Player.Position.X, (int)(Player.Position.Y + movement.Y));
+                WallInstance wall = levelManager.GetWall((int)player.Position.X, (int)(player.Position.Y + movement.Y));
 
                 if (wall == null)
                 {
@@ -54,17 +56,22 @@ namespace DoomRPG.GameLogic.GameManagers
                 }
             }
 
-            Player.Position = newPosition;
+            player.Position = newPosition;
         }
 
-        void SetPlayerMovementDirection(MovementDirection direction)
+        public void SetPlayerMovementDirection(MovementDirection direction)
         {
-            Player.MovementDirection = direction;
+            player.MovementDirection = direction;
+        }
+
+        public Player GetPlayer()
+        {
+            return player;
         }
 
         private PointF2D GetMovement(float elapsedSeconds)
         {
-            switch (Player.MovementDirection)
+            switch (player.MovementDirection)
             {
                 case MovementDirection.NorthWest:
                     throw new NotImplementedException();
@@ -80,16 +87,16 @@ namespace DoomRPG.GameLogic.GameManagers
 
                 case MovementDirection.North:
                     return new PointF2D(
-                        Player.Direction.X * (elapsedSeconds * Player.MovementSpeed),
-                        Player.Direction.Y * (elapsedSeconds * Player.MovementSpeed));
+                        player.Direction.X * (elapsedSeconds * player.MovementSpeed),
+                        player.Direction.Y * (elapsedSeconds * player.MovementSpeed));
 
                 case MovementDirection.West:
                     throw new NotImplementedException();
 
                 case MovementDirection.South:
                     return new PointF2D(
-                        -Player.Direction.X * (elapsedSeconds * Player.MovementSpeed),
-                        -Player.Direction.Y * (elapsedSeconds * Player.MovementSpeed));
+                        -player.Direction.X * (elapsedSeconds * player.MovementSpeed),
+                        -player.Direction.Y * (elapsedSeconds * player.MovementSpeed));
 
                 case MovementDirection.East:
                     throw new NotImplementedException();

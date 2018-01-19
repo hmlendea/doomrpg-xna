@@ -1,4 +1,5 @@
-﻿using DoomRPG.Models.Enumerations;
+﻿using DoomRPG.Models;
+using DoomRPG.Models.Enumerations;
 
 namespace DoomRPG.GameLogic.GameManagers.Interfaces
 {
@@ -11,5 +12,7 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         void Update(float elapsedSeconds);
 
         void SetPlayerMovementDirection(MovementDirection direction);
+
+        Player GetPlayer();
     }
 }

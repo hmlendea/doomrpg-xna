@@ -1,4 +1,6 @@
-﻿using DoomRPG.Models;
+﻿using System.Collections.Generic;
+
+using DoomRPG.Models;
 
 namespace DoomRPG.GameLogic.GameManagers.Interfaces
 {
@@ -13,6 +15,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         void UnloadContent();
 
         void Update(float elapsedSeconds);
+
+        IEnumerable<WallInstance> GetWalls();
 
         /// <summary>
         /// Gets the wall.

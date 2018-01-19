@@ -1,4 +1,6 @@
-﻿using DoomRPG.Models;
+﻿using System.Collections.Generic;
+
+using DoomRPG.Models;
 using DoomRPG.Models.Enumerations;
 
 namespace DoomRPG.GameLogic.GameManagers.Interfaces
@@ -13,6 +15,14 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void MovePlayer(MovementDirection direction);
 
+        IEnumerable<Wall> GetLevelWallDefinitions();
+
+        IEnumerable<WallInstance> GetWalls();
+
+        Wall GetWallDefinition(string id);
+
         WallInstance GetWall(int x, int y);
+
+        Player GetPlayer();
     }
 }

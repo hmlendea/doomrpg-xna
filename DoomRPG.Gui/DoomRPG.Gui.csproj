@@ -37,14 +37,14 @@
     <Reference Include="NuciXNA.Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NuciXNA.Graphics.1.0.0\lib\net45\NuciXNA.Graphics.dll</HintPath>
     </Reference>
-    <Reference Include="NuciXNA.Gui, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NuciXNA.Gui.1.0.0\lib\net461\NuciXNA.Gui.dll</HintPath>
+    <Reference Include="NuciXNA.Gui, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuciXNA.Gui.1.0.2\lib\net45\NuciXNA.Gui.dll</HintPath>
     </Reference>
     <Reference Include="NuciXNA.Input, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NuciXNA.Input.1.0.1\lib\net45\NuciXNA.Input.dll</HintPath>
     </Reference>
-    <Reference Include="NuciXNA.Primitives, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NuciXNA.Primitives.1.0.1\lib\net45\NuciXNA.Primitives.dll</HintPath>
+    <Reference Include="NuciXNA.Primitives, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuciXNA.Primitives.1.0.2\lib\net45\NuciXNA.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="MonoGame.Framework">
@@ -54,10 +54,12 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="FpsIndicator.cs" />
+    <Compile Include="GuiElements\GuiCameraView.cs" />
     <Compile Include="Helpers\FramerateCounter.cs" />
     <Compile Include="Screens\GameplayScreen.cs" />
     <Compile Include="Screens\SplashScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WallSlice.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

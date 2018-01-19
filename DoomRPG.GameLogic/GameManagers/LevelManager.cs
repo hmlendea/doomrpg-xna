@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using DoomRPG.DataAccess.Repositories;
@@ -34,6 +35,11 @@ namespace DoomRPG.GameLogic.GameManagers
         public void Update(float elapsedSeconds)
         {
 
+        }
+
+        public IEnumerable<WallInstance> GetWalls()
+        {
+            return currentLevel.Walls;
         }
 
         /// <summary>

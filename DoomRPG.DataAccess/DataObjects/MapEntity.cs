@@ -46,6 +46,6 @@ namespace DoomRPG.DataAccess.DataObjects
 
         public int SpawnY { get; set; }
 
-        public IEnumerable<WallInstanceEntity> Walls { get; set; }
+        public List<WallInstanceEntity> Walls { get; set; }
     }
 }

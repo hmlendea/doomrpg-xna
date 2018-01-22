@@ -94,19 +94,19 @@ namespace DoomRPG.GameLogic.GameManagers
             player.Position = newPosition;
         }
 
+        public void RotatePlayer(float angle)
+        {
+            float sin = (float)Math.Sin(angle);
+            float cos = (float)Math.Cos(angle);
+
+            player.Direction = new PointF2D(
+                player.Direction.X * cos - player.Direction.Y * sin,
+                player.Direction.X * sin + player.Direction.Y * cos);
+        }
+
         public Player GetPlayer()
         {
             return player;
-        }
-
-        private void Rotate(float amount)
-        {
-            float sinRot = (float)Math.Sin(amount);
-            float cosRot = (float)Math.Cos(amount);
-            
-            player.Direction = new PointF2D(
-                player.Direction.X * cosRot - player.Direction.Y * sinRot,
-                player.Direction.X * sinRot + player.Direction.Y * cosRot);
         }
     }
 }

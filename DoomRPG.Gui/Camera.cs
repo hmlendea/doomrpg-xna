@@ -55,15 +55,14 @@ namespace DoomRPG.Gui
             this.gameManager = gameManager;
         }
         
-        private void UpdateRotation(float amount)
+        public void Rotate(float amount)
         {
-            float sinRot = (float)Math.Sin(amount);
-            float cosRot = (float)Math.Cos(amount);
-
-            float opX = Plane.X;
+            float sin = (float)Math.Sin(amount);
+            float cos = (float)Math.Cos(amount);
+            
             Plane = new PointF2D(
-                Plane.X * cosRot - Plane.Y * sinRot,
-                Plane.X * sinRot + Plane.Y * cosRot);
+                Plane.X * cos - Plane.Y * sin,
+                Plane.X * sin + Plane.Y * cos);
         }
     }
 }

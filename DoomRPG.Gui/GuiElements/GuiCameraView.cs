@@ -17,7 +17,7 @@ namespace DoomRPG.Gui.GuiElements
     public class GuiCameraView : GuiElement
     {
         IGameManager game;
-        Camera camera;
+        public Camera camera; // TODO: remove workaround
         Player player;
 
         GuiImage ceiling;

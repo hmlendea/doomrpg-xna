@@ -13,6 +13,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void MovePlayer(MovementDirection direction);
 
+        void RotatePlayer(float angle);
+
         Player GetPlayer();
     }
 }

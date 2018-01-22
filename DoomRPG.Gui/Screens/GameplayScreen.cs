@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using NuciXNA.Gui;
 using NuciXNA.Gui.Screens;
 using NuciXNA.Input;
-using NuciXNA.Primitives;
+using NuciXNA.Input.Events;
 
 using DoomRPG.GameLogic.GameManagers;
 using DoomRPG.GameLogic.GameManagers.Interfaces;
@@ -33,6 +35,8 @@ namespace DoomRPG.Gui.Screens
             game.LoadContent();
 
             cameraView.AssociateGameManager(game);
+
+            InputManager.Instance.MouseMoved += Instance_MouseMoved;
 
             base.LoadContent();
         }
@@ -71,6 +75,17 @@ namespace DoomRPG.Gui.Screens
         protected override void SetChildrenProperties()
         {
             cameraView.Size = ScreenManager.Instance.Size;
+        }
+
+        private void Instance_MouseMoved(object sender, MouseEventArgs e)
+        {
+            float angle = (e.PreviousLocation.X - e.Location.X) * 0.0125f;
+
+            if (angle != 0.0f)
+            {
+                game.RotatePlayer(angle);
+                cameraView.camera.Rotate(angle);
+            }
         }
     }
 }

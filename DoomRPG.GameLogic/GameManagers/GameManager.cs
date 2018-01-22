@@ -56,6 +56,11 @@ namespace DoomRPG.GameLogic.GameManagers
             playerManager.MovePlayer(direction);
         }
 
+        public void RotatePlayer(float angle)
+        {
+            playerManager.RotatePlayer(angle);
+        }
+
         public Size2D GetLevelSize()
         {
             return levelManager.GetSize();

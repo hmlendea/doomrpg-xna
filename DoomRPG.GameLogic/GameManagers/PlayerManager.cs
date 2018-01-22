@@ -95,7 +95,10 @@ namespace DoomRPG.GameLogic.GameManagers
                         player.Direction.Y * (elapsedSeconds * player.MovementSpeed));
 
                 case MovementDirection.West:
-                    throw new NotImplementedException();
+                    player.MovementDirection = MovementDirection.None;
+                    return new PointF2D(
+                        -player.Direction.Y * (elapsedSeconds * player.MovementSpeed),
+                        -player.Direction.X * (elapsedSeconds * player.MovementSpeed));
 
                 case MovementDirection.South:
                     player.MovementDirection = MovementDirection.None;
@@ -104,7 +107,10 @@ namespace DoomRPG.GameLogic.GameManagers
                         -player.Direction.Y * (elapsedSeconds * player.MovementSpeed));
 
                 case MovementDirection.East:
-                    throw new NotImplementedException();
+                    player.MovementDirection = MovementDirection.None;
+                    return new PointF2D(
+                        player.Direction.Y * (elapsedSeconds * player.MovementSpeed),
+                        player.Direction.X * (elapsedSeconds * player.MovementSpeed));
 
                 default:
                     return PointF2D.Empty;

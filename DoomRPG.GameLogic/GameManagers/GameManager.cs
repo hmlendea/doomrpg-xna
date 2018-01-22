@@ -53,7 +53,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public void MovePlayer(MovementDirection direction)
         {
-            playerManager.SetPlayerMovementDirection(direction);
+            playerManager.MovePlayer(direction);
         }
 
         public Size2D GetLevelSize()

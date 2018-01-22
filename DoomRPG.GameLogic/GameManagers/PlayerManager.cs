@@ -36,9 +36,41 @@ namespace DoomRPG.GameLogic.GameManagers
         
         public void Update(float elapsedSeconds)
         {
-            PointF2D movement = GetMovement(elapsedSeconds);
+
+        }
+
+        public void MovePlayer(MovementDirection direction)
+        {
             PointF2D newPosition = player.Position;
-            
+            PointF2D movement = PointF2D.Empty;
+
+            switch (direction)
+            {
+                case MovementDirection.North:
+                    movement = new PointF2D(
+                        player.Direction.X * player.MovementSpeed,
+                        player.Direction.Y * player.MovementSpeed);
+                    break;
+
+                case MovementDirection.West:
+                    movement = new PointF2D(
+                        -player.Direction.Y * player.MovementSpeed,
+                        -player.Direction.X * player.MovementSpeed);
+                    break;
+
+                case MovementDirection.South:
+                    movement = new PointF2D(
+                        -player.Direction.X * player.MovementSpeed,
+                        -player.Direction.Y * player.MovementSpeed);
+                    break;
+
+                case MovementDirection.East:
+                    movement = new PointF2D(
+                        player.Direction.Y * player.MovementSpeed,
+                        player.Direction.X * player.MovementSpeed);
+                    break;
+            }
+
             if (movement.X != 0)
             {
                 WallInstance wall = levelManager.GetWall((int)(player.Position.X + movement.X), (int)player.Position.Y);
@@ -62,59 +94,9 @@ namespace DoomRPG.GameLogic.GameManagers
             player.Position = newPosition;
         }
 
-        public void SetPlayerMovementDirection(MovementDirection direction)
-        {
-            player.MovementDirection = direction;
-        }
-
         public Player GetPlayer()
         {
             return player;
-        }
-
-        private PointF2D GetMovement(float elapsedSeconds)
-        {
-            switch (player.MovementDirection)
-            {
-                case MovementDirection.NorthWest:
-                    throw new NotImplementedException();
-
-                case MovementDirection.NorthEast:
-                    throw new NotImplementedException();
-
-                case MovementDirection.SouthWest:
-                    throw new NotImplementedException();
-
-                case MovementDirection.SouthEast:
-                    throw new NotImplementedException();
-
-                case MovementDirection.North:
-                    player.MovementDirection = MovementDirection.None;
-                    return new PointF2D(
-                        player.Direction.X * (elapsedSeconds * player.MovementSpeed),
-                        player.Direction.Y * (elapsedSeconds * player.MovementSpeed));
-
-                case MovementDirection.West:
-                    player.MovementDirection = MovementDirection.None;
-                    return new PointF2D(
-                        -player.Direction.Y * (elapsedSeconds * player.MovementSpeed),
-                        -player.Direction.X * (elapsedSeconds * player.MovementSpeed));
-
-                case MovementDirection.South:
-                    player.MovementDirection = MovementDirection.None;
-                    return new PointF2D(
-                        -player.Direction.X * (elapsedSeconds * player.MovementSpeed),
-                        -player.Direction.Y * (elapsedSeconds * player.MovementSpeed));
-
-                case MovementDirection.East:
-                    player.MovementDirection = MovementDirection.None;
-                    return new PointF2D(
-                        player.Direction.Y * (elapsedSeconds * player.MovementSpeed),
-                        player.Direction.X * (elapsedSeconds * player.MovementSpeed));
-
-                default:
-                    return PointF2D.Empty;
-            }
         }
 
         private void Rotate(float amount)

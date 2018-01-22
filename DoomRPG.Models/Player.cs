@@ -1,7 +1,5 @@
 ﻿using NuciXNA.Primitives;
 
-using DoomRPG.Models.Enumerations;
-
 namespace DoomRPG.Models
 {
     public sealed class Player
@@ -13,11 +11,9 @@ namespace DoomRPG.Models
         
         public float MovementSpeed { get; set; }
 
-        public MovementDirection MovementDirection { get; set; }
-
         public Player()
         {
-            MovementSpeed = 3f;
+            MovementSpeed = 0.075f;
         }
     }
 }

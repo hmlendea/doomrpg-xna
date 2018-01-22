@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations\MovementDirection.cs" />
     <Compile Include="GameManagers\GameManager.cs" />
     <Compile Include="GameManagers\Interfaces\IGameManager.cs" />
     <Compile Include="GameManagers\Interfaces\IPlayerManager.cs" />

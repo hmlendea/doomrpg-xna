@@ -18,7 +18,10 @@ namespace DoomRPG.GameLogic.GameManagers
         {
             this.levelManager = levelManager;
 
-            player = new Player();
+            player = new Player
+            {
+                Position = new PointF2D(3, 4)
+            };
         }
 
         public void LoadContent()
@@ -35,7 +38,7 @@ namespace DoomRPG.GameLogic.GameManagers
         {
             PointF2D movement = GetMovement(elapsedSeconds);
             PointF2D newPosition = player.Position;
-
+            
             if (movement.X != 0)
             {
                 WallInstance wall = levelManager.GetWall((int)(player.Position.X + movement.X), (int)player.Position.Y);
@@ -86,6 +89,7 @@ namespace DoomRPG.GameLogic.GameManagers
                     throw new NotImplementedException();
 
                 case MovementDirection.North:
+                    player.MovementDirection = MovementDirection.None;
                     return new PointF2D(
                         player.Direction.X * (elapsedSeconds * player.MovementSpeed),
                         player.Direction.Y * (elapsedSeconds * player.MovementSpeed));
@@ -94,6 +98,7 @@ namespace DoomRPG.GameLogic.GameManagers
                     throw new NotImplementedException();
 
                 case MovementDirection.South:
+                    player.MovementDirection = MovementDirection.None;
                     return new PointF2D(
                         -player.Direction.X * (elapsedSeconds * player.MovementSpeed),
                         -player.Direction.Y * (elapsedSeconds * player.MovementSpeed));
@@ -104,6 +109,16 @@ namespace DoomRPG.GameLogic.GameManagers
                 default:
                     return PointF2D.Empty;
             }
+        }
+
+        private void Rotate(float amount)
+        {
+            float sinRot = (float)Math.Sin(amount);
+            float cosRot = (float)Math.Cos(amount);
+            
+            player.Direction = new PointF2D(
+                player.Direction.X * cosRot - player.Direction.Y * sinRot,
+                player.Direction.X * sinRot + player.Direction.Y * cosRot);
         }
     }
 }

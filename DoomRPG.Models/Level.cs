@@ -4,7 +4,7 @@ using NuciXNA.Primitives;
 
 namespace DoomRPG.Models
 {
-    public sealed class Map
+    public sealed class Level
     {
         /// <summary>
         /// Gets or sets the identifier.

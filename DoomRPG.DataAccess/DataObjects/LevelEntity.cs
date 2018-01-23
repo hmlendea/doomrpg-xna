@@ -4,7 +4,7 @@ using NuciXNA.DataAccess.DataObjects;
 
 namespace DoomRPG.DataAccess.DataObjects
 {
-    public sealed class MapEntity : EntityBase
+    public sealed class LevelEntity : EntityBase
     {
         /// <summary>
         /// Gets or sets the name.

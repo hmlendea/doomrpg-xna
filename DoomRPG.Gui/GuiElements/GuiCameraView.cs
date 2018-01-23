@@ -102,9 +102,9 @@ namespace DoomRPG.Gui.GuiElements
                 double rayDirX = camera.Direction.X + camera.Plane.X * cameraX;
                 double rayDirY = camera.Direction.Y + camera.Plane.Y * cameraX;
                 
-                //which box of the map we're in  
-                int mapX = (int)rayPosX;
-                int mapY = (int)rayPosY;
+                //which box of the level we're in  
+                int levelX = (int)rayPosX;
+                int levelY = (int)rayPosY;
 
                 //length of ray from current position to next x or y-side
                 double sideDistX = 0;
@@ -125,44 +125,44 @@ namespace DoomRPG.Gui.GuiElements
                 if (rayDirX < 0)
                 {
                     step.X = -1;
-                    sideDistX = (rayPosX - mapX) * deltaDistX;
+                    sideDistX = (rayPosX - levelX) * deltaDistX;
                 }
                 else
                 {
                     step.X = 1;
-                    sideDistX = (mapX + 1.0 - rayPosX) * deltaDistX;
+                    sideDistX = (levelX + 1.0 - rayPosX) * deltaDistX;
                 }
 
                 if (rayDirY < 0)
                 {
                     step.Y = -1;
-                    sideDistY = (rayPosY - mapY) * deltaDistY;
+                    sideDistY = (rayPosY - levelY) * deltaDistY;
                 }
                 else
                 {
                     step.Y = 1;
-                    sideDistY = (mapY + 1.0 - rayPosY) * deltaDistY;
+                    sideDistY = (levelY + 1.0 - rayPosY) * deltaDistY;
                 }
 
                 //perform DDA
                 while (!wallHit)
                 {
-                    //jump to next map square, OR in x-direction, OR in y-direction
+                    //jump to next level square, OR in x-direction, OR in y-direction
                     if (sideDistX < sideDistY)
                     {
                         sideDistX += deltaDistX;
-                        mapX += step.X;
+                        levelX += step.X;
                         side = 0;
                     }
                     else
                     {
                         sideDistY += deltaDistY;
-                        mapY += step.Y;
+                        levelY += step.Y;
                         side = 1;
                     }
                     
                     //Check if ray has hit a wall
-                    if (game.GetWall(mapX, mapY) != null)
+                    if (game.GetWall(levelX, levelY) != null)
                     {
                         wallHit = true;
                     }
@@ -171,18 +171,18 @@ namespace DoomRPG.Gui.GuiElements
                 //Calculate distance projected on camera direction (oblique distance will give fisheye effect!)
                 if (side == 0)
                 {
-                    perpWallDist = Math.Abs((mapX - rayPosX + (1 - step.X) / 2.0) / rayDirX);
+                    perpWallDist = Math.Abs((levelX - rayPosX + (1 - step.X) / 2.0) / rayDirX);
                 }
                 else
                 {
-                    perpWallDist = Math.Abs((mapY - rayPosY + (1 - step.Y) / 2.0) / rayDirY);
+                    perpWallDist = Math.Abs((levelY - rayPosY + (1 - step.Y) / 2.0) / rayDirY);
                 }
 
                 //Calculate height of line to draw on screen
                 int lineHeight = (int)Math.Abs(ScreenHeight / perpWallDist);
                 
                 //texturing calculations
-                WallInstance wallInstance = game.GetWall(mapX, mapY);
+                WallInstance wallInstance = game.GetWall(levelX, levelY);
                 Wall wall = null;
 
                 if (wallInstance != null)
@@ -195,11 +195,11 @@ namespace DoomRPG.Gui.GuiElements
 
                 if (side == 1)
                 {
-                    wallX = rayPosX + ((mapY - rayPosY + (1 - step.Y) / 2.0) / rayDirY) * rayDirX;
+                    wallX = rayPosX + ((levelY - rayPosY + (1 - step.Y) / 2.0) / rayDirY) * rayDirX;
                 }
                 else
                 {
-                    wallX = rayPosY + ((mapX - rayPosX + (1 - step.X) / 2.0) / rayDirX) * rayDirY;
+                    wallX = rayPosY + ((levelX - rayPosX + (1 - step.X) / 2.0) / rayDirX) * rayDirY;
                 }
 
                 wallX -= Math.Floor(wallX);

@@ -58,7 +58,7 @@
     <None Include="x86\soft_oal.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Entities\maps.xml">
+    <Content Include="Data\Entities\levels.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Entities\walls.xml">

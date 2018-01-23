@@ -14,7 +14,7 @@ namespace DoomRPG.GameLogic.GameManagers
 {
     public class LevelManager : ILevelManager
     {
-        Map currentLevel;
+        Level currentLevel;
 
         /// <summary>
         /// Loads the content.
@@ -22,9 +22,9 @@ namespace DoomRPG.GameLogic.GameManagers
         /// <param name="levelId">Level identifier.</param>
         public void LoadContent(string levelId)
         {
-            string levelPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "maps.xml");
+            string levelPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "levels.xml");
 
-            MapRepository levelRepository = new MapRepository(levelPath);
+            LevelRepository levelRepository = new LevelRepository(levelPath);
 
             currentLevel = levelRepository.Get(levelId).ToDomainModel();
         }

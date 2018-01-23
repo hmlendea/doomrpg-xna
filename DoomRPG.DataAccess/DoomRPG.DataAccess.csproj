@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataObjects\MapEntity.cs" />
+    <Compile Include="DataObjects\LevelEntity.cs" />
     <Compile Include="DataObjects\WallEntity.cs" />
     <Compile Include="DataObjects\WallInstanceEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\MapRepository.cs" />
+    <Compile Include="Repositories\LevelRepository.cs" />
     <Compile Include="Repositories\WallRepository.cs" />
   </ItemGroup>
   <ItemGroup>

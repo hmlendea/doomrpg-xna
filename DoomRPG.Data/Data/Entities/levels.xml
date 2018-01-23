@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfMapEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <MapEntity>
+<ArrayOfLevelEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LevelEntity>
     <Id>test</Id>
     <Name>Test Level</Name>
     <Description>This is just a test map. Nothing to see here. Move along.</Description>
@@ -39,5 +39,5 @@
       <WallInstanceEntity><WallId>stone_wall</WallId><X>3</X><Y>7</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>4</X><Y>7</Y></WallInstanceEntity>
     </Walls>
-  </MapEntity>
-</ArrayOfMapEntity>
+  </LevelEntity>
+</ArrayOfLevelEntity>

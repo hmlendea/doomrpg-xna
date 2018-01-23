@@ -6,8 +6,8 @@
     <Description>This is just a test map. Nothing to see here. Move along.</Description>
     <Width>8</Width>
     <Height>8</Height>
-    <CeilingColourHex>#FF0000</CeilingColourHex>
-    <FloorColourHex>#0000FF</FloorColourHex>
+    <CeilingColourHex>#7A784F</CeilingColourHex>
+    <FloorColourHex>#3D3A35</FloorColourHex>
     <Walls>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>3</X><Y>0</Y></WallInstanceEntity>
@@ -21,10 +21,9 @@
       <WallInstanceEntity><WallId>metal_wall</WallId><X>2</X><Y>2</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>7</X><Y>2</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>1</X><Y>3</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>stone_wall</WallId><X>5</X><Y>3</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall_pipes</WallId><X>4</X><Y>3</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>3</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>0</X><Y>4</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>4</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>6</X><Y>4</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>4</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>0</X><Y>5</Y></WallInstanceEntity>

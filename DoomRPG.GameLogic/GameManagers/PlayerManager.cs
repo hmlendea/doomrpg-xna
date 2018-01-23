@@ -55,7 +55,7 @@ namespace DoomRPG.GameLogic.GameManagers
                 case MovementDirection.West:
                     movement = new PointF2D(
                         -player.Direction.Y * player.MovementSpeed,
-                        -player.Direction.X * player.MovementSpeed);
+                        player.Direction.X * player.MovementSpeed);
                     break;
 
                 case MovementDirection.South:
@@ -67,7 +67,7 @@ namespace DoomRPG.GameLogic.GameManagers
                 case MovementDirection.East:
                     movement = new PointF2D(
                         player.Direction.Y * player.MovementSpeed,
-                        player.Direction.X * player.MovementSpeed);
+                        -player.Direction.X * player.MovementSpeed);
                     break;
             }
 

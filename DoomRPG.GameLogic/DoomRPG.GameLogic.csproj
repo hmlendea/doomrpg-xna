@@ -53,6 +53,8 @@
     <Compile Include="GameManagers\Interfaces\IPlayerManager.cs" />
     <Compile Include="GameManagers\PlayerManager.cs" />
     <Compile Include="Mapping\LevelMappingExtensions.cs" />
+    <Compile Include="Mapping\MobInstanceMappingExtensions.cs" />
+    <Compile Include="Mapping\MobMappingExtensions.cs" />
     <Compile Include="Mapping\WallInstanceMappingExtensions.cs" />
     <Compile Include="Mapping\WallMappingExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

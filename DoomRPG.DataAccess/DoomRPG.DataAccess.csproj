@@ -44,10 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjects\LevelEntity.cs" />
+    <Compile Include="DataObjects\MobEntity.cs" />
+    <Compile Include="DataObjects\MobInstanceEntity.cs" />
     <Compile Include="DataObjects\WallEntity.cs" />
     <Compile Include="DataObjects\WallInstanceEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\LevelRepository.cs" />
+    <Compile Include="Repositories\MobRepository.cs" />
     <Compile Include="Repositories\WallRepository.cs" />
   </ItemGroup>
   <ItemGroup>

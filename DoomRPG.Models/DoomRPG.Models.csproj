@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Enumerations\MovementDirection.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="Mob.cs" />
+    <Compile Include="MobInstance.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

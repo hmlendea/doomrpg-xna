@@ -52,6 +52,7 @@
     <Compile Include="GameManagers\Interfaces\IGameManager.cs" />
     <Compile Include="GameManagers\Interfaces\IPlayerManager.cs" />
     <Compile Include="GameManagers\PlayerManager.cs" />
+    <Compile Include="Mapping\AmmunitionMappingExtensions.cs" />
     <Compile Include="Mapping\LevelMappingExtensions.cs" />
     <Compile Include="Mapping\MobInstanceMappingExtensions.cs" />
     <Compile Include="Mapping\MobMappingExtensions.cs" />

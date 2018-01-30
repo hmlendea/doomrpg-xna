@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ammunition.cs" />
     <Compile Include="Enumerations\MovementDirection.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Mob.cs" />

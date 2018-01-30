@@ -15,6 +15,7 @@ namespace DoomRPG.GameLogic.GameManagers
 {
     public class GameManager : IGameManager
     {
+        List<Ammunition> ammunitions;
         List<Wall> wallDefinitions;
 
         readonly ILevelManager levelManager;
@@ -31,9 +32,13 @@ namespace DoomRPG.GameLogic.GameManagers
             levelManager.LoadContent("test"); // TODO: Remove hardcoding
             playerManager.LoadContent();
 
+            string ammoPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "ammo.xml");
             string wallPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "walls.xml");
+
+            AmmunitionRepository ammoRepository = new AmmunitionRepository(ammoPath);
             WallRepository wallRepository = new WallRepository(wallPath);
 
+            ammunitions = ammoRepository.GetAll().ToDomainModels().ToList();
             wallDefinitions = wallRepository.GetAll().ToDomainModels().ToList();
         }
 
@@ -42,6 +47,7 @@ namespace DoomRPG.GameLogic.GameManagers
             levelManager.UnloadContent();
             playerManager.UnloadContent();
 
+            ammunitions.Clear();
             wallDefinitions.Clear();
         }
 

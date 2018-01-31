@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using NuciXNA.DataAccess.Exceptions;
+﻿using NuciXNA.DataAccess.Exceptions;
 using NuciXNA.DataAccess.Repositories;
 
 using DoomRPG.DataAccess.DataObjects;
@@ -29,7 +27,7 @@ namespace DoomRPG.DataAccess.Repositories
         {
             LoadEntitiesIfNeeded();
 
-            LevelEntity levelEntityToUpdate = Entities.FirstOrDefault(x => x.Id == levelEntity.Id);
+            LevelEntity levelEntityToUpdate = Get(levelEntity.Id);
 
             if (levelEntityToUpdate == null)
             {
@@ -46,7 +44,7 @@ namespace DoomRPG.DataAccess.Repositories
             levelEntityToUpdate.SpawnY = levelEntity.SpawnY;
             levelEntityToUpdate.Walls = levelEntity.Walls;
 
-            XmlFile.SaveEntities(Entities);
+            XmlFile.SaveEntities(Entities.Values);
         }
     }
 }

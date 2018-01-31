@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using NuciXNA.DataAccess.Exceptions;
+﻿using NuciXNA.DataAccess.Exceptions;
 using NuciXNA.DataAccess.Repositories;
 
 using DoomRPG.DataAccess.DataObjects;
@@ -29,7 +27,7 @@ namespace DoomRPG.DataAccess.Repositories
         {
             LoadEntitiesIfNeeded();
 
-            WallEntity wallEntityToUpdate = Entities.FirstOrDefault(x => x.Id == wallEntity.Id);
+            WallEntity wallEntityToUpdate = Get(wallEntity.Id);
 
             if (wallEntityToUpdate == null)
             {
@@ -41,7 +39,7 @@ namespace DoomRPG.DataAccess.Repositories
             wallEntityToUpdate.SpritesheetName = wallEntity.SpritesheetName;
             wallEntityToUpdate.SpritesheetTextureIndex = wallEntity.SpritesheetTextureIndex;
 
-            XmlFile.SaveEntities(Entities);
+            XmlFile.SaveEntities(Entities.Values);
         }
     }
 }

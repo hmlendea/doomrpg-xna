@@ -29,7 +29,7 @@ namespace DoomRPG.DataAccess.Repositories
         {
             LoadEntitiesIfNeeded();
 
-            AmmunitionEntity ammunitionEntityToUpdate = Entities.FirstOrDefault(x => x.Id == ammunitionEntity.Id);
+            AmmunitionEntity ammunitionEntityToUpdate = Get(ammunitionEntity.Id);
 
             if (ammunitionEntityToUpdate == null)
             {
@@ -41,7 +41,7 @@ namespace DoomRPG.DataAccess.Repositories
             ammunitionEntityToUpdate.SpritesheetName = ammunitionEntity.SpritesheetName;
             ammunitionEntityToUpdate.SpritesheetTextureIndex = ammunitionEntity.SpritesheetTextureIndex;
 
-            XmlFile.SaveEntities(Entities);
+            XmlFile.SaveEntities(Entities.Values);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using NuciXNA.DataAccess.Exceptions;
+﻿using NuciXNA.DataAccess.Exceptions;
 using NuciXNA.DataAccess.Repositories;
 
 using DoomRPG.DataAccess.DataObjects;
@@ -29,7 +27,7 @@ namespace DoomRPG.DataAccess.Repositories
         {
             LoadEntitiesIfNeeded();
 
-            MobEntity mobEntityToUpdate = Entities.FirstOrDefault(x => x.Id == mobEntity.Id);
+            MobEntity mobEntityToUpdate = Get(mobEntity.Id);
 
             if (mobEntityToUpdate == null)
             {
@@ -40,7 +38,7 @@ namespace DoomRPG.DataAccess.Repositories
             mobEntityToUpdate.Description = mobEntity.Description;
             mobEntityToUpdate.SpritesheetName = mobEntity.SpritesheetName;
 
-            XmlFile.SaveEntities(Entities);
+            XmlFile.SaveEntities(Entities.Values);
         }
     }
 }

@@ -26,6 +26,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         IEnumerable<WallInstance> GetWalls();
 
+        IEnumerable<MobInstance> GetMobs();
+
         /// <summary>
         /// Gets the wall.
         /// </summary>

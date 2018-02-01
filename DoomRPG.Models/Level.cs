@@ -42,6 +42,10 @@ namespace DoomRPG.Models
         /// <value>The floor colour.</value>
         public Colour FloorColour { get; set; }
 
+        /// <summary>
+        /// Gets or sets the player spawn location.
+        /// </summary>
+        /// <value>The player spawn location.</value>
         public Point2D SpawnPosition { get; set; }
 
         /// <summary>
@@ -49,5 +53,11 @@ namespace DoomRPG.Models
         /// </summary>
         /// <value>The walls.</value>
         public IEnumerable<WallInstance> Walls { get; set; }
+
+        /// <summary>
+        /// Gets or sets the mobs.
+        /// </summary>
+        /// <value>The mobs.</value>
+        public IEnumerable<MobInstance> Mobs { get; set; }
     }
 }

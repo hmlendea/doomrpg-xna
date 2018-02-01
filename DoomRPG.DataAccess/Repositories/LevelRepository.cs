@@ -43,6 +43,7 @@ namespace DoomRPG.DataAccess.Repositories
             levelEntityToUpdate.SpawnX = levelEntity.SpawnX;
             levelEntityToUpdate.SpawnY = levelEntity.SpawnY;
             levelEntityToUpdate.Walls = levelEntity.Walls;
+            levelEntityToUpdate.Mobs = levelEntity.Mobs;
 
             XmlFile.SaveEntities(Entities.Values);
         }

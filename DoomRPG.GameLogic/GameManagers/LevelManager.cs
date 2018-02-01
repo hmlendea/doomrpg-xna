@@ -59,6 +59,11 @@ namespace DoomRPG.GameLogic.GameManagers
             return currentLevel.Walls;
         }
 
+        public IEnumerable<MobInstance> GetMobs()
+        {
+            return currentLevel.Mobs;
+        }
+
         /// <summary>
         /// Gets the wall.
         /// </summary>

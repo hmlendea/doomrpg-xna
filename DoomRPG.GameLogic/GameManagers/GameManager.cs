@@ -19,17 +19,20 @@ namespace DoomRPG.GameLogic.GameManagers
         List<Wall> wallDefinitions;
 
         readonly ILevelManager levelManager;
+        readonly IMobManager mobManager;
         readonly IPlayerManager playerManager;
 
         public GameManager()
         {
             levelManager = new LevelManager();
+            mobManager = new MobManager(levelManager);
             playerManager = new PlayerManager(levelManager);
         }
 
         public void LoadContent()
         {
             levelManager.LoadContent("test"); // TODO: Remove hardcoding
+            mobManager.LoadContent();
             playerManager.LoadContent();
 
             string ammoPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "ammo.xml");
@@ -45,6 +48,7 @@ namespace DoomRPG.GameLogic.GameManagers
         public void UnloadContent()
         {
             levelManager.UnloadContent();
+            mobManager.UnloadContent();
             playerManager.UnloadContent();
 
             ammunitions.Clear();
@@ -54,6 +58,7 @@ namespace DoomRPG.GameLogic.GameManagers
         public void Update(float elapsedSeconds)
         {
             levelManager.Update(elapsedSeconds);
+            mobManager.Update(elapsedSeconds);
             playerManager.Update(elapsedSeconds);
         }
 

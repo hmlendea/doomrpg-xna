@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMobEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MobEntity>
+    <Id>test</Id>
+    <Name>Test Mob</Name>
+    <Description>This is just a test mob</Description>
+    <SpritesheetName>This is just a test mob</SpritesheetName>
+  </MobEntity>
+</ArrayOfMobEntity>

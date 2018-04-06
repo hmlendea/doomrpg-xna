@@ -79,6 +79,11 @@ namespace DoomRPG.Settings
         /// </summary>
         public void SaveContent()
         {
+            if (!Directory.Exists(ApplicationPaths.UserDataDirectory))
+            {
+                Directory.CreateDirectory(ApplicationPaths.UserDataDirectory);
+            }
+
             XmlFileObject<SettingsManager> xmlManager = new XmlFileObject<SettingsManager>();
             xmlManager.Write(ApplicationPaths.SettingsFile, this);
         }

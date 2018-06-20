@@ -35,4 +35,11 @@
     <SpritesheetName>stone-wall</SpritesheetName>
     <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
   </WallEntity>
+  <WallEntity>
+    <Id>terminal</Id>
+    <Name>Terminal</Name>
+    <Description>Hmmm, I wonder if I can play Pac-man on it.</Description>
+    <SpritesheetName>terminal</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+  </WallEntity>
 </ArrayOfWallEntity>

@@ -11,7 +11,7 @@
     <Walls>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>3</X><Y>0</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>stone_wall</WallId><X>4</X><Y>0</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>terminal</WallId><X>4</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>1</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>1</Y></WallInstanceEntity>

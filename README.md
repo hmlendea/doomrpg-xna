@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/hmlendea/doomrpg-xna.svg?branch=master)](https://travis-ci.com/hmlendea/doomrpg-xna)
+
 # About
 
 This project is a an open-source remake of the old J2ME-based DoomRPG game.

@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Input;
 using NuciXNA.Gui;
 using NuciXNA.Gui.Screens;
 using NuciXNA.Input;
-using NuciXNA.Input.Events;
 
 using DoomRPG.GameLogic.GameManagers;
 using DoomRPG.GameLogic.GameManagers.Interfaces;

@@ -1,83 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C664CCC3-7D21-482B-A782-52742F6FEBE4}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>DoomRPG.Gui</RootNamespace>
-    <AssemblyName>DoomRPG.Gui</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <Authors>Horațiu Mlendea</Authors>
+    <Copyright>Copyright 2019 © Horațiu Mlendea</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="NuciXNA.DataAccess, Version=1.0.4.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NuciXNA.DataAccess.1.0.4.1\lib\net45\NuciXNA.DataAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="NuciXNA.Graphics, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NuciXNA.Graphics.1.0.1\lib\net45\NuciXNA.Graphics.dll</HintPath>
-    </Reference>
-    <Reference Include="NuciXNA.Gui, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NuciXNA.Gui.1.1.0\lib\net45\NuciXNA.Gui.dll</HintPath>
-    </Reference>
-    <Reference Include="NuciXNA.Input, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NuciXNA.Input.1.0.1\lib\net45\NuciXNA.Input.dll</HintPath>
-    </Reference>
-    <Reference Include="NuciXNA.Primitives, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NuciXNA.Primitives.1.0.4\lib\net45\NuciXNA.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing" />
+    <ProjectReference Include="..\DoomRPG.DataAccess\DoomRPG.DataAccess.csproj" />
+    <ProjectReference Include="..\DoomRPG.GameLogic\DoomRPG.GameLogic.csproj" />
+    <ProjectReference Include="..\DoomRPG.Models\DoomRPG.Models.csproj" />
+    <ProjectReference Include="..\DoomRPG.Settings\DoomRPG.Settings.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Camera.cs" />
-    <Compile Include="FpsIndicator.cs" />
-    <Compile Include="GuiElements\GuiCameraView.cs" />
-    <Compile Include="Helpers\FramerateCounter.cs" />
-    <Compile Include="Screens\GameplayScreen.cs" />
-    <Compile Include="Screens\SplashScreen.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WallSlice.cs" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL.Core" Version="3.7.0.7" />
+    <PackageReference Include="NuciXNA.DataAccess" Version="1.3.0" />
+    <PackageReference Include="NuciXNA.Graphics" Version="1.5.0" />
+    <PackageReference Include="NuciXNA.Gui" Version="1.9.2" />
+    <PackageReference Include="NuciXNA.Input" Version="1.4.0" />
+    <PackageReference Include="NuciXNA.Primitives" Version="1.3.1" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DoomRPG.GameLogic\DoomRPG.GameLogic.csproj">
-      <Project>{ed25ebc5-4d72-41e8-8247-6bed8e43c3fe}</Project>
-      <Name>DoomRPG.GameLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DoomRPG.Models\DoomRPG.Models.csproj">
-      <Project>{dcdaf30e-e632-49bd-ad3d-c3216152a234}</Project>
-      <Name>DoomRPG.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DoomRPG.Settings\DoomRPG.Settings.csproj">
-      <Project>{c7a4de34-5afd-4c9f-bc6e-9b7720c1f5be}</Project>
-      <Name>DoomRPG.Settings</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

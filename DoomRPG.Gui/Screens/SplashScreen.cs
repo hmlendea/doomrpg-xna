@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using NuciXNA.Input.Events;
+using NuciXNA.Input;
 using NuciXNA.Primitives;
 
 using NuciXNA.Gui;

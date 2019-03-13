@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-using NuciXNA.DataAccess.Exceptions;
+using NuciXNA.DataAccess;
 using NuciXNA.DataAccess.Repositories;
 
 using DoomRPG.DataAccess.DataObjects;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using NuciXNA.DataAccess.Resources;
+using NuciXNA.DataAccess.Content;
 using NuciXNA.Graphics.Drawing;
 using NuciXNA.Gui.GuiElements;
 using NuciXNA.Primitives;
@@ -64,7 +64,7 @@ namespace DoomRPG.Gui.GuiElements
             {
                 if (!wallTextures.ContainsKey(wall.SpritesheetName))
                 {
-                    Texture2D texture = ResourceManager.Instance.LoadTexture2D("Spritesheets/" + wall.SpritesheetName);
+                    Texture2D texture = NuciContentManager.Instance.LoadTexture2D("Spritesheets/" + wall.SpritesheetName);
                     wallTextures.Add(wall.SpritesheetName, texture);
                 }
             }

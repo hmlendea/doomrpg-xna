@@ -2,7 +2,7 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using NuciXNA.DataAccess.Resources;
+using NuciXNA.DataAccess.Content;
 
 using DoomRPG.Gui.Helpers;
 using DoomRPG.Settings;
@@ -38,7 +38,7 @@ namespace DoomRPG.Gui
         /// </summary>
         public void LoadContent()
         {
-            fpsFont = ResourceManager.Instance.LoadSpriteFont("Fonts/FrameCounterFont");
+            fpsFont = NuciContentManager.Instance.LoadSpriteFont("Fonts/FrameCounterFont");
         }
 
         /// <summary>

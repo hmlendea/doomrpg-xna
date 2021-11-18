@@ -5,7 +5,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NuciXNA.DataAccess.Content;
 using NuciXNA.Graphics.Drawing;
-using NuciXNA.Gui.GuiElements;
+using NuciXNA.Gui;
+using NuciXNA.Gui.Controls;
 using NuciXNA.Primitives;
 
 using DoomRPG.GameLogic.GameManagers.Interfaces;
@@ -14,7 +15,7 @@ using DoomRPG.Settings;
 
 namespace DoomRPG.Gui.GuiElements
 {
-    public class GuiCameraView : GuiElement
+    public class GuiCameraView : GuiControl
     {
         IGameManager game;
         public Camera camera; // TODO: remove workaround
@@ -27,7 +28,7 @@ namespace DoomRPG.Gui.GuiElements
 
         Dictionary<string, Texture2D> wallTextures;
 
-        public override void LoadContent()
+        protected override void DoLoadContent()
         {
             player.Direction = new PointF2D(0, -1);
 
@@ -68,18 +69,17 @@ namespace DoomRPG.Gui.GuiElements
                     wallTextures.Add(wall.SpritesheetName, texture);
                 }
             }
-
-            camera.LoadContent();
+            
+            // I can't use the RegisterChildren method as they'd be drawn above the map
             ceiling.LoadContent();
             floor.LoadContent();
 
-            base.LoadContent();
+            camera.LoadContent();
+            SetChildrenProperties();
         }
 
-        public override void UnloadContent()
+        protected override void DoUnloadContent()
         {
-            base.UnloadContent();
-
             ceiling.UnloadContent();
             floor.UnloadContent();
 
@@ -87,8 +87,10 @@ namespace DoomRPG.Gui.GuiElements
             wallTextures.Clear();
         }
 
-        public override void Update(GameTime gameTime)
+        protected override void DoUpdate(GameTime gameTime)
         {
+            SetChildrenProperties();
+            
             int ScreenWidth = Size.Width;
             int ScreenHeight = Size.Height;
 
@@ -226,17 +228,13 @@ namespace DoomRPG.Gui.GuiElements
             camera.Update(gameTime);
             ceiling.Update(gameTime);
             floor.Update(gameTime);
-
-            base.Update(gameTime);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        protected override void DoDraw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
-
             ceiling.Draw(spriteBatch);
             floor.Draw(spriteBatch);
-
+            
             for (int x = 0; x < Size.Width; x++)
             {
                 int columnStart = -wallSlices[x].Height / 2 + Size.Height / 2;
@@ -265,10 +263,8 @@ namespace DoomRPG.Gui.GuiElements
             player = game.GetPlayer();
         }
 
-        protected override void SetChildrenProperties()
+        void SetChildrenProperties()
         {
-            base.SetChildrenProperties();
-
             ceiling.Location = new Point2D(0, 0);
             ceiling.Size = new Size2D(Size.Width, Size.Height / 2);
 

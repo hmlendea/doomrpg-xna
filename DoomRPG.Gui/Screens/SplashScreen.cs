@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using NuciXNA.Input;
 using NuciXNA.Primitives;
 
 using NuciXNA.Gui;
-using NuciXNA.Gui.GuiElements;
+using NuciXNA.Gui.Controls;
 using NuciXNA.Gui.Screens;
 
 namespace DoomRPG.Gui.Screens
@@ -19,11 +20,7 @@ namespace DoomRPG.Gui.Screens
         /// <value>The delay.</value>
         public float Delay { get; set; }
         
-        /// <summary>
-        /// Gets or sets the logo.
-        /// </summary>
-        /// <value>The logo.</value>
-        public GuiImage LogoImage { get; set; }
+        GuiImage logoImage { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SplashScreen"/> class.
@@ -37,43 +34,71 @@ namespace DoomRPG.Gui.Screens
         /// <summary>
         /// Loads the content.
         /// </summary>
-        public override void LoadContent()
+        protected override void DoLoadContent()
         {
-            LogoImage = new GuiImage { ContentFile = "SplashScreen/Logo" };
+            logoImage = new GuiImage { ContentFile = "SplashScreen/Logo" };
             
-            GuiManager.Instance.GuiElements.Add(LogoImage);
+            GuiManager.Instance.RegisterControls(logoImage);
 
-            base.LoadContent();
+            RegisterEvents();
+            SetChildrenProperties();
+        }
+
+        /// <summary>
+        /// Unloads the content.
+        /// </summary>
+        protected override void DoUnloadContent()
+        {
+            UnregisterEvents();
         }
 
         /// <summary>
         /// Updates the content.
         /// </summary>
         /// <param name="gameTime">Game time.</param>
-        public override void Update(GameTime gameTime)
+        protected override void DoUpdate(GameTime gameTime)
         {
-            base.Update(gameTime);
-
+            SetChildrenProperties();
+            
             Delay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
-        protected override void SetChildrenProperties()
+        protected override void DoDraw(SpriteBatch spriteBatch)
         {
-            LogoImage.Location = new Point2D((ScreenManager.Instance.Size.Width - LogoImage.Size.Width) / 2,
-                                             (ScreenManager.Instance.Size.Height - LogoImage.Size.Height) / 2);
+
         }
 
-        protected override void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
+        /// <summary>
+        /// Registers the events.
+        /// </summary>
+        void RegisterEvents()
         {
-            base.OnKeyPressed(sender, e);
+            KeyPressed += OnKeyPressed;
+            MouseButtonPressed += OnMouseButtonPressed;
+        }
 
+        /// <summary>
+        /// Unregisters the events.
+        /// </summary>
+        void UnregisterEvents()
+        {
+            KeyPressed -= OnKeyPressed;
+            MouseButtonPressed -= OnMouseButtonPressed;
+        }
+
+        void SetChildrenProperties()
+        {
+            logoImage.Location = new Point2D((ScreenManager.Instance.Size.Width - logoImage.Size.Width) / 2,
+                                             (ScreenManager.Instance.Size.Height - logoImage.Size.Height) / 2);
+        }
+
+        void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
+        {
             ScreenManager.Instance.ChangeScreens(typeof(GameplayScreen));
         }
 
-        protected override void OnMouseButtonPressed(object sender, MouseButtonEventArgs e)
+        void OnMouseButtonPressed(object sender, MouseButtonEventArgs e)
         {
-            base.OnMouseButtonPressed(sender, e);
-
             ScreenManager.Instance.ChangeScreens(typeof(GameplayScreen));
         }
     }

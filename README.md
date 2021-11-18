@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/hmlendea/doomrpg-xna.svg?branch=master)](https://travis-ci.com/hmlendea/doomrpg-xna)
+[![Build Status](https://github.com/hmlendea/doomrpg-xna/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hmlendea/doomrpg-xna/actions/workflows/dotnet.yml)
 
 # About
 

@@ -1,6 +1,5 @@
-﻿using System;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NuciXNA.Gui;
 using NuciXNA.Gui.Screens;
@@ -24,12 +23,12 @@ namespace DoomRPG.Gui.Screens
         /// <summary>
         /// Loads the content.
         /// </summary>
-        public override void LoadContent()
+        protected override void DoLoadContent()
         {
             game = new GameManager();
             cameraView = new GuiCameraView();
 
-            GuiManager.Instance.GuiElements.Add(cameraView);
+            GuiManager.Instance.RegisterControls(cameraView);
 
             game.LoadContent();
 
@@ -37,20 +36,18 @@ namespace DoomRPG.Gui.Screens
 
             InputManager.Instance.MouseMoved += Instance_MouseMoved;
 
-            base.LoadContent();
+            SetChildrenProperties();
         }
 
-        public override void UnloadContent()
+        protected override void DoUnloadContent()
         {
-            base.UnloadContent();
-
+            InputManager.Instance.MouseMoved -= Instance_MouseMoved;
+            
             game.UnloadContent();
         }
 
-        public override void Update(GameTime gameTime)
+        protected override void DoUpdate(GameTime gameTime)
         {
-            base.Update(gameTime);
-
             game.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             if (InputManager.Instance.IsAnyKeyDown(Keys.Up, Keys.W))
@@ -69,9 +66,16 @@ namespace DoomRPG.Gui.Screens
             {
                 game.MovePlayer(MovementDirection.East);
             }
+
+            SetChildrenProperties();
         }
 
-        protected override void SetChildrenProperties()
+        protected override void DoDraw(SpriteBatch spriteBatch)
+        {
+
+        }
+
+        void SetChildrenProperties()
         {
             cameraView.Size = ScreenManager.Instance.Size;
         }

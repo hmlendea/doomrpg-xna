@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/hmlendea/doomrpg-xna/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hmlendea/doomrpg-xna/actions/workflows/dotnet.yml)
+
 # About
 
 This project is a an open-source remake of the old J2ME-based DoomRPG game.

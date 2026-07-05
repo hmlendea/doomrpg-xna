@@ -1,0 +1,12 @@
+using System;
+
+namespace DoomRPG.DataAccess
+{
+    public sealed class EntityNotFoundException : Exception
+    {
+        public EntityNotFoundException(string entityId, string entityType)
+            : base($"Entity of type '{entityType}' with id '{entityId}' was not found.")
+        {
+        }
+    }
+}

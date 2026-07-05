@@ -98,7 +98,7 @@ namespace DoomRPG
 
             if (IsActive)
             {
-                InputManager.Instance.Update();
+                InputManager.Instance.Update(Window);
             }
             else
             {

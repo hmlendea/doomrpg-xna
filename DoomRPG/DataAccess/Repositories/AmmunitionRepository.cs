@@ -1,7 +1,4 @@
-﻿using System.Linq;
-
-using NuciXNA.DataAccess;
-using NuciXNA.DataAccess.Repositories;
+﻿using NuciDAL.Repositories;
 
 using DoomRPG.DataAccess.DataObjects;
 
@@ -10,38 +7,7 @@ namespace DoomRPG.DataAccess.Repositories
     /// <summary>
     /// Ammunition repository implementation.
     /// </summary>
-    public class AmmunitionRepository : XmlRepository<AmmunitionEntity>
+    public sealed class AmmunitionRepository(string fileName) : XmlRepository<AmmunitionEntity>(fileName)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AmmunitionRepository"/> class.
-        /// </summary>
-        /// <param name="fileName">File name.</param>
-        public AmmunitionRepository(string fileName) : base(fileName)
-        {
-
-        }
-
-        /// <summary>
-        /// Updates the specified ammunition.
-        /// </summary>
-        /// <param name="ammunitionEntity">Ammunition.</param>
-        public override void Update(AmmunitionEntity ammunitionEntity)
-        {
-            LoadEntitiesIfNeeded();
-
-            AmmunitionEntity ammunitionEntityToUpdate = Get(ammunitionEntity.Id);
-
-            if (ammunitionEntityToUpdate == null)
-            {
-                throw new EntityNotFoundException(ammunitionEntity.Id, nameof(AmmunitionEntity));
-            }
-
-            ammunitionEntityToUpdate.Name = ammunitionEntity.Name;
-            ammunitionEntityToUpdate.Description = ammunitionEntity.Description;
-            ammunitionEntityToUpdate.SpritesheetName = ammunitionEntity.SpritesheetName;
-            ammunitionEntityToUpdate.SpritesheetTextureIndex = ammunitionEntity.SpritesheetTextureIndex;
-
-            XmlFile.SaveEntities(Entities.Values);
-        }
     }
 }

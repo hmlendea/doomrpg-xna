@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-using NuciXNA.DataAccess.Repositories;
+using NuciDAL.Repositories;
 
 using DoomRPG.DataAccess.DataObjects;
 using DoomRPG.DataAccess.Repositories;

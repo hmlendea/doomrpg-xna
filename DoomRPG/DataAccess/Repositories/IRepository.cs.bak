@@ -1,0 +1,13 @@
+using System.Collections.Generic;
+
+namespace DoomRPG.DataAccess.Repositories
+{
+    public interface IRepository<TKey, TEntity>
+    {
+        TEntity Get(TKey id);
+
+        IEnumerable<TEntity> GetAll();
+
+        void Update(TEntity entity);
+    }
+}

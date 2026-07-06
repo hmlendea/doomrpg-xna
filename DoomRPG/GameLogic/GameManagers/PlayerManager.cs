@@ -5,6 +5,7 @@ using NuciXNA.Primitives;
 using DoomRPG.GameLogic.GameManagers.Interfaces;
 using DoomRPG.Models;
 using DoomRPG.Models.Enumerations;
+using DoomRPG.Settings;
 
 namespace DoomRPG.GameLogic.GameManagers
 {
@@ -20,7 +21,9 @@ namespace DoomRPG.GameLogic.GameManagers
 
             player = new Player
             {
-                Position = new PointF2D(3, 4)
+                Position = new PointF2D(3, 4),
+                Health = GameDefines.PlayerStartingHealth,
+                MaxHealth = GameDefines.PlayerStartingMaxHealth
             };
         }
 
@@ -102,6 +105,26 @@ namespace DoomRPG.GameLogic.GameManagers
             player.Direction = new PointF2D(
                 player.Direction.X * cos - player.Direction.Y * sin,
                 player.Direction.X * sin + player.Direction.Y * cos);
+        }
+
+        public void ApplyDamage(int amount)
+        {
+            player.Health -= amount;
+
+            if (player.Health < 0)
+            {
+                player.Health = 0;
+            }
+        }
+
+        public void Heal(int amount)
+        {
+            player.Health += amount;
+
+            if (player.Health > player.MaxHealth)
+            {
+                player.Health = player.MaxHealth;
+            }
         }
 
         public Player GetPlayer()

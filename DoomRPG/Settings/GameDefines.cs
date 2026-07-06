@@ -8,5 +8,11 @@
         public static string ApplicationName => "DoomRPG";
 
         public const int TextureSize = 450;
+
+        public const int PlayerStartingHealth = 100;
+
+        public const int PlayerStartingMaxHealth = 100;
+
+        public const int StatusBarHeight = 48;
     }
 }

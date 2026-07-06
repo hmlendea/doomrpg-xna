@@ -15,6 +15,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void RotatePlayer(float angle);
 
+        void ApplyDamage(int amount);
+
+        void Heal(int amount);
+
         Player GetPlayer();
     }
 }

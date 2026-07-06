@@ -9,6 +9,7 @@ using DoomRPG.GameLogic.GameManagers;
 using DoomRPG.GameLogic.GameManagers.Interfaces;
 using DoomRPG.Gui.GuiElements;
 using DoomRPG.Models.Enumerations;
+using DoomRPG.Settings;
 
 namespace DoomRPG.Gui.Screens
 {
@@ -19,6 +20,7 @@ namespace DoomRPG.Gui.Screens
     {
         IGameManager game;
         GuiCameraView cameraView;
+        GuiStatusBar statusBar;
         
         /// <summary>
         /// Loads the content.
@@ -27,12 +29,14 @@ namespace DoomRPG.Gui.Screens
         {
             game = new GameManager();
             cameraView = new GuiCameraView();
+            statusBar = new GuiStatusBar();
 
-            GuiManager.Instance.RegisterControls(cameraView);
+            GuiManager.Instance.RegisterControls(cameraView, statusBar);
 
             game.LoadContent();
 
             cameraView.AssociateGameManager(game);
+            statusBar.AssociateGameManager(game);
 
             InputManager.Instance.MouseMoved += Instance_MouseMoved;
 
@@ -42,7 +46,7 @@ namespace DoomRPG.Gui.Screens
         protected override void DoUnloadContent()
         {
             InputManager.Instance.MouseMoved -= Instance_MouseMoved;
-            
+
             game.UnloadContent();
         }
 
@@ -72,12 +76,16 @@ namespace DoomRPG.Gui.Screens
 
         protected override void DoDraw(SpriteBatch spriteBatch)
         {
-
         }
 
         void SetChildrenProperties()
         {
-            cameraView.Size = ScreenManager.Instance.Size;
+            int viewHeight = ScreenManager.Instance.Size.Height - GameDefines.StatusBarHeight;
+
+            cameraView.Size = new NuciXNA.Primitives.Size2D(ScreenManager.Instance.Size.Width, viewHeight);
+
+            statusBar.Location = new NuciXNA.Primitives.Point2D(0, viewHeight);
+            statusBar.Size = new NuciXNA.Primitives.Size2D(ScreenManager.Instance.Size.Width, GameDefines.StatusBarHeight);
         }
 
         private void Instance_MouseMoved(object sender, MouseEventArgs e)

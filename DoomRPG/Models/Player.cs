@@ -8,8 +8,14 @@ namespace DoomRPG.Models
 
         // TODO: Change to Vector2D
         public PointF2D Direction { get; set; }
-        
+
         public float MovementSpeed { get; set; }
+
+        public int Health { get; set; }
+
+        public int MaxHealth { get; set; }
+
+        public bool IsAlive => Health > 0;
 
         public Player()
         {

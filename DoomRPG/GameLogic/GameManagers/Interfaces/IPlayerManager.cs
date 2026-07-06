@@ -19,6 +19,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void Heal(int amount);
 
+        void RestoreArmour(int amount);
+
+        void DepleteArmour(int amount);
+
         Player GetPlayer();
     }
 }

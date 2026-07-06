@@ -23,7 +23,9 @@ namespace DoomRPG.GameLogic.GameManagers
             {
                 Position = new PointF2D(3.5f, 4.5f),
                 Health = GameDefines.PlayerStartingHealth,
-                MaxHealth = GameDefines.PlayerStartingMaxHealth
+                MaxHealth = GameDefines.PlayerStartingMaxHealth,
+                Armour = GameDefines.PlayerStartingArmour,
+                MaxArmour = GameDefines.PlayerStartingMaxArmour
             };
         }
 
@@ -111,6 +113,26 @@ namespace DoomRPG.GameLogic.GameManagers
             if (player.Health > player.MaxHealth)
             {
                 player.Health = player.MaxHealth;
+            }
+        }
+
+        public void RestoreArmour(int amount)
+        {
+            player.Armour += amount;
+
+            if (player.Armour > player.MaxArmour)
+            {
+                player.Armour = player.MaxArmour;
+            }
+        }
+
+        public void DepleteArmour(int amount)
+        {
+            player.Armour -= amount;
+
+            if (player.Armour < 0)
+            {
+                player.Armour = 0;
             }
         }
 

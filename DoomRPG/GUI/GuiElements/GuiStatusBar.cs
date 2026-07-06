@@ -13,9 +13,9 @@ namespace DoomRPG.Gui.GuiElements
     public sealed class GuiStatusBar : GuiControl
     {
         IGameManager game;
-        SpriteFont font;
         Texture2D fillTexture;
-        string healthText;
+        GuiText healthLabel;
+        GuiText armourLabel;
 
         public void AssociateGameManager(IGameManager game)
         {
@@ -24,13 +24,30 @@ namespace DoomRPG.Gui.GuiElements
 
         protected override void DoLoadContent()
         {
-            font = NuciContentManager.Instance.LoadSpriteFont("Fonts/MenuFont");
             fillTexture = NuciContentManager.Instance.LoadTexture2D("ScreenManager/FillImage");
-            healthText = string.Empty;
+
+            healthLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.White,
+                Size = new Size2D(150, 24)
+            };
+
+            armourLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.White,
+                Size = new Size2D(150, 24)
+            };
+
+            healthLabel.LoadContent();
+            armourLabel.LoadContent();
         }
 
         protected override void DoUnloadContent()
         {
+            healthLabel.UnloadContent();
+            armourLabel.UnloadContent();
         }
 
         protected override void DoUpdate(GameTime gameTime)
@@ -44,13 +61,28 @@ namespace DoomRPG.Gui.GuiElements
                 healthPercent = (int)((float)player.Health / player.MaxHealth * 100);
             }
 
-            healthText = $"Health: {healthPercent}%";
+            int armourPercent = 0;
+
+            if (player.MaxArmour > 0)
+            {
+                armourPercent = (int)((float)player.Armour / player.MaxArmour * 100);
+            }
+
+            healthLabel.Text = $"Health: {healthPercent}%";
+            healthLabel.Location = new Point2D(Location.X + 4, Location.Y + 4);
+
+            armourLabel.Text = $"Armour: {armourPercent}%";
+            armourLabel.Location = new Point2D(Location.X + 160, Location.Y + 4);
+
+            healthLabel.Update(gameTime);
+            armourLabel.Update(gameTime);
         }
 
         protected override void DoDraw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(fillTexture, new Rectangle(Location.X, Location.Y, Size.Width, Size.Height), Color.Black);
-            spriteBatch.DrawString(font, healthText, new Vector2(Location.X + 4, Location.Y + 4), Color.White);
+            healthLabel.Draw(spriteBatch);
+            armourLabel.Draw(spriteBatch);
         }
     }
 }

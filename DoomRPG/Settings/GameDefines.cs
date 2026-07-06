@@ -13,6 +13,10 @@
 
         public const int PlayerStartingMaxHealth = 100;
 
+        public const int PlayerStartingArmour = 0;
+
+        public const int PlayerStartingMaxArmour = 100;
+
         public const int StatusBarHeight = 48;
     }
 }

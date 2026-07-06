@@ -30,6 +30,7 @@ namespace DoomRPG.Gui
         float pendingRotation;
 
         static readonly float RotationRate = (float)(Math.PI / 2 / 0.5); // radians per second — full 90° in 500ms
+        static readonly float MovementRate = 1.0f / 0.5f; // tiles per second — 1 tile in 500ms
 
         public Camera()
         {
@@ -43,26 +44,41 @@ namespace DoomRPG.Gui
         {
             player = gameManager.GetPlayer();
             Direction = player.Direction;
+            Position = player.Position;
         }
 
         public void Update(GameTime gameTime)
         {
             float elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Position = player.Position;
+            float dx = player.Position.X - Position.X;
+            float dy = player.Position.Y - Position.Y;
+            float distance = (float)Math.Sqrt(dx * dx + dy * dy);
+            float maxStep = MovementRate * elapsedSeconds;
+
+            if (distance <= maxStep)
+            {
+                Position = player.Position;
+            }
+            else
+            {
+                Position = new PointF2D(
+                    Position.X + dx / distance * maxStep,
+                    Position.Y + dy / distance * maxStep);
+            }
 
             if (pendingRotation != 0)
             {
-                float maxStep = RotationRate * elapsedSeconds;
+                float maxRotationStep = RotationRate * elapsedSeconds;
                 float step;
 
                 if (pendingRotation > 0)
                 {
-                    step = Math.Min(pendingRotation, maxStep);
+                    step = Math.Min(pendingRotation, maxRotationStep);
                 }
                 else
                 {
-                    step = Math.Max(pendingRotation, -maxStep);
+                    step = Math.Max(pendingRotation, -maxRotationStep);
                 }
 
                 ApplyRotation(step);

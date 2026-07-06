@@ -56,15 +56,6 @@ namespace DoomRPG.Gui.Screens
         {
             game.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            if (InputManager.Instance.IsAnyKeyDown(Keys.Up, Keys.W))
-            {
-                game.MovePlayer(MovementDirection.North);
-            }
-            else if (InputManager.Instance.IsAnyKeyDown(Keys.Down, Keys.S))
-            {
-                game.MovePlayer(MovementDirection.South);
-            }
-
             SetChildrenProperties();
         }
 
@@ -84,7 +75,15 @@ namespace DoomRPG.Gui.Screens
 
         void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
         {
-            if (e.Key == Keys.Left || e.Key == Keys.A)
+            if (e.Key == Keys.Up || e.Key == Keys.W)
+            {
+                game.MovePlayer(MovementDirection.North);
+            }
+            else if (e.Key == Keys.Down || e.Key == Keys.S)
+            {
+                game.MovePlayer(MovementDirection.South);
+            }
+            else if (e.Key == Keys.Left || e.Key == Keys.A)
             {
                 float angle = (float)(Math.PI / 2);
                 game.RotatePlayer(angle);

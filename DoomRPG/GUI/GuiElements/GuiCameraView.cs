@@ -35,8 +35,6 @@ namespace DoomRPG.Gui.GuiElements
             camera = new Camera();
             camera.AssociateGameManager(game);
 
-            // TODO: Remove hardcoding
-            camera.Position = new PointF2D(4f, 4f);
             camera.Plane = new PointF2D(
                 player.Direction.Y * camera.FieldOfView,
                 -player.Direction.X * camera.FieldOfView);

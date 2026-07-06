@@ -21,7 +21,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
             player = new Player
             {
-                Position = new PointF2D(3, 4),
+                Position = new PointF2D(3.5f, 4.5f),
                 Health = GameDefines.PlayerStartingHealth,
                 MaxHealth = GameDefines.PlayerStartingMaxHealth
             };
@@ -44,57 +44,44 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public void MovePlayer(MovementDirection direction)
         {
-            PointF2D newPosition = player.Position;
-            PointF2D movement = PointF2D.Empty;
+            int dirX = (int)Math.Round(player.Direction.X);
+            int dirY = (int)Math.Round(player.Direction.Y);
+
+            int dx = 0;
+            int dy = 0;
 
             switch (direction)
             {
                 case MovementDirection.North:
-                    movement = new PointF2D(
-                        player.Direction.X * player.MovementSpeed,
-                        player.Direction.Y * player.MovementSpeed);
-                    break;
-
-                case MovementDirection.West:
-                    movement = new PointF2D(
-                        -player.Direction.Y * player.MovementSpeed,
-                        player.Direction.X * player.MovementSpeed);
+                    dx = dirX;
+                    dy = dirY;
                     break;
 
                 case MovementDirection.South:
-                    movement = new PointF2D(
-                        -player.Direction.X * player.MovementSpeed,
-                        -player.Direction.Y * player.MovementSpeed);
+                    dx = -dirX;
+                    dy = -dirY;
+                    break;
+
+                case MovementDirection.West:
+                    dx = dirY;
+                    dy = -dirX;
                     break;
 
                 case MovementDirection.East:
-                    movement = new PointF2D(
-                        player.Direction.Y * player.MovementSpeed,
-                        -player.Direction.X * player.MovementSpeed);
+                    dx = -dirY;
+                    dy = dirX;
                     break;
             }
 
-            if (movement.X != 0)
+            float targetX = player.Position.X + dx;
+            float targetY = player.Position.Y + dy;
+
+            WallInstance wall = levelManager.GetWall((int)targetX, (int)targetY);
+
+            if (wall is null)
             {
-                WallInstance wall = levelManager.GetWall((int)(player.Position.X + movement.X), (int)player.Position.Y);
-
-                if (wall == null)
-                {
-                    newPosition.X += movement.X;
-                }
+                player.Position = new PointF2D(targetX, targetY);
             }
-
-            if (movement.Y != 0)
-            {
-                WallInstance wall = levelManager.GetWall((int)player.Position.X, (int)(player.Position.Y + movement.Y));
-
-                if (wall == null)
-                {
-                    newPosition.Y += movement.Y;
-                }
-            }
-
-            player.Position = newPosition;
         }
 
         public void RotatePlayer(float angle)

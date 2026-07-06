@@ -27,8 +27,13 @@ namespace DoomRPG.GameLogic.GameManagers
                 Armour = GameDefines.PlayerStartingArmour,
                 MaxArmour = GameDefines.PlayerStartingMaxArmour,
                 Credits = GameDefines.PlayerStartingCredits,
+                Strength = GameDefines.PlayerStartingStrength,
+                Agility = GameDefines.PlayerStartingAgility,
+                Accuracy = GameDefines.PlayerStartingAccuracy,
+                Defense = GameDefines.PlayerStartingDefense,
+                StatPoints = GameDefines.PlayerStartingStatPoints,
                 Level = GameDefines.PlayerStartingLevel,
-                Experience = GameDefines.PlayerStartingXp
+                Experience = GameDefines.PlayerStartingExperience
             };
         }
 
@@ -152,7 +157,37 @@ namespace DoomRPG.GameLogic.GameManagers
             {
                 player.Experience -= player.ExperienceToNextLevel;
                 player.Level += 1;
+                player.StatPoints += GameDefines.StatPointsPerLevel;
             }
+        }
+
+        public bool AllocateStat(StatType stat)
+        {
+            if (player.StatPoints <= 0)
+            {
+                return false;
+            }
+
+            if (stat.Equals(StatType.Strength))
+            {
+                player.Strength += 1;
+            }
+            else if (stat.Equals(StatType.Agility))
+            {
+                player.Agility += 1;
+            }
+            else if (stat.Equals(StatType.Accuracy))
+            {
+                player.Accuracy += 1;
+            }
+            else if (stat.Equals(StatType.Defense))
+            {
+                player.Defense += 1;
+            }
+
+            player.StatPoints -= 1;
+
+            return true;
         }
 
         public bool SpendCredits(int amount)

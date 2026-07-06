@@ -21,6 +21,16 @@ namespace DoomRPG.Models
 
         public int Credits { get; set; }
 
+        public int Strength { get; set; }
+
+        public int Agility { get; set; }
+
+        public int Accuracy { get; set; }
+
+        public int Defense { get; set; }
+
+        public int StatPoints { get; set; }
+
         public int Level { get; set; }
 
         public int Experience { get; set; }

@@ -19,10 +19,24 @@
 
         public const int PlayerStartingCredits = 0;
 
+        public const int PlayerStartingStrength = 1;
+
+        public const int PlayerStartingAgility = 1;
+
+        public const int PlayerStartingAccuracy = 1;
+
+        public const int PlayerStartingDefense = 1;
+
+        public const int PlayerStartingStatPoints = 0;
+
+        public const int StatPointsPerLevel = 3;
+
         public const int PlayerStartingLevel = 1;
 
         public const int PlayerStartingXp = 0;
 
-        public const int StatusBarHeight = 48;
+        public const int PlayerStartingExperience = 0;
+
+        public const int StatusBarHeight = 72;
     }
 }

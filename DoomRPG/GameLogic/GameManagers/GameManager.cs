@@ -114,6 +114,11 @@ namespace DoomRPG.GameLogic.GameManagers
             playerManager.AddExperience(amount);
         }
 
+        public bool AllocateStat(StatType stat)
+        {
+            return playerManager.AllocateStat(stat);
+        }
+
         public Player GetPlayer()
         {
             return playerManager.GetPlayer();

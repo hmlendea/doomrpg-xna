@@ -35,6 +35,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void AddExperience(int amount);
 
+        bool AllocateStat(StatType stat);
+
         Player GetPlayer();
     }
 }

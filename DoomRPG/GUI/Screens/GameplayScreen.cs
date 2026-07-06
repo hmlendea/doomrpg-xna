@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NuciXNA.Gui;
@@ -38,14 +40,14 @@ namespace DoomRPG.Gui.Screens
             cameraView.AssociateGameManager(game);
             statusBar.AssociateGameManager(game);
 
-            InputManager.Instance.MouseMoved += Instance_MouseMoved;
+            KeyPressed += OnKeyPressed;
 
             SetChildrenProperties();
         }
 
         protected override void DoUnloadContent()
         {
-            InputManager.Instance.MouseMoved -= Instance_MouseMoved;
+            KeyPressed -= OnKeyPressed;
 
             game.UnloadContent();
         }
@@ -61,14 +63,6 @@ namespace DoomRPG.Gui.Screens
             else if (InputManager.Instance.IsAnyKeyDown(Keys.Down, Keys.S))
             {
                 game.MovePlayer(MovementDirection.South);
-            }
-            else if (InputManager.Instance.IsAnyKeyDown(Keys.Left, Keys.A))
-            {
-                game.MovePlayer(MovementDirection.West);
-            }
-            else if (InputManager.Instance.IsAnyKeyDown(Keys.Right, Keys.D))
-            {
-                game.MovePlayer(MovementDirection.East);
             }
 
             SetChildrenProperties();
@@ -88,12 +82,17 @@ namespace DoomRPG.Gui.Screens
             statusBar.Size = new NuciXNA.Primitives.Size2D(ScreenManager.Instance.Size.Width, GameDefines.StatusBarHeight);
         }
 
-        private void Instance_MouseMoved(object sender, MouseEventArgs e)
+        void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
         {
-            float angle = (e.PreviousLocation.X - e.Location.X) * 0.0125f;
-
-            if (angle != 0.0f)
+            if (e.Key == Keys.Left || e.Key == Keys.A)
             {
+                float angle = (float)(Math.PI / 2);
+                game.RotatePlayer(angle);
+                cameraView.camera.Rotate(angle);
+            }
+            else if (e.Key == Keys.Right || e.Key == Keys.D)
+            {
+                float angle = -(float)(Math.PI / 2);
                 game.RotatePlayer(angle);
                 cameraView.camera.Rotate(angle);
             }

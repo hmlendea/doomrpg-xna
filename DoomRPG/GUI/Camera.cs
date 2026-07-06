@@ -27,6 +27,9 @@ namespace DoomRPG.Gui
         public IGameManager gameManager;
 
         Player player;
+        float pendingRotation;
+
+        static readonly float RotationRate = (float)(Math.PI / 2 / 0.5); // radians per second — full 90° in 500ms
 
         public Camera()
         {
@@ -39,27 +42,58 @@ namespace DoomRPG.Gui
         public void LoadContent()
         {
             player = gameManager.GetPlayer();
+            Direction = player.Direction;
         }
-        
+
         public void Update(GameTime gameTime)
         {
-            Vector2 move = Vector2.Zero;
             float elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Direction = player.Direction;
             Position = player.Position;
+
+            if (pendingRotation != 0)
+            {
+                float maxStep = RotationRate * elapsedSeconds;
+                float step;
+
+                if (pendingRotation > 0)
+                {
+                    step = Math.Min(pendingRotation, maxStep);
+                }
+                else
+                {
+                    step = Math.Max(pendingRotation, -maxStep);
+                }
+
+                ApplyRotation(step);
+                pendingRotation -= step;
+
+                if (Math.Abs(pendingRotation) < 1e-6f)
+                {
+                    pendingRotation = 0;
+                }
+            }
         }
 
         public void AssociateGameManager(IGameManager gameManager)
         {
             this.gameManager = gameManager;
         }
-        
+
         public void Rotate(float amount)
         {
-            float sin = (float)Math.Sin(amount);
-            float cos = (float)Math.Cos(amount);
-            
+            pendingRotation += amount;
+        }
+
+        void ApplyRotation(float angle)
+        {
+            float sin = (float)Math.Sin(angle);
+            float cos = (float)Math.Cos(angle);
+
+            Direction = new PointF2D(
+                Direction.X * cos - Direction.Y * sin,
+                Direction.X * sin + Direction.Y * cos);
+
             Plane = new PointF2D(
                 Plane.X * cos - Plane.Y * sin,
                 Plane.X * sin + Plane.Y * cos);

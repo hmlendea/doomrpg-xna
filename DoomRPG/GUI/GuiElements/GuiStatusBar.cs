@@ -1,21 +1,19 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using NuciXNA.DataAccess.Content;
 using NuciXNA.Gui.Controls;
 using NuciXNA.Primitives;
 
 using DoomRPG.GameLogic.GameManagers.Interfaces;
 using DoomRPG.Models;
-using DoomRPG.Settings;
 
 namespace DoomRPG.Gui.GuiElements
 {
     public sealed class GuiStatusBar : GuiControl
     {
         IGameManager game;
-        Texture2D fillTexture;
+        GuiImage background;
         GuiText healthLabel;
         GuiText armourLabel;
+        GuiText creditsLabel;
 
         public void AssociateGameManager(IGameManager game)
         {
@@ -24,7 +22,11 @@ namespace DoomRPG.Gui.GuiElements
 
         protected override void DoLoadContent()
         {
-            fillTexture = NuciContentManager.Instance.LoadTexture2D("ScreenManager/FillImage");
+            background = new GuiImage
+            {
+                ContentFile = "ScreenManager/FillImage",
+                TintColour = Colour.Black
+            };
 
             healthLabel = new GuiText
             {
@@ -40,15 +42,17 @@ namespace DoomRPG.Gui.GuiElements
                 Size = new Size2D(150, 24)
             };
 
-            healthLabel.LoadContent();
-            armourLabel.LoadContent();
+            creditsLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.Yellow,
+                Size = new Size2D(150, 24)
+            };
+
+            RegisterChildren(background, healthLabel, armourLabel, creditsLabel);
         }
 
-        protected override void DoUnloadContent()
-        {
-            healthLabel.UnloadContent();
-            armourLabel.UnloadContent();
-        }
+        protected override void DoUnloadContent() { }
 
         protected override void DoUpdate(GameTime gameTime)
         {
@@ -68,21 +72,19 @@ namespace DoomRPG.Gui.GuiElements
                 armourPercent = (int)((float)player.Armour / player.MaxArmour * 100);
             }
 
+            background.Location = Point2D.Empty;
+            background.Size = Size;
+
             healthLabel.Text = $"Health: {healthPercent}%";
-            healthLabel.Location = new Point2D(Location.X + 4, Location.Y + 4);
+            healthLabel.Location = new Point2D(4, 4);
 
             armourLabel.Text = $"Armour: {armourPercent}%";
-            armourLabel.Location = new Point2D(Location.X + 160, Location.Y + 4);
+            armourLabel.Location = new Point2D(160, 4);
 
-            healthLabel.Update(gameTime);
-            armourLabel.Update(gameTime);
+            creditsLabel.Text = $"Credits: {player.Credits}";
+            creditsLabel.Location = new Point2D(316, 4);
         }
 
-        protected override void DoDraw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(fillTexture, new Rectangle(Location.X, Location.Y, Size.Width, Size.Height), Color.Black);
-            healthLabel.Draw(spriteBatch);
-            armourLabel.Draw(spriteBatch);
-        }
+        protected override void DoDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) { }
     }
 }

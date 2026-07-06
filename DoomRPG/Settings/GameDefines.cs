@@ -17,6 +17,8 @@
 
         public const int PlayerStartingMaxArmour = 100;
 
+        public const int PlayerStartingCredits = 0;
+
         public const int StatusBarHeight = 48;
     }
 }

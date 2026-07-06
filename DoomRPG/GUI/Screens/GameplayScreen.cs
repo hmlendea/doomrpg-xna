@@ -12,6 +12,7 @@ using DoomRPG.GameLogic.GameManagers.Interfaces;
 using DoomRPG.Gui.GuiElements;
 using DoomRPG.Models.Enumerations;
 using DoomRPG.Settings;
+using NuciXNA.Primitives;
 
 namespace DoomRPG.Gui.Screens
 {
@@ -23,7 +24,7 @@ namespace DoomRPG.Gui.Screens
         IGameManager game;
         GuiCameraView cameraView;
         GuiStatusBar statusBar;
-        
+
         /// <summary>
         /// Loads the content.
         /// </summary>
@@ -67,10 +68,10 @@ namespace DoomRPG.Gui.Screens
         {
             int viewHeight = ScreenManager.Instance.Size.Height - GameDefines.StatusBarHeight;
 
-            cameraView.Size = new NuciXNA.Primitives.Size2D(ScreenManager.Instance.Size.Width, viewHeight);
+            cameraView.Size = new Size2D(ScreenManager.Instance.Size.Width, viewHeight);
 
-            statusBar.Location = new NuciXNA.Primitives.Point2D(0, viewHeight);
-            statusBar.Size = new NuciXNA.Primitives.Size2D(ScreenManager.Instance.Size.Width, GameDefines.StatusBarHeight);
+            statusBar.Location = new Point2D(0, viewHeight);
+            statusBar.Size = new Size2D(ScreenManager.Instance.Size.Width, GameDefines.StatusBarHeight);
         }
 
         void OnKeyPressed(object sender, KeyboardKeyEventArgs e)

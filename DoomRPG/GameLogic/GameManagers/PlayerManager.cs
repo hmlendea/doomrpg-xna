@@ -25,7 +25,8 @@ namespace DoomRPG.GameLogic.GameManagers
                 Health = GameDefines.PlayerStartingHealth,
                 MaxHealth = GameDefines.PlayerStartingMaxHealth,
                 Armour = GameDefines.PlayerStartingArmour,
-                MaxArmour = GameDefines.PlayerStartingMaxArmour
+                MaxArmour = GameDefines.PlayerStartingMaxArmour,
+                Credits = GameDefines.PlayerStartingCredits
             };
         }
 
@@ -134,6 +135,23 @@ namespace DoomRPG.GameLogic.GameManagers
             {
                 player.Armour = 0;
             }
+        }
+
+        public void AddCredits(int amount)
+        {
+            player.Credits += amount;
+        }
+
+        public bool SpendCredits(int amount)
+        {
+            if (player.Credits < amount)
+            {
+                return false;
+            }
+
+            player.Credits -= amount;
+            
+            return true;
         }
 
         public Player GetPlayer()

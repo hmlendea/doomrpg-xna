@@ -23,6 +23,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void DepleteArmour(int amount);
 
+        void AddCredits(int amount);
+
+        bool SpendCredits(int amount);
+
         Player GetPlayer();
     }
 }

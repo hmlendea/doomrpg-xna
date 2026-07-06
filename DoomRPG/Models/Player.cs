@@ -19,6 +19,8 @@ namespace DoomRPG.Models
 
         public int MaxArmour { get; set; }
 
+        public int Credits { get; set; }
+
         public bool IsAlive => Health > 0;
 
         public Player()

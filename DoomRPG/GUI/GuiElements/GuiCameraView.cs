@@ -236,14 +236,25 @@ namespace DoomRPG.Gui.GuiElements
             for (int x = 0; x < Size.Width; x++)
             {
                 int columnStart = -wallSlices[x].Height / 2 + Size.Height / 2;
-                int columnLength = wallSlices[x].Height / 2 + Size.Height / 2 - columnStart;
-                
-                if (!string.IsNullOrWhiteSpace(wallSlices[x].Spritesheet))
+                int columnEnd = columnStart + wallSlices[x].Height;
+
+                int drawStart = Math.Max(0, columnStart);
+                int drawEnd = Math.Min(Size.Height, columnEnd);
+                int drawLength = drawEnd - drawStart;
+
+                if (drawLength > 0 && !string.IsNullOrWhiteSpace(wallSlices[x].Spritesheet))
                 {
+                    int texYOffset = wallSlices[x].Height > 0
+                        ? (drawStart - columnStart) * GameDefines.TextureSize / wallSlices[x].Height
+                        : 0;
+                    int texHeight = wallSlices[x].Height > 0
+                        ? Math.Max(1, drawLength * GameDefines.TextureSize / wallSlices[x].Height)
+                        : GameDefines.TextureSize;
+
                     spriteBatch.Draw(
                         wallTextures[wallSlices[x].Spritesheet],
-                        new Rectangle(x, columnStart, 1, columnLength),
-                        new Rectangle(wallSlices[x].TextureX + wallSlices[x].SpritesheetTextureIndex * GameDefines.TextureSize, 0, 1, GameDefines.TextureSize),
+                        new Rectangle(x, drawStart, 1, drawLength),
+                        new Rectangle(wallSlices[x].TextureX + wallSlices[x].SpritesheetTextureIndex * GameDefines.TextureSize, texYOffset, 1, texHeight),
                         Color.White);
                 }
             }

@@ -27,6 +27,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         bool SpendCredits(int amount);
 
+        void AddExperience(int amount);
+
         Player GetPlayer();
     }
 }

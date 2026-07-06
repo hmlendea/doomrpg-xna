@@ -109,6 +109,11 @@ namespace DoomRPG.GameLogic.GameManagers
             return levelManager.GetWall(x, y);
         }
 
+        public void AddExperience(int amount)
+        {
+            playerManager.AddExperience(amount);
+        }
+
         public Player GetPlayer()
         {
             return playerManager.GetPlayer();

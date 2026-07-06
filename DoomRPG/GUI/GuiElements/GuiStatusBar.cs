@@ -14,6 +14,7 @@ namespace DoomRPG.Gui.GuiElements
         GuiText healthLabel;
         GuiText armourLabel;
         GuiText creditsLabel;
+        GuiText xpLabel;
 
         public void AssociateGameManager(IGameManager game)
         {
@@ -49,7 +50,14 @@ namespace DoomRPG.Gui.GuiElements
                 Size = new Size2D(150, 24)
             };
 
-            RegisterChildren(background, healthLabel, armourLabel, creditsLabel);
+            xpLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.Aqua,
+                Size = new Size2D(200, 24)
+            };
+
+            RegisterChildren(background, healthLabel, armourLabel, creditsLabel, xpLabel);
         }
 
         protected override void DoUnloadContent() { }
@@ -83,6 +91,9 @@ namespace DoomRPG.Gui.GuiElements
 
             creditsLabel.Text = $"Credits: {player.Credits}";
             creditsLabel.Location = new Point2D(316, 4);
+
+            xpLabel.Text = $"Level {player.Level}  XP: {player.Experience}/{player.ExperienceToNextLevel}";
+            xpLabel.Location = new Point2D(472, 4);
         }
 
         protected override void DoDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) { }

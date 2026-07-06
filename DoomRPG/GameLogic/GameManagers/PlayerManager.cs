@@ -26,7 +26,9 @@ namespace DoomRPG.GameLogic.GameManagers
                 MaxHealth = GameDefines.PlayerStartingMaxHealth,
                 Armour = GameDefines.PlayerStartingArmour,
                 MaxArmour = GameDefines.PlayerStartingMaxArmour,
-                Credits = GameDefines.PlayerStartingCredits
+                Credits = GameDefines.PlayerStartingCredits,
+                Level = GameDefines.PlayerStartingLevel,
+                Experience = GameDefines.PlayerStartingXp
             };
         }
 
@@ -39,7 +41,7 @@ namespace DoomRPG.GameLogic.GameManagers
         {
 
         }
-        
+
         public void Update(float elapsedSeconds)
         {
 
@@ -142,6 +144,17 @@ namespace DoomRPG.GameLogic.GameManagers
             player.Credits += amount;
         }
 
+        public void AddExperience(int amount)
+        {
+            player.Experience += amount;
+
+            while (player.Experience >= player.ExperienceToNextLevel)
+            {
+                player.Experience -= player.ExperienceToNextLevel;
+                player.Level += 1;
+            }
+        }
+
         public bool SpendCredits(int amount)
         {
             if (player.Credits < amount)
@@ -150,7 +163,7 @@ namespace DoomRPG.GameLogic.GameManagers
             }
 
             player.Credits -= amount;
-            
+
             return true;
         }
 

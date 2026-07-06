@@ -33,6 +33,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         WallInstance GetWall(int x, int y);
 
+        void AddExperience(int amount);
+
         Player GetPlayer();
     }
 }

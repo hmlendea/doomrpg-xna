@@ -19,6 +19,10 @@
 
         public const int PlayerStartingCredits = 0;
 
+        public const int PlayerStartingLevel = 1;
+
+        public const int PlayerStartingXp = 0;
+
         public const int StatusBarHeight = 48;
     }
 }

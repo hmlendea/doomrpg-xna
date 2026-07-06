@@ -21,6 +21,12 @@ namespace DoomRPG.Models
 
         public int Credits { get; set; }
 
+        public int Level { get; set; }
+
+        public int Experience { get; set; }
+
+        public int ExperienceToNextLevel => Level * 100;
+
         public bool IsAlive => Health > 0;
 
         public Player()

@@ -96,6 +96,15 @@ namespace DoomRPG.Gui.Screens
                 game.RotatePlayer(angle);
                 cameraView.camera.Rotate(angle);
             }
+            else
+            {
+                int slot = (int)e.Key - (int)Keys.D0;
+
+                if (slot >= 1 && slot <= 9)
+                {
+                    game.SelectWeaponBySlot(slot);
+                }
+            }
         }
     }
 }

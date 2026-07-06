@@ -1,4 +1,6 @@
-﻿using DoomRPG.Models;
+﻿using System.Collections.Generic;
+
+using DoomRPG.Models;
 using DoomRPG.Models.Enumerations;
 
 namespace DoomRPG.GameLogic.GameManagers.Interfaces
@@ -26,6 +28,16 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         void AddCredits(int amount);
 
         bool SpendCredits(int amount);
+
+        void GiveWeapon(string weaponId);
+
+        bool SelectWeapon(string weaponId);
+
+        bool SelectWeaponBySlot(int slot);
+
+        string GetEquippedWeaponId();
+
+        IEnumerable<string> GetWeaponInventory();
 
         void AddExperience(int amount);
 

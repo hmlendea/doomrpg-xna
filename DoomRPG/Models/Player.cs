@@ -21,6 +21,8 @@ namespace DoomRPG.Models
 
         public int Credits { get; set; }
 
+        public string EquippedWeaponId { get; set; }
+
         public int Strength { get; set; }
 
         public int Agility { get; set; }

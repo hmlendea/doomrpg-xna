@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using NuciXNA.Primitives;
 
@@ -15,6 +16,8 @@ namespace DoomRPG.GameLogic.GameManagers
 
         Player player;
 
+        List<string> weaponInventory;
+
         public PlayerManager(ILevelManager levelManager)
         {
             this.levelManager = levelManager;
@@ -27,6 +30,7 @@ namespace DoomRPG.GameLogic.GameManagers
                 Armour = GameDefines.PlayerStartingArmour,
                 MaxArmour = GameDefines.PlayerStartingMaxArmour,
                 Credits = GameDefines.PlayerStartingCredits,
+                EquippedWeaponId = GameDefines.PlayerStartingWeaponId,
                 Strength = GameDefines.PlayerStartingStrength,
                 Agility = GameDefines.PlayerStartingAgility,
                 Accuracy = GameDefines.PlayerStartingAccuracy,
@@ -35,6 +39,8 @@ namespace DoomRPG.GameLogic.GameManagers
                 Level = GameDefines.PlayerStartingLevel,
                 Experience = GameDefines.PlayerStartingExperience
             };
+
+            weaponInventory = ["fist", "pistol"];
         }
 
         public void LoadContent()
@@ -159,6 +165,48 @@ namespace DoomRPG.GameLogic.GameManagers
                 player.Level += 1;
                 player.StatPoints += GameDefines.StatPointsPerLevel;
             }
+        }
+
+        public void GiveWeapon(string weaponId)
+        {
+            if (!weaponInventory.Contains(weaponId))
+            {
+                weaponInventory.Add(weaponId);
+            }
+        }
+
+        public bool SelectWeapon(string weaponId)
+        {
+            if (!weaponInventory.Contains(weaponId))
+            {
+                return false;
+            }
+
+            player.EquippedWeaponId = weaponId;
+
+            return true;
+        }
+
+        public bool SelectWeaponBySlot(int slot)
+        {
+            if (slot < 1 || slot > weaponInventory.Count)
+            {
+                return false;
+            }
+
+            player.EquippedWeaponId = weaponInventory[slot - 1];
+
+            return true;
+        }
+
+        public string GetEquippedWeaponId()
+        {
+            return player.EquippedWeaponId;
+        }
+
+        public IEnumerable<string> GetWeaponInventory()
+        {
+            return weaponInventory;
         }
 
         public bool AllocateStat(StatType stat)

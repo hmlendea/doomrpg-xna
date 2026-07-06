@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWeaponEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WeaponEntity>
+    <Id>fist</Id>
+    <Name>Fist</Name>
+    <Description>Your bare fists. Always available.</Description>
+    <AmmunitionId></AmmunitionId>
+    <Damage>20</Damage>
+    <AmmoPerShot>0</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
+    <Id>pistol</Id>
+    <Name>Pistol</Name>
+    <Description>A standard-issue sidearm. Uses bullets.</Description>
+    <AmmunitionId>bullets</AmmunitionId>
+    <Damage>35</Damage>
+    <AmmoPerShot>1</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
+    <Id>shotgun</Id>
+    <Name>Shotgun</Name>
+    <Description>A powerful close-range weapon. Uses shells.</Description>
+    <AmmunitionId>shells</AmmunitionId>
+    <Damage>80</Damage>
+    <AmmoPerShot>1</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
+    <Id>chaingun</Id>
+    <Name>Chaingun</Name>
+    <Description>A rapid-fire bullet hose. Uses bullets.</Description>
+    <AmmunitionId>bullets</AmmunitionId>
+    <Damage>25</Damage>
+    <AmmoPerShot>1</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>3</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
+    <Id>rocket_launcher</Id>
+    <Name>Rocket Launcher</Name>
+    <Description>Fires explosive rockets. Uses missiles.</Description>
+    <AmmunitionId>missile</AmmunitionId>
+    <Damage>200</Damage>
+    <AmmoPerShot>1</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>4</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
+    <Id>plasma_gun</Id>
+    <Name>Plasma Gun</Name>
+    <Description>Fires bolts of superheated plasma. Uses energy cells.</Description>
+    <AmmunitionId>cells</AmmunitionId>
+    <Damage>60</Damage>
+    <AmmoPerShot>1</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>5</SpritesheetTextureIndex>
+  </WeaponEntity>
+</ArrayOfWeaponEntity>

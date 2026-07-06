@@ -33,6 +33,18 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         WallInstance GetWall(int x, int y);
 
+        IEnumerable<Weapon> GetWeaponDefinitions();
+
+        Weapon GetWeaponDefinition(string id);
+
+        void GiveWeapon(string weaponId);
+
+        bool SelectWeapon(string weaponId);
+
+        bool SelectWeaponBySlot(int slot);
+
+        Weapon GetEquippedWeapon();
+
         void AddExperience(int amount);
 
         bool AllocateStat(StatType stat);

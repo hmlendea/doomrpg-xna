@@ -17,6 +17,7 @@ namespace DoomRPG.GameLogic.GameManagers
     {
         List<Ammunition> ammunitions;
         List<Wall> wallDefinitions;
+        List<Weapon> weaponDefinitions;
 
         readonly ILevelManager levelManager;
         readonly IMobManager mobManager;
@@ -38,11 +39,15 @@ namespace DoomRPG.GameLogic.GameManagers
             string ammoPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "ammo.xml");
             string wallPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "walls.xml");
 
+            string weaponPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "weapons.xml");
+
             AmmunitionRepository ammoRepository = new AmmunitionRepository(ammoPath);
             WallRepository wallRepository = new WallRepository(wallPath);
+            WeaponRepository weaponRepository = new WeaponRepository(weaponPath);
 
             ammunitions = ammoRepository.GetAll().ToDomainModels().ToList();
             wallDefinitions = wallRepository.GetAll().ToDomainModels().ToList();
+            weaponDefinitions = weaponRepository.GetAll().ToDomainModels().ToList();
         }
 
         public void UnloadContent()
@@ -53,6 +58,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
             ammunitions.Clear();
             wallDefinitions.Clear();
+            weaponDefinitions.Clear();
         }
 
         public void Update(float elapsedSeconds)
@@ -107,6 +113,43 @@ namespace DoomRPG.GameLogic.GameManagers
         public WallInstance GetWall(int x, int y)
         {
             return levelManager.GetWall(x, y);
+        }
+
+        public IEnumerable<Weapon> GetWeaponDefinitions()
+        {
+            return weaponDefinitions;
+        }
+
+        public Weapon GetWeaponDefinition(string id)
+        {
+            return weaponDefinitions.FirstOrDefault(weapon => weapon.Id.Equals(id));
+        }
+
+        public void GiveWeapon(string weaponId)
+        {
+            playerManager.GiveWeapon(weaponId);
+        }
+
+        public bool SelectWeapon(string weaponId)
+        {
+            return playerManager.SelectWeapon(weaponId);
+        }
+
+        public bool SelectWeaponBySlot(int slot)
+        {
+            return playerManager.SelectWeaponBySlot(slot);
+        }
+
+        public Weapon GetEquippedWeapon()
+        {
+            string equippedId = playerManager.GetEquippedWeaponId();
+
+            if (equippedId is null)
+            {
+                return null;
+            }
+
+            return weaponDefinitions.FirstOrDefault(weapon => weapon.Id.Equals(equippedId));
         }
 
         public void AddExperience(int amount)

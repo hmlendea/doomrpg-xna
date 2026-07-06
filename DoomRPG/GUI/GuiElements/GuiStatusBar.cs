@@ -20,6 +20,7 @@ namespace DoomRPG.Gui.GuiElements
         GuiText accuracyLabel;
         GuiText defenseLabel;
         GuiText statPointsLabel;
+        GuiText weaponLabel;
 
         public void AssociateGameManager(IGameManager game)
         {
@@ -97,8 +98,15 @@ namespace DoomRPG.Gui.GuiElements
                 Size = new Size2D(140, 20)
             };
 
+            weaponLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.White,
+                Size = new Size2D(200, 20)
+            };
+
             RegisterChildren(background, healthLabel, armourLabel, creditsLabel, xpLabel,
-                strengthLabel, agilityLabel, accuracyLabel, defenseLabel, statPointsLabel);
+                strengthLabel, agilityLabel, accuracyLabel, defenseLabel, statPointsLabel, weaponLabel);
         }
 
         protected override void DoUnloadContent() { }
@@ -150,6 +158,10 @@ namespace DoomRPG.Gui.GuiElements
 
             statPointsLabel.Text = $"Points: {player.StatPoints}";
             statPointsLabel.Location = new Point2D(388, 28);
+
+            DoomRPG.Models.Weapon equippedWeapon = game.GetEquippedWeapon();
+            weaponLabel.Text = equippedWeapon is not null ? $"[{equippedWeapon.Name}]" : "[Unarmed]";
+            weaponLabel.Location = new Point2D(540, 28);
         }
 
         protected override void DoDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) { }

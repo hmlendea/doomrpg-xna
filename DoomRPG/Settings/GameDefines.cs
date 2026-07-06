@@ -19,6 +19,8 @@
 
         public const int PlayerStartingCredits = 0;
 
+        public const string PlayerStartingWeaponId = "pistol";
+
         public const int PlayerStartingStrength = 1;
 
         public const int PlayerStartingAgility = 1;

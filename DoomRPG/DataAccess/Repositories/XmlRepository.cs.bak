@@ -1,0 +1,65 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml.Serialization;
+
+using DoomRPG.DataAccess.DataObjects;
+
+namespace DoomRPG.DataAccess.Repositories
+{
+    public abstract class XmlRepository<TEntity> : IRepository<string, TEntity>
+        where TEntity : EntityBase
+    {
+        readonly string fileName;
+
+        Dictionary<string, TEntity> entities;
+
+        protected Dictionary<string, TEntity> Entities => entities;
+
+        protected XmlRepository(string fileName)
+        {
+            this.fileName = fileName;
+        }
+
+        public TEntity Get(string id)
+        {
+            LoadEntitiesIfNeeded();
+            entities.TryGetValue(id, out TEntity entity);
+            return entity;
+        }
+
+        public IEnumerable<TEntity> GetAll()
+        {
+            LoadEntitiesIfNeeded();
+            return entities.Values;
+        }
+
+        public abstract void Update(TEntity entity);
+
+        protected void LoadEntitiesIfNeeded()
+        {
+            if (entities is not null)
+            {
+                return;
+            }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<TEntity>));
+
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                List<TEntity> list = (List<TEntity>)serializer.Deserialize(reader);
+                entities = list.ToDictionary(e => e.Id, e => e);
+            }
+        }
+
+        protected void SaveEntities()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<TEntity>));
+
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                serializer.Serialize(writer, entities.Values.ToList());
+            }
+        }
+    }
+}

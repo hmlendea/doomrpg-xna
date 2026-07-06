@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-using NuciXNA.DataAccess.IO;
+using NuciDAL.IO;
 using NuciXNA.Graphics;
 
 namespace DoomRPG.Settings

@@ -25,6 +25,8 @@ namespace DoomRPG.Gui.Screens
         GuiCameraView cameraView;
         GuiStatusBar statusBar;
 
+        int previousScrollWheelValue;
+
         /// <summary>
         /// Loads the content.
         /// </summary>
@@ -43,6 +45,8 @@ namespace DoomRPG.Gui.Screens
 
             KeyPressed += OnKeyPressed;
 
+            previousScrollWheelValue = Mouse.GetState().ScrollWheelValue;
+
             SetChildrenProperties();
         }
 
@@ -56,6 +60,20 @@ namespace DoomRPG.Gui.Screens
         protected override void DoUpdate(GameTime gameTime)
         {
             game.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+
+            int currentScrollWheelValue = Mouse.GetState().ScrollWheelValue;
+            int scrollDelta = currentScrollWheelValue - previousScrollWheelValue;
+
+            if (scrollDelta > 0)
+            {
+                game.CycleWeaponNext();
+            }
+            else if (scrollDelta < 0)
+            {
+                game.CycleWeaponPrevious();
+            }
+
+            previousScrollWheelValue = currentScrollWheelValue;
 
             SetChildrenProperties();
         }

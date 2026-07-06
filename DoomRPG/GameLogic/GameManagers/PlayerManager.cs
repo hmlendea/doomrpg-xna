@@ -199,6 +199,32 @@ namespace DoomRPG.GameLogic.GameManagers
             return true;
         }
 
+        public void CycleWeaponNext()
+        {
+            if (weaponInventory.Count == 0)
+            {
+                return;
+            }
+
+            int currentIndex = weaponInventory.IndexOf(player.EquippedWeaponId);
+            int nextIndex = (currentIndex + 1) % weaponInventory.Count;
+
+            player.EquippedWeaponId = weaponInventory[nextIndex];
+        }
+
+        public void CycleWeaponPrevious()
+        {
+            if (weaponInventory.Count == 0)
+            {
+                return;
+            }
+
+            int currentIndex = weaponInventory.IndexOf(player.EquippedWeaponId);
+            int previousIndex = (currentIndex - 1 + weaponInventory.Count) % weaponInventory.Count;
+
+            player.EquippedWeaponId = weaponInventory[previousIndex];
+        }
+
         public string GetEquippedWeaponId()
         {
             return player.EquippedWeaponId;

@@ -35,6 +35,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         bool SelectWeaponBySlot(int slot);
 
+        void CycleWeaponNext();
+
+        void CycleWeaponPrevious();
+
         string GetEquippedWeaponId();
 
         IEnumerable<string> GetWeaponInventory();

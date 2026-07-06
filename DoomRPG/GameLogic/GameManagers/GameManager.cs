@@ -140,6 +140,16 @@ namespace DoomRPG.GameLogic.GameManagers
             return playerManager.SelectWeaponBySlot(slot);
         }
 
+        public void CycleWeaponNext()
+        {
+            playerManager.CycleWeaponNext();
+        }
+
+        public void CycleWeaponPrevious()
+        {
+            playerManager.CycleWeaponPrevious();
+        }
+
         public Weapon GetEquippedWeapon()
         {
             string equippedId = playerManager.GetEquippedWeaponId();

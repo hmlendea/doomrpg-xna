@@ -43,6 +43,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         bool SelectWeaponBySlot(int slot);
 
+        void CycleWeaponNext();
+
+        void CycleWeaponPrevious();
+
         Weapon GetEquippedWeapon();
 
         void AddExperience(int amount);

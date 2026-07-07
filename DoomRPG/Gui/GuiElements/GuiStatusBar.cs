@@ -160,7 +160,16 @@ namespace DoomRPG.Gui.GuiElements
             statPointsLabel.Location = new Point2D(388, 28);
 
             DoomRPG.Models.Weapon equippedWeapon = game.GetEquippedWeapon();
-            weaponLabel.Text = equippedWeapon is not null ? $"[{equippedWeapon.Name}]" : "[Unarmed]";
+
+            if (equippedWeapon is not null)
+            {
+                weaponLabel.Text = $"[{equippedWeapon.Name}]";
+            }
+            else
+            {
+                weaponLabel.Text = "[Unarmed]";
+            }
+
             weaponLabel.Location = new Point2D(540, 28);
         }
 

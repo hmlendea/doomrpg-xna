@@ -162,7 +162,7 @@ namespace DoomRPG.Gui.GuiElements
                     }
                     
                     //Check if ray has hit a wall
-                    if (game.GetWall(levelX, levelY) != null)
+                    if (game.GetWall(levelX, levelY) is not null)
                     {
                         wallHit = true;
                     }
@@ -185,7 +185,7 @@ namespace DoomRPG.Gui.GuiElements
                 WallInstance wallInstance = game.GetWall(levelX, levelY);
                 Wall wall = null;
 
-                if (wallInstance != null)
+                if (wallInstance is not null)
                 {
                     wall = game.GetWallDefinition(wallInstance.WallId);
                 }
@@ -216,7 +216,7 @@ namespace DoomRPG.Gui.GuiElements
                 wallSlices[x].Height = lineHeight;
                 wallSlices[x].TextureX = texX;
 
-                if (wall != null)
+                if (wall is not null)
                 {
                     wallSlices[x].Spritesheet = wall.SpritesheetName;
                     wallSlices[x].SpritesheetTextureIndex = wall.SpritesheetTextureIndex;
@@ -244,12 +244,27 @@ namespace DoomRPG.Gui.GuiElements
 
                 if (drawLength > 0 && !string.IsNullOrWhiteSpace(wallSlices[x].Spritesheet))
                 {
-                    int texYOffset = wallSlices[x].Height > 0
-                        ? (drawStart - columnStart) * GameDefines.TextureSize / wallSlices[x].Height
-                        : 0;
-                    int texHeight = wallSlices[x].Height > 0
-                        ? Math.Max(1, drawLength * GameDefines.TextureSize / wallSlices[x].Height)
-                        : GameDefines.TextureSize;
+                    int texYOffset;
+
+                    if (wallSlices[x].Height > 0)
+                    {
+                        texYOffset = (drawStart - columnStart) * GameDefines.TextureSize / wallSlices[x].Height;
+                    }
+                    else
+                    {
+                        texYOffset = 0;
+                    }
+
+                    int texHeight;
+
+                    if (wallSlices[x].Height > 0)
+                    {
+                        texHeight = Math.Max(1, drawLength * GameDefines.TextureSize / wallSlices[x].Height);
+                    }
+                    else
+                    {
+                        texHeight = GameDefines.TextureSize;
+                    }
 
                     spriteBatch.Draw(
                         wallTextures[wallSlices[x].Spritesheet],

@@ -20,7 +20,7 @@ namespace DoomRPG.GameLogic.Mapping
         /// <param name="mobInstanceEntity">MobInstance entity.</param>
         internal static MobInstance ToDomainModel(this MobInstanceEntity mobInstanceEntity)
         {
-            MobInstance mobInstance = new MobInstance
+            MobInstance mobInstance = new()
             {
                 Id = mobInstanceEntity.Id,
                 MobId = mobInstanceEntity.MobId,
@@ -38,7 +38,7 @@ namespace DoomRPG.GameLogic.Mapping
         /// <param name="mobInstance">MobInstance.</param>
         internal static MobInstanceEntity ToEntity(this MobInstance mobInstance)
         {
-            MobInstanceEntity mobInstanceEntity = new MobInstanceEntity
+            MobInstanceEntity mobInstanceEntity = new()
             {
                 Id = mobInstance.Id,
                 MobId = mobInstance.MobId,

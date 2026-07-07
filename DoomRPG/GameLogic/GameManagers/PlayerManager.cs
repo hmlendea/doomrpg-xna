@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using NuciXNA.Primitives;
 
@@ -10,38 +11,27 @@ using DoomRPG.Settings;
 
 namespace DoomRPG.GameLogic.GameManagers
 {
-    public class PlayerManager : IPlayerManager
+    public sealed class PlayerManager(ILevelManager levelManager) : IPlayerManager
     {
-        ILevelManager levelManager;
-
-        Player player;
-
-        List<string> weaponInventory;
-
-        public PlayerManager(ILevelManager levelManager)
+        Player player = new()
         {
-            this.levelManager = levelManager;
+            Position = new PointF2D(3.5f, 4.5f),
+            Health = GameDefines.PlayerStartingHealth,
+            MaxHealth = GameDefines.PlayerStartingMaxHealth,
+            Armour = GameDefines.PlayerStartingArmour,
+            MaxArmour = GameDefines.PlayerStartingMaxArmour,
+            Credits = GameDefines.PlayerStartingCredits,
+            EquippedWeaponId = GameDefines.PlayerStartingWeaponId,
+            Strength = GameDefines.PlayerStartingStrength,
+            Agility = GameDefines.PlayerStartingAgility,
+            Accuracy = GameDefines.PlayerStartingAccuracy,
+            Defense = GameDefines.PlayerStartingDefense,
+            StatPoints = GameDefines.PlayerStartingStatPoints,
+            Level = GameDefines.PlayerStartingLevel,
+            Experience = GameDefines.PlayerStartingExperience
+        };
 
-            player = new Player
-            {
-                Position = new PointF2D(3.5f, 4.5f),
-                Health = GameDefines.PlayerStartingHealth,
-                MaxHealth = GameDefines.PlayerStartingMaxHealth,
-                Armour = GameDefines.PlayerStartingArmour,
-                MaxArmour = GameDefines.PlayerStartingMaxArmour,
-                Credits = GameDefines.PlayerStartingCredits,
-                EquippedWeaponId = GameDefines.PlayerStartingWeaponId,
-                Strength = GameDefines.PlayerStartingStrength,
-                Agility = GameDefines.PlayerStartingAgility,
-                Accuracy = GameDefines.PlayerStartingAccuracy,
-                Defense = GameDefines.PlayerStartingDefense,
-                StatPoints = GameDefines.PlayerStartingStatPoints,
-                Level = GameDefines.PlayerStartingLevel,
-                Experience = GameDefines.PlayerStartingExperience
-            };
-
-            weaponInventory = ["fist", "pistol"];
-        }
+        IEnumerable<string> weaponInventory = ["fist", "pistol"];
 
         public void LoadContent()
         {
@@ -171,7 +161,7 @@ namespace DoomRPG.GameLogic.GameManagers
         {
             if (!weaponInventory.Contains(weaponId))
             {
-                weaponInventory.Add(weaponId);
+                weaponInventory = [.. weaponInventory, weaponId];
             }
         }
 
@@ -189,40 +179,44 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public bool SelectWeaponBySlot(int slot)
         {
-            if (slot < 1 || slot > weaponInventory.Count)
+            if (slot < 1 || slot > weaponInventory.Count())
             {
                 return false;
             }
 
-            player.EquippedWeaponId = weaponInventory[slot - 1];
+            player.EquippedWeaponId = weaponInventory.ElementAt(slot - 1);
 
             return true;
         }
 
         public void CycleWeaponNext()
         {
-            if (weaponInventory.Count == 0)
+            if (!weaponInventory.Any())
             {
                 return;
             }
 
-            int currentIndex = weaponInventory.IndexOf(player.EquippedWeaponId);
-            int nextIndex = (currentIndex + 1) % weaponInventory.Count;
+            int currentIndex = weaponInventory
+                .Select((id, index) => (id, index))
+                .First(x => x.id.Equals(player.EquippedWeaponId)).index;
+            int nextIndex = (currentIndex + 1) % weaponInventory.Count();
 
-            player.EquippedWeaponId = weaponInventory[nextIndex];
+            player.EquippedWeaponId = weaponInventory.ElementAt(nextIndex);
         }
 
         public void CycleWeaponPrevious()
         {
-            if (weaponInventory.Count == 0)
+            if (!weaponInventory.Any())
             {
                 return;
             }
 
-            int currentIndex = weaponInventory.IndexOf(player.EquippedWeaponId);
-            int previousIndex = (currentIndex - 1 + weaponInventory.Count) % weaponInventory.Count;
+            int currentIndex = weaponInventory
+                .Select((id, index) => (id, index))
+                .First(x => x.id.Equals(player.EquippedWeaponId)).index;
+            int previousIndex = (currentIndex - 1 + weaponInventory.Count()) % weaponInventory.Count();
 
-            player.EquippedWeaponId = weaponInventory[previousIndex];
+            player.EquippedWeaponId = weaponInventory.ElementAt(previousIndex);
         }
 
         public string GetEquippedWeaponId()

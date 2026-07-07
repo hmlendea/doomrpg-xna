@@ -13,11 +13,11 @@ using DoomRPG.Settings;
 
 namespace DoomRPG.GameLogic.GameManagers
 {
-    public class GameManager : IGameManager
+    public sealed class GameManager : IGameManager
     {
-        List<Ammunition> ammunitions;
-        List<Wall> wallDefinitions;
-        List<Weapon> weaponDefinitions;
+        IEnumerable<Ammunition> ammunitions;
+        IEnumerable<Wall> wallDefinitions;
+        IEnumerable<Weapon> weaponDefinitions;
 
         readonly ILevelManager levelManager;
         readonly IMobManager mobManager;
@@ -45,9 +45,9 @@ namespace DoomRPG.GameLogic.GameManagers
             WallRepository wallRepository = new WallRepository(wallPath);
             WeaponRepository weaponRepository = new WeaponRepository(weaponPath);
 
-            ammunitions = ammoRepository.GetAll().ToDomainModels().ToList();
-            wallDefinitions = wallRepository.GetAll().ToDomainModels().ToList();
-            weaponDefinitions = weaponRepository.GetAll().ToDomainModels().ToList();
+            ammunitions = ammoRepository.GetAll().ToDomainModels();
+            wallDefinitions = wallRepository.GetAll().ToDomainModels();
+            weaponDefinitions = weaponRepository.GetAll().ToDomainModels();
         }
 
         public void UnloadContent()
@@ -56,9 +56,9 @@ namespace DoomRPG.GameLogic.GameManagers
             mobManager.UnloadContent();
             playerManager.UnloadContent();
 
-            ammunitions.Clear();
-            wallDefinitions.Clear();
-            weaponDefinitions.Clear();
+            ammunitions = [];
+            wallDefinitions = [];
+            weaponDefinitions = [];
         }
 
         public void Update(float elapsedSeconds)
@@ -97,7 +97,7 @@ namespace DoomRPG.GameLogic.GameManagers
         {
             IEnumerable<WallInstance> walls = levelManager.GetWalls();
 
-            return wallDefinitions.Where(wallDefinition => walls.Any(wall => wall.WallId == wallDefinition.Id));
+            return wallDefinitions.Where(wallDefinition => walls.Any(wall => wall.WallId.Equals(wallDefinition.Id)));
         }
 
         public IEnumerable<WallInstance> GetWalls()
@@ -107,7 +107,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public Wall GetWallDefinition(string id)
         {
-            return wallDefinitions.FirstOrDefault(wall => wall.Id == id);
+            return wallDefinitions.FirstOrDefault(wall => wall.Id.Equals(id));
         }
 
         public WallInstance GetWall(int x, int y)

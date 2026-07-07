@@ -19,7 +19,7 @@ namespace DoomRPG.Settings
         {
             get
             {
-                if (rootDirectory == null)
+                if (rootDirectory is null)
                 {
                     rootDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 }
@@ -36,7 +36,7 @@ namespace DoomRPG.Settings
         {
             get
             {
-                if (localAppData == null)
+                if (localAppData is null)
                 {
                     localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 }

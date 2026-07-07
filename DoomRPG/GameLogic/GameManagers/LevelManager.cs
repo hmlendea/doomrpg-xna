@@ -12,7 +12,7 @@ using DoomRPG.Settings;
 
 namespace DoomRPG.GameLogic.GameManagers
 {
-    public class LevelManager : ILevelManager
+    public sealed class LevelManager : ILevelManager
     {
         Level currentLevel;
 

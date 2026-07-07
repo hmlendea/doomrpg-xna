@@ -18,7 +18,7 @@ namespace DoomRPG.GameLogic.Mapping
         /// <param name="ammunitionEntity">Ammunition entity.</param>
         internal static Ammunition ToDomainModel(this AmmunitionEntity ammunitionEntity)
         {
-            Ammunition ammunition = new Ammunition
+            Ammunition ammunition = new()
             {
                 Id = ammunitionEntity.Id,
                 Name = ammunitionEntity.Name,
@@ -36,7 +36,7 @@ namespace DoomRPG.GameLogic.Mapping
         /// <param name="ammunition">Ammunition.</param>
         internal static AmmunitionEntity ToEntity(this Ammunition ammunition)
         {
-            AmmunitionEntity ammunitionEntity = new AmmunitionEntity
+            AmmunitionEntity ammunitionEntity = new()
             {
                 Id = ammunition.Id,
                 Name = ammunition.Name,

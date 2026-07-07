@@ -13,8 +13,10 @@ namespace DoomRPG
         [STAThread]
         static void Main()
         {
-            using (var game = new GameWindow())
+            using (GameWindow game = new GameWindow())
+            {
                 game.Run();
+            }
         }
     }
 }

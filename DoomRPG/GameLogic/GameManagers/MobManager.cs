@@ -13,17 +13,10 @@ using DoomRPG.Settings;
 
 namespace DoomRPG.GameLogic.GameManagers
 {
-    public sealed class MobManager : IMobManager
+    public sealed class MobManager(ILevelManager levelManager) : IMobManager
     {
-        readonly ILevelManager levelManager;
-
         Dictionary<string, Mob> mobDefinitions;
         Dictionary<string, MobInstance> mobInstances;
-
-        public MobManager(ILevelManager levelManager)
-        {
-            this.levelManager = levelManager;
-        }
 
         public void LoadContent()
         {

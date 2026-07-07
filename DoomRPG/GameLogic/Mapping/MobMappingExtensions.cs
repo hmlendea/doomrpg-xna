@@ -18,7 +18,7 @@ namespace DoomRPG.GameLogic.Mapping
         /// <param name="mobEntity">Mob entity.</param>
         internal static Mob ToDomainModel(this MobEntity mobEntity)
         {
-            Mob mob = new Mob
+            Mob mob = new()
             {
                 Id = mobEntity.Id,
                 Name = mobEntity.Name,
@@ -36,7 +36,7 @@ namespace DoomRPG.GameLogic.Mapping
         /// <param name="mob">Mob.</param>
         internal static MobEntity ToEntity(this Mob mob)
         {
-            MobEntity mobEntity = new MobEntity
+            MobEntity mobEntity = new()
             {
                 Id = mob.Id,
                 Name = mob.Name,

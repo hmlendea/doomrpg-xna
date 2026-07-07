@@ -8,7 +8,7 @@ namespace DoomRPG.Settings
     /// <summary>
     /// Settings manager.
     /// </summary>
-    public class SettingsManager
+    public sealed class SettingsManager
     {
         static volatile SettingsManager instance;
         static object syncRoot = new object();
@@ -21,11 +21,11 @@ namespace DoomRPG.Settings
         {
             get
             {
-                if (instance == null)
+                if (instance is null)
                 {
                     lock (syncRoot)
                     {
-                        if (instance == null)
+                        if (instance is null)
                         {
                             instance = new SettingsManager();
                         }

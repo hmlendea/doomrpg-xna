@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework.Input;
 using NuciXNA.Gui;
 using NuciXNA.Gui.Screens;
 using NuciXNA.Input;
+using NuciXNA.Primitives;
 
 using DoomRPG.GameLogic.GameManagers;
 using DoomRPG.GameLogic.GameManagers.Interfaces;
 using DoomRPG.Gui.GuiElements;
 using DoomRPG.Models.Enumerations;
 using DoomRPG.Settings;
-using NuciXNA.Primitives;
 
 namespace DoomRPG.Gui.Screens
 {

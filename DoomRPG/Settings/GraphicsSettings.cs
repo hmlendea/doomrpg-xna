@@ -2,13 +2,13 @@
 
 namespace DoomRPG.Settings
 {
-    public class GraphicsSettings
+    public sealed class GraphicsSettings
     {
         /// <summary>
         /// Gets or sets the resolution.
         /// </summary>
         /// <value>The resolution.</value>
-        public Size2D Resolution { get; set; }
+        public Size2D Resolution { get; set; } = new(1024, 544);
 
         /// <summary>
         /// Gets or sets the fullscreen mode toggle.
@@ -19,10 +19,5 @@ namespace DoomRPG.Settings
         public bool FogOfWar { get; set; }
 
         public bool ShowRoofs { get; set; }
-
-        public GraphicsSettings()
-        {
-            Resolution = new Size2D(1024, 544);
-        }
     }
 }

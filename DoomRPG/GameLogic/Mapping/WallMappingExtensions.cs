@@ -18,7 +18,7 @@ namespace DoomRPG.GameLogic.Mapping
         /// <param name="wallEntity">Wall entity.</param>
         internal static Wall ToDomainModel(this WallEntity wallEntity)
         {
-            Wall wall = new Wall
+            Wall wall = new()
             {
                 Id = wallEntity.Id,
                 Name = wallEntity.Name,
@@ -37,7 +37,7 @@ namespace DoomRPG.GameLogic.Mapping
         /// <param name="wall">Wall.</param>
         internal static WallEntity ToEntity(this Wall wall)
         {
-            WallEntity wallEntity = new WallEntity
+            WallEntity wallEntity = new()
             {
                 Id = wall.Id,
                 Name = wall.Name,

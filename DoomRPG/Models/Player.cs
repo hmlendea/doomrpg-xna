@@ -9,7 +9,7 @@ namespace DoomRPG.Models
         // TODO: Change to Vector2D
         public PointF2D Direction { get; set; }
 
-        public float MovementSpeed { get; set; }
+        public float MovementSpeed { get; set; } = 0.075f;
 
         public int Health { get; set; }
 
@@ -40,10 +40,5 @@ namespace DoomRPG.Models
         public int ExperienceToNextLevel => Level * 100;
 
         public bool IsAlive => Health > 0;
-
-        public Player()
-        {
-            MovementSpeed = 0.075f;
-        }
     }
 }

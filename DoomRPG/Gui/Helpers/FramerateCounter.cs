@@ -6,7 +6,7 @@ namespace DoomRPG.Gui.Helpers
     /// <summary>
     /// Framerate counter.
     /// </summary>
-    public class FramerateCounter
+    public sealed class FramerateCounter
     {
         static volatile FramerateCounter instance;
         static object syncRoot = new object();
@@ -21,11 +21,11 @@ namespace DoomRPG.Gui.Helpers
         {
             get
             {
-                if (instance == null)
+                if (instance is null)
                 {
                     lock (syncRoot)
                     {
-                        if (instance == null)
+                        if (instance is null)
                         {
                             instance = new FramerateCounter();
                         }

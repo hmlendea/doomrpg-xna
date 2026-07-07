@@ -50,12 +50,12 @@ namespace DoomRPG.DataAccess.DataObjects
         /// Gets or sets the walls.
         /// </summary>
         /// <value>The walls.</value>
-        public List<WallInstanceEntity> Walls { get; set; }
+        public IEnumerable<WallInstanceEntity> Walls { get; set; }
 
         /// <summary>
         /// Gets or sets the mobs.
         /// </summary>
         /// <value>The mobs.</value>
-        public List<MobInstanceEntity> Mobs { get; set; }
+        public IEnumerable<MobInstanceEntity> Mobs { get; set; }
     }
 }

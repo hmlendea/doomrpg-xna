@@ -156,6 +156,24 @@ namespace DoomRPG.Gui.Screens
                 {
                     ShowNotification("Not enough ammo!", Colour.ChromeYellow);
                 }
+                else
+                {
+                    var weapon = game.GetEquippedWeapon();
+
+                    if (weapon is not null && !string.IsNullOrEmpty(weapon.AmmunitionId))
+                    {
+                        game.GetPlayer().AmmoCounts.TryGetValue(weapon.AmmunitionId, out int remaining);
+
+                        if (remaining == 1)
+                        {
+                            ShowNotification("Last shot!", Colour.ChromeYellow);
+                        }
+                        else if (remaining == 2)
+                        {
+                            ShowNotification("2 shots left!", Colour.ChromeYellow);
+                        }
+                    }
+                }
             }
             else
             {

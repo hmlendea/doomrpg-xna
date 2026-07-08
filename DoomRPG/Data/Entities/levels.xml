@@ -41,6 +41,7 @@
     </Walls>
     <Mobs>
       <MobInstanceEntity><Id>zombie_pvt_1</Id><MobId>zombie_private</MobId><X>5</X><Y>3</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
+      <MobInstanceEntity><Id>zombie_lt_1</Id><MobId>zombie_lieutenant</MobId><X>5</X><Y>2</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
     </Mobs>
   </LevelEntity>
 </ArrayOfLevelEntity>

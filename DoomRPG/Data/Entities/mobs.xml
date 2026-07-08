@@ -44,7 +44,7 @@
     <Id>zombie_lieutenant</Id>
     <Name>Zombie Lt</Name>
     <Description>A reanimated lieutenant with better weaponry and slightly more resilience. Commands squads of zombie privates.</Description>
-    <SpritesheetName>mobs</SpritesheetName>
+    <SpritesheetName>zombie_lieutenant</SpritesheetName>
     <ClassId>zombie</ClassId>
     <Health>50</Health>
     <Damage>20</Damage>

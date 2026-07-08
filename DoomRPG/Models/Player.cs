@@ -1,4 +1,6 @@
-﻿using NuciXNA.Primitives;
+﻿using System.Collections.Generic;
+
+using NuciXNA.Primitives;
 
 namespace DoomRPG.Models
 {
@@ -22,6 +24,8 @@ namespace DoomRPG.Models
         public int Credits { get; set; }
 
         public string EquippedWeaponId { get; set; }
+
+        public Dictionary<string, int> AmmoCounts { get; set; } = [];
 
         public int Strength { get; set; }
 

@@ -28,7 +28,15 @@ namespace DoomRPG.GameLogic.GameManagers
             Defense = GameDefines.PlayerStartingDefense,
             StatPoints = GameDefines.PlayerStartingStatPoints,
             Level = GameDefines.PlayerStartingLevel,
-            Experience = GameDefines.PlayerStartingExperience
+            Experience = GameDefines.PlayerStartingExperience,
+            AmmoCounts = new Dictionary<string, int>
+            {
+                { "bullet_clip", GameDefines.PlayerStartingBulletClips },
+                { "shell_clip", 0 },
+                { "rocket", 0 },
+                { "cell_clip", 0 },
+                { "halon_can", 0 }
+            }
         };
 
         IEnumerable<string> weaponInventory = ["fist", "pistol"];
@@ -269,6 +277,30 @@ namespace DoomRPG.GameLogic.GameManagers
             }
 
             player.Credits -= amount;
+
+            return true;
+        }
+
+        public void AddAmmo(string ammoId, int amount)
+        {
+            if (player.AmmoCounts.ContainsKey(ammoId))
+            {
+                player.AmmoCounts[ammoId] += amount;
+            }
+            else
+            {
+                player.AmmoCounts[ammoId] = amount;
+            }
+        }
+
+        public bool SpendAmmo(string ammoId, int amount)
+        {
+            if (!player.AmmoCounts.TryGetValue(ammoId, out int current) || current < amount)
+            {
+                return false;
+            }
+
+            player.AmmoCounts[ammoId] -= amount;
 
             return true;
         }

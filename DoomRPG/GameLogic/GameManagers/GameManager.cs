@@ -135,6 +135,21 @@ namespace DoomRPG.GameLogic.GameManagers
             return weaponDefinitions.FirstOrDefault(weapon => weapon.Id.Equals(id));
         }
 
+        public IEnumerable<Ammunition> GetAmmunitionDefinitions()
+        {
+            return ammunitions;
+        }
+
+        public void AddAmmo(string ammoId, int amount)
+        {
+            playerManager.AddAmmo(ammoId, amount);
+        }
+
+        public bool SpendAmmo(string ammoId, int amount)
+        {
+            return playerManager.SpendAmmo(ammoId, amount);
+        }
+
         public void GiveWeapon(string weaponId)
         {
             playerManager.GiveWeapon(weaponId);

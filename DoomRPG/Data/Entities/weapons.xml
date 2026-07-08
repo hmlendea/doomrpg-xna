@@ -11,53 +11,93 @@
     <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
   </WeaponEntity>
   <WeaponEntity>
-    <Id>pistol</Id>
-    <Name>Pistol</Name>
-    <Description>A standard-issue sidearm. Uses bullets.</Description>
-    <AmmunitionId>bullets</AmmunitionId>
-    <Damage>35</Damage>
-    <AmmoPerShot>1</AmmoPerShot>
+    <Id>axe</Id>
+    <Name>Axe</Name>
+    <Description>A fire axe. Chops through Jammed Doors and is effective vs Zombies at close range.</Description>
+    <AmmunitionId></AmmunitionId>
+    <Damage>50</Damage>
+    <AmmoPerShot>0</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
   </WeaponEntity>
   <WeaponEntity>
-    <Id>shotgun</Id>
-    <Name>Shotgun</Name>
-    <Description>A powerful close-range weapon. Uses shells.</Description>
-    <AmmunitionId>shells</AmmunitionId>
-    <Damage>80</Damage>
+    <Id>pistol</Id>
+    <Name>Pistol</Name>
+    <Description>A standard-issue sidearm. Starting weapon. Uses bullet clips.</Description>
+    <AmmunitionId>bullet_clip</AmmunitionId>
+    <Damage>35</Damage>
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
   </WeaponEntity>
   <WeaponEntity>
-    <Id>chaingun</Id>
-    <Name>Chaingun</Name>
-    <Description>A rapid-fire bullet hose. Uses bullets.</Description>
-    <AmmunitionId>bullets</AmmunitionId>
-    <Damage>25</Damage>
+    <Id>fire_extinguisher</Id>
+    <Name>Fire Extinguisher</Name>
+    <Description>Puts out Fire tiles. Ineffective vs most monsters. Uses halon canisters.</Description>
+    <AmmunitionId>halon_can</AmmunitionId>
+    <Damage>5</Damage>
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>3</SpritesheetTextureIndex>
   </WeaponEntity>
   <WeaponEntity>
-    <Id>rocket_launcher</Id>
-    <Name>Rocket Launcher</Name>
-    <Description>Fires explosive rockets. Uses missiles.</Description>
-    <AmmunitionId>missile</AmmunitionId>
-    <Damage>200</Damage>
+    <Id>shotgun</Id>
+    <Name>Shotgun</Name>
+    <Description>A powerful close-range weapon. Uses shell clips.</Description>
+    <AmmunitionId>shell_clip</AmmunitionId>
+    <Damage>80</Damage>
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>4</SpritesheetTextureIndex>
   </WeaponEntity>
   <WeaponEntity>
+    <Id>super_shotgun</Id>
+    <Name>Super Shotgun</Name>
+    <Description>A double-barrelled shotgun with devastating spread. Uses shell clips.</Description>
+    <AmmunitionId>shell_clip</AmmunitionId>
+    <Damage>150</Damage>
+    <AmmoPerShot>2</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>5</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
+    <Id>chaingun</Id>
+    <Name>Chaingun</Name>
+    <Description>A rapid-fire bullet hose with high ammo consumption. Uses bullet clips.</Description>
+    <AmmunitionId>bullet_clip</AmmunitionId>
+    <Damage>25</Damage>
+    <AmmoPerShot>3</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>6</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
+    <Id>rocket_launcher</Id>
+    <Name>Rocket Launcher</Name>
+    <Description>Fires explosive rockets. Uses rockets.</Description>
+    <AmmunitionId>rocket</AmmunitionId>
+    <Damage>200</Damage>
+    <AmmoPerShot>1</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>7</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
     <Id>plasma_gun</Id>
     <Name>Plasma Gun</Name>
-    <Description>Fires bolts of superheated plasma. Uses energy cells.</Description>
-    <AmmunitionId>cells</AmmunitionId>
+    <Description>Fires bolts of superheated plasma. Effective vs Commandos. Uses cell clips.</Description>
+    <AmmunitionId>cell_clip</AmmunitionId>
     <Damage>60</Damage>
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
-    <SpritesheetTextureIndex>5</SpritesheetTextureIndex>
+    <SpritesheetTextureIndex>8</SpritesheetTextureIndex>
+  </WeaponEntity>
+  <WeaponEntity>
+    <Id>bfg</Id>
+    <Name>BFG</Name>
+    <Description>The Big F***ing Gun. Devastates everything in its path. Uses cell clips.</Description>
+    <AmmunitionId>cell_clip</AmmunitionId>
+    <Damage>500</Damage>
+    <AmmoPerShot>40</AmmoPerShot>
+    <SpritesheetName>weapons</SpritesheetName>
+    <SpritesheetTextureIndex>9</SpritesheetTextureIndex>
   </WeaponEntity>
 </ArrayOfWeaponEntity>

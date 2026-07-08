@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAmmunitionEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AmmunitionEntity>
-    <Id>bullets</Id>
-    <Name>Bullets</Name>
-    <Description>Just the regular bullets.</Description>
+    <Id>bullet_clip</Id>
+    <Name>Bullet Clip</Name>
+    <Description>A clip of bullets for pistols and chainguns.</Description>
     <SpritesheetName>Spritesheets/ammo</SpritesheetName>
     <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
   </AmmunitionEntity>
   <AmmunitionEntity>
-    <Id>shells</Id>
-    <Name>12 gauge shells</Name>
-    <Description>12G Shotgun shells.</Description>
+    <Id>shell_clip</Id>
+    <Name>Shell Clip</Name>
+    <Description>A clip of 12G shells for shotguns.</Description>
     <SpritesheetName>Spritesheets/ammo</SpritesheetName>
     <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
   </AmmunitionEntity>
   <AmmunitionEntity>
-    <Id>missile</Id>
-    <Name>Rocket missiles</Name>
-    <Description>Rocket missiles.</Description>
+    <Id>rocket</Id>
+    <Name>Rocket</Name>
+    <Description>An explosive rocket for the rocket launcher.</Description>
     <SpritesheetName>Spritesheets/ammo</SpritesheetName>
     <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
   </AmmunitionEntity>
   <AmmunitionEntity>
-    <Id>cells</Id>
-    <Name>Energy cells</Name>
-    <Description>Energy cells for energy weapons.</Description>
+    <Id>cell_clip</Id>
+    <Name>Cell Clip</Name>
+    <Description>A clip of energy cells for plasma weapons.</Description>
     <SpritesheetName>Spritesheets/ammo</SpritesheetName>
     <SpritesheetTextureIndex>3</SpritesheetTextureIndex>
   </AmmunitionEntity>
   <AmmunitionEntity>
-    <Id>plasma</Id>
-    <Name>Plasma cartridges</Name>
-    <Description>Cartridges for plasma weapons.</Description>
+    <Id>halon_can</Id>
+    <Name>Halon Can</Name>
+    <Description>A pressurised halon canister for the fire extinguisher.</Description>
     <SpritesheetName>Spritesheets/ammo</SpritesheetName>
     <SpritesheetTextureIndex>4</SpritesheetTextureIndex>
   </AmmunitionEntity>

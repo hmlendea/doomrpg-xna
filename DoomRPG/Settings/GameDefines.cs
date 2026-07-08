@@ -21,6 +21,8 @@
 
         public const string PlayerStartingWeaponId = "pistol";
 
+        public const int PlayerStartingBulletClips = 20;
+
         public const int PlayerStartingStrength = 1;
 
         public const int PlayerStartingAgility = 1;

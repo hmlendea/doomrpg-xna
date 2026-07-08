@@ -37,6 +37,12 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         Weapon GetWeaponDefinition(string id);
 
+        IEnumerable<Ammunition> GetAmmunitionDefinitions();
+
+        void AddAmmo(string ammoId, int amount);
+
+        bool SpendAmmo(string ammoId, int amount);
+
         void GiveWeapon(string weaponId);
 
         bool SelectWeapon(string weaponId);

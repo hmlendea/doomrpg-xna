@@ -43,6 +43,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         IEnumerable<string> GetWeaponInventory();
 
+        void AddAmmo(string ammoId, int amount);
+
+        bool SpendAmmo(string ammoId, int amount);
+
         void AddExperience(int amount);
 
         bool AllocateStat(StatType stat);

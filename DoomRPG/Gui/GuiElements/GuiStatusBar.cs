@@ -22,6 +22,11 @@ namespace DoomRPG.Gui.GuiElements
         GuiText statPointsLabel;
         GuiText weaponLabel;
         GuiText turnLabel;
+        GuiText bulletClipLabel;
+        GuiText shellClipLabel;
+        GuiText rocketLabel;
+        GuiText cellClipLabel;
+        GuiText halonCanLabel;
 
         public void AssociateGameManager(IGameManager game)
         {
@@ -113,8 +118,44 @@ namespace DoomRPG.Gui.GuiElements
                 Size = new Size2D(160, 24)
             };
 
+            bulletClipLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.Yellow,
+                Size = new Size2D(148, 20)
+            };
+
+            shellClipLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.Yellow,
+                Size = new Size2D(148, 20)
+            };
+
+            rocketLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.Yellow,
+                Size = new Size2D(148, 20)
+            };
+
+            cellClipLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.Yellow,
+                Size = new Size2D(148, 20)
+            };
+
+            halonCanLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.Yellow,
+                Size = new Size2D(148, 20)
+            };
+
             RegisterChildren(background, healthLabel, armourLabel, creditsLabel, xpLabel,
-                strengthLabel, agilityLabel, accuracyLabel, defenseLabel, statPointsLabel, weaponLabel, turnLabel);
+                strengthLabel, agilityLabel, accuracyLabel, defenseLabel, statPointsLabel, weaponLabel, turnLabel,
+                bulletClipLabel, shellClipLabel, rocketLabel, cellClipLabel, halonCanLabel);
         }
 
         protected override void DoUnloadContent() { }
@@ -182,6 +223,27 @@ namespace DoomRPG.Gui.GuiElements
             }
 
             weaponLabel.Location = new Point2D(540, 28);
+
+            int bulletClips = player.AmmoCounts.TryGetValue("bullet_clip", out int bc) ? bc : 0;
+            int shellClips = player.AmmoCounts.TryGetValue("shell_clip", out int sc) ? sc : 0;
+            int rockets = player.AmmoCounts.TryGetValue("rocket", out int rk) ? rk : 0;
+            int cellClips = player.AmmoCounts.TryGetValue("cell_clip", out int cc) ? cc : 0;
+            int halonCans = player.AmmoCounts.TryGetValue("halon_can", out int hc) ? hc : 0;
+
+            bulletClipLabel.Text = $"Bullets: {bulletClips}";
+            bulletClipLabel.Location = new Point2D(4, 52);
+
+            shellClipLabel.Text = $"Shells: {shellClips}";
+            shellClipLabel.Location = new Point2D(152, 52);
+
+            rocketLabel.Text = $"Rockets: {rockets}";
+            rocketLabel.Location = new Point2D(300, 52);
+
+            cellClipLabel.Text = $"Cells: {cellClips}";
+            cellClipLabel.Location = new Point2D(448, 52);
+
+            halonCanLabel.Text = $"Halon: {halonCans}";
+            halonCanLabel.Location = new Point2D(596, 52);
         }
 
         protected override void DoDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) { }

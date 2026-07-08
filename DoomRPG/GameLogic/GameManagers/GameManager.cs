@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -22,6 +23,7 @@ namespace DoomRPG.GameLogic.GameManagers
         readonly ILevelManager levelManager;
         readonly IMobManager mobManager;
         readonly IPlayerManager playerManager;
+        readonly Random rng = new();
 
         public GameManager()
         {
@@ -78,13 +80,13 @@ namespace DoomRPG.GameLogic.GameManagers
             }
         }
 
-        public bool Attack()
+        public AttackResult Attack()
         {
             Weapon weapon = GetEquippedWeapon();
 
             if (weapon is null)
             {
-                return false;
+                return new AttackResult { Outcome = AttackOutcome.NoAmmo };
             }
 
             if (!string.IsNullOrEmpty(weapon.AmmunitionId) && weapon.AmmoPerShot > 0)
@@ -93,13 +95,169 @@ namespace DoomRPG.GameLogic.GameManagers
 
                 if (!ammoSpent)
                 {
-                    return false;
+                    return new AttackResult { Outcome = AttackOutcome.NoAmmo };
                 }
             }
 
             levelManager.AdvanceTurn();
 
-            return true;
+            MobInstance target = FindTargetInView();
+
+            if (target is null)
+            {
+                return new AttackResult { Outcome = AttackOutcome.NoTarget };
+            }
+
+            Mob mobDef = mobManager.GetMobDefinition(target.MobId);
+            Player player = playerManager.GetPlayer();
+
+            AttackOutcome outcome = ResolveHit(player, weapon, mobDef);
+
+            if (outcome == AttackOutcome.Missed)
+            {
+                return new AttackResult { Outcome = AttackOutcome.Missed, MobName = mobDef.Name };
+            }
+
+            int damage = CalculateDamage(player, weapon, mobDef, outcome == AttackOutcome.Crit || outcome == AttackOutcome.CritKill);
+            mobManager.ApplyDamageToMob(target, damage);
+
+            int ammoRemaining = 0;
+            if (!string.IsNullOrEmpty(weapon.AmmunitionId))
+            {
+                player.AmmoCounts.TryGetValue(weapon.AmmunitionId, out ammoRemaining);
+            }
+
+            if (target.CurrentHealth <= 0)
+            {
+                levelManager.RemoveMob(target.Id);
+                playerManager.AddExperience(mobDef.Health);
+
+                return new AttackResult
+                {
+                    Outcome = outcome == AttackOutcome.Crit ? AttackOutcome.CritKill : AttackOutcome.Kill,
+                    Damage = damage,
+                    MobName = mobDef.Name,
+                    AmmoRemaining = ammoRemaining
+                };
+            }
+
+            return new AttackResult
+            {
+                Outcome = outcome,
+                Damage = damage,
+                MobName = mobDef.Name,
+                AmmoRemaining = ammoRemaining
+            };
+        }
+
+        /// <summary>
+        /// Finds the nearest mob directly in the player's view using DDA ray marching.
+        /// </summary>
+        MobInstance FindTargetInView()
+        {
+            Player player = playerManager.GetPlayer();
+
+            float rayX = player.Position.X;
+            float rayY = player.Position.Y;
+            float dirX = player.Direction.X;
+            float dirY = player.Direction.Y;
+
+            // Normalise direction
+            float len = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
+            if (len < 0.0001f) return null;
+            dirX /= len;
+            dirY /= len;
+
+            const float StepSize = 0.5f;
+            const int MaxSteps = 20;
+
+            for (int step = 1; step <= MaxSteps; step++)
+            {
+                float checkX = rayX + dirX * step * StepSize;
+                float checkY = rayY + dirY * step * StepSize;
+
+                int tileX = (int)Math.Floor(checkX);
+                int tileY = (int)Math.Floor(checkY);
+
+                // Stop at walls
+                if (levelManager.GetWall(tileX, tileY) is not null)
+                {
+                    break;
+                }
+
+                MobInstance mob = levelManager
+                    .GetMobs()
+                    .FirstOrDefault(m => m.Position.X == tileX && m.Position.Y == tileY && !m.IsFriendly);
+
+                if (mob is not null)
+                {
+                    return mob;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Hit check formula derived from original game's u.a(attacker, weapon, defender, distance).
+        /// Stats scaled to 0-255 fixed-point range where 128 = balanced (attacker == defender).
+        /// </summary>
+        AttackOutcome ResolveHit(Player player, Weapon weapon, Mob mob)
+        {
+            // Scale player accuracy to original 8-bit range (Accuracy 1 → 20, grows with upgrades)
+            int attackerAcc = Math.Clamp(player.Accuracy * 20, 1, 255);
+
+            // Derive mob evasion from its HP: squishier mobs are harder to track
+            int defenderEvasion = Math.Clamp(200 - mob.Health / 2, 10, 200);
+
+            // Original formula: hitChance = (attacker.acc * 128 / defender.evasion) + (weapon.d * 65536 / 51200)
+            int hitChance = attackerAcc * 128 / defenderEvasion
+                          + weapon.AccuracyBonus * 65536 / 51200;
+
+            // Roll 0-255
+            int roll = rng.Next(256);
+
+            if (roll >= hitChance)
+            {
+                return AttackOutcome.Missed;
+            }
+
+            // Crit threshold: hitChance * 8 / 5120 (rare at low levels, scales with accuracy investment)
+            int critThreshold = hitChance * 8 / 5120;
+
+            return roll < critThreshold ? AttackOutcome.Crit : AttackOutcome.Hit;
+        }
+
+        /// <summary>
+        /// Damage formula derived from original game's u.a(attacker, weapon, defender, param, distance).
+        /// </summary>
+        int CalculateDamage(Player player, Weapon weapon, Mob mob, bool isCrit)
+        {
+            // Weapon damage range ±15% (original had explicit min/max per weapon)
+            int minDamage = weapon.Damage * 85 / 100;
+            int maxDamage = weapon.Damage * 115 / 100;
+
+            // Random roll 0-255 to pick damage in range (original formula)
+            int dmgRoll = rng.Next(256);
+            int baseDamage = minDamage + dmgRoll * (maxDamage - minDamage) / 256;
+
+            // Scale by attacker strength vs mob defence
+            // Original: damage = base * (attacker.f / defender.e), both 0-255
+            int attackerStr = Math.Clamp(player.Strength * 20, 1, 255);
+            int mobDefense  = Math.Clamp(mob.Health / 5, 5, 200);
+
+            int damage = baseDamage * attackerStr / mobDefense;
+
+            // Clamp to [1, 999] matching original game
+            damage = Math.Clamp(damage, 1, 999);
+
+            if (isCrit)
+            {
+                damage *= 2;
+                damage = Math.Clamp(damage, 1, 999);
+            }
+
+            return damage;
         }
 
         public void RotatePlayer(float angle)

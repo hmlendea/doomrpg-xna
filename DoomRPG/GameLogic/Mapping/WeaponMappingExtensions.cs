@@ -17,7 +17,8 @@ namespace DoomRPG.GameLogic.Mapping
             Damage = weaponEntity.Damage,
             AmmoPerShot = weaponEntity.AmmoPerShot,
             SpritesheetName = weaponEntity.SpritesheetName,
-            SpritesheetTextureIndex = weaponEntity.SpritesheetTextureIndex
+            SpritesheetTextureIndex = weaponEntity.SpritesheetTextureIndex,
+            AccuracyBonus = weaponEntity.AccuracyBonus
         };
 
         internal static WeaponEntity ToDataObject(this Weapon weapon) => new()
@@ -29,7 +30,8 @@ namespace DoomRPG.GameLogic.Mapping
             Damage = weapon.Damage,
             AmmoPerShot = weapon.AmmoPerShot,
             SpritesheetName = weapon.SpritesheetName,
-            SpritesheetTextureIndex = weapon.SpritesheetTextureIndex
+            SpritesheetTextureIndex = weapon.SpritesheetTextureIndex,
+            AccuracyBonus = weapon.AccuracyBonus
         };
 
         internal static IEnumerable<Weapon> ToDomainModels(this IEnumerable<WeaponEntity> weaponEntities)

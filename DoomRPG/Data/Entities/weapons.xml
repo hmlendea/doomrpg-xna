@@ -9,6 +9,7 @@
     <AmmoPerShot>0</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <AccuracyBonus>70</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>axe</Id>
@@ -19,6 +20,7 @@
     <AmmoPerShot>0</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+    <AccuracyBonus>100</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>pistol</Id>
@@ -29,6 +31,7 @@
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+    <AccuracyBonus>80</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>fire_extinguisher</Id>
@@ -39,6 +42,7 @@
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>3</SpritesheetTextureIndex>
+    <AccuracyBonus>60</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>shotgun</Id>
@@ -49,6 +53,7 @@
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>4</SpritesheetTextureIndex>
+    <AccuracyBonus>90</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>super_shotgun</Id>
@@ -59,6 +64,7 @@
     <AmmoPerShot>2</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>5</SpritesheetTextureIndex>
+    <AccuracyBonus>80</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>chaingun</Id>
@@ -69,6 +75,7 @@
     <AmmoPerShot>3</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>6</SpritesheetTextureIndex>
+    <AccuracyBonus>90</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>rocket_launcher</Id>
@@ -79,6 +86,7 @@
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>7</SpritesheetTextureIndex>
+    <AccuracyBonus>100</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>plasma_gun</Id>
@@ -89,6 +97,7 @@
     <AmmoPerShot>1</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>8</SpritesheetTextureIndex>
+    <AccuracyBonus>80</AccuracyBonus>
   </WeaponEntity>
   <WeaponEntity>
     <Id>bfg</Id>
@@ -99,5 +108,6 @@
     <AmmoPerShot>40</AmmoPerShot>
     <SpritesheetName>weapons</SpritesheetName>
     <SpritesheetTextureIndex>9</SpritesheetTextureIndex>
+    <AccuracyBonus>95</AccuracyBonus>
   </WeaponEntity>
 </ArrayOfWeaponEntity>

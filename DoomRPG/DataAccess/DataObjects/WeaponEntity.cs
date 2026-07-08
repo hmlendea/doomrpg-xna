@@ -17,5 +17,7 @@ namespace DoomRPG.DataAccess.DataObjects
         public string SpritesheetName { get; set; }
 
         public int SpritesheetTextureIndex { get; set; }
+
+        public int AccuracyBonus { get; set; }
     }
 }

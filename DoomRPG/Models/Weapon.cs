@@ -17,5 +17,8 @@ namespace DoomRPG.Models
         public string SpritesheetName { get; set; }
 
         public int SpritesheetTextureIndex { get; set; }
+
+        /// <summary>Weapon accuracy bonus in range 0–100 (from original game's weapon.d stat).</summary>
+        public int AccuracyBonus { get; set; }
     }
 }

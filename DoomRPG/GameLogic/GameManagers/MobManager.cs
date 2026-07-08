@@ -30,6 +30,11 @@ namespace DoomRPG.GameLogic.GameManagers
             mobClassDefinitions = mobClassRepository.GetAll().ToDomainModels().ToDictionary(x => x.Id, x => x);
             mobDefinitions = mobsRepository.GetAll().ToDomainModels().ToDictionary(x => x.Id, x => x);
             mobInstances = levelManager.GetMobs().ToDictionary(x => x.Id, x => x);
+
+            foreach (MobInstance mobInstance in mobInstances.Values)
+            {
+                InitialiseMobHealth(mobInstance);
+            }
         }
 
         public void UnloadContent()
@@ -60,5 +65,23 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public IEnumerable<MobInstance> GetMobInstances()
             => mobInstances.Values;
+
+        public void InitialiseMobHealth(MobInstance mobInstance)
+        {
+            if (mobDefinitions.TryGetValue(mobInstance.MobId, out Mob mob))
+            {
+                mobInstance.CurrentHealth = mob.Health;
+            }
+        }
+
+        public void ApplyDamageToMob(MobInstance mobInstance, int damage)
+        {
+            mobInstance.CurrentHealth -= damage;
+
+            if (mobInstance.CurrentHealth < 0)
+            {
+                mobInstance.CurrentHealth = 0;
+            }
+        }
     }
 }

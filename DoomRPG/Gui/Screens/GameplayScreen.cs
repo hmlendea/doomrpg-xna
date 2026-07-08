@@ -13,6 +13,7 @@ using NuciXNA.Primitives;
 using DoomRPG.GameLogic.GameManagers;
 using DoomRPG.GameLogic.GameManagers.Interfaces;
 using DoomRPG.Gui.GuiElements;
+using DoomRPG.Models;
 using DoomRPG.Models.Enumerations;
 using DoomRPG.Settings;
 
@@ -32,6 +33,7 @@ namespace DoomRPG.Gui.Screens
         int turnAtNotificationStart;
 
         int previousScrollWheelValue;
+        MouseState previousMouseState;
 
         /// <summary>
         /// Loads the content.
@@ -58,6 +60,7 @@ namespace DoomRPG.Gui.Screens
             KeyPressed += OnKeyPressed;
 
             previousScrollWheelValue = Mouse.GetState().ScrollWheelValue;
+            previousMouseState = Mouse.GetState();
 
             SetChildrenProperties();
         }
@@ -84,7 +87,9 @@ namespace DoomRPG.Gui.Screens
                 }
             }
 
-            int currentScrollWheelValue = Mouse.GetState().ScrollWheelValue;
+            MouseState currentMouseState = Mouse.GetState();
+
+            int currentScrollWheelValue = currentMouseState.ScrollWheelValue;
             int scrollDelta = currentScrollWheelValue - previousScrollWheelValue;
 
             if (scrollDelta > 0)
@@ -97,6 +102,18 @@ namespace DoomRPG.Gui.Screens
             }
 
             previousScrollWheelValue = currentScrollWheelValue;
+
+            int viewHeight = ScreenManager.Instance.Size.Height - GameDefines.StatusBarHeight;
+            bool clickInView = currentMouseState.Y < viewHeight;
+
+            if (currentMouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed
+                && previousMouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released
+                && clickInView)
+            {
+                PerformAttack();
+            }
+
+            previousMouseState = currentMouseState;
 
             SetChildrenProperties();
         }
@@ -126,6 +143,68 @@ namespace DoomRPG.Gui.Screens
             notificationLabel.Size = new Size2D(ScreenManager.Instance.Size.Width, 60);
         }
 
+        private void PerformAttack()
+        {
+            AttackResult result = game.Attack();
+
+            switch (result.Outcome)
+            {
+                case AttackOutcome.NoAmmo:
+                    ShowNotification("Not enough ammo!", Colour.ChromeYellow);
+                    break;
+
+                case AttackOutcome.NoTarget:
+                    break;
+
+                case AttackOutcome.Missed:
+                    ShowNotification($"Missed!", Colour.White);
+                    break;
+
+                case AttackOutcome.Hit:
+                    ShowNotification($"Hit {result.MobName} for {result.Damage} damage!", Colour.White);
+                    HandleAmmoLowNotification(result);
+                    break;
+
+                case AttackOutcome.Kill:
+                    ShowNotification($"{result.Damage} damage! {result.MobName} died!", Colour.Green);
+                    HandleAmmoLowNotification(result);
+                    break;
+
+                case AttackOutcome.Crit:
+                    ShowNotification($"Crit! {result.Damage} damage!", Colour.Orange);
+                    HandleAmmoLowNotification(result);
+                    break;
+
+                case AttackOutcome.CritKill:
+                    ShowNotification($"Crit! {result.Damage} damage! {result.MobName} died!", Colour.Orange);
+                    HandleAmmoLowNotification(result);
+                    break;
+            }
+        }
+
+        private void HandleAmmoLowNotification(AttackResult result)
+        {
+            Weapon weapon = game.GetEquippedWeapon();
+
+            if (weapon is null || string.IsNullOrEmpty(weapon.AmmunitionId))
+            {
+                return;
+            }
+
+            if (result.AmmoRemaining == 0)
+            {
+                ShowNotification("Last shot!", Colour.ChromeYellow);
+            }
+            else if (result.AmmoRemaining == 1)
+            {
+                ShowNotification("1 shot left!", Colour.ChromeYellow);
+            }
+            else if (result.AmmoRemaining == 2)
+            {
+                ShowNotification("2 shots left!", Colour.ChromeYellow);
+            }
+        }
+
         private void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
         {
             if (e.Key == Keys.Up || e.Key == Keys.W)
@@ -150,30 +229,7 @@ namespace DoomRPG.Gui.Screens
             }
             else if (e.Key == Keys.Space)
             {
-                bool attacked = game.Attack();
-
-                if (!attacked)
-                {
-                    ShowNotification("Not enough ammo!", Colour.ChromeYellow);
-                }
-                else
-                {
-                    var weapon = game.GetEquippedWeapon();
-
-                    if (weapon is not null && !string.IsNullOrEmpty(weapon.AmmunitionId))
-                    {
-                        game.GetPlayer().AmmoCounts.TryGetValue(weapon.AmmunitionId, out int remaining);
-
-                        if (remaining == 1)
-                        {
-                            ShowNotification("Last shot!", Colour.ChromeYellow);
-                        }
-                        else if (remaining == 2)
-                        {
-                            ShowNotification("2 shots left!", Colour.ChromeYellow);
-                        }
-                    }
-                }
+                PerformAttack();
             }
             else
             {

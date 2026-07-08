@@ -28,6 +28,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         IEnumerable<MobInstance> GetMobs();
 
+        void RemoveMob(string mobInstanceId);
+
         /// <summary>
         /// Gets the wall.
         /// </summary>

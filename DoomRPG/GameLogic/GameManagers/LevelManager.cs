@@ -64,6 +64,9 @@ namespace DoomRPG.GameLogic.GameManagers
             return currentLevel.Mobs;
         }
 
+        public void RemoveMob(string mobInstanceId)
+            => currentLevel.Mobs = [.. currentLevel.Mobs.Where(m => m.Id != mobInstanceId)];
+
         /// <summary>
         /// Gets the wall.
         /// </summary>

@@ -224,11 +224,11 @@ namespace DoomRPG.Gui.GuiElements
 
             weaponLabel.Location = new Point2D(540, 28);
 
-            int bulletClips = player.AmmoCounts.TryGetValue("bullet_clip", out int bc) ? bc : 0;
-            int shellClips = player.AmmoCounts.TryGetValue("shell_clip", out int sc) ? sc : 0;
-            int rockets = player.AmmoCounts.TryGetValue("rocket", out int rk) ? rk : 0;
-            int cellClips = player.AmmoCounts.TryGetValue("cell_clip", out int cc) ? cc : 0;
-            int halonCans = player.AmmoCounts.TryGetValue("halon_can", out int hc) ? hc : 0;
+            player.AmmoCounts.TryGetValue("bullet_clip", out int bulletClips);
+            player.AmmoCounts.TryGetValue("shell_clip", out int shellClips);
+            player.AmmoCounts.TryGetValue("rocket", out int rockets);
+            player.AmmoCounts.TryGetValue("cell_clip", out int cellClips);
+            player.AmmoCounts.TryGetValue("halon_can", out int halonCans);
 
             bulletClipLabel.Text = $"Bullets: {bulletClips}";
             bulletClipLabel.Location = new Point2D(4, 52);

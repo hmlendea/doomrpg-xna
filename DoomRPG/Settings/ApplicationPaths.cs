@@ -19,10 +19,7 @@ namespace DoomRPG.Settings
         {
             get
             {
-                if (rootDirectory is null)
-                {
-                    rootDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                }
+                rootDirectory ??= Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
                 return rootDirectory;
             }
@@ -36,15 +33,12 @@ namespace DoomRPG.Settings
         {
             get
             {
-                if (localAppData is null)
-                {
-                    localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                }
+                localAppData ??= Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
                 return Path.Combine(localAppData, "DoomRPG");
             }
         }
-        
+
         /// <summary>
         /// The data directory.
         /// </summary>
@@ -54,7 +48,7 @@ namespace DoomRPG.Settings
         /// The entities directory.
         /// </summary>
         public static string EntitiesDirectory => Path.Combine(DataDirectory, "Entities");
-        
+
         /// <summary>
         /// Gets the options file.
         /// </summary>

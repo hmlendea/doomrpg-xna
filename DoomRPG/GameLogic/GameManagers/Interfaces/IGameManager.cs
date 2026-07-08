@@ -64,5 +64,9 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         int GetTurnNumber();
 
         Player GetPlayer();
+
+        IEnumerable<MobInstance> GetMobInstances();
+
+        Mob GetMobDefinition(string id);
     }
 }

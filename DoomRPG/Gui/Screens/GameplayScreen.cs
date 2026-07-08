@@ -75,7 +75,7 @@ namespace DoomRPG.Gui.Screens
 
             if (notificationTimer > 0)
             {
-                notificationTimer -= (int)(gameTime.ElapsedGameTime.TotalMilliseconds);
+                notificationTimer -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (notificationTimer <= 0 || game.GetTurnNumber() != turnAtNotificationStart)
                 {
@@ -105,7 +105,7 @@ namespace DoomRPG.Gui.Screens
         {
         }
 
-        void ShowNotification(string text, Colour colour)
+        private void ShowNotification(string text, Colour colour)
         {
             notificationLabel.Text = text;
             notificationLabel.ForegroundColour = colour;
@@ -113,7 +113,7 @@ namespace DoomRPG.Gui.Screens
             turnAtNotificationStart = game.GetTurnNumber();
         }
 
-        void SetChildrenProperties()
+        private void SetChildrenProperties()
         {
             int viewHeight = ScreenManager.Instance.Size.Height - GameDefines.StatusBarHeight;
 
@@ -126,7 +126,7 @@ namespace DoomRPG.Gui.Screens
             notificationLabel.Size = new Size2D(ScreenManager.Instance.Size.Width, 60);
         }
 
-        void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
+        private void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
         {
             if (e.Key == Keys.Up || e.Key == Keys.W)
             {

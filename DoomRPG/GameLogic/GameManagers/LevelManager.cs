@@ -24,7 +24,7 @@ namespace DoomRPG.GameLogic.GameManagers
         {
             string levelPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "levels.xml");
 
-            LevelRepository levelRepository = new LevelRepository(levelPath);
+            LevelRepository levelRepository = new(levelPath);
 
             currentLevel = levelRepository.Get(levelId).ToDomainModel();
         }

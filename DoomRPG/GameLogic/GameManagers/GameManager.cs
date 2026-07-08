@@ -32,7 +32,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public void LoadContent()
         {
-            levelManager.LoadContent("test"); // TODO: Remove hardcoding
+            levelManager.LoadContent("test"); // TODO: Remove hardcoding.
             mobManager.LoadContent();
             playerManager.LoadContent();
 
@@ -41,9 +41,9 @@ namespace DoomRPG.GameLogic.GameManagers
 
             string weaponPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "weapons.xml");
 
-            AmmunitionRepository ammoRepository = new AmmunitionRepository(ammoPath);
-            WallRepository wallRepository = new WallRepository(wallPath);
-            WeaponRepository weaponRepository = new WeaponRepository(weaponPath);
+            AmmunitionRepository ammoRepository = new(ammoPath);
+            WallRepository wallRepository = new(wallPath);
+            WeaponRepository weaponRepository = new(weaponPath);
 
             ammunitions = ammoRepository.GetAll().ToDomainModels();
             wallDefinitions = wallRepository.GetAll().ToDomainModels();
@@ -98,33 +98,24 @@ namespace DoomRPG.GameLogic.GameManagers
             }
 
             levelManager.AdvanceTurn();
+
             return true;
         }
 
         public void RotatePlayer(float angle)
-        {
-            playerManager.RotatePlayer(angle);
-        }
+            => playerManager.RotatePlayer(angle);
 
         public Size2D GetLevelSize()
-        {
-            return levelManager.GetSize();
-        }
+            => levelManager.GetSize();
 
         public int GetTurnNumber()
-        {
-            return levelManager.GetTurnNumber();
-        }
+            => levelManager.GetTurnNumber();
 
         public Colour GetLevelCeilingColour()
-        {
-            return levelManager.GetCeilingColour();
-        }
+            => levelManager.GetCeilingColour();
 
         public Colour GetLevelFloorColour()
-        {
-            return levelManager.GetFloorColour();
-        }
+            => levelManager.GetFloorColour();
 
         public IEnumerable<Wall> GetLevelWallDefinitions()
         {
@@ -134,69 +125,43 @@ namespace DoomRPG.GameLogic.GameManagers
         }
 
         public IEnumerable<WallInstance> GetWalls()
-        {
-            return levelManager.GetWalls();
-        }
+            => levelManager.GetWalls();
 
         public Wall GetWallDefinition(string id)
-        {
-            return wallDefinitions.FirstOrDefault(wall => wall.Id.Equals(id));
-        }
+            => wallDefinitions.FirstOrDefault(wall => wall.Id.Equals(id));
 
         public WallInstance GetWall(int x, int y)
-        {
-            return levelManager.GetWall(x, y);
-        }
+            => levelManager.GetWall(x, y);
 
         public IEnumerable<Weapon> GetWeaponDefinitions()
-        {
-            return weaponDefinitions;
-        }
+            => weaponDefinitions;
 
         public Weapon GetWeaponDefinition(string id)
-        {
-            return weaponDefinitions.FirstOrDefault(weapon => weapon.Id.Equals(id));
-        }
+            => weaponDefinitions.FirstOrDefault(weapon => weapon.Id.Equals(id));
 
         public IEnumerable<Ammunition> GetAmmunitionDefinitions()
-        {
-            return ammunitions;
-        }
+            => ammunitions;
 
         public void AddAmmo(string ammoId, int amount)
-        {
-            playerManager.AddAmmo(ammoId, amount);
-        }
+            => playerManager.AddAmmo(ammoId, amount);
 
         public bool SpendAmmo(string ammoId, int amount)
-        {
-            return playerManager.SpendAmmo(ammoId, amount);
-        }
+            => playerManager.SpendAmmo(ammoId, amount);
 
         public void GiveWeapon(string weaponId)
-        {
-            playerManager.GiveWeapon(weaponId);
-        }
+            => playerManager.GiveWeapon(weaponId);
 
         public bool SelectWeapon(string weaponId)
-        {
-            return playerManager.SelectWeapon(weaponId);
-        }
+            => playerManager.SelectWeapon(weaponId);
 
         public bool SelectWeaponBySlot(int slot)
-        {
-            return playerManager.SelectWeaponBySlot(slot);
-        }
+            => playerManager.SelectWeaponBySlot(slot);
 
         public void CycleWeaponNext()
-        {
-            playerManager.CycleWeaponNext();
-        }
+            => playerManager.CycleWeaponNext();
 
         public void CycleWeaponPrevious()
-        {
-            playerManager.CycleWeaponPrevious();
-        }
+            => playerManager.CycleWeaponPrevious();
 
         public Weapon GetEquippedWeapon()
         {
@@ -211,18 +176,18 @@ namespace DoomRPG.GameLogic.GameManagers
         }
 
         public void AddExperience(int amount)
-        {
-            playerManager.AddExperience(amount);
-        }
+            => playerManager.AddExperience(amount);
 
         public bool AllocateStat(StatType stat)
-        {
-            return playerManager.AllocateStat(stat);
-        }
+            => playerManager.AllocateStat(stat);
 
         public Player GetPlayer()
-        {
-            return playerManager.GetPlayer();
-        }
+            => playerManager.GetPlayer();
+
+        public IEnumerable<MobInstance> GetMobInstances()
+            => mobManager.GetMobInstances();
+
+        public Mob GetMobDefinition(string id)
+            => mobManager.GetMobDefinition(id);
     }
 }

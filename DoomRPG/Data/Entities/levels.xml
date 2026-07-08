@@ -39,5 +39,8 @@
       <WallInstanceEntity><WallId>stone_wall</WallId><X>3</X><Y>7</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>4</X><Y>7</Y></WallInstanceEntity>
     </Walls>
+    <Mobs>
+      <MobInstanceEntity><Id>zombie_pvt_1</Id><MobId>zombie_private</MobId><X>5</X><Y>3</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
+    </Mobs>
   </LevelEntity>
 </ArrayOfLevelEntity>

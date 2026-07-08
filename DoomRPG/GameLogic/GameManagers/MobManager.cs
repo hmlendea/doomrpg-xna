@@ -24,7 +24,7 @@ namespace DoomRPG.GameLogic.GameManagers
             string mobClassesPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "mob-classes.xml");
             string mobsPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "mobs.xml");
 
-            MobClassRepository mobClassRepository = new MobClassRepository(mobClassesPath);
+            MobClassRepository mobClassRepository = new(mobClassesPath);
             IRepository<string, MobEntity> mobsRepository = new MobRepository(mobsPath);
 
             mobClassDefinitions = mobClassRepository.GetAll().ToDomainModels().ToDictionary(x => x.Id, x => x);

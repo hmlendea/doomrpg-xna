@@ -13,7 +13,7 @@ namespace DoomRPG.GameLogic.GameManagers
 {
     public sealed class PlayerManager(ILevelManager levelManager) : IPlayerManager
     {
-        Player player = new()
+        readonly Player player = new()
         {
             Position = new PointF2D(3.5f, 4.5f),
             Health = GameDefines.PlayerStartingHealth,
@@ -92,13 +92,22 @@ namespace DoomRPG.GameLogic.GameManagers
 
             WallInstance wall = levelManager.GetWall((int)targetX, (int)targetY);
 
-            if (wall is null)
+            if (wall is not null)
             {
-                player.Position = new PointF2D(targetX, targetY);
-                return true;
+                return false;
             }
 
-            return false;
+            bool tileOccupiedByMob = levelManager.GetMobs()
+                .Any(mob => mob.Position.X == (int)targetX && mob.Position.Y == (int)targetY);
+
+            if (tileOccupiedByMob)
+            {
+                return false;
+            }
+
+            player.Position = new PointF2D(targetX, targetY);
+
+            return true;
         }
 
         public void RotatePlayer(float angle)
@@ -231,14 +240,10 @@ namespace DoomRPG.GameLogic.GameManagers
         }
 
         public string GetEquippedWeaponId()
-        {
-            return player.EquippedWeaponId;
-        }
+            => player.EquippedWeaponId;
 
         public IEnumerable<string> GetWeaponInventory()
-        {
-            return weaponInventory;
-        }
+            => weaponInventory;
 
         public bool AllocateStat(StatType stat)
         {
@@ -306,8 +311,6 @@ namespace DoomRPG.GameLogic.GameManagers
         }
 
         public Player GetPlayer()
-        {
-            return player;
-        }
+            => player;
     }
 }

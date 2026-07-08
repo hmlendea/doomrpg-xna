@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace DoomRPG.Gui.Helpers
 {
@@ -9,7 +10,7 @@ namespace DoomRPG.Gui.Helpers
     public sealed class FramerateCounter
     {
         static volatile FramerateCounter instance;
-        static object syncRoot = new object();
+        static readonly Lock syncRoot = new();
 
         readonly Queue<float> sampleBuffer;
 
@@ -25,10 +26,7 @@ namespace DoomRPG.Gui.Helpers
                 {
                     lock (syncRoot)
                     {
-                        if (instance is null)
-                        {
-                            instance = new FramerateCounter();
-                        }
+                        instance ??= new FramerateCounter();
                     }
                 }
 

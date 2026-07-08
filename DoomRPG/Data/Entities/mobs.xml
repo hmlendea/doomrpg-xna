@@ -35,7 +35,7 @@
     <Id>zombie_private</Id>
     <Name>Zombie Pvt</Name>
     <Description>A reanimated private, shambling forward with a rifle. Slow and predictable, but still armed and dangerous.</Description>
-    <SpritesheetName>mobs</SpritesheetName>
+    <SpritesheetName>zombie_private</SpritesheetName>
     <ClassId>zombie</ClassId>
     <Health>25</Health>
     <Damage>10</Damage>

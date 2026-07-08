@@ -29,8 +29,8 @@ namespace DoomRPG.Gui
         Player player;
         float pendingRotation;
 
-        static readonly float RotationRate = (float)(Math.PI / 2 / 0.5); // radians per second — full 90° in 500ms
-        static readonly float MovementRate = 1.0f / 0.5f; // tiles per second — 1 tile in 500ms
+        private static readonly float RotationRate = (float)(Math.PI / 2 / 0.5); // Radians per second — full 90° turn in 500 ms.
+        private static readonly float MovementRate = 1.0f / 0.5f; // Tiles per second — 1 tile in 500 ms.
 
         public Camera()
         {
@@ -101,7 +101,7 @@ namespace DoomRPG.Gui
             pendingRotation += amount;
         }
 
-        void ApplyRotation(float angle)
+        private void ApplyRotation(float angle)
         {
             float sin = (float)Math.Sin(angle);
             float cos = (float)Math.Cos(angle);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +19,7 @@ namespace DoomRPG.Gui.GuiElements
     public class GuiCameraView : GuiControl
     {
         IGameManager game;
-        public Camera camera; // TODO: remove workaround
+        public Camera camera; // TODO: Remove the camera workaround.
         Player player;
 
         GuiImage ceiling;
@@ -27,6 +28,8 @@ namespace DoomRPG.Gui.GuiElements
         WallSlice[] wallSlices;
 
         Dictionary<string, Texture2D> wallTextures;
+        Dictionary<string, Texture2D> mobTextures;
+        List<MobInstance> sortedMobs;
 
         protected override void DoLoadContent()
         {
@@ -55,7 +58,9 @@ namespace DoomRPG.Gui.GuiElements
             };
 
             wallSlices = new WallSlice[Size.Width];
-            wallTextures = new Dictionary<string, Texture2D>();
+            wallTextures = [];
+            mobTextures = [];
+            sortedMobs = [];
 
             IEnumerable<Wall> walls = game.GetLevelWallDefinitions();
 
@@ -68,7 +73,18 @@ namespace DoomRPG.Gui.GuiElements
                 }
             }
 
-            // I can't use the RegisterChildren method as they'd be drawn above the map
+            foreach (MobInstance mobInstance in game.GetMobInstances())
+            {
+                Mob mobDefinition = game.GetMobDefinition(mobInstance.MobId);
+
+                if (!mobTextures.ContainsKey(mobDefinition.SpritesheetName))
+                {
+                    Texture2D texture = NuciContentManager.Instance.LoadTexture2D("mobs/" + mobDefinition.SpritesheetName);
+                    mobTextures.Add(mobDefinition.SpritesheetName, texture);
+                }
+            }
+
+            // Registration via RegisterChildren is avoided as those controls would be drawn above the raycasted view.
             ceiling.LoadContent();
             floor.LoadContent();
 
@@ -83,106 +99,107 @@ namespace DoomRPG.Gui.GuiElements
 
             wallSlices = null;
             wallTextures.Clear();
+            mobTextures.Clear();
+            sortedMobs = null;
         }
 
         protected override void DoUpdate(GameTime gameTime)
         {
             SetChildrenProperties();
 
-            int ScreenWidth = Size.Width;
-            int ScreenHeight = Size.Height;
+            int screenWidth = Size.Width;
+            int screenHeight = Size.Height;
 
-            for (int x = 0; x < Size.Width; x++)
+            for (int x = 0; x < Size.Width; x += 1)
             {
-                //x-coordinate in camera space
-                double cameraX = 2 * x / (double)ScreenWidth - 1;
+                double cameraSpaceX = 2 * x / (double)screenWidth - 1;
 
-                double rayPosX = camera.Position.X;
-                double rayPosY = camera.Position.Y;
-                double rayDirX = camera.Direction.X + camera.Plane.X * cameraX;
-                double rayDirY = camera.Direction.Y + camera.Plane.Y * cameraX;
+                double rayPositionX = camera.Position.X;
+                double rayPositionY = camera.Position.Y;
+                double rayDirectionX = camera.Direction.X + camera.Plane.X * cameraSpaceX;
+                double rayDirectionY = camera.Direction.Y + camera.Plane.Y * cameraSpaceX;
 
-                //which box of the level we're in
-                int levelX = (int)rayPosX;
-                int levelY = (int)rayPosY;
+                // Determines which tile of the level the ray currently occupies.
+                int tileX = (int)rayPositionX;
+                int tileY = (int)rayPositionY;
 
-                //length of ray from current position to next x or y-side
-                double sideDistX = 0;
-                double sideDistY = 0;
+                // Length of ray from current position to next x or y-side.
+                double sideDistanceX = 0;
+                double sideDistanceY = 0;
 
-                //length of ray from one x or y-side to next x or y-side
-                double deltaDistX = Math.Sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-                double deltaDistY = Math.Sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
-                double perpWallDist = 0;
+                // Length of ray from one x or y-side to next x or y-side.
+                double deltaDistanceX = Math.Sqrt(1 + rayDirectionY * rayDirectionY / (rayDirectionX * rayDirectionX));
+                double deltaDistanceY = Math.Sqrt(1 + rayDirectionX * rayDirectionX / (rayDirectionY * rayDirectionY));
+                double perpendicularWallDistance = 0;
 
-                //what direction to step in x or y-direction (either +1 or -1)
-                Point2D step = Point2D.Empty;
+                // Direction to step in x or y (either +1 or -1).
+                Point2D stepDirection = Point2D.Empty;
 
-                bool wallHit = false;
-                int side = 0; //was a NS or a EW wall hit?
+                bool aWallWasHit = false;
+                int hitSide = 0; // Indicates whether a north/south (0) or east/west (1) wall face was hit.
 
-                //calculate step and initial sideDist
-                if (rayDirX < 0)
+                // Calculates the step direction and initial side distances.
+                if (rayDirectionX < 0)
                 {
-                    step.X = -1;
-                    sideDistX = (rayPosX - levelX) * deltaDistX;
+                    stepDirection.X = -1;
+                    sideDistanceX = (rayPositionX - tileX) * deltaDistanceX;
                 }
                 else
                 {
-                    step.X = 1;
-                    sideDistX = (levelX + 1.0 - rayPosX) * deltaDistX;
+                    stepDirection.X = 1;
+                    sideDistanceX = (tileX + 1.0 - rayPositionX) * deltaDistanceX;
                 }
 
-                if (rayDirY < 0)
+                if (rayDirectionY < 0)
                 {
-                    step.Y = -1;
-                    sideDistY = (rayPosY - levelY) * deltaDistY;
+                    stepDirection.Y = -1;
+                    sideDistanceY = (rayPositionY - tileY) * deltaDistanceY;
                 }
                 else
                 {
-                    step.Y = 1;
-                    sideDistY = (levelY + 1.0 - rayPosY) * deltaDistY;
+                    stepDirection.Y = 1;
+                    sideDistanceY = (tileY + 1.0 - rayPositionY) * deltaDistanceY;
                 }
 
-                //perform DDA
-                while (!wallHit)
+                // Performs the DDA algorithm.
+                while (!aWallWasHit)
                 {
-                    //jump to next level square, OR in x-direction, OR in y-direction
-                    if (sideDistX < sideDistY)
+                    // Advances the ray to the next tile in x or y direction.
+                    if (sideDistanceX < sideDistanceY)
                     {
-                        sideDistX += deltaDistX;
-                        levelX += step.X;
-                        side = 0;
+                        sideDistanceX += deltaDistanceX;
+                        tileX += stepDirection.X;
+                        hitSide = 0;
                     }
                     else
                     {
-                        sideDistY += deltaDistY;
-                        levelY += step.Y;
-                        side = 1;
+                        sideDistanceY += deltaDistanceY;
+                        tileY += stepDirection.Y;
+                        hitSide = 1;
                     }
 
-                    //Check if ray has hit a wall
-                    if (game.GetWall(levelX, levelY) is not null)
+                    // Checks whether the ray has hit a wall.
+                    if (game.GetWall(tileX, tileY) is not null)
                     {
-                        wallHit = true;
+                        aWallWasHit = true;
                     }
                 }
 
-                //Calculate distance projected on camera direction (oblique distance will give fisheye effect!)
-                if (side == 0)
+                // Calculates the distance projected on the camera direction (oblique distance would cause fisheye distortion).
+                if (hitSide == 0)
                 {
-                    perpWallDist = Math.Abs((levelX - rayPosX + (1 - step.X) / 2.0) / rayDirX);
+                    perpendicularWallDistance = Math.Abs((tileX - rayPositionX + (1 - stepDirection.X) / 2.0) / rayDirectionX);
                 }
                 else
                 {
-                    perpWallDist = Math.Abs((levelY - rayPosY + (1 - step.Y) / 2.0) / rayDirY);
+                    perpendicularWallDistance = Math.Abs((tileY - rayPositionY + (1 - stepDirection.Y) / 2.0) / rayDirectionY);
                 }
 
-                //Calculate height of line to draw on screen
-                int lineHeight = (int)Math.Abs(ScreenHeight / perpWallDist);
+                // Calculates the height of the wall slice to draw on screen.
+                int wallLineHeight = (int)Math.Abs(screenHeight / perpendicularWallDistance);
 
-                //texturing calculations
-                WallInstance wallInstance = game.GetWall(levelX, levelY);
+                // Performs texturing calculations for the wall slice.
+                WallInstance wallInstance = game.GetWall(tileX, tileY);
                 Wall wall = null;
 
                 if (wallInstance is not null)
@@ -190,31 +207,28 @@ namespace DoomRPG.Gui.GuiElements
                     wall = game.GetWallDefinition(wallInstance.WallId);
                 }
 
-                //calculate where exactly the wall was hit
-                double wallX;
+                // Calculates the exact position on the wall face where the ray hit.
+                double wallHitOffset = rayPositionY + (tileX - rayPositionX + (1 - stepDirection.X) / 2.0) / rayDirectionX * rayDirectionY;
 
-                if (side == 1)
+                if (hitSide == 1)
                 {
-                    wallX = rayPosX + ((levelY - rayPosY + (1 - step.Y) / 2.0) / rayDirY) * rayDirX;
-                }
-                else
-                {
-                    wallX = rayPosY + ((levelX - rayPosX + (1 - step.X) / 2.0) / rayDirX) * rayDirY;
+                    wallHitOffset = rayPositionX + (tileY - rayPositionY + (1 - stepDirection.Y) / 2.0) / rayDirectionY * rayDirectionX;
                 }
 
-                wallX -= Math.Floor(wallX);
+                wallHitOffset -= Math.Floor(wallHitOffset);
 
-                //x coordinate on the texture
-                int texX = (int)(wallX * GameDefines.TextureSize);
-                if ((side == 0 && rayDirX > 0) ||
-                    (side == 1 && rayDirY < 0))
+                // X coordinate on the texture.
+                int textureX = (int)(wallHitOffset * GameDefines.TextureSize);
+
+                if ((hitSide == 0 && rayDirectionX > 0) ||
+                    (hitSide == 1 && rayDirectionY < 0))
                 {
-                    texX = GameDefines.TextureSize - texX - 1;
+                    textureX = GameDefines.TextureSize - textureX - 1;
                 }
 
-                wallSlices[x].Depth = perpWallDist;
-                wallSlices[x].Height = lineHeight;
-                wallSlices[x].TextureX = texX;
+                wallSlices[x].Depth = perpendicularWallDistance;
+                wallSlices[x].Height = wallLineHeight;
+                wallSlices[x].TextureX = textureX;
 
                 if (wall is not null)
                 {
@@ -222,6 +236,11 @@ namespace DoomRPG.Gui.GuiElements
                     wallSlices[x].SpritesheetTextureIndex = wall.SpritesheetTextureIndex;
                 }
             }
+
+            sortedMobs = [.. game.GetMobInstances()
+                .OrderByDescending(instance =>
+                    Math.Pow(instance.Position.X + 0.5 - camera.Position.X, 2) +
+                    Math.Pow(instance.Position.Y + 0.5 - camera.Position.Y, 2))];
 
             camera.Update(gameTime);
             ceiling.Update(gameTime);
@@ -244,38 +263,157 @@ namespace DoomRPG.Gui.GuiElements
 
                 if (drawLength > 0 && !string.IsNullOrWhiteSpace(wallSlices[x].Spritesheet))
                 {
-                    int texYOffset;
+                    int textureYOffset = 0;
+                    int textureHeight = GameDefines.TextureSize;
 
                     if (wallSlices[x].Height > 0)
                     {
-                        texYOffset = (drawStart - columnStart) * GameDefines.TextureSize / wallSlices[x].Height;
+                        textureYOffset = (drawStart - columnStart) * GameDefines.TextureSize / wallSlices[x].Height;
                     }
-                    else
-                    {
-                        texYOffset = 0;
-                    }
-
-                    int texHeight;
 
                     if (wallSlices[x].Height > 0)
                     {
-                        texHeight = Math.Max(1, drawLength * GameDefines.TextureSize / wallSlices[x].Height);
-                    }
-                    else
-                    {
-                        texHeight = GameDefines.TextureSize;
+                        textureHeight = Math.Max(1, drawLength * GameDefines.TextureSize / wallSlices[x].Height);
                     }
 
                     spriteBatch.Draw(
                         wallTextures[wallSlices[x].Spritesheet],
                         new Rectangle(x, drawStart, 1, drawLength),
-                        new Rectangle(wallSlices[x].TextureX + wallSlices[x].SpritesheetTextureIndex * GameDefines.TextureSize, texYOffset, 1, texHeight),
+                        new Rectangle(wallSlices[x].TextureX + wallSlices[x].SpritesheetTextureIndex * GameDefines.TextureSize, textureYOffset, 1, textureHeight),
                         Color.White);
                 }
             }
+
+            DrawMobSprites(spriteBatch);
         }
 
-        // TODO: Handle this better
+        private void DrawMobSprites(SpriteBatch spriteBatch)
+        {
+            int screenWidth = Size.Width;
+            int screenHeight = Size.Height;
+
+            foreach (MobInstance mobInstance in sortedMobs)
+            {
+                Mob mobDefinition = game.GetMobDefinition(mobInstance.MobId);
+
+                if (!mobTextures.TryGetValue(mobDefinition.SpritesheetName, out Texture2D texture))
+                {
+                    continue;
+                }
+
+                // Compute which face of the tile the camera approaches first,
+                // then place the sprite at that face — matching where a wall would be drawn.
+                double toCenterX = mobInstance.Position.X + 0.5 - camera.Position.X;
+                double toCenterY = mobInstance.Position.Y + 0.5 - camera.Position.Y;
+
+                double nearFaceX;
+                double nearFaceY;
+
+                if (camera.Position.X < mobInstance.Position.X + 0.5)
+                {
+                    nearFaceX = mobInstance.Position.X;
+                }
+                else
+                {
+                    nearFaceX = mobInstance.Position.X + 1;
+                }
+
+                if (camera.Position.Y < mobInstance.Position.Y + 0.5)
+                {
+                    nearFaceY = mobInstance.Position.Y;
+                }
+                else
+                {
+                    nearFaceY = mobInstance.Position.Y + 1;
+                }
+
+                double xFaceParametricDistance = double.MaxValue;
+                double yFaceParametricDistance = double.MaxValue;
+
+                if (Math.Abs(toCenterX) > 0)
+                {
+                    xFaceParametricDistance = (nearFaceX - camera.Position.X) / toCenterX;
+                }
+
+                if (Math.Abs(toCenterY) > 0)
+                {
+                    yFaceParametricDistance = (nearFaceY - camera.Position.Y) / toCenterY;
+                }
+
+                double spriteX;
+                double spriteY;
+
+                if (xFaceParametricDistance < yFaceParametricDistance)
+                {
+                    // Vertical (X-axis) face is nearest — keep tile centre Y.
+                    spriteX = nearFaceX - camera.Position.X;
+                    spriteY = toCenterY;
+                }
+                else
+                {
+                    // Horizontal (Y-axis) face is nearest — keep tile centre X.
+                    spriteX = toCenterX;
+                    spriteY = nearFaceY - camera.Position.Y;
+                }
+
+                // Transforms the sprite position into camera space via the inverse camera matrix.
+                double inverseDeterminant = 1.0 / (camera.Plane.X * camera.Direction.Y - camera.Direction.X * camera.Plane.Y);
+                double transformX = inverseDeterminant * (camera.Direction.Y * spriteX - camera.Direction.X * spriteY);
+                double transformY = inverseDeterminant * (-camera.Plane.Y * spriteX + camera.Plane.X * spriteY);
+
+                if (transformY <= 0)
+                {
+                    continue;
+                }
+
+                int spriteScreenX = (int)(screenWidth / 2 * (1 + transformX / transformY));
+
+                int unscaledSpriteHeight = (int)Math.Abs(screenHeight / transformY);
+                int spriteHeight = (int)(unscaledSpriteHeight * 0.70);
+                int spriteWidth = spriteHeight; // Square sprite.
+
+                // Anchor the sprite bottom to the floor line for its depth,
+                // so shorter sprites still appear to stand on the floor.
+                int floorLine = screenHeight / 2 + unscaledSpriteHeight / 2;
+                int drawStartY = Math.Max(0, floorLine - spriteHeight);
+                int drawEndY = Math.Min(screenHeight, floorLine);
+                int drawStartX = Math.Max(0, -spriteWidth / 2 + spriteScreenX);
+                int drawEndX = Math.Min(screenWidth, spriteWidth / 2 + spriteScreenX);
+
+                int drawWidth = drawEndX - drawStartX;
+                int drawHeight = drawEndY - drawStartY;
+
+                if (drawWidth <= 0 || drawHeight <= 0)
+                {
+                    continue;
+                }
+
+                // Check depth at the sprite's centre column only.
+                int centreColumn = Math.Clamp(spriteScreenX, 0, screenWidth - 1);
+
+                if (transformY >= wallSlices[centreColumn].Depth)
+                {
+                    continue;
+                }
+
+                // Map the visible screen region back to source texture coordinates.
+                int unclippedLeft = -spriteWidth / 2 + spriteScreenX;
+                int unclippedTop = floorLine - spriteHeight;
+
+                int srcX = Math.Clamp((drawStartX - unclippedLeft) * texture.Width / spriteWidth, 0, texture.Width - 1);
+                int srcWidth = Math.Clamp(drawWidth * texture.Width / spriteWidth, 1, texture.Width - srcX);
+                int srcY = Math.Clamp((drawStartY - unclippedTop) * texture.Height / spriteHeight, 0, texture.Height - 1);
+                int srcHeight = Math.Clamp(drawHeight * texture.Height / spriteHeight, 1, texture.Height - srcY);
+
+                spriteBatch.Draw(
+                    texture,
+                    new Rectangle(drawStartX, drawStartY, drawWidth, drawHeight),
+                    new Rectangle(srcX, srcY, srcWidth, srcHeight),
+                    Color.White);
+            }
+        }
+
+        // TODO: Find a better approach for the game manager association.
         /// <summary>
         /// Associates the game manager.
         /// </summary>
@@ -287,7 +425,7 @@ namespace DoomRPG.Gui.GuiElements
             player = game.GetPlayer();
         }
 
-            void SetChildrenProperties()
+        private void SetChildrenProperties()
         {
             ceiling.Location = new Point2D(0, 0);
             ceiling.Size = new Size2D(Size.Width, Size.Height / 2);

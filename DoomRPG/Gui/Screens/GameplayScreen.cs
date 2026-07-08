@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NuciXNA.Gui;
+using NuciXNA.Gui.Controls;
 using NuciXNA.Gui.Screens;
+using NuciXNA.Graphics.Drawing;
 using NuciXNA.Input;
 using NuciXNA.Primitives;
 
@@ -24,6 +26,10 @@ namespace DoomRPG.Gui.Screens
         IGameManager game;
         GuiCameraView cameraView;
         GuiStatusBar statusBar;
+        GuiText notificationLabel;
+
+        int notificationTimer;
+        int turnAtNotificationStart;
 
         int previousScrollWheelValue;
 
@@ -35,8 +41,14 @@ namespace DoomRPG.Gui.Screens
             game = new GameManager();
             cameraView = new GuiCameraView();
             statusBar = new GuiStatusBar();
+            notificationLabel = new GuiText
+            {
+                FontName = "LargeFont",
+                HorizontalAlignment = Alignment.Middle,
+                Text = string.Empty
+            };
 
-            GuiManager.Instance.RegisterControls(cameraView, statusBar);
+            GuiManager.Instance.RegisterControls(cameraView, statusBar, notificationLabel);
 
             game.LoadContent();
 
@@ -61,6 +73,17 @@ namespace DoomRPG.Gui.Screens
         {
             game.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
+            if (notificationTimer > 0)
+            {
+                notificationTimer -= (int)(gameTime.ElapsedGameTime.TotalMilliseconds);
+
+                if (notificationTimer <= 0 || game.GetTurnNumber() != turnAtNotificationStart)
+                {
+                    notificationTimer = 0;
+                    notificationLabel.Text = string.Empty;
+                }
+            }
+
             int currentScrollWheelValue = Mouse.GetState().ScrollWheelValue;
             int scrollDelta = currentScrollWheelValue - previousScrollWheelValue;
 
@@ -82,6 +105,14 @@ namespace DoomRPG.Gui.Screens
         {
         }
 
+        void ShowNotification(string text, Colour colour)
+        {
+            notificationLabel.Text = text;
+            notificationLabel.ForegroundColour = colour;
+            notificationTimer = 1000;
+            turnAtNotificationStart = game.GetTurnNumber();
+        }
+
         void SetChildrenProperties()
         {
             int viewHeight = ScreenManager.Instance.Size.Height - GameDefines.StatusBarHeight;
@@ -90,6 +121,9 @@ namespace DoomRPG.Gui.Screens
 
             statusBar.Location = new Point2D(0, viewHeight);
             statusBar.Size = new Size2D(ScreenManager.Instance.Size.Width, GameDefines.StatusBarHeight);
+
+            notificationLabel.Location = new Point2D(0, viewHeight / 2 - 30);
+            notificationLabel.Size = new Size2D(ScreenManager.Instance.Size.Width, 60);
         }
 
         void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
@@ -113,6 +147,15 @@ namespace DoomRPG.Gui.Screens
                 float angle = -(float)(Math.PI / 2);
                 game.RotatePlayer(angle);
                 cameraView.camera.Rotate(angle);
+            }
+            else if (e.Key == Keys.Space)
+            {
+                bool attacked = game.Attack();
+
+                if (!attacked)
+                {
+                    ShowNotification("Not enough ammo!", Colour.ChromeYellow);
+                }
             }
             else
             {

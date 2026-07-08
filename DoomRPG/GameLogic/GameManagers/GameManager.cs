@@ -78,6 +78,29 @@ namespace DoomRPG.GameLogic.GameManagers
             }
         }
 
+        public bool Attack()
+        {
+            Weapon weapon = GetEquippedWeapon();
+
+            if (weapon is null)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(weapon.AmmunitionId) && weapon.AmmoPerShot > 0)
+            {
+                bool ammoSpent = playerManager.SpendAmmo(weapon.AmmunitionId, weapon.AmmoPerShot);
+
+                if (!ammoSpent)
+                {
+                    return false;
+                }
+            }
+
+            levelManager.AdvanceTurn();
+            return true;
+        }
+
         public void RotatePlayer(float angle)
         {
             playerManager.RotatePlayer(angle);

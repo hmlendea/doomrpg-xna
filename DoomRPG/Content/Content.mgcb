@@ -75,6 +75,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/FrameCounterFont.spritefont
 
+#begin Fonts/LargeFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/LargeFont.spritefont
+
 #begin SplashScreen/Logo.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -134,4 +141,3 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Interface/Terminal/background.png
-

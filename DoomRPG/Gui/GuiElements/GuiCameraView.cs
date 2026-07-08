@@ -67,7 +67,7 @@ namespace DoomRPG.Gui.GuiElements
                     wallTextures.Add(wall.SpritesheetName, texture);
                 }
             }
-            
+
             // I can't use the RegisterChildren method as they'd be drawn above the map
             ceiling.LoadContent();
             floor.LoadContent();
@@ -88,7 +88,7 @@ namespace DoomRPG.Gui.GuiElements
         protected override void DoUpdate(GameTime gameTime)
         {
             SetChildrenProperties();
-            
+
             int ScreenWidth = Size.Width;
             int ScreenHeight = Size.Height;
 
@@ -101,8 +101,8 @@ namespace DoomRPG.Gui.GuiElements
                 double rayPosY = camera.Position.Y;
                 double rayDirX = camera.Direction.X + camera.Plane.X * cameraX;
                 double rayDirY = camera.Direction.Y + camera.Plane.Y * cameraX;
-                
-                //which box of the level we're in  
+
+                //which box of the level we're in
                 int levelX = (int)rayPosX;
                 int levelY = (int)rayPosY;
 
@@ -160,7 +160,7 @@ namespace DoomRPG.Gui.GuiElements
                         levelY += step.Y;
                         side = 1;
                     }
-                    
+
                     //Check if ray has hit a wall
                     if (game.GetWall(levelX, levelY) is not null)
                     {
@@ -180,7 +180,7 @@ namespace DoomRPG.Gui.GuiElements
 
                 //Calculate height of line to draw on screen
                 int lineHeight = (int)Math.Abs(ScreenHeight / perpWallDist);
-                
+
                 //texturing calculations
                 WallInstance wallInstance = game.GetWall(levelX, levelY);
                 Wall wall = null;
@@ -232,7 +232,7 @@ namespace DoomRPG.Gui.GuiElements
         {
             ceiling.Draw(spriteBatch);
             floor.Draw(spriteBatch);
-            
+
             for (int x = 0; x < Size.Width; x++)
             {
                 int columnStart = -wallSlices[x].Height / 2 + Size.Height / 2;
@@ -287,7 +287,7 @@ namespace DoomRPG.Gui.GuiElements
             player = game.GetPlayer();
         }
 
-        void SetChildrenProperties()
+            void SetChildrenProperties()
         {
             ceiling.Location = new Point2D(0, 0);
             ceiling.Size = new Size2D(Size.Width, Size.Height / 2);

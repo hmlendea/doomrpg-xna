@@ -17,6 +17,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void MovePlayer(MovementDirection direction);
 
+        bool Attack();
+
         void RotatePlayer(float angle);
 
         Size2D GetLevelSize();

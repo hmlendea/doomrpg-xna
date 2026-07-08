@@ -32,7 +32,7 @@
 
   <!-- Zombies -->
   <MobEntity>
-    <Id>zombie_pvt</Id>
+    <Id>zombie_private</Id>
     <Name>Zombie Pvt</Name>
     <Description>A reanimated private, shambling forward with a rifle. Slow and predictable, but still armed and dangerous.</Description>
     <SpritesheetName>mobs</SpritesheetName>
@@ -41,7 +41,7 @@
     <Damage>10</Damage>
   </MobEntity>
   <MobEntity>
-    <Id>zombie_lt</Id>
+    <Id>zombie_lieutenant</Id>
     <Name>Zombie Lt</Name>
     <Description>A reanimated lieutenant with better weaponry and slightly more resilience. Commands squads of zombie privates.</Description>
     <SpritesheetName>mobs</SpritesheetName>
@@ -50,7 +50,7 @@
     <Damage>20</Damage>
   </MobEntity>
   <MobEntity>
-    <Id>zombie_cpt</Id>
+    <Id>zombie_captain</Id>
     <Name>Zombie Cpt</Name>
     <Description>A reanimated captain carrying heavy ordnance. Significantly more durable and hits far harder than its lower-ranked kin.</Description>
     <SpritesheetName>mobs</SpritesheetName>

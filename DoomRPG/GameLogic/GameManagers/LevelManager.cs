@@ -74,5 +74,15 @@ namespace DoomRPG.GameLogic.GameManagers
         {
             return currentLevel.Walls.FirstOrDefault(wall => wall.Position.X == x && wall.Position.Y == y);
         }
+
+        public int GetTurnNumber()
+        {
+            return currentLevel.TurnNumber;
+        }
+
+        public void AdvanceTurn()
+        {
+            currentLevel.TurnNumber += 1;
+        }
     }
 }

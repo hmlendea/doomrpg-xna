@@ -53,8 +53,8 @@ namespace DoomRPG.GameLogic.Mapping
                 FloorColourHex = level.FloorColour.ToHexadecimal(),
                 SpawnX = level.SpawnPosition.X,
                 SpawnY = level.SpawnPosition.Y,
-                Walls = level.Walls.ToEntities(),
-                Mobs = level.Mobs.ToEntities()
+                Walls = level.Walls.ToEntities().ToList(),
+                Mobs = level.Mobs.ToEntities().ToList()
             };
 
             return levelEntity;

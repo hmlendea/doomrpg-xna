@@ -35,5 +35,9 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         /// <param name="x">The X coordinate.</param>
         /// <param name="y">The Y coordinate.</param>
         WallInstance GetWall(int x, int y);
+
+        int GetTurnNumber();
+
+        void AdvanceTurn();
     }
 }

@@ -48,7 +48,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
         }
 
-        public void MovePlayer(MovementDirection direction)
+        public bool MovePlayer(MovementDirection direction)
         {
             int dirX = (int)Math.Round(player.Direction.X);
             int dirY = (int)Math.Round(player.Direction.Y);
@@ -87,7 +87,10 @@ namespace DoomRPG.GameLogic.GameManagers
             if (wall is null)
             {
                 player.Position = new PointF2D(targetX, targetY);
+                return true;
             }
+
+            return false;
         }
 
         public void RotatePlayer(float angle)

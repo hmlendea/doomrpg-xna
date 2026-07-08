@@ -70,7 +70,12 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public void MovePlayer(MovementDirection direction)
         {
-            playerManager.MovePlayer(direction);
+            bool moved = playerManager.MovePlayer(direction);
+
+            if (moved)
+            {
+                levelManager.AdvanceTurn();
+            }
         }
 
         public void RotatePlayer(float angle)
@@ -81,6 +86,11 @@ namespace DoomRPG.GameLogic.GameManagers
         public Size2D GetLevelSize()
         {
             return levelManager.GetSize();
+        }
+
+        public int GetTurnNumber()
+        {
+            return levelManager.GetTurnNumber();
         }
 
         public Colour GetLevelCeilingColour()

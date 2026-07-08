@@ -53,6 +53,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         bool AllocateStat(StatType stat);
 
+        int GetTurnNumber();
+
         Player GetPlayer();
     }
 }

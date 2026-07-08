@@ -27,5 +27,7 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         void InitialiseMobHealth(MobInstance mobInstance);
 
         void ApplyDamageToMob(MobInstance mobInstance, int damage);
+
+        void RemoveMob(string mobInstanceId);
     }
 }

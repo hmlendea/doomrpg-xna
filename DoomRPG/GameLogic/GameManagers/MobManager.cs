@@ -83,5 +83,8 @@ namespace DoomRPG.GameLogic.GameManagers
                 mobInstance.CurrentHealth = 0;
             }
         }
+
+        public void RemoveMob(string mobInstanceId)
+            => mobInstances.Remove(mobInstanceId);
     }
 }

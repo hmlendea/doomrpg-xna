@@ -130,6 +130,7 @@ namespace DoomRPG.GameLogic.GameManagers
             if (target.CurrentHealth <= 0)
             {
                 levelManager.RemoveMob(target.Id);
+                mobManager.RemoveMob(target.Id);
                 playerManager.AddExperience(mobDef.Health);
 
                 return new AttackResult

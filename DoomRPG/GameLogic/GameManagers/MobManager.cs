@@ -15,23 +15,26 @@ namespace DoomRPG.GameLogic.GameManagers
 {
     public sealed class MobManager(ILevelManager levelManager) : IMobManager
     {
+        Dictionary<string, MobClass> mobClassDefinitions;
         Dictionary<string, Mob> mobDefinitions;
         Dictionary<string, MobInstance> mobInstances;
 
         public void LoadContent()
         {
+            string mobClassesPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "mob-classes.xml");
             string mobsPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "mobs.xml");
 
+            MobClassRepository mobClassRepository = new MobClassRepository(mobClassesPath);
             IRepository<string, MobEntity> mobsRepository = new MobRepository(mobsPath);
 
-            mobDefinitions = new Dictionary<string, Mob>();
-
+            mobClassDefinitions = mobClassRepository.GetAll().ToDomainModels().ToDictionary(x => x.Id, x => x);
             mobDefinitions = mobsRepository.GetAll().ToDomainModels().ToDictionary(x => x.Id, x => x);
             mobInstances = levelManager.GetMobs().ToDictionary(x => x.Id, x => x);
         }
 
         public void UnloadContent()
         {
+            mobClassDefinitions.Clear();
             mobDefinitions.Clear();
         }
 
@@ -45,6 +48,12 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public IEnumerable<Mob> GetMobDefinitions()
             => mobDefinitions.Values;
+
+        public MobClass GetMobClassDefinition(string mobClassId)
+            => mobClassDefinitions[mobClassId];
+
+        public IEnumerable<MobClass> GetMobClassDefinitions()
+            => mobClassDefinitions.Values;
 
         public MobInstance GetMobInstance(string mobInstanceId)
             => mobInstances[mobInstanceId];

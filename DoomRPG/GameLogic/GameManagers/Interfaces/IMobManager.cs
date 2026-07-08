@@ -16,6 +16,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         IEnumerable<Mob> GetMobDefinitions();
 
+        MobClass GetMobClassDefinition(string mobClassId);
+
+        IEnumerable<MobClass> GetMobClassDefinitions();
+
         MobInstance GetMobInstance(string mobInstanceId);
 
         IEnumerable<MobInstance> GetMobInstances();

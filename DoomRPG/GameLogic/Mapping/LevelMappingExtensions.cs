@@ -19,46 +19,36 @@ namespace DoomRPG.GameLogic.Mapping
         /// </summary>
         /// <returns>The domain model.</returns>
         /// <param name="levelEntity">Level entity.</param>
-        internal static Level ToDomainModel(this LevelEntity levelEntity)
+        internal static Level ToDomainModel(this LevelEntity levelEntity) => new()
         {
-            Level level = new()
-            {
-                Name = levelEntity.Name,
-                Description = levelEntity.Description,
-                Size = new Size2D(levelEntity.Width, levelEntity.Height),
-                CeilingColour = ColourTranslator.FromHexadecimal(levelEntity.CeilingColourHex),
-                FloorColour = ColourTranslator.FromHexadecimal(levelEntity.FloorColourHex),
-                SpawnPosition = new Point2D(levelEntity.SpawnX, levelEntity.SpawnY),
-                Walls = levelEntity.Walls.ToDomainModels(),
-                Mobs = levelEntity.Mobs.ToDomainModels()
-            };
-
-            return level;
-        }
+            Name = levelEntity.Name,
+            Description = levelEntity.Description,
+            Size = new Size2D(levelEntity.Width, levelEntity.Height),
+            CeilingColour = ColourTranslator.FromHexadecimal(levelEntity.CeilingColourHex),
+            FloorColour = ColourTranslator.FromHexadecimal(levelEntity.FloorColourHex),
+            SpawnPosition = new Point2D(levelEntity.SpawnX, levelEntity.SpawnY),
+            Walls = levelEntity.Walls.ToDomainModels(),
+            Mobs = levelEntity.Mobs.ToDomainModels()
+        };
 
         /// <summary>
         /// Converts the domain model into an entity.
         /// </summary>
         /// <returns>The entity.</returns>
         /// <param name="level">Level.</param>
-        internal static LevelEntity ToEntity(this Level level)
+        internal static LevelEntity ToDataObject(this Level level) => new()
         {
-            LevelEntity levelEntity = new()
-            {
-                Name = level.Name,
-                Description = level.Description,
-                Width = level.Size.Width,
-                Height = level.Size.Height,
-                CeilingColourHex = level.CeilingColour.ToHexadecimal(),
-                FloorColourHex = level.FloorColour.ToHexadecimal(),
-                SpawnX = level.SpawnPosition.X,
-                SpawnY = level.SpawnPosition.Y,
-                Walls = level.Walls.ToEntities().ToList(),
-                Mobs = level.Mobs.ToEntities().ToList()
-            };
-
-            return levelEntity;
-        }
+            Name = level.Name,
+            Description = level.Description,
+            Width = level.Size.Width,
+            Height = level.Size.Height,
+            CeilingColourHex = level.CeilingColour.ToHexadecimal(),
+            FloorColourHex = level.FloorColour.ToHexadecimal(),
+            SpawnX = level.SpawnPosition.X,
+            SpawnY = level.SpawnPosition.Y,
+            Walls = level.Walls.ToDataObjects().ToList(),
+            Mobs = level.Mobs.ToDataObjects().ToList()
+        };
 
         /// <summary>
         /// Converts the entities into domain models.
@@ -66,22 +56,14 @@ namespace DoomRPG.GameLogic.Mapping
         /// <returns>The domain models.</returns>
         /// <param name="levelEntities">Level entities.</param>
         internal static IEnumerable<Level> ToDomainModels(this IEnumerable<LevelEntity> levelEntities)
-        {
-            IEnumerable<Level> levels = levelEntities.Select(levelEntity => levelEntity.ToDomainModel());
-
-            return levels;
-        }
+            => levelEntities.Select(levelEntity => levelEntity.ToDomainModel());
 
         /// <summary>
         /// Converts the domain models into entities.
         /// </summary>
         /// <returns>The entities.</returns>
         /// <param name="levels">Levels.</param>
-        internal static IEnumerable<LevelEntity> ToEntities(this IEnumerable<Level> levels)
-        {
-            IEnumerable<LevelEntity> levelEntities = levels.Select(level => level.ToEntity());
-
-            return levelEntities;
-        }
+        internal static IEnumerable<LevelEntity> ToDataObjects(this IEnumerable<Level> levels)
+            => levels.Select(level => level.ToDataObject());
     }
 }

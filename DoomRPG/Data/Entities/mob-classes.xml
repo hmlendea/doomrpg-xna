@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMobClassEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MobClassEntity>
+    <Id>canine</Id>
+    <Name>Canine</Name>
+    <Description>Fast and aggressive demonic hounds that close distance quickly to tear apart their prey in melee.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>zombie</Id>
+    <Name>Zombie</Name>
+    <Description>Reanimated military personnel. Slow but relentless, they retain enough muscle memory to use their weapons.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>imp</Id>
+    <Name>Imp</Name>
+    <Description>Common foot soldiers of Hell. They hurl fireballs at range and slash with their claws up close.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>specter</Id>
+    <Name>Specter</Name>
+    <Description>Ethereal creatures that drift through the darkness. Semi-transparent and hard to hit.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>demon</Id>
+    <Name>Demon</Name>
+    <Description>Massive horned brutes that charge headlong into battle and tear through armour with sheer force.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>cacodemon</Id>
+    <Name>Cacodemon</Name>
+    <Description>Floating one-eyed monstrosities that spit balls of plasma and electrical energy.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>pain_elemental</Id>
+    <Name>Pain Elemental</Name>
+    <Description>Bloated demonic entities that vomit Lost Souls from their gaping maws as a form of attack.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>revenant</Id>
+    <Name>Revenant</Name>
+    <Description>Skeletal warriors outfitted with shoulder-mounted rocket launchers. They track their targets relentlessly.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>behemoth</Id>
+    <Name>Behemoth</Name>
+    <Description>A colossal demonic titan of immense power. Its every step shakes the ground beneath it.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>mancubus</Id>
+    <Name>Mancubus</Name>
+    <Description>Grotesquely obese demons with mechanical arms that fire barrages of incendiary projectiles.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>archvile</Id>
+    <Name>Archvile</Name>
+    <Description>Terrifying demons that can resurrect slain enemies and incinerate targets with hellfire from a distance.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>knight</Id>
+    <Name>Knight</Name>
+    <Description>Elite demonic warriors clad in hellforged armour. They combine brutal melee attacks with ranged plasma blasts.</Description>
+  </MobClassEntity>
+  <MobClassEntity>
+    <Id>boss</Id>
+    <Name>Boss</Name>
+    <Description>Titanic demonic overlords of immense power and resilience. Encountering one is a fight for survival.</Description>
+  </MobClassEntity>
+</ArrayOfMobClassEntity>

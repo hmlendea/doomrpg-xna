@@ -301,60 +301,9 @@ namespace DoomRPG.Gui.GuiElements
                     continue;
                 }
 
-                // Compute which face of the tile the camera approaches first,
-                // then place the sprite at that face — matching where a wall would be drawn.
-                double toCenterX = mobInstance.Position.X + 0.5 - camera.Position.X;
-                double toCenterY = mobInstance.Position.Y + 0.5 - camera.Position.Y;
-
-                double nearFaceX;
-                double nearFaceY;
-
-                if (camera.Position.X < mobInstance.Position.X + 0.5)
-                {
-                    nearFaceX = mobInstance.Position.X;
-                }
-                else
-                {
-                    nearFaceX = mobInstance.Position.X + 1;
-                }
-
-                if (camera.Position.Y < mobInstance.Position.Y + 0.5)
-                {
-                    nearFaceY = mobInstance.Position.Y;
-                }
-                else
-                {
-                    nearFaceY = mobInstance.Position.Y + 1;
-                }
-
-                double xFaceParametricDistance = double.MaxValue;
-                double yFaceParametricDistance = double.MaxValue;
-
-                if (Math.Abs(toCenterX) > 0)
-                {
-                    xFaceParametricDistance = (nearFaceX - camera.Position.X) / toCenterX;
-                }
-
-                if (Math.Abs(toCenterY) > 0)
-                {
-                    yFaceParametricDistance = (nearFaceY - camera.Position.Y) / toCenterY;
-                }
-
-                double spriteX;
-                double spriteY;
-
-                if (xFaceParametricDistance < yFaceParametricDistance)
-                {
-                    // Vertical (X-axis) face is nearest — keep tile centre Y.
-                    spriteX = nearFaceX - camera.Position.X;
-                    spriteY = toCenterY;
-                }
-                else
-                {
-                    // Horizontal (Y-axis) face is nearest — keep tile centre X.
-                    spriteX = toCenterX;
-                    spriteY = nearFaceY - camera.Position.Y;
-                }
+                // Sprite position relative to camera, centred on the tile.
+                double spriteX = mobInstance.Position.X + 0.5 - camera.Position.X;
+                double spriteY = mobInstance.Position.Y + 0.5 - camera.Position.Y;
 
                 // Transforms the sprite position into camera space via the inverse camera matrix.
                 double inverseDeterminant = 1.0 / (camera.Plane.X * camera.Direction.Y - camera.Direction.X * camera.Plane.Y);
@@ -368,48 +317,45 @@ namespace DoomRPG.Gui.GuiElements
 
                 int spriteScreenX = (int)(screenWidth / 2 * (1 + transformX / transformY));
 
-                int unscaledSpriteHeight = (int)Math.Abs(screenHeight / transformY);
-                int spriteHeight = (int)(unscaledSpriteHeight * 0.70);
-                int spriteWidth = spriteHeight; // Square sprite.
+                // Height and width are set to the same value, producing a square billboard.
+                int spriteHeight = (int)Math.Abs(screenHeight / transformY);
+                int spriteWidth = spriteHeight;
 
-                // Anchor the sprite bottom to the floor line for its depth,
-                // so shorter sprites still appear to stand on the floor.
-                int floorLine = screenHeight / 2 + unscaledSpriteHeight / 2;
-                int drawStartY = Math.Max(0, floorLine - spriteHeight);
-                int drawEndY = Math.Min(screenHeight, floorLine);
+                // Centre the sprite on the horizon line.
+                int drawStartY = Math.Max(0, -spriteHeight / 2 + screenHeight / 2);
+                int drawEndY = Math.Min(screenHeight, spriteHeight / 2 + screenHeight / 2);
                 int drawStartX = Math.Max(0, -spriteWidth / 2 + spriteScreenX);
                 int drawEndX = Math.Min(screenWidth, spriteWidth / 2 + spriteScreenX);
 
-                int drawWidth = drawEndX - drawStartX;
-                int drawHeight = drawEndY - drawStartY;
+                int columnStartY = -spriteHeight / 2 + screenHeight / 2;
 
-                if (drawWidth <= 0 || drawHeight <= 0)
+                for (int stripe = drawStartX; stripe < drawEndX; stripe++)
                 {
-                    continue;
+                    if (transformY >= wallSlices[stripe].Depth)
+                    {
+                        continue;
+                    }
+
+                    int textureX = Math.Clamp(
+                        (stripe - (-spriteWidth / 2 + spriteScreenX)) * texture.Width / spriteWidth,
+                        0, texture.Width - 1);
+
+                    int drawLength = drawEndY - drawStartY;
+
+                    if (drawLength <= 0)
+                    {
+                        continue;
+                    }
+
+                    int textureYOffset = Math.Clamp((drawStartY - columnStartY) * texture.Height / spriteHeight, 0, texture.Height - 1);
+                    int textureHeight = Math.Clamp(drawLength * texture.Height / spriteHeight, 1, texture.Height - textureYOffset);
+
+                    spriteBatch.Draw(
+                        texture,
+                        new Rectangle(stripe, drawStartY, 1, drawLength),
+                        new Rectangle(textureX, textureYOffset, 1, textureHeight),
+                        Color.White);
                 }
-
-                // Check depth at the sprite's centre column only.
-                int centreColumn = Math.Clamp(spriteScreenX, 0, screenWidth - 1);
-
-                if (transformY >= wallSlices[centreColumn].Depth)
-                {
-                    continue;
-                }
-
-                // Map the visible screen region back to source texture coordinates.
-                int unclippedLeft = -spriteWidth / 2 + spriteScreenX;
-                int unclippedTop = floorLine - spriteHeight;
-
-                int srcX = Math.Clamp((drawStartX - unclippedLeft) * texture.Width / spriteWidth, 0, texture.Width - 1);
-                int srcWidth = Math.Clamp(drawWidth * texture.Width / spriteWidth, 1, texture.Width - srcX);
-                int srcY = Math.Clamp((drawStartY - unclippedTop) * texture.Height / spriteHeight, 0, texture.Height - 1);
-                int srcHeight = Math.Clamp(drawHeight * texture.Height / spriteHeight, 1, texture.Height - srcY);
-
-                spriteBatch.Draw(
-                    texture,
-                    new Rectangle(drawStartX, drawStartY, drawWidth, drawHeight),
-                    new Rectangle(srcX, srcY, srcWidth, srcHeight),
-                    Color.White);
             }
         }
 

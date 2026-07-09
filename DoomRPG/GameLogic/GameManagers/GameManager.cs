@@ -19,6 +19,7 @@ namespace DoomRPG.GameLogic.GameManagers
         IEnumerable<Ammunition> ammunitions;
         IEnumerable<Wall> wallDefinitions;
         IEnumerable<Weapon> weaponDefinitions;
+        IEnumerable<WorldObject> worldObjectDefinitions;
 
         readonly ILevelManager levelManager;
         readonly IMobManager mobManager;
@@ -43,13 +44,28 @@ namespace DoomRPG.GameLogic.GameManagers
 
             string weaponPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "weapons.xml");
 
+            string worldObjectPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "objects.xml");
+
             AmmunitionRepository ammoRepository = new(ammoPath);
             WallRepository wallRepository = new(wallPath);
             WeaponRepository weaponRepository = new(weaponPath);
+            WorldObjectRepository worldObjectRepository = new(worldObjectPath);
 
             ammunitions = ammoRepository.GetAll().ToDomainModels();
             wallDefinitions = wallRepository.GetAll().ToDomainModels();
             weaponDefinitions = weaponRepository.GetAll().ToDomainModels();
+            worldObjectDefinitions = worldObjectRepository.GetAll().ToDomainModels();
+
+            foreach (WorldObjectInstance worldObjectInstance in levelManager.GetWorldObjects())
+            {
+                WorldObject worldObjectDefinition = worldObjectDefinitions
+                    .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectInstance.WorldObjectId));
+
+                if (worldObjectDefinition is not null)
+                {
+                    worldObjectInstance.CurrentHealth = worldObjectDefinition.Health;
+                }
+            }
 
             foreach (WallInstance wallInstance in levelManager.GetWalls())
             {
@@ -71,6 +87,7 @@ namespace DoomRPG.GameLogic.GameManagers
             ammunitions = [];
             wallDefinitions = [];
             weaponDefinitions = [];
+            worldObjectDefinitions = [];
         }
 
         public void Update(float elapsedSeconds)
@@ -117,6 +134,13 @@ namespace DoomRPG.GameLogic.GameManagers
             }
 
             levelManager.AdvanceTurn();
+
+            WorldObjectInstance worldObjectTarget = FindWorldObjectInView();
+
+            if (worldObjectTarget is not null)
+            {
+                return AttackWorldObject(worldObjectTarget, weapon);
+            }
 
             MobInstance target = FindTargetInView();
 
@@ -176,6 +200,137 @@ namespace DoomRPG.GameLogic.GameManagers
             };
         }
 
+        AttackResult AttackWorldObject(WorldObjectInstance worldObjectInstance, Weapon weapon)
+        {
+            WorldObject worldObjectDefinition = worldObjectDefinitions
+                .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectInstance.WorldObjectId));
+
+            int damage = weapon.Damage;
+
+            worldObjectInstance.CurrentHealth -= damage;
+
+            Player player = playerManager.GetPlayer();
+
+            int remainingAmmunition = 0;
+
+            if (!string.IsNullOrEmpty(weapon.AmmunitionId))
+            {
+                player.AmmoCounts.TryGetValue(weapon.AmmunitionId, out remainingAmmunition);
+            }
+
+            if (worldObjectInstance.CurrentHealth > 0)
+            {
+                return new AttackResult
+                {
+                    Outcome = AttackOutcome.WorldObjectHit,
+                    Damage = damage,
+                    WorldObjectName = worldObjectDefinition.Name,
+                    RemainingAmmunition = remainingAmmunition
+                };
+            }
+
+            levelManager.RemoveWorldObject(worldObjectInstance.Id);
+
+            int explosionDamageDealtToPlayer = 0;
+
+            if (worldObjectDefinition.IsExplosive)
+            {
+                explosionDamageDealtToPlayer = TriggerExplosion(
+                    worldObjectInstance.Position,
+                    worldObjectDefinition,
+                    [worldObjectInstance.Id]);
+            }
+
+            return new AttackResult
+            {
+                Outcome = AttackOutcome.WorldObjectDestroyed,
+                Damage = damage,
+                WorldObjectName = worldObjectDefinition.Name,
+                ExplosionDamageDealtToPlayer = explosionDamageDealtToPlayer,
+                RemainingAmmunition = remainingAmmunition
+            };
+        }
+
+        int TriggerExplosion(Point2D explosionPosition, WorldObject explosiveDefinition, IEnumerable<string> alreadyExplodedIds)
+        {
+            int explosionDamageDealtToPlayer = 0;
+
+            Point2D[] adjacentPositions =
+            [
+                new Point2D(explosionPosition.X - 1, explosionPosition.Y),
+                new Point2D(explosionPosition.X + 1, explosionPosition.Y),
+                new Point2D(explosionPosition.X, explosionPosition.Y - 1),
+                new Point2D(explosionPosition.X, explosionPosition.Y + 1),
+                new Point2D(explosionPosition.X - 1, explosionPosition.Y - 1),
+                new Point2D(explosionPosition.X + 1, explosionPosition.Y - 1),
+                new Point2D(explosionPosition.X - 1, explosionPosition.Y + 1),
+                new Point2D(explosionPosition.X + 1, explosionPosition.Y + 1)
+            ];
+
+            int explosionDamage = randomNumberGenerator.Next(
+                explosiveDefinition.MinimumExplosionDamage,
+                explosiveDefinition.MaximumExplosionDamage + 1);
+
+            Player player = playerManager.GetPlayer();
+
+            int playerTileX = (int)Math.Floor(player.Position.X);
+            int playerTileY = (int)Math.Floor(player.Position.Y);
+
+            foreach (Point2D adjacentPosition in adjacentPositions)
+            {
+                if (playerTileX == adjacentPosition.X && playerTileY == adjacentPosition.Y)
+                {
+                    playerManager.ApplyDamage(explosionDamage);
+                    explosionDamageDealtToPlayer += explosionDamage;
+                }
+
+                foreach (MobInstance mobInstance in levelManager.GetMobs().ToList())
+                {
+                    if (mobInstance.Position.X == adjacentPosition.X && mobInstance.Position.Y == adjacentPosition.Y)
+                    {
+                        mobManager.ApplyDamageToMob(mobInstance, explosionDamage);
+
+                        if (mobInstance.CurrentHealth <= 0)
+                        {
+                            levelManager.RemoveMob(mobInstance.Id);
+                            mobManager.RemoveMob(mobInstance.Id);
+                        }
+                    }
+                }
+
+                WorldObjectInstance adjacentWorldObject = levelManager.GetWorldObjectAtPosition(
+                    adjacentPosition.X, adjacentPosition.Y);
+
+                if (adjacentWorldObject is not null && !alreadyExplodedIds.Contains(adjacentWorldObject.Id))
+                {
+                    WorldObject adjacentDefinition = worldObjectDefinitions
+                        .FirstOrDefault(worldObject => worldObject.Id.Equals(adjacentWorldObject.WorldObjectId));
+
+                    if (adjacentDefinition is not null)
+                    {
+                        adjacentWorldObject.CurrentHealth -= explosionDamage;
+
+                        if (adjacentWorldObject.CurrentHealth <= 0)
+                        {
+                            levelManager.RemoveWorldObject(adjacentWorldObject.Id);
+
+                            if (adjacentDefinition.IsExplosive)
+                            {
+                                IEnumerable<string> updatedExplodedIds = alreadyExplodedIds.Append(adjacentWorldObject.Id);
+
+                                explosionDamageDealtToPlayer += TriggerExplosion(
+                                    adjacentWorldObject.Position,
+                                    adjacentDefinition,
+                                    updatedExplodedIds);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return explosionDamageDealtToPlayer;
+        }
+
         MobInstance FindFirstMobInView()
         {
             Player player = playerManager.GetPlayer();
@@ -211,6 +366,11 @@ namespace DoomRPG.GameLogic.GameManagers
                     break;
                 }
 
+                if (levelManager.GetWorldObjectAtPosition(tileX, tileY) is not null)
+                {
+                    break;
+                }
+
                 MobInstance mob = levelManager
                     .GetMobs()
                     .FirstOrDefault(mobInstance => mobInstance.Position.X == tileX && mobInstance.Position.Y == tileY);
@@ -218,6 +378,60 @@ namespace DoomRPG.GameLogic.GameManagers
                 if (mob is not null)
                 {
                     return mob;
+                }
+            }
+
+            return null;
+        }
+
+        WorldObjectInstance FindWorldObjectInView()
+        {
+            Player player = playerManager.GetPlayer();
+
+            float rayPositionX = player.Position.X;
+            float rayPositionY = player.Position.Y;
+            float directionX = player.Direction.X;
+            float directionY = player.Direction.Y;
+
+            float magnitude = (float)Math.Sqrt(directionX * directionX + directionY * directionY);
+
+            if (magnitude < 0.0001f)
+            {
+                return null;
+            }
+
+            directionX /= magnitude;
+            directionY /= magnitude;
+
+            const float StepSize = 0.5f;
+            const int MaxSteps = 20;
+
+            for (int step = 1; step <= MaxSteps; step++)
+            {
+                float samplePositionX = rayPositionX + directionX * step * StepSize;
+                float samplePositionY = rayPositionY + directionY * step * StepSize;
+
+                int tileX = (int)Math.Floor(samplePositionX);
+                int tileY = (int)Math.Floor(samplePositionY);
+
+                if (levelManager.GetWall(tileX, tileY) is not null)
+                {
+                    break;
+                }
+
+                bool tileOccupiedByMob = levelManager.GetMobs()
+                    .Any(mob => mob.Position.X == tileX && mob.Position.Y == tileY);
+
+                if (tileOccupiedByMob)
+                {
+                    break;
+                }
+
+                WorldObjectInstance worldObject = levelManager.GetWorldObjectAtPosition(tileX, tileY);
+
+                if (worldObject is not null)
+                {
+                    return worldObject;
                 }
             }
 
@@ -260,6 +474,12 @@ namespace DoomRPG.GameLogic.GameManagers
 
                 // Stop at walls.
                 if (levelManager.GetWall(tileX, tileY) is not null)
+                {
+                    break;
+                }
+
+                // Stop at world objects (they block projectiles).
+                if (levelManager.GetWorldObjectAtPosition(tileX, tileY) is not null)
                 {
                     break;
                 }
@@ -528,5 +748,11 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public Mob GetMobDefinition(string id)
             => mobManager.GetMobDefinition(id);
+
+        public IEnumerable<WorldObjectInstance> GetWorldObjectInstances()
+            => levelManager.GetWorldObjects();
+
+        public WorldObject GetWorldObjectDefinition(string id)
+            => worldObjectDefinitions.FirstOrDefault(worldObject => worldObject.Id.Equals(id));
     }
 }

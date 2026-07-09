@@ -29,7 +29,8 @@ namespace DoomRPG.Gui.GuiElements
 
         Dictionary<string, Texture2D> wallTextures;
         Dictionary<string, Texture2D> mobTextures;
-        List<MobInstance> sortedMobs;
+        Dictionary<string, Texture2D> worldObjectTextures;
+        List<SpriteDrawEntry> sortedSprites;
 
         protected override void DoLoadContent()
         {
@@ -60,7 +61,8 @@ namespace DoomRPG.Gui.GuiElements
             wallSlices = new WallSlice[Size.Width];
             wallTextures = [];
             mobTextures = [];
-            sortedMobs = [];
+            worldObjectTextures = [];
+            sortedSprites = [];
 
             IEnumerable<Wall> walls = game.GetLevelWallDefinitions();
 
@@ -93,6 +95,17 @@ namespace DoomRPG.Gui.GuiElements
                 }
             }
 
+            foreach (WorldObjectInstance worldObjectInstance in game.GetWorldObjectInstances())
+            {
+                WorldObject worldObjectDefinition = game.GetWorldObjectDefinition(worldObjectInstance.WorldObjectId);
+
+                if (!worldObjectTextures.ContainsKey(worldObjectDefinition.SpritesheetName))
+                {
+                    Texture2D texture = NuciContentManager.Instance.LoadTexture2D("objects/" + worldObjectDefinition.SpritesheetName);
+                    worldObjectTextures.Add(worldObjectDefinition.SpritesheetName, texture);
+                }
+            }
+
             // Registration via RegisterChildren is avoided as those controls would be drawn above the raycasted view.
             ceiling.LoadContent();
             floor.LoadContent();
@@ -109,7 +122,8 @@ namespace DoomRPG.Gui.GuiElements
             wallSlices = null;
             wallTextures.Clear();
             mobTextures.Clear();
-            sortedMobs = null;
+            worldObjectTextures.Clear();
+            sortedSprites = null;
         }
 
         protected override void DoUpdate(GameTime gameTime)
@@ -254,10 +268,41 @@ namespace DoomRPG.Gui.GuiElements
                 }
             }
 
-            sortedMobs = [.. game.GetMobInstances()
-                .OrderByDescending(instance =>
-                    Math.Pow(instance.Position.X + 0.5 - camera.Position.X, 2) +
-                    Math.Pow(instance.Position.Y + 0.5 - camera.Position.Y, 2))];
+            IEnumerable<SpriteDrawEntry> mobSprites = game.GetMobInstances()
+                .Select(instance =>
+                {
+                    Mob mobDefinition = game.GetMobDefinition(instance.MobId);
+
+                    return new SpriteDrawEntry
+                    {
+                        Texture = mobTextures[mobDefinition.SpritesheetName],
+                        PositionX = instance.Position.X,
+                        PositionY = instance.Position.Y,
+                        SquaredDistance =
+                            Math.Pow(instance.Position.X + 0.5 - camera.Position.X, 2) +
+                            Math.Pow(instance.Position.Y + 0.5 - camera.Position.Y, 2)
+                    };
+                });
+
+            IEnumerable<SpriteDrawEntry> worldObjectSprites = game.GetWorldObjectInstances()
+                .Select(instance =>
+                {
+                    WorldObject worldObjectDefinition = game.GetWorldObjectDefinition(instance.WorldObjectId);
+
+                    return new SpriteDrawEntry
+                    {
+                        Texture = worldObjectTextures[worldObjectDefinition.SpritesheetName],
+                        PositionX = instance.Position.X,
+                        PositionY = instance.Position.Y,
+                        SquaredDistance =
+                            Math.Pow(instance.Position.X + 0.5 - camera.Position.X, 2) +
+                            Math.Pow(instance.Position.Y + 0.5 - camera.Position.Y, 2)
+                    };
+                });
+
+            sortedSprites = [.. mobSprites
+                .Concat(worldObjectSprites)
+                .OrderByDescending(entry => entry.SquaredDistance)];
 
             camera.Update(gameTime);
             ceiling.Update(gameTime);
@@ -301,28 +346,19 @@ namespace DoomRPG.Gui.GuiElements
                 }
             }
 
-            DrawMobSprites(spriteBatch);
+            DrawSprites(spriteBatch);
         }
 
-        private void DrawMobSprites(SpriteBatch spriteBatch)
+        private void DrawSprites(SpriteBatch spriteBatch)
         {
             int screenWidth = Size.Width;
             int screenHeight = Size.Height;
 
-            foreach (MobInstance mobInstance in sortedMobs)
+            foreach (SpriteDrawEntry entry in sortedSprites)
             {
-                Mob mobDefinition = game.GetMobDefinition(mobInstance.MobId);
+                double spriteX = entry.PositionX + 0.5 - camera.Position.X;
+                double spriteY = entry.PositionY + 0.5 - camera.Position.Y;
 
-                if (!mobTextures.TryGetValue(mobDefinition.SpritesheetName, out Texture2D texture))
-                {
-                    continue;
-                }
-
-                // Sprite position relative to camera, centred on the tile.
-                double spriteX = mobInstance.Position.X + 0.5 - camera.Position.X;
-                double spriteY = mobInstance.Position.Y + 0.5 - camera.Position.Y;
-
-                // Transforms the sprite position into camera space via the inverse camera matrix.
                 double inverseDeterminant = 1.0 / (camera.Plane.X * camera.Direction.Y - camera.Direction.X * camera.Plane.Y);
                 double transformX = inverseDeterminant * (camera.Direction.Y * spriteX - camera.Direction.X * spriteY);
                 double transformY = inverseDeterminant * (-camera.Plane.Y * spriteX + camera.Plane.X * spriteY);
@@ -334,11 +370,9 @@ namespace DoomRPG.Gui.GuiElements
 
                 int spriteScreenX = (int)(screenWidth / 2 * (1 + transformX / transformY));
 
-                // Height and width are set to the same value, producing a square billboard.
                 int spriteHeight = (int)Math.Abs(screenHeight / transformY);
                 int spriteWidth = spriteHeight;
 
-                // Shift the sprite downward so it appears grounded on the floor.
                 int verticalScreenOffset = (int)(GameDefines.MobVerticalDrawOffset * spriteHeight);
                 int drawStartY = Math.Max(0, -spriteHeight / 2 + screenHeight / 2 + verticalScreenOffset);
                 int drawEndY = Math.Min(screenHeight, spriteHeight / 2 + screenHeight / 2 + verticalScreenOffset);
@@ -355,8 +389,8 @@ namespace DoomRPG.Gui.GuiElements
                     }
 
                     int textureX = Math.Clamp(
-                        (stripe - (-spriteWidth / 2 + spriteScreenX)) * texture.Width / spriteWidth,
-                        0, texture.Width - 1);
+                        (stripe - (-spriteWidth / 2 + spriteScreenX)) * entry.Texture.Width / spriteWidth,
+                        0, entry.Texture.Width - 1);
 
                     int drawLength = drawEndY - drawStartY;
 
@@ -365,11 +399,11 @@ namespace DoomRPG.Gui.GuiElements
                         continue;
                     }
 
-                    int textureYOffset = Math.Clamp((drawStartY - columnStartY) * texture.Height / spriteHeight, 0, texture.Height - 1);
-                    int textureHeight = Math.Clamp(drawLength * texture.Height / spriteHeight, 1, texture.Height - textureYOffset);
+                    int textureYOffset = Math.Clamp((drawStartY - columnStartY) * entry.Texture.Height / spriteHeight, 0, entry.Texture.Height - 1);
+                    int textureHeight = Math.Clamp(drawLength * entry.Texture.Height / spriteHeight, 1, entry.Texture.Height - textureYOffset);
 
                     spriteBatch.Draw(
-                        texture,
+                        entry.Texture,
                         new Rectangle(stripe, drawStartY, 1, drawLength),
                         new Rectangle(textureX, textureYOffset, 1, textureHeight),
                         Color.White);
@@ -377,7 +411,6 @@ namespace DoomRPG.Gui.GuiElements
             }
         }
 
-        // TODO: Find a better approach for the game manager association.
         /// <summary>
         /// Associates the game manager.
         /// </summary>

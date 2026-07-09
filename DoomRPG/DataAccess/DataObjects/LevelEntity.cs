@@ -59,5 +59,7 @@ namespace DoomRPG.DataAccess.DataObjects
         public List<MobInstanceEntity> Mobs { get; set; }
 
         public List<TerminalInstanceEntity> Terminals { get; set; }
+
+        public List<WorldObjectInstanceEntity> WorldObjects { get; set; }
     }
 }

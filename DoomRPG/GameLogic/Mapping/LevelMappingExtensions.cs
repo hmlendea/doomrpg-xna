@@ -29,7 +29,8 @@ namespace DoomRPG.GameLogic.Mapping
             SpawnPosition = new Point2D(levelEntity.SpawnX, levelEntity.SpawnY),
             Walls = [.. levelEntity.Walls.ToDomainModels()],
             Mobs = [.. (levelEntity.Mobs ?? []).ToDomainModels()],
-            Terminals = [.. (levelEntity.Terminals ?? []).ToDomainModels()]
+            Terminals = [.. (levelEntity.Terminals ?? []).ToDomainModels()],
+            WorldObjects = [.. (levelEntity.WorldObjects ?? []).ToDomainModels()]
         };
 
         /// <summary>
@@ -49,7 +50,8 @@ namespace DoomRPG.GameLogic.Mapping
             SpawnY = level.SpawnPosition.Y,
             Walls = [.. level.Walls.ToDataObjects()],
             Mobs = [.. level.Mobs.ToDataObjects()],
-            Terminals = [.. level.Terminals.ToDataObjects()]
+            Terminals = [.. level.Terminals.ToDataObjects()],
+            WorldObjects = [.. level.WorldObjects.ToDataObjects()]
         };
 
         /// <summary>

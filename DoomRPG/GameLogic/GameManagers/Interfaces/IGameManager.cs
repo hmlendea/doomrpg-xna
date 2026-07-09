@@ -78,5 +78,9 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         IEnumerable<MobInstance> GetMobInstances();
 
         Mob GetMobDefinition(string id);
+
+        IEnumerable<WorldObjectInstance> GetWorldObjectInstances();
+
+        WorldObject GetWorldObjectDefinition(string id);
     }
 }

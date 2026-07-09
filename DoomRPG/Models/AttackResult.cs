@@ -8,7 +8,9 @@ namespace DoomRPG.Models
         Critical,
         Kill,
         CriticalKill,
-        NoTarget
+        NoTarget,
+        WorldObjectHit,
+        WorldObjectDestroyed
     }
 
     public sealed class AttackResult
@@ -20,5 +22,9 @@ namespace DoomRPG.Models
         public string MobName { get; init; }
 
         public int RemainingAmmunition { get; init; }
+
+        public string WorldObjectName { get; init; }
+
+        public int ExplosionDamageDealtToPlayer { get; init; }
     }
 }

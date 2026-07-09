@@ -62,6 +62,8 @@ namespace DoomRPG.Models
 
         public IEnumerable<TerminalInstance> Terminals { get; set; }
 
+        public IEnumerable<WorldObjectInstance> WorldObjects { get; set; }
+
         public int TurnNumber { get; set; }
     }
 }

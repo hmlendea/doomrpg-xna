@@ -44,6 +44,12 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         TerminalInstance GetTerminalAtPosition(int x, int y);
 
+        IEnumerable<WorldObjectInstance> GetWorldObjects();
+
+        WorldObjectInstance GetWorldObjectAtPosition(int x, int y);
+
+        void RemoveWorldObject(string worldObjectInstanceId);
+
         int GetTurnNumber();
 
         void AdvanceTurn();

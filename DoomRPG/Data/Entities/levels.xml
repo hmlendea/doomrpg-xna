@@ -71,5 +71,9 @@
     <Terminals>
       <TerminalInstanceEntity><Id>terminal_1</Id><Text>Hello world!</Text><SpritesheetName>terminal</SpritesheetName><SpritesheetTextureIndex>0</SpritesheetTextureIndex><X>4</X><Y>0</Y></TerminalInstanceEntity>
     </Terminals>
+    <WorldObjects>
+      <WorldObjectInstanceEntity><Id>barrel_1</Id><WorldObjectId>barrel</WorldObjectId><X>3</X><Y>2</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>barrel_2</Id><WorldObjectId>barrel</WorldObjectId><X>6</X><Y>2</Y></WorldObjectInstanceEntity>
+    </WorldObjects>
   </LevelEntity>
 </ArrayOfLevelEntity>

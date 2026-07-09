@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWorldObjectEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WorldObjectEntity>
+    <Id>barrel</Id>
+    <Name>Barrel</Name>
+    <SpritesheetName>barrel</SpritesheetName>
+    <Health>20</Health>
+    <IsExplosive>true</IsExplosive>
+    <MinimumExplosionDamage>5</MinimumExplosionDamage>
+    <MaximumExplosionDamage>15</MaximumExplosionDamage>
+  </WorldObjectEntity>
+</ArrayOfWorldObjectEntity>

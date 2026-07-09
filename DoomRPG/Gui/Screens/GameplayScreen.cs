@@ -206,6 +206,16 @@ namespace DoomRPG.Gui.Screens
                     ShowNotification($"Crit! {result.Damage} damage! {result.MobName} died!", Colour.Orange);
                     HandleAmmoLowNotification(result);
                     break;
+
+                case AttackOutcome.WorldObjectHit:
+                    ShowNotification($"Hit {result.WorldObjectName} for {result.Damage} damage!", Colour.White);
+                    HandleAmmoLowNotification(result);
+                    break;
+
+                case AttackOutcome.WorldObjectDestroyed:
+                    HandleWorldObjectDestroyedNotification(result);
+                    HandleAmmoLowNotification(result);
+                    break;
             }
         }
 
@@ -229,6 +239,18 @@ namespace DoomRPG.Gui.Screens
             else if (result.RemainingAmmunition == 2)
             {
                 ShowNotification("2 shots left!", Colour.ChromeYellow);
+            }
+        }
+
+        private void HandleWorldObjectDestroyedNotification(AttackResult result)
+        {
+            if (result.ExplosionDamageDealtToPlayer > 0)
+            {
+                ShowNotification($"{result.WorldObjectName} exploded! You took {result.ExplosionDamageDealtToPlayer} damage!", Colour.Red);
+            }
+            else
+            {
+                ShowNotification($"{result.WorldObjectName} exploded!", Colour.Orange);
             }
         }
 

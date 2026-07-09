@@ -85,6 +85,26 @@ namespace DoomRPG.GameLogic.GameManagers
         public TerminalInstance GetTerminalAtPosition(int x, int y)
             => currentLevel.Terminals.FirstOrDefault(t => t.Position.X == x && t.Position.Y == y);
 
+        public IEnumerable<WorldObjectInstance> GetWorldObjects()
+            => currentLevel.WorldObjects.Where(worldObjectInstance => !worldObjectInstance.IsDestroyed);
+
+        public WorldObjectInstance GetWorldObjectAtPosition(int x, int y)
+            => currentLevel.WorldObjects.FirstOrDefault(worldObjectInstance =>
+                worldObjectInstance.Position.X == x &&
+                worldObjectInstance.Position.Y == y &&
+                !worldObjectInstance.IsDestroyed);
+
+        public void RemoveWorldObject(string worldObjectInstanceId)
+        {
+            WorldObjectInstance worldObjectInstance = currentLevel.WorldObjects
+                .FirstOrDefault(instance => instance.Id.Equals(worldObjectInstanceId));
+
+            if (worldObjectInstance is not null)
+            {
+                worldObjectInstance.IsDestroyed = true;
+            }
+        }
+
         public int GetTurnNumber()
             => currentLevel.TurnNumber;
 

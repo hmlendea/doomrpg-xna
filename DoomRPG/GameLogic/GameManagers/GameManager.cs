@@ -97,14 +97,47 @@ namespace DoomRPG.GameLogic.GameManagers
             playerManager.Update(elapsedSeconds);
         }
 
-        public void MovePlayer(MovementDirection direction)
+        public MoveResult MovePlayer(MovementDirection direction)
         {
             bool moved = playerManager.MovePlayer(direction);
 
-            if (moved)
+            if (!moved)
             {
-                levelManager.AdvanceTurn();
+                return new MoveResult();
             }
+
+            levelManager.AdvanceTurn();
+
+            Player player = playerManager.GetPlayer();
+
+            int playerTileX = (int)Math.Floor(player.Position.X);
+            int playerTileY = (int)Math.Floor(player.Position.Y);
+
+            WorldObjectInstance worldObjectAtTile = levelManager.GetWorldObjectAtPosition(playerTileX, playerTileY);
+
+            if (worldObjectAtTile is null)
+            {
+                return new MoveResult();
+            }
+
+            WorldObject worldObjectDefinition = worldObjectDefinitions
+                .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectAtTile.WorldObjectId));
+
+            if (worldObjectDefinition is null || worldObjectDefinition.HealAmount <= 0)
+            {
+                return new MoveResult();
+            }
+
+            int actualHeal = Math.Min(worldObjectDefinition.HealAmount, player.MaxHealth - player.Health);
+
+            playerManager.Heal(worldObjectDefinition.HealAmount);
+            levelManager.RemoveWorldObject(worldObjectAtTile.Id);
+
+            return new MoveResult
+            {
+                PickedUpObjectName = worldObjectDefinition.Name,
+                HealAmountReceived = actualHeal
+            };
         }
 
         public AttackResult Attack()

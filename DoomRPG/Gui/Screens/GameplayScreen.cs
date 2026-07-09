@@ -254,15 +254,25 @@ namespace DoomRPG.Gui.Screens
             }
         }
 
+        private void HandleMoveResult(MoveResult result)
+        {
+            if (!string.IsNullOrEmpty(result.PickedUpObjectName))
+            {
+                ShowNotification($"Picked up {result.PickedUpObjectName}! +{result.HealAmountReceived} HP", Colour.Green);
+            }
+        }
+
         private void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
         {
             if (e.Key == Keys.Up || e.Key == Keys.W)
             {
-                game.MovePlayer(MovementDirection.North);
+                MoveResult moveResult = game.MovePlayer(MovementDirection.North);
+                HandleMoveResult(moveResult);
             }
             else if (e.Key == Keys.Down || e.Key == Keys.S)
             {
-                game.MovePlayer(MovementDirection.South);
+                MoveResult moveResult = game.MovePlayer(MovementDirection.South);
+                HandleMoveResult(moveResult);
             }
             else if (e.Key == Keys.Left || e.Key == Keys.A)
             {

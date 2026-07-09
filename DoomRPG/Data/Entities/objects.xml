@@ -8,5 +8,16 @@
     <IsExplosive>true</IsExplosive>
     <MinimumExplosionDamage>5</MinimumExplosionDamage>
     <MaximumExplosionDamage>15</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>medikit</Id>
+    <Name>Medkit</Name>
+    <SpritesheetName>medikit</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>25</HealAmount>
   </WorldObjectEntity>
 </ArrayOfWorldObjectEntity>

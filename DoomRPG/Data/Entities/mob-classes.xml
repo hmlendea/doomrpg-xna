@@ -65,4 +65,9 @@
     <Name>Boss</Name>
     <Description>Titanic demonic overlords of immense power and resilience. Encountering one is a fight for survival.</Description>
   </MobClassEntity>
+  <MobClassEntity>
+    <Id>civilian</Id>
+    <Name>Civilian</Name>
+    <Description>Non-combatants. They will not attack and cannot be harmed.</Description>
+  </MobClassEntity>
 </ArrayOfMobClassEntity>

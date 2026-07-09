@@ -29,10 +29,10 @@ namespace DoomRPG.GameLogic.Mapping
             Y = terminal.Position.Y
         };
 
-        internal static IEnumerable<TerminalInstance> ToDomainModels(this IEnumerable<TerminalInstanceEntity> entities)
-            => entities.Select(e => e.ToDomainModel());
+        internal static IEnumerable<TerminalInstance> ToDomainModels(this IEnumerable<TerminalInstanceEntity> terminalInstanceEntities)
+            => terminalInstanceEntities.Select(terminalInstanceEntity => terminalInstanceEntity.ToDomainModel());
 
-        internal static IEnumerable<TerminalInstanceEntity> ToDataObjects(this IEnumerable<TerminalInstance> terminals)
-            => terminals.Select(t => t.ToDataObject());
+        internal static IEnumerable<TerminalInstanceEntity> ToDataObjects(this IEnumerable<TerminalInstance> terminalInstances)
+            => terminalInstances.Select(terminalInstance => terminalInstance.ToDataObject());
     }
 }

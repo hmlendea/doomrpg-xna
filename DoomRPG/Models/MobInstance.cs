@@ -29,6 +29,8 @@ namespace DoomRPG.Models
         /// <value>True if the mob is friendly, false otherwise.</value>
         public bool IsFriendly { get; set; }
 
+        public string Dialogue { get; set; }
+
         public int CurrentHealth { get; set; }
     }
 }

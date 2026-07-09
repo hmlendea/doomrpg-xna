@@ -360,4 +360,15 @@
     <Damage>200</Damage>
   </MobEntity>
 
+  <!-- Civilians -->
+  <MobEntity>
+    <Id>scientist_male</Id>
+    <Name>Scientist</Name>
+    <Description>A UAC researcher who somehow survived. He doesn't fight, but he knows things.</Description>
+    <SpritesheetName>scientist_male</SpritesheetName>
+    <ClassId>civilian</ClassId>
+    <Health>1</Health>
+    <Damage>0</Damage>
+  </MobEntity>
+
 </ArrayOfMobEntity>

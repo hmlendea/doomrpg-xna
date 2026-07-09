@@ -23,7 +23,8 @@ namespace DoomRPG.GameLogic.Mapping
             Id = mobInstanceEntity.Id,
             MobId = mobInstanceEntity.MobId,
             Position = new Point2D(mobInstanceEntity.X, mobInstanceEntity.Y),
-            IsFriendly = mobInstanceEntity.IsFriendly
+            IsFriendly = mobInstanceEntity.IsFriendly,
+            Dialogue = mobInstanceEntity.Dialogue
         };
 
         /// <summary>
@@ -37,7 +38,8 @@ namespace DoomRPG.GameLogic.Mapping
             MobId = mobInstance.MobId,
             X = mobInstance.Position.X,
             Y = mobInstance.Position.Y,
-            IsFriendly = mobInstance.IsFriendly
+            IsFriendly = mobInstance.IsFriendly,
+            Dialogue = mobInstance.Dialogue
         };
 
         /// <summary>

@@ -41,6 +41,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         string InteractWithTerminal();
 
+        string InteractWithMob();
+
         IEnumerable<Weapon> GetWeaponDefinitions();
 
         Weapon GetWeaponDefinition(string id);

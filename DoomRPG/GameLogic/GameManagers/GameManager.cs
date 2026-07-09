@@ -89,6 +89,13 @@ namespace DoomRPG.GameLogic.GameManagers
                 return new AttackResult { Outcome = AttackOutcome.NoAmmo };
             }
 
+            MobInstance firstMobInView = FindFirstMobInView();
+
+            if (firstMobInView is not null && firstMobInView.IsFriendly)
+            {
+                return new AttackResult { Outcome = AttackOutcome.NoTarget };
+            }
+
             if (!string.IsNullOrEmpty(weapon.AmmunitionId) && weapon.AmmoPerShot > 0)
             {
                 bool ammoSpent = playerManager.SpendAmmo(weapon.AmmunitionId, weapon.AmmoPerShot);
@@ -151,36 +158,36 @@ namespace DoomRPG.GameLogic.GameManagers
             };
         }
 
-        /// <summary>
-        /// Finds the nearest mob directly in the player's view using DDA ray marching.
-        /// </summary>
-        MobInstance FindTargetInView()
+        MobInstance FindFirstMobInView()
         {
             Player player = playerManager.GetPlayer();
 
-            float rayX = player.Position.X;
-            float rayY = player.Position.Y;
-            float dirX = player.Direction.X;
-            float dirY = player.Direction.Y;
+            float rayPositionX = player.Position.X;
+            float rayPositionY = player.Position.Y;
+            float directionX = player.Direction.X;
+            float directionY = player.Direction.Y;
 
-            // Normalise direction
-            float len = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
-            if (len < 0.0001f) return null;
-            dirX /= len;
-            dirY /= len;
+            float magnitude = (float)Math.Sqrt(directionX * directionX + directionY * directionY);
+
+            if (magnitude < 0.0001f)
+            {
+                return null;
+            }
+
+            directionX /= magnitude;
+            directionY /= magnitude;
 
             const float StepSize = 0.5f;
             const int MaxSteps = 20;
 
             for (int step = 1; step <= MaxSteps; step++)
             {
-                float checkX = rayX + dirX * step * StepSize;
-                float checkY = rayY + dirY * step * StepSize;
+                float samplePositionX = rayPositionX + directionX * step * StepSize;
+                float samplePositionY = rayPositionY + directionY * step * StepSize;
 
-                int tileX = (int)Math.Floor(checkX);
-                int tileY = (int)Math.Floor(checkY);
+                int tileX = (int)Math.Floor(samplePositionX);
+                int tileY = (int)Math.Floor(samplePositionY);
 
-                // Stop at walls
                 if (levelManager.GetWall(tileX, tileY) is not null)
                 {
                     break;
@@ -188,7 +195,60 @@ namespace DoomRPG.GameLogic.GameManagers
 
                 MobInstance mob = levelManager
                     .GetMobs()
-                    .FirstOrDefault(m => m.Position.X == tileX && m.Position.Y == tileY && !m.IsFriendly);
+                    .FirstOrDefault(mobInstance => mobInstance.Position.X == tileX && mobInstance.Position.Y == tileY);
+
+                if (mob is not null)
+                {
+                    return mob;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Finds the nearest mob directly in the player's view using DDA ray marching.
+        /// </summary>
+        MobInstance FindTargetInView()
+        {
+            Player player = playerManager.GetPlayer();
+
+            float rayPositionX = player.Position.X;
+            float rayPositionY = player.Position.Y;
+            float directionX = player.Direction.X;
+            float directionY = player.Direction.Y;
+
+            // Normalise direction.
+            float magnitude = (float)Math.Sqrt(directionX * directionX + directionY * directionY);
+
+            if (magnitude < 0.0001f)
+            {
+                return null;
+            }
+
+            directionX /= magnitude;
+            directionY /= magnitude;
+
+            const float StepSize = 0.5f;
+            const int MaxSteps = 20;
+
+            for (int step = 1; step <= MaxSteps; step++)
+            {
+                float samplePositionX = rayPositionX + directionX * step * StepSize;
+                float samplePositionY = rayPositionY + directionY * step * StepSize;
+
+                int tileX = (int)Math.Floor(samplePositionX);
+                int tileY = (int)Math.Floor(samplePositionY);
+
+                // Stop at walls.
+                if (levelManager.GetWall(tileX, tileY) is not null)
+                {
+                    break;
+                }
+
+                MobInstance mob = levelManager
+                    .GetMobs()
+                    .FirstOrDefault(mobInstance => mobInstance.Position.X == tileX && mobInstance.Position.Y == tileY && !mobInstance.IsFriendly);
 
                 if (mob is not null)
                 {
@@ -235,19 +295,19 @@ namespace DoomRPG.GameLogic.GameManagers
         int CalculateDamage(Player player, Weapon weapon, Mob mob, bool isCrit)
         {
             // Weapon damage range ±15% (original had explicit min/max per weapon)
-            int minDamage = weapon.Damage * 85 / 100;
-            int maxDamage = weapon.Damage * 115 / 100;
+            int minimumDamage = weapon.Damage * 85 / 100;
+            int maximumDamage = weapon.Damage * 115 / 100;
 
             // Random roll 0-255 to pick damage in range (original formula)
-            int dmgRoll = rng.Next(256);
-            int baseDamage = minDamage + dmgRoll * (maxDamage - minDamage) / 256;
+            int damageRoll = rng.Next(256);
+            int baseDamage = minimumDamage + damageRoll * (maximumDamage - minimumDamage) / 256;
 
             // Scale by attacker strength vs mob defence
             // Original: damage = base * (attacker.f / defender.e), both 0-255
-            int attackerStr = Math.Clamp(player.Strength * 20, 1, 255);
-            int mobDefense  = Math.Clamp(mob.Health / 5, 5, 200);
+            int attackerStrength = Math.Clamp(player.Strength * 20, 1, 255);
+            int mobDefense = Math.Clamp(mob.Health / 5, 5, 200);
 
-            int damage = baseDamage * attackerStr / mobDefense;
+            int damage = baseDamage * attackerStrength / mobDefense;
 
             // Clamp to [1, 999] matching original game
             damage = Math.Clamp(damage, 1, 999);
@@ -302,23 +362,60 @@ namespace DoomRPG.GameLogic.GameManagers
         {
             Player player = playerManager.GetPlayer();
 
-            float dirX = player.Direction.X;
-            float dirY = player.Direction.Y;
-            float len = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
+            float directionX = player.Direction.X;
+            float directionY = player.Direction.Y;
+            float magnitude = (float)Math.Sqrt(directionX * directionX + directionY * directionY);
 
-            if (len < 0.0001f)
+            if (magnitude < 0.0001f)
             {
                 return null;
             }
 
-            dirX /= len;
-            dirY /= len;
+            directionX /= magnitude;
+            directionY /= magnitude;
 
-            int tileX = (int)Math.Floor(player.Position.X + dirX);
-            int tileY = (int)Math.Floor(player.Position.Y + dirY);
+            int tileX = (int)Math.Floor(player.Position.X + directionX);
+            int tileY = (int)Math.Floor(player.Position.Y + directionY);
 
             TerminalInstance terminal = levelManager.GetTerminalAtPosition(tileX, tileY);
-            return terminal?.Text;
+
+            if (terminal is null)
+            {
+                return null;
+            }
+
+            return terminal.Text;
+        }
+
+        public string InteractWithMob()
+        {
+            Player player = playerManager.GetPlayer();
+
+            float directionX = player.Direction.X;
+            float directionY = player.Direction.Y;
+            float magnitude = (float)Math.Sqrt(directionX * directionX + directionY * directionY);
+
+            if (magnitude < 0.0001f)
+            {
+                return null;
+            }
+
+            directionX /= magnitude;
+            directionY /= magnitude;
+
+            int tileX = (int)Math.Floor(player.Position.X + directionX);
+            int tileY = (int)Math.Floor(player.Position.Y + directionY);
+
+            MobInstance targetMob = levelManager.GetMobs()
+                .FirstOrDefault(mobInstance => mobInstance.Position.X == tileX && mobInstance.Position.Y == tileY
+                    && mobInstance.IsFriendly && !string.IsNullOrEmpty(mobInstance.Dialogue));
+
+            if (targetMob is null)
+            {
+                return null;
+            }
+
+            return targetMob.Dialogue;
         }
 
         public IEnumerable<Weapon> GetWeaponDefinitions()

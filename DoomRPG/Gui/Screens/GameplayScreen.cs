@@ -117,7 +117,7 @@ namespace DoomRPG.Gui.Screens
                 && previousMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Released
                 && clickInView)
             {
-                PerformTerminalInteraction();
+                PerformInteraction();
             }
 
             previousMouseState = currentMouseState;
@@ -150,9 +150,14 @@ namespace DoomRPG.Gui.Screens
             notificationLabel.Size = new Size2D(ScreenManager.Instance.Size.Width, 60);
         }
 
-        private void PerformTerminalInteraction()
+        private void PerformInteraction()
         {
             string text = game.InteractWithTerminal();
+
+            if (text is null)
+            {
+                text = game.InteractWithMob();
+            }
 
             if (!string.IsNullOrEmpty(text))
             {
@@ -250,7 +255,7 @@ namespace DoomRPG.Gui.Screens
             }
             else if (e.Key == Keys.E)
             {
-                PerformTerminalInteraction();
+                PerformInteraction();
             }
             else
             {

@@ -5,9 +5,9 @@ namespace DoomRPG.Models
         NoAmmo,
         Missed,
         Hit,
-        Crit,
+        Critical,
         Kill,
-        CritKill,
+        CriticalKill,
         NoTarget
     }
 
@@ -19,6 +19,6 @@ namespace DoomRPG.Models
 
         public string MobName { get; init; }
 
-        public int AmmoRemaining { get; init; }
+        public int RemainingAmmunition { get; init; }
     }
 }

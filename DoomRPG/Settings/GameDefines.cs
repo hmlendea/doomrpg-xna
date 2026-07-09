@@ -42,5 +42,8 @@
         public const int PlayerStartingExperience = 0;
 
         public const int StatusBarHeight = 72;
+
+        // Fraction of sprite height to shift mob sprites downward, making them appear grounded on the floor.
+        public const double MobVerticalDrawOffset = 0.25;
     }
 }

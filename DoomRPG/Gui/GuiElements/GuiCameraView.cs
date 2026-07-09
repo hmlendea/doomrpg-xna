@@ -338,13 +338,14 @@ namespace DoomRPG.Gui.GuiElements
                 int spriteHeight = (int)Math.Abs(screenHeight / transformY);
                 int spriteWidth = spriteHeight;
 
-                // Centre the sprite on the horizon line.
-                int drawStartY = Math.Max(0, -spriteHeight / 2 + screenHeight / 2);
-                int drawEndY = Math.Min(screenHeight, spriteHeight / 2 + screenHeight / 2);
+                // Shift the sprite downward so it appears grounded on the floor.
+                int verticalScreenOffset = (int)(GameDefines.MobVerticalDrawOffset * spriteHeight);
+                int drawStartY = Math.Max(0, -spriteHeight / 2 + screenHeight / 2 + verticalScreenOffset);
+                int drawEndY = Math.Min(screenHeight, spriteHeight / 2 + screenHeight / 2 + verticalScreenOffset);
                 int drawStartX = Math.Max(0, -spriteWidth / 2 + spriteScreenX);
                 int drawEndX = Math.Min(screenWidth, spriteWidth / 2 + spriteScreenX);
 
-                int columnStartY = -spriteHeight / 2 + screenHeight / 2;
+                int columnStartY = -spriteHeight / 2 + screenHeight / 2 + verticalScreenOffset;
 
                 for (int stripe = drawStartX; stripe < drawEndX; stripe++)
                 {

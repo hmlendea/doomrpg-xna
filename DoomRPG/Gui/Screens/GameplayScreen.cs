@@ -192,12 +192,12 @@ namespace DoomRPG.Gui.Screens
                     HandleAmmoLowNotification(result);
                     break;
 
-                case AttackOutcome.Crit:
+                case AttackOutcome.Critical:
                     ShowNotification($"Crit! {result.Damage} damage!", Colour.Orange);
                     HandleAmmoLowNotification(result);
                     break;
 
-                case AttackOutcome.CritKill:
+                case AttackOutcome.CriticalKill:
                     ShowNotification($"Crit! {result.Damage} damage! {result.MobName} died!", Colour.Orange);
                     HandleAmmoLowNotification(result);
                     break;
@@ -213,15 +213,15 @@ namespace DoomRPG.Gui.Screens
                 return;
             }
 
-            if (result.AmmoRemaining == 0)
+            if (result.RemainingAmmunition == 0)
             {
                 ShowNotification("Last shot!", Colour.ChromeYellow);
             }
-            else if (result.AmmoRemaining == 1)
+            else if (result.RemainingAmmunition == 1)
             {
                 ShowNotification("1 shot left!", Colour.ChromeYellow);
             }
-            else if (result.AmmoRemaining == 2)
+            else if (result.RemainingAmmunition == 2)
             {
                 ShowNotification("2 shots left!", Colour.ChromeYellow);
             }

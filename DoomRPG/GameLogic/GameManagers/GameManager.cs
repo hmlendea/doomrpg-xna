@@ -23,7 +23,7 @@ namespace DoomRPG.GameLogic.GameManagers
         readonly ILevelManager levelManager;
         readonly IMobManager mobManager;
         readonly IPlayerManager playerManager;
-        readonly Random rng = new();
+        readonly Random randomNumberGenerator = new();
 
         public GameManager()
         {
@@ -115,37 +115,45 @@ namespace DoomRPG.GameLogic.GameManagers
                 return new AttackResult { Outcome = AttackOutcome.NoTarget };
             }
 
-            Mob mobDef = mobManager.GetMobDefinition(target.MobId);
+            Mob mobDefinition = mobManager.GetMobDefinition(target.MobId);
             Player player = playerManager.GetPlayer();
 
-            AttackOutcome outcome = ResolveHit(player, weapon, mobDef);
+            AttackOutcome outcome = ResolveHit(player, weapon, mobDefinition);
 
             if (outcome == AttackOutcome.Missed)
             {
-                return new AttackResult { Outcome = AttackOutcome.Missed, MobName = mobDef.Name };
+                return new AttackResult { Outcome = AttackOutcome.Missed, MobName = mobDefinition.Name };
             }
 
-            int damage = CalculateDamage(player, weapon, mobDef, outcome == AttackOutcome.Crit || outcome == AttackOutcome.CritKill);
+            int damage = CalculateDamage(player, weapon, mobDefinition, outcome == AttackOutcome.Critical || outcome == AttackOutcome.CriticalKill);
             mobManager.ApplyDamageToMob(target, damage);
 
-            int ammoRemaining = 0;
+            int remainingAmmunition = 0;
+
             if (!string.IsNullOrEmpty(weapon.AmmunitionId))
             {
-                player.AmmoCounts.TryGetValue(weapon.AmmunitionId, out ammoRemaining);
+                player.AmmoCounts.TryGetValue(weapon.AmmunitionId, out remainingAmmunition);
             }
 
             if (target.CurrentHealth <= 0)
             {
                 levelManager.RemoveMob(target.Id);
                 mobManager.RemoveMob(target.Id);
-                playerManager.AddExperience(mobDef.Health);
+                playerManager.AddExperience(mobDefinition.Health);
+
+                AttackOutcome killOutcome = AttackOutcome.Kill;
+
+                if (outcome == AttackOutcome.Critical)
+                {
+                    killOutcome = AttackOutcome.CriticalKill;
+                }
 
                 return new AttackResult
                 {
-                    Outcome = outcome == AttackOutcome.Crit ? AttackOutcome.CritKill : AttackOutcome.Kill,
+                    Outcome = killOutcome,
                     Damage = damage,
-                    MobName = mobDef.Name,
-                    AmmoRemaining = ammoRemaining
+                    MobName = mobDefinition.Name,
+                    RemainingAmmunition = remainingAmmunition
                 };
             }
 
@@ -153,8 +161,8 @@ namespace DoomRPG.GameLogic.GameManagers
             {
                 Outcome = outcome,
                 Damage = damage,
-                MobName = mobDef.Name,
-                AmmoRemaining = ammoRemaining
+                MobName = mobDefinition.Name,
+                RemainingAmmunition = remainingAmmunition
             };
         }
 
@@ -266,17 +274,17 @@ namespace DoomRPG.GameLogic.GameManagers
         AttackOutcome ResolveHit(Player player, Weapon weapon, Mob mob)
         {
             // Scale player accuracy to original 8-bit range (Accuracy 1 → 20, grows with upgrades)
-            int attackerAcc = Math.Clamp(player.Accuracy * 20, 1, 255);
+            int attackerAccuracy = Math.Clamp(player.Accuracy * 20, 1, 255);
 
             // Derive mob evasion from its HP: squishier mobs are harder to track
             int defenderEvasion = Math.Clamp(200 - mob.Health / 2, 10, 200);
 
             // Original formula: hitChance = (attacker.acc * 128 / defender.evasion) + (weapon.d * 65536 / 51200)
-            int hitChance = attackerAcc * 128 / defenderEvasion
+            int hitChance = attackerAccuracy * 128 / defenderEvasion
                           + weapon.AccuracyBonus * 65536 / 51200;
 
             // Roll 0-255
-            int roll = rng.Next(256);
+            int roll = randomNumberGenerator.Next(256);
 
             if (roll >= hitChance)
             {
@@ -284,22 +292,27 @@ namespace DoomRPG.GameLogic.GameManagers
             }
 
             // Crit threshold: hitChance * 8 / 5120 (rare at low levels, scales with accuracy investment)
-            int critThreshold = hitChance * 8 / 5120;
+            int criticalHitThreshold = hitChance * 8 / 5120;
 
-            return roll < critThreshold ? AttackOutcome.Crit : AttackOutcome.Hit;
+            if (roll < criticalHitThreshold)
+            {
+                return AttackOutcome.Critical;
+            }
+
+            return AttackOutcome.Hit;
         }
 
         /// <summary>
         /// Damage formula derived from original game's u.a(attacker, weapon, defender, param, distance).
         /// </summary>
-        int CalculateDamage(Player player, Weapon weapon, Mob mob, bool isCrit)
+        int CalculateDamage(Player player, Weapon weapon, Mob mob, bool isCriticalHit)
         {
             // Weapon damage range ±15% (original had explicit min/max per weapon)
             int minimumDamage = weapon.Damage * 85 / 100;
             int maximumDamage = weapon.Damage * 115 / 100;
 
             // Random roll 0-255 to pick damage in range (original formula)
-            int damageRoll = rng.Next(256);
+            int damageRoll = randomNumberGenerator.Next(256);
             int baseDamage = minimumDamage + damageRoll * (maximumDamage - minimumDamage) / 256;
 
             // Scale by attacker strength vs mob defence
@@ -312,7 +325,7 @@ namespace DoomRPG.GameLogic.GameManagers
             // Clamp to [1, 999] matching original game
             damage = Math.Clamp(damage, 1, 999);
 
-            if (isCrit)
+            if (isCriticalHit)
             {
                 damage *= 2;
                 damage = Math.Clamp(damage, 1, 999);

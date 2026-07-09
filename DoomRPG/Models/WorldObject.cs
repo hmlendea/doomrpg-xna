@@ -12,6 +12,8 @@ namespace DoomRPG.Models
 
         public bool IsExplosive { get; set; }
 
+        public bool BlocksProjectiles { get; set; }
+
         public int MinimumExplosionDamage { get; set; }
 
         public int MaximumExplosionDamage { get; set; }

@@ -15,6 +15,7 @@ namespace DoomRPG.GameLogic.Mapping
             SpritesheetName = worldObjectEntity.SpritesheetName,
             Health = worldObjectEntity.Health,
             IsExplosive = worldObjectEntity.IsExplosive,
+            BlocksProjectiles = worldObjectEntity.BlocksProjectiles,
             MinimumExplosionDamage = worldObjectEntity.MinimumExplosionDamage,
             MaximumExplosionDamage = worldObjectEntity.MaximumExplosionDamage,
             HealAmount = worldObjectEntity.HealAmount
@@ -27,6 +28,7 @@ namespace DoomRPG.GameLogic.Mapping
             SpritesheetName = worldObject.SpritesheetName,
             Health = worldObject.Health,
             IsExplosive = worldObject.IsExplosive,
+            BlocksProjectiles = worldObject.BlocksProjectiles,
             MinimumExplosionDamage = worldObject.MinimumExplosionDamage,
             MaximumExplosionDamage = worldObject.MaximumExplosionDamage,
             HealAmount = worldObject.HealAmount

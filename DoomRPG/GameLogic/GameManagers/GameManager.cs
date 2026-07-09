@@ -399,7 +399,7 @@ namespace DoomRPG.GameLogic.GameManagers
                     break;
                 }
 
-                if (levelManager.GetWorldObjectAtPosition(tileX, tileY) is not null)
+                if (WorldObjectBlocksProjectilesAt(tileX, tileY))
                 {
                     break;
                 }
@@ -462,7 +462,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
                 WorldObjectInstance worldObject = levelManager.GetWorldObjectAtPosition(tileX, tileY);
 
-                if (worldObject is not null)
+                if (worldObject is not null && WorldObjectBlocksProjectilesAt(tileX, tileY))
                 {
                     return worldObject;
                 }
@@ -511,8 +511,8 @@ namespace DoomRPG.GameLogic.GameManagers
                     break;
                 }
 
-                // Stop at world objects (they block projectiles).
-                if (levelManager.GetWorldObjectAtPosition(tileX, tileY) is not null)
+                // Stop at world objects that block projectiles.
+                if (WorldObjectBlocksProjectilesAt(tileX, tileY))
                 {
                     break;
                 }
@@ -528,6 +528,21 @@ namespace DoomRPG.GameLogic.GameManagers
             }
 
             return null;
+        }
+
+        bool WorldObjectBlocksProjectilesAt(int tileX, int tileY)
+        {
+            WorldObjectInstance worldObjectInstance = levelManager.GetWorldObjectAtPosition(tileX, tileY);
+
+            if (worldObjectInstance is null)
+            {
+                return false;
+            }
+
+            WorldObject worldObjectDefinition = worldObjectDefinitions
+                .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectInstance.WorldObjectId));
+
+            return worldObjectDefinition is not null && worldObjectDefinition.BlocksProjectiles;
         }
 
         /// <summary>

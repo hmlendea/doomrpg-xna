@@ -6,6 +6,7 @@
     <SpritesheetName>barrel</SpritesheetName>
     <Health>20</Health>
     <IsExplosive>true</IsExplosive>
+    <BlocksProjectiles>true</BlocksProjectiles>
     <MinimumExplosionDamage>5</MinimumExplosionDamage>
     <MaximumExplosionDamage>15</MaximumExplosionDamage>
     <HealAmount>0</HealAmount>
@@ -16,6 +17,7 @@
     <SpritesheetName>medikit</SpritesheetName>
     <Health>1</Health>
     <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
     <MinimumExplosionDamage>0</MinimumExplosionDamage>
     <MaximumExplosionDamage>0</MaximumExplosionDamage>
     <HealAmount>25</HealAmount>

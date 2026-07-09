@@ -40,29 +40,19 @@ namespace DoomRPG.GameLogic.GameManagers
         }
 
         public Size2D GetSize()
-        {
-            return currentLevel.Size;
-        }
+            => currentLevel.Size;
 
         public Colour GetCeilingColour()
-        {
-            return currentLevel.CeilingColour;
-        }
+            => currentLevel.CeilingColour;
 
         public Colour GetFloorColour()
-        {
-            return currentLevel.FloorColour;
-        }
+            => currentLevel.FloorColour;
 
         public IEnumerable<WallInstance> GetWalls()
-        {
-            return currentLevel.Walls;
-        }
+            => currentLevel.Walls;
 
         public IEnumerable<MobInstance> GetMobs()
-        {
-            return currentLevel.Mobs;
-        }
+            => currentLevel.Mobs;
 
         public void RemoveMob(string mobInstanceId)
             => currentLevel.Mobs = [.. currentLevel.Mobs.Where(m => m.Id != mobInstanceId)];
@@ -74,14 +64,16 @@ namespace DoomRPG.GameLogic.GameManagers
         /// <param name="x">The X coordinate.</param>
         /// <param name="y">The Y coordinate.</param>
         public WallInstance GetWall(int x, int y)
-        {
-            return currentLevel.Walls.FirstOrDefault(wall => wall.Position.X == x && wall.Position.Y == y);
-        }
+            => currentLevel.Walls.FirstOrDefault(wall => wall.Position.X == x && wall.Position.Y == y);
+
+        public IEnumerable<TerminalInstance> GetTerminals()
+            => currentLevel.Terminals;
+
+        public TerminalInstance GetTerminalAtPosition(int x, int y)
+            => currentLevel.Terminals.FirstOrDefault(t => t.Position.X == x && t.Position.Y == y);
 
         public int GetTurnNumber()
-        {
-            return currentLevel.TurnNumber;
-        }
+            => currentLevel.TurnNumber;
 
         public void AdvanceTurn()
         {

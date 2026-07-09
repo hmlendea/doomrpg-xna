@@ -84,6 +84,15 @@ namespace DoomRPG.Gui.GuiElements
                 }
             }
 
+            foreach (TerminalInstance terminal in game.GetTerminalInstances())
+            {
+                if (!wallTextures.ContainsKey(terminal.SpritesheetName))
+                {
+                    Texture2D texture = NuciContentManager.Instance.LoadTexture2D("Spritesheets/" + terminal.SpritesheetName);
+                    wallTextures.Add(terminal.SpritesheetName, texture);
+                }
+            }
+
             // Registration via RegisterChildren is avoided as those controls would be drawn above the raycasted view.
             ceiling.LoadContent();
             floor.LoadContent();
@@ -234,6 +243,14 @@ namespace DoomRPG.Gui.GuiElements
                 {
                     wallSlices[x].Spritesheet = wall.SpritesheetName;
                     wallSlices[x].SpritesheetTextureIndex = wall.SpritesheetTextureIndex;
+                }
+
+                TerminalInstance terminal = game.GetTerminalAtPosition(tileX, tileY);
+
+                if (terminal is not null)
+                {
+                    wallSlices[x].Spritesheet = terminal.SpritesheetName;
+                    wallSlices[x].SpritesheetTextureIndex = terminal.SpritesheetTextureIndex;
                 }
             }
 

@@ -35,6 +35,12 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         WallInstance GetWall(int x, int y);
 
+        IEnumerable<TerminalInstance> GetTerminalInstances();
+
+        TerminalInstance GetTerminalAtPosition(int x, int y);
+
+        string InteractWithTerminal();
+
         IEnumerable<Weapon> GetWeaponDefinitions();
 
         Weapon GetWeaponDefinition(string id);

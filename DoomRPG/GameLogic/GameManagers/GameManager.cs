@@ -292,6 +292,35 @@ namespace DoomRPG.GameLogic.GameManagers
         public WallInstance GetWall(int x, int y)
             => levelManager.GetWall(x, y);
 
+        public IEnumerable<TerminalInstance> GetTerminalInstances()
+            => levelManager.GetTerminals();
+
+        public TerminalInstance GetTerminalAtPosition(int x, int y)
+            => levelManager.GetTerminalAtPosition(x, y);
+
+        public string InteractWithTerminal()
+        {
+            Player player = playerManager.GetPlayer();
+
+            float dirX = player.Direction.X;
+            float dirY = player.Direction.Y;
+            float len = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
+
+            if (len < 0.0001f)
+            {
+                return null;
+            }
+
+            dirX /= len;
+            dirY /= len;
+
+            int tileX = (int)Math.Floor(player.Position.X + dirX);
+            int tileY = (int)Math.Floor(player.Position.Y + dirY);
+
+            TerminalInstance terminal = levelManager.GetTerminalAtPosition(tileX, tileY);
+            return terminal?.Text;
+        }
+
         public IEnumerable<Weapon> GetWeaponDefinitions()
             => weaponDefinitions;
 

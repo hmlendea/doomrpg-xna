@@ -60,6 +60,8 @@ namespace DoomRPG.Models
         /// <value>The mobs.</value>
         public IEnumerable<MobInstance> Mobs { get; set; }
 
+        public IEnumerable<TerminalInstance> Terminals { get; set; }
+
         public int TurnNumber { get; set; }
     }
 }

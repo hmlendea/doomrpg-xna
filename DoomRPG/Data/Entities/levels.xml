@@ -11,7 +11,7 @@
     <Walls>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>3</X><Y>0</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>terminal</WallId><X>4</X><Y>0</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>4</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>1</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>1</Y></WallInstanceEntity>
@@ -43,5 +43,8 @@
       <MobInstanceEntity><Id>zombie_pvt_1</Id><MobId>zombie_private</MobId><X>5</X><Y>3</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
       <MobInstanceEntity><Id>zombie_lt_1</Id><MobId>zombie_lieutenant</MobId><X>5</X><Y>2</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
     </Mobs>
+    <Terminals>
+      <TerminalInstanceEntity><Id>terminal_1</Id><Text>Hello world!</Text><SpritesheetName>terminal</SpritesheetName><SpritesheetTextureIndex>0</SpritesheetTextureIndex><X>4</X><Y>0</Y></TerminalInstanceEntity>
+    </Terminals>
   </LevelEntity>
 </ArrayOfLevelEntity>

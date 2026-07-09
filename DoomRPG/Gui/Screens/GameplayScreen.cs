@@ -113,6 +113,13 @@ namespace DoomRPG.Gui.Screens
                 PerformAttack();
             }
 
+            if (currentMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed
+                && previousMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Released
+                && clickInView)
+            {
+                PerformTerminalInteraction();
+            }
+
             previousMouseState = currentMouseState;
 
             SetChildrenProperties();
@@ -141,6 +148,16 @@ namespace DoomRPG.Gui.Screens
 
             notificationLabel.Location = new Point2D(0, viewHeight / 2 - 30);
             notificationLabel.Size = new Size2D(ScreenManager.Instance.Size.Width, 60);
+        }
+
+        private void PerformTerminalInteraction()
+        {
+            string text = game.InteractWithTerminal();
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                ShowNotification(text, Colour.Green);
+            }
         }
 
         private void PerformAttack()
@@ -230,6 +247,10 @@ namespace DoomRPG.Gui.Screens
             else if (e.Key == Keys.Space)
             {
                 PerformAttack();
+            }
+            else if (e.Key == Keys.E)
+            {
+                PerformTerminalInteraction();
             }
             else
             {

@@ -67,6 +67,7 @@
       <MobInstanceEntity><Id>zombie_pvt_1</Id><MobId>zombie_private</MobId><X>5</X><Y>3</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
       <MobInstanceEntity><Id>zombie_lt_1</Id><MobId>zombie_lieutenant</MobId><X>5</X><Y>2</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
       <MobInstanceEntity><Id>scientist_1</Id><MobId>scientist_male</MobId><X>3</X><Y>3</Y><IsFriendly>true</IsFriendly><Dialogue>The demons breached sector 7 three days ago. Whatever you do, don't go near the red door.</Dialogue></MobInstanceEntity>
+      <MobInstanceEntity><Id>zombie_pvt_2</Id><MobId>zombie_private</MobId><X>3</X><Y>10</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
     </Mobs>
     <Terminals>
       <TerminalInstanceEntity><Id>terminal_1</Id><Text>Hello world!</Text><SpritesheetName>terminal</SpritesheetName><SpritesheetTextureIndex>0</SpritesheetTextureIndex><X>4</X><Y>0</Y></TerminalInstanceEntity>
@@ -74,6 +75,10 @@
     <WorldObjects>
       <WorldObjectInstanceEntity><Id>barrel_1</Id><WorldObjectId>barrel</WorldObjectId><X>3</X><Y>2</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>barrel_2</Id><WorldObjectId>barrel</WorldObjectId><X>6</X><Y>2</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>barrel_3</Id><WorldObjectId>barrel</WorldObjectId><X>3</X><Y>9</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>barrel_4</Id><WorldObjectId>barrel</WorldObjectId><X>3</X><Y>11</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>barrel_5</Id><WorldObjectId>barrel</WorldObjectId><X>2</X><Y>10</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>barrel_6</Id><WorldObjectId>barrel</WorldObjectId><X>4</X><Y>10</Y></WorldObjectInstanceEntity>
     </WorldObjects>
   </LevelEntity>
 </ArrayOfLevelEntity>

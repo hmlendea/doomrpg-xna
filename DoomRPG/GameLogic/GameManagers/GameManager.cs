@@ -237,8 +237,7 @@ namespace DoomRPG.GameLogic.GameManagers
             {
                 explosionDamageDealtToPlayer = TriggerExplosion(
                     worldObjectInstance.Position,
-                    worldObjectDefinition,
-                    [worldObjectInstance.Id]);
+                    worldObjectDefinition);
             }
 
             return new AttackResult
@@ -251,7 +250,7 @@ namespace DoomRPG.GameLogic.GameManagers
             };
         }
 
-        int TriggerExplosion(Point2D explosionPosition, WorldObject explosiveDefinition, IEnumerable<string> alreadyExplodedIds)
+        int TriggerExplosion(Point2D explosionPosition, WorldObject explosiveDefinition)
         {
             int explosionDamageDealtToPlayer = 0;
 
@@ -301,27 +300,28 @@ namespace DoomRPG.GameLogic.GameManagers
                 WorldObjectInstance adjacentWorldObject = levelManager.GetWorldObjectAtPosition(
                     adjacentPosition.X, adjacentPosition.Y);
 
-                if (adjacentWorldObject is not null && !alreadyExplodedIds.Contains(adjacentWorldObject.Id))
+                if (adjacentWorldObject is not null)
                 {
                     WorldObject adjacentDefinition = worldObjectDefinitions
                         .FirstOrDefault(worldObject => worldObject.Id.Equals(adjacentWorldObject.WorldObjectId));
 
                     if (adjacentDefinition is not null)
                     {
-                        adjacentWorldObject.CurrentHealth -= explosionDamage;
-
-                        if (adjacentWorldObject.CurrentHealth <= 0)
+                        if (adjacentDefinition.IsExplosive)
                         {
                             levelManager.RemoveWorldObject(adjacentWorldObject.Id);
 
-                            if (adjacentDefinition.IsExplosive)
-                            {
-                                IEnumerable<string> updatedExplodedIds = alreadyExplodedIds.Append(adjacentWorldObject.Id);
+                            explosionDamageDealtToPlayer += TriggerExplosion(
+                                adjacentWorldObject.Position,
+                                adjacentDefinition);
+                        }
+                        else
+                        {
+                            adjacentWorldObject.CurrentHealth -= explosionDamage;
 
-                                explosionDamageDealtToPlayer += TriggerExplosion(
-                                    adjacentWorldObject.Position,
-                                    adjacentDefinition,
-                                    updatedExplodedIds);
+                            if (adjacentWorldObject.CurrentHealth <= 0)
+                            {
+                                levelManager.RemoveWorldObject(adjacentWorldObject.Id);
                             }
                         }
                     }

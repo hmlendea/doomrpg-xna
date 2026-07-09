@@ -5,7 +5,7 @@
     <Name>Test Level</Name>
     <Description>This is just a test map. Nothing to see here. Move along.</Description>
     <Width>8</Width>
-    <Height>8</Height>
+    <Height>14</Height>
     <CeilingColourHex>#7A784F</CeilingColourHex>
     <FloorColourHex>#3D3A35</FloorColourHex>
     <Walls>
@@ -14,6 +14,7 @@
       <WallInstanceEntity><WallId>metal_wall</WallId><X>4</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>1</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>3</X><Y>1</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>1</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>6</X><Y>1</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>1</Y></WallInstanceEntity>
@@ -36,8 +37,31 @@
       <WallInstanceEntity><WallId>metal_wall</WallId><X>4</X><Y>6</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>6</X><Y>6</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>2</X><Y>7</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>stone_wall</WallId><X>3</X><Y>7</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_door</WallId><X>3</X><Y>7</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>4</X><Y>7</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>7</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>1</X><Y>7</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>7</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>6</X><Y>7</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>7</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>8</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>8</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>10</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>10</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>11</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>11</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>12</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>12</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>1</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>2</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>3</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>4</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>6</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>13</Y></WallInstanceEntity>
     </Walls>
     <Mobs>
       <MobInstanceEntity><Id>zombie_pvt_1</Id><MobId>zombie_private</MobId><X>5</X><Y>3</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>

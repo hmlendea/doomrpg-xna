@@ -152,6 +152,11 @@ namespace DoomRPG.Gui.Screens
 
         private void PerformInteraction()
         {
+            if (game.InteractWithDoor())
+            {
+                return;
+            }
+
             string text = game.InteractWithTerminal();
 
             if (text is null)

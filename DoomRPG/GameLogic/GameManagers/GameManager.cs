@@ -50,6 +50,16 @@ namespace DoomRPG.GameLogic.GameManagers
             ammunitions = ammoRepository.GetAll().ToDomainModels();
             wallDefinitions = wallRepository.GetAll().ToDomainModels();
             weaponDefinitions = weaponRepository.GetAll().ToDomainModels();
+
+            foreach (WallInstance wallInstance in levelManager.GetWalls())
+            {
+                Wall wallDefinition = wallDefinitions.FirstOrDefault(wall => wall.Id.Equals(wallInstance.WallId));
+
+                if (wallDefinition is not null && wallDefinition.IsDoor)
+                {
+                    wallInstance.IsDoor = true;
+                }
+            }
         }
 
         public void UnloadContent()
@@ -370,6 +380,37 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public TerminalInstance GetTerminalAtPosition(int x, int y)
             => levelManager.GetTerminalAtPosition(x, y);
+
+        public bool InteractWithDoor()
+        {
+            Player player = playerManager.GetPlayer();
+
+            float directionX = player.Direction.X;
+            float directionY = player.Direction.Y;
+            float magnitude = (float)Math.Sqrt(directionX * directionX + directionY * directionY);
+
+            if (magnitude < 0.0001f)
+            {
+                return false;
+            }
+
+            directionX /= magnitude;
+            directionY /= magnitude;
+
+            int tileX = (int)Math.Floor(player.Position.X + directionX);
+            int tileY = (int)Math.Floor(player.Position.Y + directionY);
+
+            WallInstance door = levelManager.GetDoorAtPosition(tileX, tileY);
+
+            if (door is null)
+            {
+                return false;
+            }
+
+            door.IsOpen = !door.IsOpen;
+
+            return true;
+        }
 
         public string InteractWithTerminal()
         {

@@ -27,9 +27,9 @@ namespace DoomRPG.GameLogic.Mapping
             CeilingColour = ColourTranslator.FromHexadecimal(levelEntity.CeilingColourHex),
             FloorColour = ColourTranslator.FromHexadecimal(levelEntity.FloorColourHex),
             SpawnPosition = new Point2D(levelEntity.SpawnX, levelEntity.SpawnY),
-            Walls = levelEntity.Walls.ToDomainModels(),
-            Mobs = (levelEntity.Mobs ?? []).ToDomainModels(),
-            Terminals = (levelEntity.Terminals ?? []).ToDomainModels()
+            Walls = [.. levelEntity.Walls.ToDomainModels()],
+            Mobs = [.. (levelEntity.Mobs ?? []).ToDomainModels()],
+            Terminals = [.. (levelEntity.Terminals ?? []).ToDomainModels()]
         };
 
         /// <summary>

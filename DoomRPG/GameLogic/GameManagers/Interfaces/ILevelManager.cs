@@ -38,6 +38,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         /// <param name="y">The Y coordinate.</param>
         WallInstance GetWall(int x, int y);
 
+        WallInstance GetDoorAtPosition(int x, int y);
+
         IEnumerable<TerminalInstance> GetTerminals();
 
         TerminalInstance GetTerminalAtPosition(int x, int y);

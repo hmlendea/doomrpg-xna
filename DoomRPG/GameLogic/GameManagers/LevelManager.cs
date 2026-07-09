@@ -64,7 +64,20 @@ namespace DoomRPG.GameLogic.GameManagers
         /// <param name="x">The X coordinate.</param>
         /// <param name="y">The Y coordinate.</param>
         public WallInstance GetWall(int x, int y)
-            => currentLevel.Walls.FirstOrDefault(wall => wall.Position.X == x && wall.Position.Y == y);
+        {
+            WallInstance wall = currentLevel.Walls
+                .FirstOrDefault(wallInstance => wallInstance.Position.X == x && wallInstance.Position.Y == y);
+
+            if (wall is not null && wall.IsDoor && wall.IsOpen)
+            {
+                return null;
+            }
+
+            return wall;
+        }
+
+        public WallInstance GetDoorAtPosition(int x, int y)
+            => currentLevel.Walls.FirstOrDefault(wallInstance => wallInstance.Position.X == x && wallInstance.Position.Y == y && wallInstance.IsDoor);
 
         public IEnumerable<TerminalInstance> GetTerminals()
             => currentLevel.Terminals;

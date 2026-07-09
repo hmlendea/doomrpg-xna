@@ -31,5 +31,7 @@
         /// </summary>
         /// <value>The texture index.</value>
         public int SpritesheetTextureIndex { get; set; }
+
+        public bool IsDoor { get; set; }
     }
 }

@@ -53,7 +53,7 @@
     <Id>zombie_captain</Id>
     <Name>Zombie Cpt</Name>
     <Description>A reanimated captain carrying heavy ordnance. Significantly more durable and hits far harder than its lower-ranked kin.</Description>
-    <SpritesheetName>mobs</SpritesheetName>
+    <SpritesheetName>zombie_captain</SpritesheetName>
     <ClassId>zombie</ClassId>
     <Health>80</Health>
     <Damage>35</Damage>

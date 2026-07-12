@@ -12,6 +12,17 @@
     <HealAmount>0</HealAmount>
   </WorldObjectEntity>
   <WorldObjectEntity>
+    <Id>lamp</Id>
+    <Name>Lamp</Name>
+    <SpritesheetName>lamp</SpritesheetName>
+    <Health>2147483647</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>true</BlocksProjectiles>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
     <Id>medikit</Id>
     <Name>Medkit</Name>
     <SpritesheetName>medikit</SpritesheetName>

@@ -23,7 +23,8 @@ namespace DoomRPG.GameLogic.Mapping
             Id = wallInstanceEntity.Id,
             WallId = wallInstanceEntity.WallId,
             Position = new Point2D(wallInstanceEntity.X, wallInstanceEntity.Y),
-            IsRemovable = wallInstanceEntity.IsRemovable
+            IsRemovable = wallInstanceEntity.IsRemovable,
+            DestinationLevelId = wallInstanceEntity.DestinationLevelId
         };
 
         /// <summary>
@@ -37,7 +38,8 @@ namespace DoomRPG.GameLogic.Mapping
             WallId = wallInstance.WallId,
             X = wallInstance.Position.X,
             Y = wallInstance.Position.Y,
-            IsRemovable = wallInstance.IsRemovable
+            IsRemovable = wallInstance.IsRemovable,
+            DestinationLevelId = wallInstance.DestinationLevelId
         };
 
         /// <summary>

@@ -96,6 +96,11 @@ namespace DoomRPG.Gui
             this.gameManager = gameManager;
         }
 
+        public void SnapToPosition()
+        {
+            Position = player.Position;
+        }
+
         public void Rotate(float amount)
         {
             pendingRotation += amount;

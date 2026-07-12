@@ -55,6 +55,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         bool HasKey(string keyId);
 
+        void SetPosition(float x, float y);
+
         Player GetPlayer();
     }
 }

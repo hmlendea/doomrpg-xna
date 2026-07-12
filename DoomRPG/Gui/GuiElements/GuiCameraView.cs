@@ -126,6 +126,39 @@ namespace DoomRPG.Gui.GuiElements
             sortedSprites = null;
         }
 
+        public void ReloadLevel()
+        {
+            mobTextures.Clear();
+            worldObjectTextures.Clear();
+
+            ceiling.TintColour = game.GetLevelCeilingColour();
+            floor.TintColour = game.GetLevelFloorColour();
+
+            camera.SnapToPosition();
+
+            foreach (MobInstance mobInstance in game.GetMobInstances())
+            {
+                Mob mobDefinition = game.GetMobDefinition(mobInstance.MobId);
+
+                if (!mobTextures.ContainsKey(mobDefinition.SpritesheetName))
+                {
+                    Texture2D texture = NuciContentManager.Instance.LoadTexture2D("mobs/" + mobDefinition.SpritesheetName);
+                    mobTextures.Add(mobDefinition.SpritesheetName, texture);
+                }
+            }
+
+            foreach (WorldObjectInstance worldObjectInstance in game.GetWorldObjectInstances())
+            {
+                WorldObject worldObjectDefinition = game.GetWorldObjectDefinition(worldObjectInstance.WorldObjectId);
+
+                if (!worldObjectTextures.ContainsKey(worldObjectDefinition.SpritesheetName))
+                {
+                    Texture2D texture = NuciContentManager.Instance.LoadTexture2D("objects/" + worldObjectDefinition.SpritesheetName);
+                    worldObjectTextures.Add(worldObjectDefinition.SpritesheetName, texture);
+                }
+            }
+        }
+
         protected override void DoUpdate(GameTime gameTime)
         {
             SetChildrenProperties();

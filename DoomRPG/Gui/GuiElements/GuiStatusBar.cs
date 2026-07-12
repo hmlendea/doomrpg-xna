@@ -27,6 +27,7 @@ namespace DoomRPG.Gui.GuiElements
         GuiText rocketLabel;
         GuiText cellClipLabel;
         GuiText halonCanLabel;
+        GuiText positionLabel;
 
         public void AssociateGameManager(IGameManager game)
         {
@@ -153,9 +154,16 @@ namespace DoomRPG.Gui.GuiElements
                 Size = new Size2D(148, 20)
             };
 
+            positionLabel = new GuiText
+            {
+                FontName = "MenuFont",
+                ForegroundColour = Colour.White,
+                Size = new Size2D(160, 24)
+            };
+
             RegisterChildren(background, healthLabel, armourLabel, creditsLabel, xpLabel,
                 strengthLabel, agilityLabel, accuracyLabel, defenseLabel, statPointsLabel, weaponLabel, turnLabel,
-                bulletClipLabel, shellClipLabel, rocketLabel, cellClipLabel, halonCanLabel);
+                bulletClipLabel, shellClipLabel, rocketLabel, cellClipLabel, halonCanLabel, positionLabel);
         }
 
         protected override void DoUnloadContent() { }
@@ -195,6 +203,9 @@ namespace DoomRPG.Gui.GuiElements
 
             turnLabel.Text = $"Turn: {game.GetTurnNumber()}";
             turnLabel.Location = new Point2D(680, 4);
+
+            positionLabel.Text = $"[{(int)player.Position.X},{(int)player.Position.Y}]";
+            positionLabel.Location = new Point2D(840, 4);
 
             strengthLabel.Text = $"STR: {player.Strength}";
             strengthLabel.Location = new Point2D(4, 28);

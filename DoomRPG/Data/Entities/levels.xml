@@ -8,6 +8,8 @@
     <Height>16</Height>
     <CeilingColourHex>#7A784F</CeilingColourHex>
     <FloorColourHex>#3D3A35</FloorColourHex>
+    <SpawnX>3</SpawnX>
+    <SpawnY>4</SpawnY>
     <Walls>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>0</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>3</X><Y>0</Y></WallInstanceEntity>
@@ -21,7 +23,7 @@
       <WallInstanceEntity><WallId>stone_wall</WallId><X>1</X><Y>2</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>2</X><Y>2</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>7</X><Y>2</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>1</X><Y>3</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>stone_wall</WallId><X>1</X><Y>3</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall_pipes</WallId><X>4</X><Y>3</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>3</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>0</X><Y>4</Y></WallInstanceEntity>
@@ -30,7 +32,7 @@
       <WallInstanceEntity><WallId>stone_wall</WallId><X>0</X><Y>5</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>2</X><Y>5</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>4</X><Y>5</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>5</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>exit_door_to_test2</Id><WallId>exit_door</WallId><X>6</X><Y>5</Y><DestinationLevelId>test2</DestinationLevelId></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>0</X><Y>6</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>1</X><Y>6</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>stone_wall</WallId><X>2</X><Y>6</Y></WallInstanceEntity>
@@ -125,5 +127,37 @@
       <WorldObjectInstanceEntity><Id>green_key_1</Id><WorldObjectId>green_key</WorldObjectId><X>11</X><Y>14</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>yellow_key_1</Id><WorldObjectId>yellow_key</WorldObjectId><X>14</X><Y>10</Y></WorldObjectInstanceEntity>
     </WorldObjects>
+  </LevelEntity>
+  <LevelEntity>
+    <Id>test2</Id>
+    <Name>Test Level 2</Name>
+    <Description>A small secondary test room.</Description>
+    <Width>7</Width>
+    <Height>7</Height>
+    <CeilingColourHex>#7A784F</CeilingColourHex>
+    <FloorColourHex>#3D3A35</FloorColourHex>
+    <SpawnX>3</SpawnX>
+    <SpawnY>3</SpawnY>
+    <Walls>
+      <WallInstanceEntity><Id>t2_w00</Id><WallId>stone_wall</WallId><X>1</X><Y>1</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w01</Id><WallId>stone_wall</WallId><X>2</X><Y>1</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w02</Id><WallId>exit_door</WallId><X>3</X><Y>1</Y><DestinationLevelId>test</DestinationLevelId></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w03</Id><WallId>stone_wall</WallId><X>4</X><Y>1</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w04</Id><WallId>stone_wall</WallId><X>5</X><Y>1</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w05</Id><WallId>stone_wall</WallId><X>1</X><Y>2</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w06</Id><WallId>stone_wall</WallId><X>5</X><Y>2</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w07</Id><WallId>stone_wall</WallId><X>1</X><Y>3</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w08</Id><WallId>stone_wall</WallId><X>5</X><Y>3</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w09</Id><WallId>stone_wall</WallId><X>1</X><Y>4</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w10</Id><WallId>stone_wall</WallId><X>5</X><Y>4</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w11</Id><WallId>stone_wall</WallId><X>1</X><Y>5</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w12</Id><WallId>stone_wall</WallId><X>2</X><Y>5</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w13</Id><WallId>stone_wall</WallId><X>3</X><Y>5</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w14</Id><WallId>stone_wall</WallId><X>4</X><Y>5</Y></WallInstanceEntity>
+      <WallInstanceEntity><Id>t2_w15</Id><WallId>stone_wall</WallId><X>5</X><Y>5</Y></WallInstanceEntity>
+    </Walls>
+    <Mobs />
+    <Terminals />
+    <WorldObjects />
   </LevelEntity>
 </ArrayOfLevelEntity>

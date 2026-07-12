@@ -38,11 +38,13 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         TerminalInstance GetTerminalAtPosition(int x, int y);
 
-        string InteractWithDoor();
+        DoorInteractionResult InteractWithDoor();
 
         string InteractWithTerminal();
 
         string InteractWithMob();
+
+        void ChangeLevel(string levelId);
 
         IEnumerable<Weapon> GetWeaponDefinitions();
 

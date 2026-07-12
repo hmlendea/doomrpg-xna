@@ -196,6 +196,9 @@ namespace DoomRPG.GameLogic.GameManagers
         public bool HasKey(string keyId)
             => player.Keys.Contains(keyId);
 
+        public void SetPosition(float x, float y)
+            => player.Position = new PointF2D(x, y);
+
         public bool SelectWeapon(string weaponId)
         {
             if (!weaponInventory.Contains(weaponId))

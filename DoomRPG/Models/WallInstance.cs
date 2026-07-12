@@ -34,5 +34,7 @@ namespace DoomRPG.Models
         public bool IsOpen { get; set; }
 
         public bool IsDestroyed { get; set; }
+
+        public string DestinationLevelId { get; set; }
     }
 }

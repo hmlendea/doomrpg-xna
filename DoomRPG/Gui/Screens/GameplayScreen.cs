@@ -179,13 +179,18 @@ namespace DoomRPG.Gui.Screens
                 return;
             }
 
-            string doorResult = game.InteractWithDoor();
+            DoorInteractionResult doorResult = game.InteractWithDoor();
 
-            if (doorResult is not null)
+            if (doorResult.WasDoorFound)
             {
-                if (!string.IsNullOrEmpty(doorResult))
+                if (!string.IsNullOrEmpty(doorResult.ErrorMessage))
                 {
-                    ShowNotification(doorResult, Colour.Red);
+                    ShowNotification(doorResult.ErrorMessage, Colour.Red);
+                }
+                else if (!string.IsNullOrEmpty(doorResult.DestinationLevelId))
+                {
+                    game.ChangeLevel(doorResult.DestinationLevelId);
+                    cameraView.ReloadLevel();
                 }
 
                 return;

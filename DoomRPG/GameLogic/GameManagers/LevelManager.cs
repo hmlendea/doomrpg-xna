@@ -48,6 +48,9 @@ namespace DoomRPG.GameLogic.GameManagers
         public Colour GetFloorColour()
             => currentLevel.FloorColour;
 
+        public Point2D GetSpawnPosition()
+            => currentLevel.SpawnPosition;
+
         public IEnumerable<WallInstance> GetWalls()
             => currentLevel.Walls;
 

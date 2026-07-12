@@ -24,6 +24,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         Colour GetFloorColour();
 
+        Point2D GetSpawnPosition();
+
         IEnumerable<WallInstance> GetWalls();
 
         IEnumerable<MobInstance> GetMobs();

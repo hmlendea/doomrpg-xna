@@ -726,7 +726,7 @@ namespace DoomRPG.GameLogic.GameManagers
         public TerminalInstance GetTerminalAtPosition(int x, int y)
             => levelManager.GetTerminalAtPosition(x, y);
 
-        public string InteractWithDoor()
+        public DoorInteractionResult InteractWithDoor()
         {
             Player player = playerManager.GetPlayer();
 
@@ -736,7 +736,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
             if (magnitude < 0.0001f)
             {
-                return null;
+                return DoorInteractionResult.NoDoor;
             }
 
             directionX /= magnitude;
@@ -749,7 +749,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
             if (door is null)
             {
-                return null;
+                return DoorInteractionResult.NoDoor;
             }
 
             Wall doorDefinition = wallDefinitions.FirstOrDefault(w => w.Id.Equals(door.WallId));
@@ -758,13 +758,51 @@ namespace DoomRPG.GameLogic.GameManagers
             {
                 if (!playerManager.HasKey(doorDefinition.RequiredKeyId))
                 {
-                    return $"Authorization required, but no {doorDefinition.Name.ToLower().Replace(" door", "")} key found.";
+                    return new DoorInteractionResult
+                    {
+                        ErrorMessage = $"Authorization required, but no {doorDefinition.Name.ToLower().Replace(" door", "")} key found."
+                    };
                 }
+            }
+
+            if (!string.IsNullOrEmpty(door.DestinationLevelId))
+            {
+                return new DoorInteractionResult { DestinationLevelId = door.DestinationLevelId };
             }
 
             door.IsOpen = !door.IsOpen;
 
-            return string.Empty;
+            return new DoorInteractionResult();
+        }
+
+        public void ChangeLevel(string levelId)
+        {
+            levelManager.LoadContent(levelId);
+            mobManager.LoadContent();
+
+            Point2D spawn = levelManager.GetSpawnPosition();
+            playerManager.SetPosition(spawn.X + 0.5f, spawn.Y + 0.5f);
+
+            foreach (WorldObjectInstance worldObjectInstance in levelManager.GetWorldObjects())
+            {
+                WorldObject worldObjectDefinition = worldObjectDefinitions
+                    .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectInstance.WorldObjectId));
+
+                if (worldObjectDefinition is not null)
+                {
+                    worldObjectInstance.CurrentHealth = worldObjectDefinition.Health;
+                }
+            }
+
+            foreach (WallInstance wallInstance in levelManager.GetWalls())
+            {
+                Wall wallDefinition = wallDefinitions.FirstOrDefault(wall => wall.Id.Equals(wallInstance.WallId));
+
+                if (wallDefinition is not null && wallDefinition.IsDoor)
+                {
+                    wallInstance.IsDoor = true;
+                }
+            }
         }
 
         public string InteractWithTerminal()

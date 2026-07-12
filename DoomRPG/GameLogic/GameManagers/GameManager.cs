@@ -316,7 +316,7 @@ namespace DoomRPG.GameLogic.GameManagers
                     explosionDamageDealtToPlayer += explosionDamage;
                 }
 
-                foreach (MobInstance mobInstance in levelManager.GetMobs().ToList())
+                foreach (MobInstance mobInstance in levelManager.GetMobs().Where(m => !m.IsFriendly).ToList())
                 {
                     if (mobInstance.Position.X == adjacentPosition.X && mobInstance.Position.Y == adjacentPosition.Y)
                     {
@@ -348,7 +348,7 @@ namespace DoomRPG.GameLogic.GameManagers
                                 adjacentWorldObject.Position,
                                 adjacentDefinition);
                         }
-                        else
+                        else if (adjacentDefinition.HealAmount == 0)
                         {
                             adjacentWorldObject.CurrentHealth -= explosionDamage;
 

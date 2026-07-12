@@ -370,5 +370,23 @@
     <Health>1</Health>
     <Damage>0</Damage>
   </MobEntity>
+  <MobEntity>
+    <Id>civilian_male</Id>
+    <Name>Civilian</Name>
+    <Description>An unarmed facility worker. They won't fight, but may have useful information.</Description>
+    <SpritesheetName>scientist_male</SpritesheetName>
+    <ClassId>civilian</ClassId>
+    <Health>1</Health>
+    <Damage>0</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>marine</Id>
+    <Name>Marine</Name>
+    <Description>A UAC Marine stationed at the facility. A friendly face in a hostile environment.</Description>
+    <SpritesheetName>marine</SpritesheetName>
+    <ClassId>civilian</ClassId>
+    <Health>1</Health>
+    <Damage>0</Damage>
+  </MobEntity>
 
 </ArrayOfMobEntity>

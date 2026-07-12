@@ -68,6 +68,7 @@
       <MobInstanceEntity><Id>zombie_lt_1</Id><MobId>zombie_lieutenant</MobId><X>5</X><Y>2</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
       <MobInstanceEntity><Id>scientist_1</Id><MobId>scientist_male</MobId><X>3</X><Y>3</Y><IsFriendly>true</IsFriendly><Dialogue>The demons breached sector 7 three days ago. Whatever you do, don't go near the red door.</Dialogue></MobInstanceEntity>
       <MobInstanceEntity><Id>zombie_cpt_1</Id><MobId>zombie_captain</MobId><X>3</X><Y>10</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
+      <MobInstanceEntity><Id>marine_1</Id><MobId>marine</MobId><X>5</X><Y>12</Y><IsFriendly>true</IsFriendly><Dialogue>Move out, Marine!</Dialogue></MobInstanceEntity>
     </Mobs>
     <Terminals>
       <TerminalInstanceEntity><Id>terminal_1</Id><Text>Hello world!</Text><SpritesheetName>terminal</SpritesheetName><SpritesheetTextureIndex>0</SpritesheetTextureIndex><X>4</X><Y>0</Y></TerminalInstanceEntity>

@@ -190,6 +190,18 @@
 /processorParam:TextureFormat=Color
 /build:mobs/scientist_male.png
 
+#begin mobs/marine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mobs/marine.png
+
 #begin objects/barrel.png
 /importer:TextureImporter
 /processor:TextureProcessor

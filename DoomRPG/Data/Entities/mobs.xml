@@ -374,7 +374,7 @@
     <Id>civilian_male</Id>
     <Name>Civilian</Name>
     <Description>An unarmed facility worker. They won't fight, but may have useful information.</Description>
-    <SpritesheetName>scientist_male</SpritesheetName>
+    <SpritesheetName>civilian_male</SpritesheetName>
     <ClassId>civilian</ClassId>
     <Health>1</Health>
     <Damage>0</Damage>

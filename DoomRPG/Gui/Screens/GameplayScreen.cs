@@ -28,9 +28,11 @@ namespace DoomRPG.Gui.Screens
         GuiCameraView cameraView;
         GuiStatusBar statusBar;
         GuiText notificationLabel;
+        GuiDialogue dialogueBox;
 
         int notificationTimer;
         int turnAtNotificationStart;
+        bool dialogueVisible;
 
         int previousScrollWheelValue;
         MouseState previousMouseState;
@@ -50,7 +52,9 @@ namespace DoomRPG.Gui.Screens
                 Text = string.Empty
             };
 
-            GuiManager.Instance.RegisterControls(cameraView, statusBar, notificationLabel);
+            dialogueBox = new GuiDialogue();
+
+            GuiManager.Instance.RegisterControls(cameraView, statusBar, notificationLabel, dialogueBox);
 
             game.LoadContent();
 
@@ -129,6 +133,18 @@ namespace DoomRPG.Gui.Screens
         {
         }
 
+        private void ShowDialogue(string text)
+        {
+            dialogueBox.Show(text);
+            dialogueVisible = true;
+        }
+
+        private void DismissDialogue()
+        {
+            dialogueBox.Hide();
+            dialogueVisible = false;
+        }
+
         private void ShowNotification(string text, Colour colour)
         {
             notificationLabel.Text = text;
@@ -148,10 +164,21 @@ namespace DoomRPG.Gui.Screens
 
             notificationLabel.Location = new Point2D(0, viewHeight / 2 - 30);
             notificationLabel.Size = new Size2D(ScreenManager.Instance.Size.Width, 60);
+
+            int dialogueBoxHeight = 120;
+
+            dialogueBox.Location = new Point2D(0, viewHeight - dialogueBoxHeight);
+            dialogueBox.Size = new Size2D(ScreenManager.Instance.Size.Width, dialogueBoxHeight);
         }
 
         private void PerformInteraction()
         {
+            if (dialogueVisible)
+            {
+                DismissDialogue();
+                return;
+            }
+
             string doorResult = game.InteractWithDoor();
 
             if (doorResult is not null)
@@ -173,7 +200,7 @@ namespace DoomRPG.Gui.Screens
 
             if (!string.IsNullOrEmpty(text))
             {
-                ShowNotification(text, Colour.Green);
+                ShowDialogue(text);
             }
         }
 

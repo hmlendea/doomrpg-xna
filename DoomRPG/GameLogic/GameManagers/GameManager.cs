@@ -152,7 +152,7 @@ namespace DoomRPG.GameLogic.GameManagers
             WorldObject worldObjectDefinition = worldObjectDefinitions
                 .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectAtTile.WorldObjectId));
 
-            if (worldObjectDefinition is null || (worldObjectDefinition.HealAmount <= 0 && string.IsNullOrEmpty(worldObjectDefinition.WeaponId) && string.IsNullOrEmpty(worldObjectDefinition.KeyId) && string.IsNullOrEmpty(worldObjectDefinition.AmmoId)))
+            if (worldObjectDefinition is null || (worldObjectDefinition.HealAmount <= 0 && worldObjectDefinition.ArmourAmount <= 0 && string.IsNullOrEmpty(worldObjectDefinition.WeaponId) && string.IsNullOrEmpty(worldObjectDefinition.KeyId) && string.IsNullOrEmpty(worldObjectDefinition.AmmoId)))
             {
                 return new MoveResult();
             }
@@ -195,6 +195,19 @@ namespace DoomRPG.GameLogic.GameManagers
             }
 
             int actualHeal = Math.Min(worldObjectDefinition.HealAmount, player.MaxHealth - player.Health);
+
+            if (worldObjectDefinition.ArmourAmount > 0)
+            {
+                int actualArmour = Math.Min(worldObjectDefinition.ArmourAmount, player.MaxArmour - player.Armour);
+                playerManager.RestoreArmour(worldObjectDefinition.ArmourAmount);
+                levelManager.RemoveWorldObject(worldObjectAtTile.Id);
+
+                return new MoveResult
+                {
+                    PickedUpObjectName = worldObjectDefinition.Name,
+                    ArmourAmountReceived = actualArmour
+                };
+            }
 
             playerManager.Heal(worldObjectDefinition.HealAmount);
             levelManager.RemoveWorldObject(worldObjectAtTile.Id);

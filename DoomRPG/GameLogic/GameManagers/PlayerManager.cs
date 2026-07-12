@@ -122,6 +122,19 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public void ApplyDamage(int amount)
         {
+            if (player.Armour > 0)
+            {
+                int absorbed = amount / 3;
+
+                if (absorbed > player.Armour)
+                {
+                    absorbed = player.Armour;
+                }
+
+                player.Armour -= absorbed;
+                amount -= absorbed;
+            }
+
             player.Health -= amount;
 
             if (player.Health < 0)

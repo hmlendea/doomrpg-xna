@@ -262,6 +262,18 @@
 /processorParam:TextureFormat=Color
 /build:objects/ammo.png
 
+#begin objects/armour.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:objects/armour.png
+
 #begin objects/barrel.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -24,6 +24,8 @@ namespace DoomRPG.DataAccess.DataObjects
 
         public int HealAmount { get; set; }
 
+        public int ArmourAmount { get; set; }
+
         public string WeaponId { get; set; }
 
         public string KeyId { get; set; }

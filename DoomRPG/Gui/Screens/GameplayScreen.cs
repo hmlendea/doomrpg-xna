@@ -303,6 +303,10 @@ namespace DoomRPG.Gui.Screens
                 {
                     pickupMessage += $" +{result.HealAmountReceived} HP";
                 }
+                else if (result.ArmourAmountReceived > 0)
+                {
+                    pickupMessage += $" +{result.ArmourAmountReceived} AP";
+                }
                 else if (result.PickedUpAmmoAmount > 0)
                 {
                     pickupMessage += $" +{result.PickedUpAmmoAmount}";

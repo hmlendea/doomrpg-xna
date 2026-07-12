@@ -119,7 +119,7 @@ namespace DoomRPG
         {
             graphics.GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(samplerState: SamplerState.LinearClamp);
 
             ScreenManager.Instance.Draw(spriteBatch);
 

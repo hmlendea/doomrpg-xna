@@ -42,4 +42,63 @@
     <SpritesheetName>terminal</SpritesheetName>
     <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
   </WallEntity>
+  <WallEntity>
+    <Id>metal_door</Id>
+    <Name>Metal Door</Name>
+    <Description>A heavy metal door. It looks like it can be opened.</Description>
+    <SpritesheetName>metal_door</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <IsDoor>true</IsDoor>
+  </WallEntity>
+  <WallEntity>
+    <Id>jammed_door</Id>
+    <Name>Jammed Door</Name>
+    <Description>A door jammed shut. An axe can break it down.</Description>
+    <SpritesheetName>metal_door</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+  </WallEntity>
+  <WallEntity>
+    <Id>exit_door</Id>
+    <Name>Exit Door</Name>
+    <Description>A door leading to another sector.</Description>
+    <SpritesheetName>metal_door</SpritesheetName>
+    <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+    <IsDoor>true</IsDoor>
+  </WallEntity>
+  <WallEntity>
+    <Id>red_door</Id>
+    <Name>Red Door</Name>
+    <Description>A security door that requires the red keycard to open.</Description>
+    <SpritesheetName>metal_door</SpritesheetName>
+    <SpritesheetTextureIndex>3</SpritesheetTextureIndex>
+    <IsDoor>true</IsDoor>
+    <RequiredKeyId>red_key</RequiredKeyId>
+  </WallEntity>
+  <WallEntity>
+    <Id>blue_door</Id>
+    <Name>Blue Door</Name>
+    <Description>A security door that requires the blue keycard to open.</Description>
+    <SpritesheetName>metal_door</SpritesheetName>
+    <SpritesheetTextureIndex>4</SpritesheetTextureIndex>
+    <IsDoor>true</IsDoor>
+    <RequiredKeyId>blue_key</RequiredKeyId>
+  </WallEntity>
+  <WallEntity>
+    <Id>green_door</Id>
+    <Name>Green Door</Name>
+    <Description>A security door that requires the green keycard to open.</Description>
+    <SpritesheetName>metal_door</SpritesheetName>
+    <SpritesheetTextureIndex>5</SpritesheetTextureIndex>
+    <IsDoor>true</IsDoor>
+    <RequiredKeyId>green_key</RequiredKeyId>
+  </WallEntity>
+  <WallEntity>
+    <Id>yellow_door</Id>
+    <Name>Yellow Door</Name>
+    <Description>A security door that requires the yellow keycard to open.</Description>
+    <SpritesheetName>metal_door</SpritesheetName>
+    <SpritesheetTextureIndex>6</SpritesheetTextureIndex>
+    <IsDoor>true</IsDoor>
+    <RequiredKeyId>yellow_key</RequiredKeyId>
+  </WallEntity>
 </ArrayOfWallEntity>

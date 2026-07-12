@@ -11,10 +11,11 @@ namespace DoomRPG
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
-            using (var game = new GameWindow())
-                game.Run();
+            using GameWindow game = new();
+
+            game.Run();
         }
     }
 }

@@ -12,7 +12,7 @@ using DoomRPG.Settings;
 
 namespace DoomRPG.GameLogic.GameManagers
 {
-    public class LevelManager : ILevelManager
+    public sealed class LevelManager : ILevelManager
     {
         Level currentLevel;
 
@@ -24,7 +24,7 @@ namespace DoomRPG.GameLogic.GameManagers
         {
             string levelPath = Path.Combine(ApplicationPaths.EntitiesDirectory, "levels.xml");
 
-            LevelRepository levelRepository = new LevelRepository(levelPath);
+            LevelRepository levelRepository = new(levelPath);
 
             currentLevel = levelRepository.Get(levelId).ToDomainModel();
         }
@@ -40,29 +40,25 @@ namespace DoomRPG.GameLogic.GameManagers
         }
 
         public Size2D GetSize()
-        {
-            return currentLevel.Size;
-        }
+            => currentLevel.Size;
 
         public Colour GetCeilingColour()
-        {
-            return currentLevel.CeilingColour;
-        }
+            => currentLevel.CeilingColour;
 
         public Colour GetFloorColour()
-        {
-            return currentLevel.FloorColour;
-        }
+            => currentLevel.FloorColour;
+
+        public Point2D GetSpawnPosition()
+            => currentLevel.SpawnPosition;
 
         public IEnumerable<WallInstance> GetWalls()
-        {
-            return currentLevel.Walls;
-        }
+            => currentLevel.Walls;
 
         public IEnumerable<MobInstance> GetMobs()
-        {
-            return currentLevel.Mobs;
-        }
+            => currentLevel.Mobs;
+
+        public void RemoveMob(string mobInstanceId)
+            => currentLevel.Mobs = [.. currentLevel.Mobs.Where(m => m.Id != mobInstanceId)];
 
         /// <summary>
         /// Gets the wall.
@@ -72,7 +68,63 @@ namespace DoomRPG.GameLogic.GameManagers
         /// <param name="y">The Y coordinate.</param>
         public WallInstance GetWall(int x, int y)
         {
-            return currentLevel.Walls.FirstOrDefault(wall => wall.Position.X == x && wall.Position.Y == y);
+            WallInstance wall = currentLevel.Walls
+                .FirstOrDefault(wallInstance => wallInstance.Position.X == x && wallInstance.Position.Y == y && !wallInstance.IsDestroyed);
+
+            if (wall is not null && wall.IsDoor && wall.IsOpen)
+            {
+                return null;
+            }
+
+            return wall;
+        }
+
+        public WallInstance GetDoorAtPosition(int x, int y)
+            => currentLevel.Walls.FirstOrDefault(wallInstance => wallInstance.Position.X == x && wallInstance.Position.Y == y && wallInstance.IsDoor);
+
+        public IEnumerable<TerminalInstance> GetTerminals()
+            => currentLevel.Terminals;
+
+        public TerminalInstance GetTerminalAtPosition(int x, int y)
+            => currentLevel.Terminals.FirstOrDefault(t => t.Position.X == x && t.Position.Y == y);
+
+        public IEnumerable<WorldObjectInstance> GetWorldObjects()
+            => currentLevel.WorldObjects.Where(worldObjectInstance => !worldObjectInstance.IsDestroyed);
+
+        public WorldObjectInstance GetWorldObjectAtPosition(int x, int y)
+            => currentLevel.WorldObjects.FirstOrDefault(worldObjectInstance =>
+                worldObjectInstance.Position.X == x &&
+                worldObjectInstance.Position.Y == y &&
+                !worldObjectInstance.IsDestroyed);
+
+        public void RemoveWorldObject(string worldObjectInstanceId)
+        {
+            WorldObjectInstance worldObjectInstance = currentLevel.WorldObjects
+                .FirstOrDefault(instance => instance.Id.Equals(worldObjectInstanceId));
+
+            if (worldObjectInstance is not null)
+            {
+                worldObjectInstance.IsDestroyed = true;
+            }
+        }
+
+        public void RemoveWallAtPosition(int x, int y)
+        {
+            WallInstance wallInstance = currentLevel.Walls
+                .FirstOrDefault(w => w.Position.X == x && w.Position.Y == y);
+
+            if (wallInstance is not null)
+            {
+                wallInstance.IsDestroyed = true;
+            }
+        }
+
+        public int GetTurnNumber()
+            => currentLevel.TurnNumber;
+
+        public void AdvanceTurn()
+        {
+            currentLevel.TurnNumber += 1;
         }
     }
 }

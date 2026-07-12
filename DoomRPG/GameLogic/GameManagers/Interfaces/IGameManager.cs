@@ -15,7 +15,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void Update(float elapsedSeconds);
 
-        void MovePlayer(MovementDirection direction);
+        MoveResult MovePlayer(MovementDirection direction);
+        AttackResult Attack();
 
         void RotatePlayer(float angle);
 
@@ -33,6 +34,54 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         WallInstance GetWall(int x, int y);
 
+        IEnumerable<TerminalInstance> GetTerminalInstances();
+
+        TerminalInstance GetTerminalAtPosition(int x, int y);
+
+        DoorInteractionResult InteractWithDoor();
+
+        string InteractWithTerminal();
+
+        string InteractWithMob();
+
+        void ChangeLevel(string levelId);
+
+        IEnumerable<Weapon> GetWeaponDefinitions();
+
+        Weapon GetWeaponDefinition(string id);
+
+        IEnumerable<Ammunition> GetAmmunitionDefinitions();
+
+        void AddAmmo(string ammoId, int amount);
+
+        bool SpendAmmo(string ammoId, int amount);
+
+        void GiveWeapon(string weaponId);
+
+        bool SelectWeapon(string weaponId);
+
+        bool SelectWeaponBySlot(int slot);
+
+        void CycleWeaponNext();
+
+        void CycleWeaponPrevious();
+
+        Weapon GetEquippedWeapon();
+
+        void AddExperience(int amount);
+
+        bool AllocateStat(StatType stat);
+
+        int GetTurnNumber();
+
         Player GetPlayer();
+
+        IEnumerable<MobInstance> GetMobInstances();
+
+        Mob GetMobDefinition(string id);
+
+        IEnumerable<WorldObjectInstance> GetWorldObjectInstances();
+
+        WorldObject GetWorldObjectDefinition(string id);
     }
 }

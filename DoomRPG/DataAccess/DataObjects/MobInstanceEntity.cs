@@ -28,5 +28,7 @@ namespace DoomRPG.DataAccess.DataObjects
         /// </summary>
         /// <value>True if the mob is friendly, false otherwise.</value>
         public bool IsFriendly { get; set; }
+
+        public string Dialogue { get; set; }
     }
 }

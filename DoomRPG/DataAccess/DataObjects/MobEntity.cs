@@ -19,7 +19,13 @@ namespace DoomRPG.DataAccess.DataObjects
         /// <summary>
         /// Gets or sets the spritsheet used to draw this wall.
         /// </summary>
-        /// <value>The name of thr spritesheet.</value>
+        /// <value>The name of the spritesheet.</value>
         public string SpritesheetName { get; set; }
+
+        public string ClassId { get; set; }
+
+        public int Health { get; set; }
+
+        public int Damage { get; set; }
     }
 }

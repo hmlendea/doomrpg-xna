@@ -24,9 +24,13 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         Colour GetFloorColour();
 
+        Point2D GetSpawnPosition();
+
         IEnumerable<WallInstance> GetWalls();
 
         IEnumerable<MobInstance> GetMobs();
+
+        void RemoveMob(string mobInstanceId);
 
         /// <summary>
         /// Gets the wall.
@@ -35,5 +39,23 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
         /// <param name="x">The X coordinate.</param>
         /// <param name="y">The Y coordinate.</param>
         WallInstance GetWall(int x, int y);
+
+        WallInstance GetDoorAtPosition(int x, int y);
+
+        IEnumerable<TerminalInstance> GetTerminals();
+
+        TerminalInstance GetTerminalAtPosition(int x, int y);
+
+        IEnumerable<WorldObjectInstance> GetWorldObjects();
+
+        WorldObjectInstance GetWorldObjectAtPosition(int x, int y);
+
+        void RemoveWorldObject(string worldObjectInstanceId);
+
+        void RemoveWallAtPosition(int x, int y);
+
+        int GetTurnNumber();
+
+        void AdvanceTurn();
     }
 }

@@ -23,7 +23,7 @@
         /// <summary>
         /// Gets or sets the spritsheet used to draw this wall.
         /// </summary>
-        /// <value>The name of thr spritesheet.</value>
+        /// <value>The name of the spritesheet.</value>
         public string SpritesheetName { get; set; }
 
         /// <summary>
@@ -31,5 +31,9 @@
         /// </summary>
         /// <value>The texture index.</value>
         public int SpritesheetTextureIndex { get; set; }
+
+        public bool IsDoor { get; set; }
+
+        public string RequiredKeyId { get; set; }
     }
 }

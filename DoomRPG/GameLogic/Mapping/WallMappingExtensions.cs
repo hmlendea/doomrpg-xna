@@ -16,38 +16,32 @@ namespace DoomRPG.GameLogic.Mapping
         /// </summary>
         /// <returns>The domain model.</returns>
         /// <param name="wallEntity">Wall entity.</param>
-        internal static Wall ToDomainModel(this WallEntity wallEntity)
+        internal static Wall ToDomainModel(this WallEntity wallEntity) => new()
         {
-            Wall wall = new Wall
-            {
-                Id = wallEntity.Id,
-                Name = wallEntity.Name,
-                Description = wallEntity.Description,
-                SpritesheetName = wallEntity.SpritesheetName,
-                SpritesheetTextureIndex = wallEntity.SpritesheetTextureIndex
-            };
-
-            return wall;
-        }
+            Id = wallEntity.Id,
+            Name = wallEntity.Name,
+            Description = wallEntity.Description,
+            SpritesheetName = wallEntity.SpritesheetName,
+            SpritesheetTextureIndex = wallEntity.SpritesheetTextureIndex,
+            IsDoor = wallEntity.IsDoor,
+            RequiredKeyId = wallEntity.RequiredKeyId
+        };
 
         /// <summary>
         /// Converts the domain model into an entity.
         /// </summary>
         /// <returns>The entity.</returns>
         /// <param name="wall">Wall.</param>
-        internal static WallEntity ToEntity(this Wall wall)
+        internal static WallEntity ToDataObject(this Wall wall) => new()
         {
-            WallEntity wallEntity = new WallEntity
-            {
-                Id = wall.Id,
-                Name = wall.Name,
-                Description = wall.Description,
-                SpritesheetName = wall.SpritesheetName,
-                SpritesheetTextureIndex = wall.SpritesheetTextureIndex
-            };
-
-            return wallEntity;
-        }
+            Id = wall.Id,
+            Name = wall.Name,
+            Description = wall.Description,
+            SpritesheetName = wall.SpritesheetName,
+            SpritesheetTextureIndex = wall.SpritesheetTextureIndex,
+            IsDoor = wall.IsDoor,
+            RequiredKeyId = wall.RequiredKeyId
+        };
 
         /// <summary>
         /// Converts the entities into domain models.
@@ -55,22 +49,14 @@ namespace DoomRPG.GameLogic.Mapping
         /// <returns>The domain models.</returns>
         /// <param name="wallEntities">Wall entities.</param>
         internal static IEnumerable<Wall> ToDomainModels(this IEnumerable<WallEntity> wallEntities)
-        {
-            IEnumerable<Wall> walls = wallEntities.Select(wallEntity => wallEntity.ToDomainModel());
-
-            return walls;
-        }
+            => wallEntities.Select(wallEntity => wallEntity.ToDomainModel());
 
         /// <summary>
         /// Converts the domain models into entities.
         /// </summary>
         /// <returns>The entities.</returns>
         /// <param name="walls">Walls.</param>
-        internal static IEnumerable<WallEntity> ToEntities(this IEnumerable<Wall> walls)
-        {
-            IEnumerable<WallEntity> wallEntities = walls.Select(wall => wall.ToEntity());
-
-            return wallEntities;
-        }
+        internal static IEnumerable<WallEntity> ToDataObjects(this IEnumerable<Wall> walls)
+            => walls.Select(wall => wall.ToDataObject());
     }
 }

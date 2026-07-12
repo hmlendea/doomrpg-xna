@@ -16,36 +16,32 @@ namespace DoomRPG.GameLogic.Mapping
         /// </summary>
         /// <returns>The domain model.</returns>
         /// <param name="mobEntity">Mob entity.</param>
-        internal static Mob ToDomainModel(this MobEntity mobEntity)
+        internal static Mob ToDomainModel(this MobEntity mobEntity) => new()
         {
-            Mob mob = new Mob
-            {
-                Id = mobEntity.Id,
-                Name = mobEntity.Name,
-                Description = mobEntity.Description,
-                SpritesheetName = mobEntity.SpritesheetName
-            };
-
-            return mob;
-        }
+            Id = mobEntity.Id,
+            Name = mobEntity.Name,
+            Description = mobEntity.Description,
+            SpritesheetName = mobEntity.SpritesheetName,
+            ClassId = mobEntity.ClassId,
+            Health = mobEntity.Health,
+            Damage = mobEntity.Damage
+        };
 
         /// <summary>
         /// Converts the domain model into an entity.
         /// </summary>
         /// <returns>The entity.</returns>
         /// <param name="mob">Mob.</param>
-        internal static MobEntity ToEntity(this Mob mob)
+        internal static MobEntity ToDataObject(this Mob mob) => new()
         {
-            MobEntity mobEntity = new MobEntity
-            {
-                Id = mob.Id,
-                Name = mob.Name,
-                Description = mob.Description,
-                SpritesheetName = mob.SpritesheetName
-            };
-
-            return mobEntity;
-        }
+            Id = mob.Id,
+            Name = mob.Name,
+            Description = mob.Description,
+            SpritesheetName = mob.SpritesheetName,
+            ClassId = mob.ClassId,
+            Health = mob.Health,
+            Damage = mob.Damage
+        };
 
         /// <summary>
         /// Converts the entities into domain models.
@@ -53,22 +49,14 @@ namespace DoomRPG.GameLogic.Mapping
         /// <returns>The domain models.</returns>
         /// <param name="mobEntities">Mob entities.</param>
         internal static IEnumerable<Mob> ToDomainModels(this IEnumerable<MobEntity> mobEntities)
-        {
-            IEnumerable<Mob> mobs = mobEntities.Select(mobEntity => mobEntity.ToDomainModel());
-
-            return mobs;
-        }
+            => mobEntities.Select(mobEntity => mobEntity.ToDomainModel());
 
         /// <summary>
         /// Converts the domain models into entities.
         /// </summary>
         /// <returns>The entities.</returns>
         /// <param name="mobs">Mobs.</param>
-        internal static IEnumerable<MobEntity> ToEntities(this IEnumerable<Mob> mobs)
-        {
-            IEnumerable<MobEntity> mobEntities = mobs.Select(mob => mob.ToEntity());
-
-            return mobEntities;
-        }
+        internal static IEnumerable<MobEntity> ToDataObjects(this IEnumerable<Mob> mobs)
+            => mobs.Select(mob => mob.ToDataObject());
     }
 }

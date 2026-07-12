@@ -1,9 +1,392 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfMobEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Canines -->
   <MobEntity>
-    <Id>test</Id>
-    <Name>Test Mob</Name>
-    <Description>This is just a test mob</Description>
-    <SpritesheetName>This is just a test mob</SpritesheetName>
+    <Id>hellhound</Id>
+    <Name>Hellhound</Name>
+    <Description>A snarling demonic hound with scorched fur and ember-red eyes. The weakest of the canine pack, but no less dangerous in numbers.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>canine</ClassId>
+    <Health>30</Health>
+    <Damage>15</Damage>
   </MobEntity>
+  <MobEntity>
+    <Id>demon_wolf</Id>
+    <Name>Demon Wolf</Name>
+    <Description>A larger and more cunning hellhound, moving in coordinated packs. Its bite can shatter bone armour.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>canine</ClassId>
+    <Health>55</Health>
+    <Damage>22</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>cerberus</Id>
+    <Name>Cerberus</Name>
+    <Description>The three-headed guardian of Hell's gates. Each head acts independently, making it nearly impossible to anticipate its attacks.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>canine</ClassId>
+    <Health>80</Health>
+    <Damage>30</Damage>
+  </MobEntity>
+
+  <!-- Zombies -->
+  <MobEntity>
+    <Id>zombie_private</Id>
+    <Name>Zombie Pvt</Name>
+    <Description>A reanimated private, shambling forward with a rifle. Slow and predictable, but still armed and dangerous.</Description>
+    <SpritesheetName>zombie_private</SpritesheetName>
+    <ClassId>zombie</ClassId>
+    <Health>25</Health>
+    <Damage>10</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>zombie_lieutenant</Id>
+    <Name>Zombie Lt</Name>
+    <Description>A reanimated lieutenant with better weaponry and slightly more resilience. Commands squads of zombie privates.</Description>
+    <SpritesheetName>zombie_lieutenant</SpritesheetName>
+    <ClassId>zombie</ClassId>
+    <Health>50</Health>
+    <Damage>20</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>zombie_captain</Id>
+    <Name>Zombie Cpt</Name>
+    <Description>A reanimated captain carrying heavy ordnance. Significantly more durable and hits far harder than its lower-ranked kin.</Description>
+    <SpritesheetName>zombie_captain</SpritesheetName>
+    <ClassId>zombie</ClassId>
+    <Health>80</Health>
+    <Damage>35</Damage>
+  </MobEntity>
+
+  <!-- Imps -->
+  <MobEntity>
+    <Id>impling</Id>
+    <Name>Impling</Name>
+    <Description>A juvenile imp, small and weak but quick to swarm. Often found in large groups preceding a larger demonic force.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>imp</ClassId>
+    <Health>20</Health>
+    <Damage>12</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>imp_troop</Id>
+    <Name>Imp Troop</Name>
+    <Description>The standard front-line imp. Hurls flaming bolts from a distance and slashes viciously in close quarters.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>imp</ClassId>
+    <Health>45</Health>
+    <Damage>18</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>imp_commando</Id>
+    <Name>Imp Commando</Name>
+    <Description>A heavily built imp clad in crude hellforged plating. Hits harder and takes more punishment than a standard troop.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>imp</ClassId>
+    <Health>75</Health>
+    <Damage>28</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>imp_assassin</Id>
+    <Name>Imp Assassin</Name>
+    <Description>A lean, shadow-cloaked imp that teleports behind its prey. Less durable than a commando but far more lethal per strike.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>imp</ClassId>
+    <Health>60</Health>
+    <Damage>35</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>phantom</Id>
+    <Name>Phantom</Name>
+    <Description>A semi-transparent imp that phases in and out of corporeality, making it difficult to hit with physical attacks.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>imp</ClassId>
+    <Health>55</Health>
+    <Damage>22</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>imp_lord</Id>
+    <Name>Imp Lord</Name>
+    <Description>The apex of impkind. Commands lesser imps and unleashes torrents of hellfire. A serious threat to any marine.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>imp</ClassId>
+    <Health>130</Health>
+    <Damage>50</Damage>
+  </MobEntity>
+
+  <!-- Specters -->
+  <MobEntity>
+    <Id>lost_soul</Id>
+    <Name>Lost Soul</Name>
+    <Description>A flaming demonic skull that hurls itself at prey in a relentless charge. Born from Pain Elementals, they swarm without mercy.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>specter</ClassId>
+    <Health>35</Health>
+    <Damage>22</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>nightmare</Id>
+    <Name>Nightmare</Name>
+    <Description>A powerful specter born from concentrated psychic torment. Its translucent form absorbs damage that would kill lesser demons.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>specter</ClassId>
+    <Health>90</Health>
+    <Damage>45</Damage>
+  </MobEntity>
+
+  <!-- Demons -->
+  <MobEntity>
+    <Id>bull_demon</Id>
+    <Name>Bull Demon</Name>
+    <Description>A hulking, horned demon that charges at full speed and gores anything in its path. Fast for its size and hard to stop.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>demon</ClassId>
+    <Health>85</Health>
+    <Damage>40</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>pinky</Id>
+    <Name>Pinky</Name>
+    <Description>The classic pink demon of Hell. Thick-skinned and ferocious, it tears through steel with its massive jaws.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>demon</ClassId>
+    <Health>110</Health>
+    <Damage>55</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>belphegor</Id>
+    <Name>Belphegor</Name>
+    <Description>A noble demon of the infernal court. Armoured in obsidian plates and gifted with savage intelligence to match its brute strength.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>demon</ClassId>
+    <Health>160</Health>
+    <Damage>65</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>malwrath</Id>
+    <Name>Malwrath</Name>
+    <Description>The apex predator among demonkind. Ancient, scarred, and nearly unstoppable in direct combat. Very few have survived an encounter.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>demon</ClassId>
+    <Health>210</Health>
+    <Damage>80</Damage>
+  </MobEntity>
+
+  <!-- Cacodemons -->
+  <MobEntity>
+    <Id>wretched</Id>
+    <Name>Wretched</Name>
+    <Description>A shrivelled, underfed cacodemon. Weaker than its kin but no less hostile, it spits erratic bolts of acidic bile.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>cacodemon</ClassId>
+    <Health>65</Health>
+    <Damage>28</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>cacodemon</Id>
+    <Name>Cacodemon</Name>
+    <Description>A massive one-eyed sphere of flesh and malice. It drifts lazily until it spots prey, then strikes with explosive plasma bolts.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>cacodemon</ClassId>
+    <Health>100</Health>
+    <Damage>40</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>beholder</Id>
+    <Name>Beholder</Name>
+    <Description>A larger, engorged cacodemon with multiple eyes that track independently. Each eye fires a distinct type of energy bolt.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>cacodemon</ClassId>
+    <Health>130</Health>
+    <Damage>50</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>rahovart</Id>
+    <Name>Rahovart</Name>
+    <Description>The ancient king of cacodemons, wreathed in crackling hellfire. Its roar alone can knock a marine off their feet.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>cacodemon</ClassId>
+    <Health>220</Health>
+    <Damage>70</Damage>
+  </MobEntity>
+
+  <!-- Pain Elementals -->
+  <MobEntity>
+    <Id>ghoul</Id>
+    <Name>Ghoul</Name>
+    <Description>A lesser pain elemental, bloated with barely contained spiritual energy. It spits Lost Souls with frantic urgency.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>pain_elemental</ClassId>
+    <Health>65</Health>
+    <Damage>28</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>pain_elemental</Id>
+    <Name>Pain Elemental</Name>
+    <Description>A grotesque floating torso that perpetually births Lost Souls. Killing it without a clean kill causes a final burst of spawns.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>pain_elemental</ClassId>
+    <Health>110</Health>
+    <Damage>35</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>fiend</Id>
+    <Name>Fiend</Name>
+    <Description>A swollen, ancient pain elemental that has feasted on countless souls. It can birth multiple Lost Souls simultaneously.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>pain_elemental</ClassId>
+    <Health>150</Health>
+    <Damage>45</Damage>
+  </MobEntity>
+
+  <!-- Revenant -->
+  <MobEntity>
+    <Id>revenant</Id>
+    <Name>Revenant</Name>
+    <Description>A skeletal warrior risen from death, armed with a pair of shoulder-mounted guided rocket launchers. It tracks its targets with supernatural precision.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>revenant</ClassId>
+    <Health>160</Health>
+    <Damage>60</Damage>
+  </MobEntity>
+
+  <!-- Behemoth -->
+  <MobEntity>
+    <Id>behemoth</Id>
+    <Name>Behemoth</Name>
+    <Description>A titanic demon of incomprehensible mass. Its fists crack the floor with every step. There is no running from the Behemoth.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>behemoth</ClassId>
+    <Health>280</Health>
+    <Damage>85</Damage>
+  </MobEntity>
+
+  <!-- Mancubi -->
+  <MobEntity>
+    <Id>druj</Id>
+    <Name>Druj</Name>
+    <Description>A leaner variant of the mancubus lineage. Still massively obese by human standards, but quicker and with a more accurate aim.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>mancubus</ClassId>
+    <Health>160</Health>
+    <Damage>55</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>mancubus</Id>
+    <Name>Mancubus</Name>
+    <Description>A grotesquely obese demon with mechanical flamethrower arms. It waddles forward spraying overlapping arcs of incendiary death.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>mancubus</ClassId>
+    <Health>200</Health>
+    <Damage>65</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>infernis</Id>
+    <Name>Infernis</Name>
+    <Description>The most powerful of the mancubus bloodline, wreathed in living flame. Its projectiles leave lasting fire pools on the ground.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>mancubus</ClassId>
+    <Health>250</Health>
+    <Damage>80</Damage>
+  </MobEntity>
+
+  <!-- Archviles -->
+  <MobEntity>
+    <Id>archvile</Id>
+    <Name>Archvile</Name>
+    <Description>A towering, emaciated demon that raises the dead and immolates living targets with columns of hellfire. Priority kill on sight.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>archvile</ClassId>
+    <Health>175</Health>
+    <Damage>75</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>apollyon</Id>
+    <Name>Apollyon</Name>
+    <Description>The destroyer. An archvile of immense power that commands entire demonic legions. Its hellfire cannot be outrun.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>archvile</ClassId>
+    <Health>270</Health>
+    <Damage>100</Damage>
+  </MobEntity>
+
+  <!-- Knights -->
+  <MobEntity>
+    <Id>ogre</Id>
+    <Name>Ogre</Name>
+    <Description>A brutish demonic warrior, too dumb to fear pain. It swings enormous fists and occasionally lobs a ball of green plasma.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>knight</ClassId>
+    <Health>130</Health>
+    <Damage>55</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>hell_knight</Id>
+    <Name>Hell Knight</Name>
+    <Description>An elite warrior of Hell, armoured in dark chitin and lethal at both melee and range. Faster and smarter than a Baron.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>knight</ClassId>
+    <Health>220</Health>
+    <Damage>75</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>baron</Id>
+    <Name>Baron</Name>
+    <Description>A Baron of Hell. An ancient and powerful demonic nobleman clad in hellforged plate. Its green plasma blasts can vaporise lesser foes.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>knight</ClassId>
+    <Health>320</Health>
+    <Damage>95</Damage>
+  </MobEntity>
+
+  <!-- Bosses -->
+  <MobEntity>
+    <Id>cyberdemon</Id>
+    <Name>Cyberdemon</Name>
+    <Description>The ultimate fusion of demon and machine. A towering horned monstrosity with a rocket launcher grafted to its arm. The icon of Hell's military might.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>boss</ClassId>
+    <Health>1000</Health>
+    <Damage>150</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>kronos</Id>
+    <Name>Kronos</Name>
+    <Description>The devourer of worlds. An unfathomably ancient demon god whose very presence warps reality. No marine has ever returned from its domain.</Description>
+    <SpritesheetName>mobs</SpritesheetName>
+    <ClassId>boss</ClassId>
+    <Health>1500</Health>
+    <Damage>200</Damage>
+  </MobEntity>
+
+  <!-- Civilians -->
+  <MobEntity>
+    <Id>scientist_male</Id>
+    <Name>Scientist</Name>
+    <Description>A UAC researcher who somehow survived. He doesn't fight, but he knows things.</Description>
+    <SpritesheetName>scientist_male</SpritesheetName>
+    <ClassId>civilian</ClassId>
+    <Health>1</Health>
+    <Damage>0</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>civilian_male</Id>
+    <Name>Civilian</Name>
+    <Description>An unarmed facility worker. They won't fight, but may have useful information.</Description>
+    <SpritesheetName>civilian_male</SpritesheetName>
+    <ClassId>civilian</ClassId>
+    <Health>1</Health>
+    <Damage>0</Damage>
+  </MobEntity>
+  <MobEntity>
+    <Id>marine</Id>
+    <Name>Marine</Name>
+    <Description>A UAC Marine stationed at the facility. A friendly face in a hostile environment.</Description>
+    <SpritesheetName>marine</SpritesheetName>
+    <ClassId>civilian</ClassId>
+    <Health>1</Health>
+    <Damage>0</Damage>
+  </MobEntity>
+
 </ArrayOfMobEntity>

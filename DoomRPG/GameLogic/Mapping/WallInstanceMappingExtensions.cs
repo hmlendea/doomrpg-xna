@@ -18,37 +18,29 @@ namespace DoomRPG.GameLogic.Mapping
         /// </summary>
         /// <returns>The domain model.</returns>
         /// <param name="wallInstanceEntity">WallInstance entity.</param>
-        internal static WallInstance ToDomainModel(this WallInstanceEntity wallInstanceEntity)
+        internal static WallInstance ToDomainModel(this WallInstanceEntity wallInstanceEntity) => new()
         {
-            WallInstance wallInstance = new WallInstance
-            {
-                Id = wallInstanceEntity.Id,
-                WallId = wallInstanceEntity.WallId,
-                Position = new Point2D(wallInstanceEntity.X, wallInstanceEntity.Y),
-                IsRemovable = wallInstanceEntity.IsRemovable
-            };
-
-            return wallInstance;
-        }
+            Id = wallInstanceEntity.Id,
+            WallId = wallInstanceEntity.WallId,
+            Position = new Point2D(wallInstanceEntity.X, wallInstanceEntity.Y),
+            IsRemovable = wallInstanceEntity.IsRemovable,
+            DestinationLevelId = wallInstanceEntity.DestinationLevelId
+        };
 
         /// <summary>
         /// Converts the domain model into an entity.
         /// </summary>
         /// <returns>The entity.</returns>
         /// <param name="wallInstance">WallInstance.</param>
-        internal static WallInstanceEntity ToEntity(this WallInstance wallInstance)
+        internal static WallInstanceEntity ToDataObject(this WallInstance wallInstance) => new()
         {
-            WallInstanceEntity wallInstanceEntity = new WallInstanceEntity
-            {
-                Id = wallInstance.Id,
-                WallId = wallInstance.WallId,
-                X = wallInstance.Position.X,
-                Y = wallInstance.Position.Y,
-                IsRemovable = wallInstance.IsRemovable
-            };
-
-            return wallInstanceEntity;
-        }
+            Id = wallInstance.Id,
+            WallId = wallInstance.WallId,
+            X = wallInstance.Position.X,
+            Y = wallInstance.Position.Y,
+            IsRemovable = wallInstance.IsRemovable,
+            DestinationLevelId = wallInstance.DestinationLevelId
+        };
 
         /// <summary>
         /// Converts the entities into domain models.
@@ -56,22 +48,14 @@ namespace DoomRPG.GameLogic.Mapping
         /// <returns>The domain models.</returns>
         /// <param name="wallInstanceEntities">WallInstance entities.</param>
         internal static IEnumerable<WallInstance> ToDomainModels(this IEnumerable<WallInstanceEntity> wallInstanceEntities)
-        {
-            IEnumerable<WallInstance> wallInstances = wallInstanceEntities.Select(wallInstanceEntity => wallInstanceEntity.ToDomainModel());
-
-            return wallInstances;
-        }
+            => wallInstanceEntities.Select(wallInstanceEntity => wallInstanceEntity.ToDomainModel());
 
         /// <summary>
         /// Converts the domain models into entities.
         /// </summary>
         /// <returns>The entities.</returns>
         /// <param name="wallInstances">WallInstances.</param>
-        internal static IEnumerable<WallInstanceEntity> ToEntities(this IEnumerable<WallInstance> wallInstances)
-        {
-            IEnumerable<WallInstanceEntity> wallInstanceEntities = wallInstances.Select(wallInstance => wallInstance.ToEntity());
-
-            return wallInstanceEntities;
-        }
+        internal static IEnumerable<WallInstanceEntity> ToDataObjects(this IEnumerable<WallInstance> wallInstances)
+            => wallInstances.Select(wallInstance => wallInstance.ToDataObject());
     }
 }

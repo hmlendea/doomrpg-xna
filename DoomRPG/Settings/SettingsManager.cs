@@ -1,5 +1,5 @@
 ﻿using System.IO;
-
+using System.Threading;
 using NuciDAL.IO;
 using NuciXNA.Graphics;
 
@@ -8,10 +8,10 @@ namespace DoomRPG.Settings
     /// <summary>
     /// Settings manager.
     /// </summary>
-    public class SettingsManager
+    public sealed class SettingsManager
     {
         static volatile SettingsManager instance;
-        static object syncRoot = new object();
+        static readonly Lock syncRoot = new();
 
         /// <summary>
         /// Gets the instance.
@@ -21,14 +21,11 @@ namespace DoomRPG.Settings
         {
             get
             {
-                if (instance == null)
+                if (instance is null)
                 {
                     lock (syncRoot)
                     {
-                        if (instance == null)
-                        {
-                            instance = new SettingsManager();
-                        }
+                        instance ??= new SettingsManager();
                     }
                 }
 
@@ -61,14 +58,15 @@ namespace DoomRPG.Settings
         {
             if (!File.Exists(ApplicationPaths.SettingsFile))
             {
-                //string logMessage = "Settings file is missing. Using default settings.";
+                // string logMessage = "Settings file is missing. Using default settings.";
                 // TODO: Log error
 
                 SaveContent();
+
                 return;
             }
 
-            XmlFileObject<SettingsManager> xmlManager = new XmlFileObject<SettingsManager>();
+            XmlFileObject<SettingsManager> xmlManager = new();
             SettingsManager storedSettings = xmlManager.Read(ApplicationPaths.SettingsFile);
 
             instance = storedSettings;
@@ -84,7 +82,7 @@ namespace DoomRPG.Settings
                 Directory.CreateDirectory(ApplicationPaths.UserDataDirectory);
             }
 
-            XmlFileObject<SettingsManager> xmlManager = new XmlFileObject<SettingsManager>();
+            XmlFileObject<SettingsManager> xmlManager = new();
             xmlManager.Write(ApplicationPaths.SettingsFile, this);
         }
 

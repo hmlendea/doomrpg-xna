@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWorldObjectEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WorldObjectEntity>
+    <Id>fire</Id>
+    <Name>Fire</Name>
+    <Description>An open flame. Walk through it and you'll get burned.</Description>
+    <SpritesheetName>fire</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <DamageOnContact>5</DamageOnContact>
+    <IsExtinguishable>true</IsExtinguishable>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>bullet_clip</Id>
+    <Name>Bullet Clip</Name>
+    <Description>A clip of bullets. +10 bullets.</Description>
+    <SpritesheetName>ammo</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <AmmoId>bullet_clip</AmmoId>
+    <AmmoAmount>10</AmmoAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>fire_extinguisher</Id>
+    <Name>Fire Extinguisher</Name>
+    <Description>A CO2 fire extinguisher.</Description>
+    <SpritesheetName>weapon</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <WeaponId>fire_extinguisher</WeaponId>
+    <AmmoId>halon_can</AmmoId>
+    <AmmoAmount>5</AmmoAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>axe</Id>
+    <Name>Axe</Name>
+    <Description>A heavy fire axe. Can break down jammed doors.</Description>
+    <SpritesheetName>weapon</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <WeaponId>axe</WeaponId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>barrel</Id>
+    <Name>Barrel</Name>
+    <SpritesheetName>barrel</SpritesheetName>
+    <Health>20</Health>
+    <IsExplosive>true</IsExplosive>
+    <BlocksProjectiles>true</BlocksProjectiles>
+    <BlocksMovement>true</BlocksMovement>
+    <MinimumExplosionDamage>5</MinimumExplosionDamage>
+    <MaximumExplosionDamage>15</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>crate</Id>
+    <Name>Crate</Name>
+    <SpritesheetName>crate</SpritesheetName>
+    <Health>2147483647</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>true</BlocksProjectiles>
+    <BlocksMovement>true</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>table</Id>
+    <Name>Table</Name>
+    <SpritesheetName>table</SpritesheetName>
+    <Health>2147483647</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>true</BlocksProjectiles>
+    <BlocksMovement>true</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>lamp</Id>
+    <Name>Lamp</Name>
+    <SpritesheetName>lamp</SpritesheetName>
+    <Health>2147483647</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>true</BlocksProjectiles>
+    <BlocksMovement>true</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>health_vial</Id>
+    <Name>Health Vial</Name>
+    <SpritesheetName>health</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>10</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>sm_medikit</Id>
+    <Name>Sm Medkit</Name>
+    <SpritesheetName>health</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>25</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>lg_medikit</Id>
+    <Name>Lg Medkit</Name>
+    <SpritesheetName>health</SpritesheetName>
+    <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>50</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>red_key</Id>
+    <Name>Red Key</Name>
+    <Description>A red security keycard. Opens red-coded doors.</Description>
+    <SpritesheetName>key</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <KeyId>red_key</KeyId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>blue_key</Id>
+    <Name>Blue Key</Name>
+    <Description>A blue security keycard. Opens blue-coded doors.</Description>
+    <SpritesheetName>key</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+    <KeyId>blue_key</KeyId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>green_key</Id>
+    <Name>Green Key</Name>
+    <Description>A green security keycard. Opens green-coded doors.</Description>
+    <SpritesheetName>key</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+    <KeyId>green_key</KeyId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>yellow_key</Id>
+    <Name>Yellow Key</Name>
+    <Description>A yellow security keycard. Opens yellow-coded doors.</Description>
+    <SpritesheetName>key</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <SpritesheetTextureIndex>3</SpritesheetTextureIndex>
+    <KeyId>yellow_key</KeyId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>armor_shard</Id>
+    <Name>Armor Shard</Name>
+    <Description>A small piece of armour. +1 AP.</Description>
+    <SpritesheetName>armour</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <ArmourAmount>1</ArmourAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>flak_jacket</Id>
+    <Name>Flak Jacket</Name>
+    <Description>Light body armour. +25 AP.</Description>
+    <SpritesheetName>armour</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <ArmourAmount>25</ArmourAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>combat_suit</Id>
+    <Name>Combat Suit</Name>
+    <Description>Heavy duty armour. +100 AP.</Description>
+    <SpritesheetName>armour</SpritesheetName>
+    <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <ArmourAmount>100</ArmourAmount>
+  </WorldObjectEntity>
+</ArrayOfWorldObjectEntity>

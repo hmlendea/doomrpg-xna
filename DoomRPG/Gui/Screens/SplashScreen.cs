@@ -19,7 +19,7 @@ namespace DoomRPG.Gui.Screens
         /// </summary>
         /// <value>The delay.</value>
         public float Delay { get; set; }
-        
+
         GuiImage logoImage { get; set; }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace DoomRPG.Gui.Screens
         protected override void DoLoadContent()
         {
             logoImage = new GuiImage { ContentFile = "SplashScreen/Logo" };
-            
+
             GuiManager.Instance.RegisterControls(logoImage);
 
             RegisterEvents();
@@ -59,7 +59,7 @@ namespace DoomRPG.Gui.Screens
         protected override void DoUpdate(GameTime gameTime)
         {
             SetChildrenProperties();
-            
+
             Delay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
@@ -71,7 +71,7 @@ namespace DoomRPG.Gui.Screens
         /// <summary>
         /// Registers the events.
         /// </summary>
-        void RegisterEvents()
+        private void RegisterEvents()
         {
             KeyPressed += OnKeyPressed;
             MouseButtonPressed += OnMouseButtonPressed;
@@ -80,26 +80,26 @@ namespace DoomRPG.Gui.Screens
         /// <summary>
         /// Unregisters the events.
         /// </summary>
-        void UnregisterEvents()
+        private void UnregisterEvents()
         {
             KeyPressed -= OnKeyPressed;
             MouseButtonPressed -= OnMouseButtonPressed;
         }
 
-        void SetChildrenProperties()
+        private void SetChildrenProperties()
         {
             logoImage.Location = new Point2D((ScreenManager.Instance.Size.Width - logoImage.Size.Width) / 2,
                                              (ScreenManager.Instance.Size.Height - logoImage.Size.Height) / 2);
         }
 
-        void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
+        private void OnKeyPressed(object sender, KeyboardKeyEventArgs e)
         {
-            ScreenManager.Instance.ChangeScreens(typeof(GameplayScreen));
+            ScreenManager.Instance.ChangeScreens<GameplayScreen>();
         }
 
-        void OnMouseButtonPressed(object sender, MouseButtonEventArgs e)
+        private void OnMouseButtonPressed(object sender, MouseButtonEventArgs e)
         {
-            ScreenManager.Instance.ChangeScreens(typeof(GameplayScreen));
+            ScreenManager.Instance.ChangeScreens<GameplayScreen>();
         }
     }
 }

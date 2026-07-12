@@ -1,4 +1,6 @@
-﻿using NuciXNA.Primitives;
+﻿using System.Collections.Generic;
+
+using NuciXNA.Primitives;
 
 namespace DoomRPG.Models
 {
@@ -8,12 +10,41 @@ namespace DoomRPG.Models
 
         // TODO: Change to Vector2D
         public PointF2D Direction { get; set; }
-        
-        public float MovementSpeed { get; set; }
 
-        public Player()
-        {
-            MovementSpeed = 0.075f;
-        }
+        public float MovementSpeed { get; set; } = 0.075f;
+
+        public int Health { get; set; }
+
+        public int MaxHealth { get; set; }
+
+        public int Armour { get; set; }
+
+        public int MaxArmour { get; set; }
+
+        public int Credits { get; set; }
+
+        public string EquippedWeaponId { get; set; }
+
+        public Dictionary<string, int> AmmoCounts { get; set; } = [];
+
+        public List<string> Keys { get; set; } = [];
+
+        public int Strength { get; set; }
+
+        public int Agility { get; set; }
+
+        public int Accuracy { get; set; }
+
+        public int Defense { get; set; }
+
+        public int StatPoints { get; set; }
+
+        public int Level { get; set; }
+
+        public int Experience { get; set; }
+
+        public int ExperienceToNextLevel => Level * 100;
+
+        public bool IsAlive => Health > 0;
     }
 }

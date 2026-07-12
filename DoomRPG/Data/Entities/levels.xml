@@ -119,6 +119,7 @@
       <WorldObjectInstanceEntity><Id>barrel_6</Id><WorldObjectId>barrel</WorldObjectId><X>4</X><Y>10</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>crate_1</Id><WorldObjectId>crate</WorldObjectId><X>6</X><Y>9</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>axe_1</Id><WorldObjectId>axe</WorldObjectId><X>5</X><Y>8</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>fire_extinguisher_1</Id><WorldObjectId>fire_extinguisher</WorldObjectId><X>2</X><Y>4</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>bullet_clip_1</Id><WorldObjectId>bullet_clip</WorldObjectId><X>4</X><Y>4</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>lamp_1</Id><WorldObjectId>lamp</WorldObjectId><X>6</X><Y>3</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>medikit_1</Id><WorldObjectId>medikit</WorldObjectId><X>4</X><Y>2</Y></WorldObjectInstanceEntity>
@@ -130,6 +131,9 @@
       <WorldObjectInstanceEntity><Id>armor_shard_1</Id><WorldObjectId>armor_shard</WorldObjectId><X>5</X><Y>4</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>flak_jacket_1</Id><WorldObjectId>flak_jacket</WorldObjectId><X>1</X><Y>8</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>combat_suit_1</Id><WorldObjectId>combat_suit</WorldObjectId><X>14</X><Y>12</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>fire_1</Id><WorldObjectId>fire</WorldObjectId><X>3</X><Y>5</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>fire_2</Id><WorldObjectId>fire</WorldObjectId><X>3</X><Y>12</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>fire_3</Id><WorldObjectId>fire</WorldObjectId><X>9</X><Y>11</Y></WorldObjectInstanceEntity>
     </WorldObjects>
   </LevelEntity>
   <LevelEntity>

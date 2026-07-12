@@ -226,7 +226,7 @@
 /processorParam:TextureFormat=Color
 /build:mobs/civilian_male.png
 
-#begin objects/axe.png
+#begin objects/weapon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -236,7 +236,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:objects/axe.png
+/build:objects/weapon.png
+
+#begin objects/fire.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=True
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:objects/fire.png
 
 #begin objects/key.png
 /importer:TextureImporter

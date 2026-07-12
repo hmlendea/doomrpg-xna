@@ -25,7 +25,9 @@ namespace DoomRPG.GameLogic.Mapping
             WeaponId = worldObjectEntity.WeaponId,
             KeyId = worldObjectEntity.KeyId,
             AmmoId = worldObjectEntity.AmmoId,
-            AmmoAmount = worldObjectEntity.AmmoAmount
+            AmmoAmount = worldObjectEntity.AmmoAmount,
+            DamageOnContact = worldObjectEntity.DamageOnContact,
+            IsExtinguishable = worldObjectEntity.IsExtinguishable
         };
 
         internal static WorldObjectEntity ToDataObject(this WorldObject worldObject) => new()
@@ -45,7 +47,9 @@ namespace DoomRPG.GameLogic.Mapping
             WeaponId = worldObject.WeaponId,
             KeyId = worldObject.KeyId,
             AmmoId = worldObject.AmmoId,
-            AmmoAmount = worldObject.AmmoAmount
+            AmmoAmount = worldObject.AmmoAmount,
+            DamageOnContact = worldObject.DamageOnContact,
+            IsExtinguishable = worldObject.IsExtinguishable
         };
 
         internal static IEnumerable<WorldObject> ToDomainModels(this IEnumerable<WorldObjectEntity> worldObjectEntities)

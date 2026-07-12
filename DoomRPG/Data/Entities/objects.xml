@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfWorldObjectEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <WorldObjectEntity>
+    <Id>fire</Id>
+    <Name>Fire</Name>
+    <Description>An open flame. Walk through it and you'll get burned.</Description>
+    <SpritesheetName>fire</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <DamageOnContact>5</DamageOnContact>
+    <IsExtinguishable>true</IsExtinguishable>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
     <Id>bullet_clip</Id>
     <Name>Bullet Clip</Name>
     <Description>A clip of bullets. +10 bullets.</Description>
@@ -16,10 +32,28 @@
     <AmmoAmount>10</AmmoAmount>
   </WorldObjectEntity>
   <WorldObjectEntity>
+    <Id>fire_extinguisher</Id>
+    <Name>Fire Extinguisher</Name>
+    <Description>A CO2 fire extinguisher.</Description>
+    <SpritesheetName>weapon</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <WeaponId>fire_extinguisher</WeaponId>
+    <AmmoId>halon_can</AmmoId>
+    <AmmoAmount>5</AmmoAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
     <Id>axe</Id>
     <Name>Axe</Name>
     <Description>A heavy fire axe. Can break down jammed doors.</Description>
-    <SpritesheetName>axe</SpritesheetName>
+    <SpritesheetName>weapon</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
     <Health>1</Health>
     <IsExplosive>false</IsExplosive>
     <BlocksProjectiles>false</BlocksProjectiles>

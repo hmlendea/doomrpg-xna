@@ -15,5 +15,7 @@ namespace DoomRPG.Models
         public string PickedUpAmmoId { get; set; }
 
         public int PickedUpAmmoAmount { get; set; }
+
+        public int ContactDamageReceived { get; set; }
     }
 }

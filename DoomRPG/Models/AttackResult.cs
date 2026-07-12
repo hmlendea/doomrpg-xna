@@ -11,7 +11,8 @@ namespace DoomRPG.Models
         NoTarget,
         WorldObjectHit,
         WorldObjectDestroyed,
-        JammedDoorDestroyed
+        JammedDoorDestroyed,
+        FireExtinguished
     }
 
     public sealed class AttackResult

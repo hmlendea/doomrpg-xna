@@ -33,5 +33,9 @@ namespace DoomRPG.DataAccess.DataObjects
         public string AmmoId { get; set; }
 
         public int AmmoAmount { get; set; }
+
+        public int DamageOnContact { get; set; }
+
+        public bool IsExtinguishable { get; set; }
     }
 }

@@ -255,6 +255,11 @@ namespace DoomRPG.Gui.Screens
                     HandleWorldObjectDestroyedNotification(result);
                     HandleAmmoLowNotification(result);
                     break;
+
+                case AttackOutcome.FireExtinguished:
+                    ShowNotification($"Fire extinguished!", Colour.CornflowerBlue);
+                    HandleAmmoLowNotification(result);
+                    break;
             }
         }
 
@@ -295,6 +300,12 @@ namespace DoomRPG.Gui.Screens
 
         private void HandleMoveResult(MoveResult result)
         {
+            if (result.ContactDamageReceived > 0)
+            {
+                ShowNotification($"It burns! -{result.ContactDamageReceived} HP", Colour.Red);
+                return;
+            }
+
             if (!string.IsNullOrEmpty(result.PickedUpObjectName))
             {
                 string pickupMessage = $"Picked up {result.PickedUpObjectName}!";

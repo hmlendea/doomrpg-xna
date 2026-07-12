@@ -152,6 +152,12 @@ namespace DoomRPG.GameLogic.GameManagers
             WorldObject worldObjectDefinition = worldObjectDefinitions
                 .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectAtTile.WorldObjectId));
 
+            if (worldObjectDefinition is not null && worldObjectDefinition.DamageOnContact > 0)
+            {
+                playerManager.ApplyDamage(worldObjectDefinition.DamageOnContact);
+                return new MoveResult { ContactDamageReceived = worldObjectDefinition.DamageOnContact };
+            }
+
             if (worldObjectDefinition is null || (worldObjectDefinition.HealAmount <= 0 && worldObjectDefinition.ArmourAmount <= 0 && string.IsNullOrEmpty(worldObjectDefinition.WeaponId) && string.IsNullOrEmpty(worldObjectDefinition.KeyId) && string.IsNullOrEmpty(worldObjectDefinition.AmmoId)))
             {
                 return new MoveResult();
@@ -160,12 +166,20 @@ namespace DoomRPG.GameLogic.GameManagers
             if (!string.IsNullOrEmpty(worldObjectDefinition.WeaponId))
             {
                 playerManager.GiveWeapon(worldObjectDefinition.WeaponId);
+
+                if (!string.IsNullOrEmpty(worldObjectDefinition.AmmoId))
+                {
+                    playerManager.AddAmmo(worldObjectDefinition.AmmoId, worldObjectDefinition.AmmoAmount);
+                }
+
                 levelManager.RemoveWorldObject(worldObjectAtTile.Id);
 
                 return new MoveResult
                 {
                     PickedUpObjectName = worldObjectDefinition.Name,
-                    PickedUpWeaponId = worldObjectDefinition.WeaponId
+                    PickedUpWeaponId = worldObjectDefinition.WeaponId,
+                    PickedUpAmmoId = worldObjectDefinition.AmmoId,
+                    PickedUpAmmoAmount = worldObjectDefinition.AmmoAmount
                 };
             }
 
@@ -341,10 +355,6 @@ namespace DoomRPG.GameLogic.GameManagers
             WorldObject worldObjectDefinition = worldObjectDefinitions
                 .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectInstance.WorldObjectId));
 
-            int damage = weapon.Damage;
-
-            worldObjectInstance.CurrentHealth -= damage;
-
             Player player = playerManager.GetPlayer();
 
             int remainingAmmunition = 0;
@@ -353,6 +363,27 @@ namespace DoomRPG.GameLogic.GameManagers
             {
                 player.AmmoCounts.TryGetValue(weapon.AmmunitionId, out remainingAmmunition);
             }
+
+            if (worldObjectDefinition.IsExtinguishable)
+            {
+                if (!weapon.Id.Equals("fire_extinguisher"))
+                {
+                    return new AttackResult { Outcome = AttackOutcome.NoTarget };
+                }
+
+                levelManager.RemoveWorldObject(worldObjectInstance.Id);
+
+                return new AttackResult
+                {
+                    Outcome = AttackOutcome.FireExtinguished,
+                    WorldObjectName = worldObjectDefinition.Name,
+                    RemainingAmmunition = remainingAmmunition
+                };
+            }
+
+            int damage = weapon.Damage;
+
+            worldObjectInstance.CurrentHealth -= damage;
 
             if (worldObjectInstance.CurrentHealth > 0)
             {
@@ -565,9 +596,15 @@ namespace DoomRPG.GameLogic.GameManagers
 
                 WorldObjectInstance worldObject = levelManager.GetWorldObjectAtPosition(tileX, tileY);
 
-                if (worldObject is not null && WorldObjectBlocksProjectilesAt(tileX, tileY))
+                if (worldObject is not null)
                 {
-                    return worldObject;
+                    WorldObject definition = worldObjectDefinitions
+                        .FirstOrDefault(wo => wo.Id.Equals(worldObject.WorldObjectId));
+
+                    if (definition is not null && (definition.BlocksProjectiles || definition.IsExtinguishable))
+                    {
+                        return worldObject;
+                    }
                 }
             }
 

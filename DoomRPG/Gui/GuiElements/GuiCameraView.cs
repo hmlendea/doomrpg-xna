@@ -185,6 +185,8 @@ namespace DoomRPG.Gui.GuiElements
                 }
 
                 // Performs the DDA algorithm.
+                Size2D levelSize = game.GetLevelSize();
+
                 while (!aWallWasHit)
                 {
                     // Advances the ray to the next tile in x or y direction.
@@ -199,6 +201,12 @@ namespace DoomRPG.Gui.GuiElements
                         sideDistanceY += deltaDistanceY;
                         tileY += stepDirection.Y;
                         hitSide = 1;
+                    }
+
+                    // Stop if the ray has escaped the level bounds.
+                    if (tileX < 0 || tileX >= levelSize.Width || tileY < 0 || tileY >= levelSize.Height)
+                    {
+                        break;
                     }
 
                     // Checks whether the ray has hit a wall.

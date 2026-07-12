@@ -4,7 +4,7 @@
     <Id>test</Id>
     <Name>Test Level</Name>
     <Description>This is just a test map. Nothing to see here. Move along.</Description>
-    <Width>8</Width>
+    <Width>14</Width>
     <Height>14</Height>
     <CeilingColourHex>#7A784F</CeilingColourHex>
     <FloorColourHex>#3D3A35</FloorColourHex>
@@ -50,8 +50,7 @@
       <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>9</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>10</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>10</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>11</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>11</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>jammed_door</WallId><X>7</X><Y>11</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>12</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>12</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>0</X><Y>13</Y></WallInstanceEntity>
@@ -62,6 +61,21 @@
       <WallInstanceEntity><WallId>metal_wall</WallId><X>5</X><Y>13</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>6</X><Y>13</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>7</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>8</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>9</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>10</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>11</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>12</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>10</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>11</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>12</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>8</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>9</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>10</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>11</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>12</X><Y>13</Y></WallInstanceEntity>
     </Walls>
     <Mobs>
       <MobInstanceEntity><Id>zombie_pvt_1</Id><MobId>zombie_private</MobId><X>5</X><Y>3</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
@@ -69,7 +83,7 @@
       <MobInstanceEntity><Id>scientist_1</Id><MobId>scientist_male</MobId><X>3</X><Y>3</Y><IsFriendly>true</IsFriendly><Dialogue>The demons breached sector 7 three days ago. Whatever you do, don't go near the red door.</Dialogue></MobInstanceEntity>
       <MobInstanceEntity><Id>zombie_cpt_1</Id><MobId>zombie_captain</MobId><X>3</X><Y>10</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
       <MobInstanceEntity><Id>marine_1</Id><MobId>marine</MobId><X>5</X><Y>12</Y><IsFriendly>true</IsFriendly><Dialogue>Move out, Marine!</Dialogue></MobInstanceEntity>
-      <MobInstanceEntity><Id>civilian_male_1</Id><MobId>civilian_male</MobId><X>1</X><Y>11</Y><IsFriendly>true</IsFriendly><Dialogue>I don't feel like talking.</Dialogue></MobInstanceEntity>
+      <MobInstanceEntity><Id>civilian_male_1</Id><MobId>civilian_male</MobId><X>1</X><Y>9</Y><IsFriendly>true</IsFriendly><Dialogue>I don't feel like talking.</Dialogue></MobInstanceEntity>
     </Mobs>
     <Terminals>
       <TerminalInstanceEntity><Id>terminal_1</Id><Text>Hello world!</Text><SpritesheetName>terminal</SpritesheetName><SpritesheetTextureIndex>0</SpritesheetTextureIndex><X>4</X><Y>0</Y></TerminalInstanceEntity>

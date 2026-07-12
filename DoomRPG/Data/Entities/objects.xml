@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfWorldObjectEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <WorldObjectEntity>
+    <Id>bullet_clip</Id>
+    <Name>Bullet Clip</Name>
+    <Description>A clip of bullets. +10 bullets.</Description>
+    <SpritesheetName>ammo</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <AmmoId>bullet_clip</AmmoId>
+    <AmmoAmount>10</AmmoAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
     <Id>axe</Id>
     <Name>Axe</Name>
     <Description>A heavy fire axe. Can break down jammed doors.</Description>

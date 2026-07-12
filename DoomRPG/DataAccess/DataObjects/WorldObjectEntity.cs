@@ -27,5 +27,9 @@ namespace DoomRPG.DataAccess.DataObjects
         public string WeaponId { get; set; }
 
         public string KeyId { get; set; }
+
+        public string AmmoId { get; set; }
+
+        public int AmmoAmount { get; set; }
     }
 }

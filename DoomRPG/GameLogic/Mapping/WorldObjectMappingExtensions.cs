@@ -22,7 +22,9 @@ namespace DoomRPG.GameLogic.Mapping
             MaximumExplosionDamage = worldObjectEntity.MaximumExplosionDamage,
             HealAmount = worldObjectEntity.HealAmount,
             WeaponId = worldObjectEntity.WeaponId,
-            KeyId = worldObjectEntity.KeyId
+            KeyId = worldObjectEntity.KeyId,
+            AmmoId = worldObjectEntity.AmmoId,
+            AmmoAmount = worldObjectEntity.AmmoAmount
         };
 
         internal static WorldObjectEntity ToDataObject(this WorldObject worldObject) => new()
@@ -39,7 +41,9 @@ namespace DoomRPG.GameLogic.Mapping
             MaximumExplosionDamage = worldObject.MaximumExplosionDamage,
             HealAmount = worldObject.HealAmount,
             WeaponId = worldObject.WeaponId,
-            KeyId = worldObject.KeyId
+            KeyId = worldObject.KeyId,
+            AmmoId = worldObject.AmmoId,
+            AmmoAmount = worldObject.AmmoAmount
         };
 
         internal static IEnumerable<WorldObject> ToDomainModels(this IEnumerable<WorldObjectEntity> worldObjectEntities)

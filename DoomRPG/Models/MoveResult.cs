@@ -9,5 +9,9 @@ namespace DoomRPG.Models
         public string PickedUpWeaponId { get; set; }
 
         public string PickedUpKeyId { get; set; }
+
+        public string PickedUpAmmoId { get; set; }
+
+        public int PickedUpAmmoAmount { get; set; }
     }
 }

@@ -152,7 +152,7 @@ namespace DoomRPG.GameLogic.GameManagers
             WorldObject worldObjectDefinition = worldObjectDefinitions
                 .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectAtTile.WorldObjectId));
 
-            if (worldObjectDefinition is null || (worldObjectDefinition.HealAmount <= 0 && string.IsNullOrEmpty(worldObjectDefinition.WeaponId) && string.IsNullOrEmpty(worldObjectDefinition.KeyId)))
+            if (worldObjectDefinition is null || (worldObjectDefinition.HealAmount <= 0 && string.IsNullOrEmpty(worldObjectDefinition.WeaponId) && string.IsNullOrEmpty(worldObjectDefinition.KeyId) && string.IsNullOrEmpty(worldObjectDefinition.AmmoId)))
             {
                 return new MoveResult();
             }
@@ -178,6 +178,19 @@ namespace DoomRPG.GameLogic.GameManagers
                 {
                     PickedUpObjectName = worldObjectDefinition.Name,
                     PickedUpKeyId = worldObjectDefinition.KeyId
+                };
+            }
+
+            if (!string.IsNullOrEmpty(worldObjectDefinition.AmmoId))
+            {
+                playerManager.AddAmmo(worldObjectDefinition.AmmoId, worldObjectDefinition.AmmoAmount);
+                levelManager.RemoveWorldObject(worldObjectAtTile.Id);
+
+                return new MoveResult
+                {
+                    PickedUpObjectName = worldObjectDefinition.Name,
+                    PickedUpAmmoId = worldObjectDefinition.AmmoId,
+                    PickedUpAmmoAmount = worldObjectDefinition.AmmoAmount
                 };
             }
 

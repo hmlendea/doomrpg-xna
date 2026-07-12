@@ -303,6 +303,10 @@ namespace DoomRPG.Gui.Screens
                 {
                     pickupMessage += $" +{result.HealAmountReceived} HP";
                 }
+                else if (result.PickedUpAmmoAmount > 0)
+                {
+                    pickupMessage += $" +{result.PickedUpAmmoAmount}";
+                }
 
                 ShowNotification(pickupMessage, string.IsNullOrEmpty(result.PickedUpKeyId) ? Colour.Green : Colour.Yellow);
             }

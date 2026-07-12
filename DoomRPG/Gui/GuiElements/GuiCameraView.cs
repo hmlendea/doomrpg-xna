@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NuciXNA.DataAccess.Content;
 using NuciXNA.Graphics.Drawing;
-using NuciXNA.Gui;
 using NuciXNA.Gui.Controls;
 using NuciXNA.Primitives;
 

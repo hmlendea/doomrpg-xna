@@ -99,6 +99,35 @@ namespace DoomRPG.GameLogic.GameManagers
 
         public MoveResult MovePlayer(MovementDirection direction)
         {
+            Player playerForCheck = playerManager.GetPlayer();
+            int dirX = (int)Math.Round(playerForCheck.Direction.X);
+            int dirY = (int)Math.Round(playerForCheck.Direction.Y);
+
+            (int dx, int dy) = direction switch
+            {
+                MovementDirection.North => (dirX, dirY),
+                MovementDirection.South => (-dirX, -dirY),
+                MovementDirection.West => (dirY, -dirX),
+                MovementDirection.East => (-dirY, dirX),
+                _ => (0, 0)
+            };
+
+            int targetX = (int)(playerForCheck.Position.X + dx);
+            int targetY = (int)(playerForCheck.Position.Y + dy);
+
+            WorldObjectInstance blockingWorldObject = levelManager.GetWorldObjectAtPosition(targetX, targetY);
+
+            if (blockingWorldObject is not null)
+            {
+                WorldObject blockingDefinition = worldObjectDefinitions
+                    .FirstOrDefault(wo => wo.Id.Equals(blockingWorldObject.WorldObjectId));
+
+                if (blockingDefinition is not null && blockingDefinition.BlocksMovement)
+                {
+                    return new MoveResult();
+                }
+            }
+
             bool moved = playerManager.MovePlayer(direction);
 
             if (!moved)

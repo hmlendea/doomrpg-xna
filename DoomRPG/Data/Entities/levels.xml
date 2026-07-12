@@ -79,6 +79,7 @@
       <WorldObjectInstanceEntity><Id>barrel_4</Id><WorldObjectId>barrel</WorldObjectId><X>3</X><Y>11</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>barrel_5</Id><WorldObjectId>barrel</WorldObjectId><X>2</X><Y>10</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>barrel_6</Id><WorldObjectId>barrel</WorldObjectId><X>4</X><Y>10</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>crate_1</Id><WorldObjectId>crate</WorldObjectId><X>6</X><Y>9</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>lamp_1</Id><WorldObjectId>lamp</WorldObjectId><X>6</X><Y>3</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>medikit_1</Id><WorldObjectId>medikit</WorldObjectId><X>4</X><Y>2</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>medikit_2</Id><WorldObjectId>medikit</WorldObjectId><X>5</X><Y>10</Y></WorldObjectInstanceEntity>

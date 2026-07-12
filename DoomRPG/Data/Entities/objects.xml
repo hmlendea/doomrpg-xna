@@ -7,8 +7,21 @@
     <Health>20</Health>
     <IsExplosive>true</IsExplosive>
     <BlocksProjectiles>true</BlocksProjectiles>
+    <BlocksMovement>true</BlocksMovement>
     <MinimumExplosionDamage>5</MinimumExplosionDamage>
     <MaximumExplosionDamage>15</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>crate</Id>
+    <Name>Crate</Name>
+    <SpritesheetName>crate</SpritesheetName>
+    <Health>2147483647</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>true</BlocksProjectiles>
+    <BlocksMovement>true</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
     <HealAmount>0</HealAmount>
   </WorldObjectEntity>
   <WorldObjectEntity>
@@ -18,6 +31,7 @@
     <Health>2147483647</Health>
     <IsExplosive>false</IsExplosive>
     <BlocksProjectiles>true</BlocksProjectiles>
+    <BlocksMovement>true</BlocksMovement>
     <MinimumExplosionDamage>0</MinimumExplosionDamage>
     <MaximumExplosionDamage>0</MaximumExplosionDamage>
     <HealAmount>0</HealAmount>

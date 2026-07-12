@@ -331,22 +331,42 @@ namespace DoomRPG.Gui.Screens
         {
             if (e.Key == Keys.Up || e.Key == Keys.W)
             {
+                if (cameraView.camera.IsMovementAnimating)
+                {
+                    return;
+                }
+
                 MoveResult moveResult = game.MovePlayer(MovementDirection.North);
                 HandleMoveResult(moveResult);
             }
             else if (e.Key == Keys.Down || e.Key == Keys.S)
             {
+                if (cameraView.camera.IsMovementAnimating)
+                {
+                    return;
+                }
+
                 MoveResult moveResult = game.MovePlayer(MovementDirection.South);
                 HandleMoveResult(moveResult);
             }
             else if (e.Key == Keys.Left || e.Key == Keys.A)
             {
+                if (cameraView.camera.IsRotationAnimating)
+                {
+                    return;
+                }
+
                 float angle = (float)(Math.PI / 2);
                 game.RotatePlayer(angle);
                 cameraView.camera.Rotate(angle);
             }
             else if (e.Key == Keys.Right || e.Key == Keys.D)
             {
+                if (cameraView.camera.IsRotationAnimating)
+                {
+                    return;
+                }
+
                 float angle = -(float)(Math.PI / 2);
                 game.RotatePlayer(angle);
                 cameraView.camera.Rotate(angle);

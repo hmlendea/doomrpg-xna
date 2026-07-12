@@ -106,6 +106,25 @@ namespace DoomRPG.Gui
             pendingRotation += amount;
         }
 
+        public bool IsMovementAnimating
+        {
+            get
+            {
+                float dx = player.Position.X - Position.X;
+                float dy = player.Position.Y - Position.Y;
+
+                return dx * dx + dy * dy > 0.16f;
+            }
+        }
+
+        public bool IsRotationAnimating
+        {
+            get
+            {
+                return Math.Abs(pendingRotation) > Math.PI / 2 * 0.4f;
+            }
+        }
+
         private void ApplyRotation(float angle)
         {
             float sin = (float)Math.Sin(angle);

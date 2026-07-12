@@ -21,5 +21,7 @@ namespace DoomRPG.Models
         public int MaximumExplosionDamage { get; set; }
 
         public int HealAmount { get; set; }
+
+        public string WeaponId { get; set; }
     }
 }

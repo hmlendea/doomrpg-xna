@@ -32,5 +32,7 @@ namespace DoomRPG.Models
         public bool IsDoor { get; set; }
 
         public bool IsOpen { get; set; }
+
+        public bool IsDestroyed { get; set; }
     }
 }

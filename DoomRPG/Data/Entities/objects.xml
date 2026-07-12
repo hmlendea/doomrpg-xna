@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfWorldObjectEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <WorldObjectEntity>
+    <Id>axe</Id>
+    <Name>Axe</Name>
+    <Description>A heavy fire axe. Can break down jammed doors.</Description>
+    <SpritesheetName>axe</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <WeaponId>axe</WeaponId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
     <Id>barrel</Id>
     <Name>Barrel</Name>
     <SpritesheetName>barrel</SpritesheetName>

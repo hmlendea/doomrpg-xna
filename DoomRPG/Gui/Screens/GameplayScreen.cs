@@ -258,7 +258,14 @@ namespace DoomRPG.Gui.Screens
         {
             if (!string.IsNullOrEmpty(result.PickedUpObjectName))
             {
-                ShowNotification($"Picked up {result.PickedUpObjectName}! +{result.HealAmountReceived} HP", Colour.Green);
+                string pickupMessage = $"Picked up {result.PickedUpObjectName}!";
+
+                if (result.HealAmountReceived > 0)
+                {
+                    pickupMessage += $" +{result.HealAmountReceived} HP";
+                }
+
+                ShowNotification(pickupMessage, Colour.Green);
             }
         }
 

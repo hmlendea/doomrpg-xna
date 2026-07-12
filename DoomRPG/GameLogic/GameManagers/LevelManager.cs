@@ -66,7 +66,7 @@ namespace DoomRPG.GameLogic.GameManagers
         public WallInstance GetWall(int x, int y)
         {
             WallInstance wall = currentLevel.Walls
-                .FirstOrDefault(wallInstance => wallInstance.Position.X == x && wallInstance.Position.Y == y);
+                .FirstOrDefault(wallInstance => wallInstance.Position.X == x && wallInstance.Position.Y == y && !wallInstance.IsDestroyed);
 
             if (wall is not null && wall.IsDoor && wall.IsOpen)
             {
@@ -102,6 +102,17 @@ namespace DoomRPG.GameLogic.GameManagers
             if (worldObjectInstance is not null)
             {
                 worldObjectInstance.IsDestroyed = true;
+            }
+        }
+
+        public void RemoveWallAtPosition(int x, int y)
+        {
+            WallInstance wallInstance = currentLevel.Walls
+                .FirstOrDefault(w => w.Position.X == x && w.Position.Y == y);
+
+            if (wallInstance is not null)
+            {
+                wallInstance.IsDestroyed = true;
             }
         }
 

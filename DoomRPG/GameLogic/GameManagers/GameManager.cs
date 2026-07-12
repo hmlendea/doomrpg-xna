@@ -152,9 +152,21 @@ namespace DoomRPG.GameLogic.GameManagers
             WorldObject worldObjectDefinition = worldObjectDefinitions
                 .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectAtTile.WorldObjectId));
 
-            if (worldObjectDefinition is null || worldObjectDefinition.HealAmount <= 0)
+            if (worldObjectDefinition is null || (worldObjectDefinition.HealAmount <= 0 && string.IsNullOrEmpty(worldObjectDefinition.WeaponId)))
             {
                 return new MoveResult();
+            }
+
+            if (!string.IsNullOrEmpty(worldObjectDefinition.WeaponId))
+            {
+                playerManager.GiveWeapon(worldObjectDefinition.WeaponId);
+                levelManager.RemoveWorldObject(worldObjectAtTile.Id);
+
+                return new MoveResult
+                {
+                    PickedUpObjectName = worldObjectDefinition.Name,
+                    PickedUpWeaponId = worldObjectDefinition.WeaponId
+                };
             }
 
             int actualHeal = Math.Min(worldObjectDefinition.HealAmount, player.MaxHealth - player.Health);
@@ -196,6 +208,30 @@ namespace DoomRPG.GameLogic.GameManagers
             }
 
             levelManager.AdvanceTurn();
+
+            if (weapon.Id.Equals("axe"))
+            {
+                Player playerForAxe = playerManager.GetPlayer();
+                float axeDirX = playerForAxe.Direction.X;
+                float axeDirY = playerForAxe.Direction.Y;
+                float axeMag = (float)Math.Sqrt(axeDirX * axeDirX + axeDirY * axeDirY);
+
+                if (axeMag > 0.0001f)
+                {
+                    axeDirX /= axeMag;
+                    axeDirY /= axeMag;
+
+                    int facingTileX = (int)Math.Floor(playerForAxe.Position.X + axeDirX);
+                    int facingTileY = (int)Math.Floor(playerForAxe.Position.Y + axeDirY);
+                    WallInstance jammedWall = levelManager.GetWall(facingTileX, facingTileY);
+
+                    if (jammedWall is not null && jammedWall.WallId.Equals("jammed_door"))
+                    {
+                        levelManager.RemoveWallAtPosition(facingTileX, facingTileY);
+                        return new AttackResult { Outcome = AttackOutcome.JammedDoorDestroyed };
+                    }
+                }
+            }
 
             WorldObjectInstance worldObjectTarget = FindWorldObjectInView();
 

@@ -10,7 +10,8 @@ namespace DoomRPG.Models
         CriticalKill,
         NoTarget,
         WorldObjectHit,
-        WorldObjectDestroyed
+        WorldObjectDestroyed,
+        JammedDoorDestroyed
     }
 
     public sealed class AttackResult

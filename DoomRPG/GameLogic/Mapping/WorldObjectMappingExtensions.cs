@@ -19,7 +19,8 @@ namespace DoomRPG.GameLogic.Mapping
             BlocksMovement = worldObjectEntity.BlocksMovement,
             MinimumExplosionDamage = worldObjectEntity.MinimumExplosionDamage,
             MaximumExplosionDamage = worldObjectEntity.MaximumExplosionDamage,
-            HealAmount = worldObjectEntity.HealAmount
+            HealAmount = worldObjectEntity.HealAmount,
+            WeaponId = worldObjectEntity.WeaponId
         };
 
         internal static WorldObjectEntity ToDataObject(this WorldObject worldObject) => new()
@@ -33,7 +34,8 @@ namespace DoomRPG.GameLogic.Mapping
             BlocksMovement = worldObject.BlocksMovement,
             MinimumExplosionDamage = worldObject.MinimumExplosionDamage,
             MaximumExplosionDamage = worldObject.MaximumExplosionDamage,
-            HealAmount = worldObject.HealAmount
+            HealAmount = worldObject.HealAmount,
+            WeaponId = worldObject.WeaponId
         };
 
         internal static IEnumerable<WorldObject> ToDomainModels(this IEnumerable<WorldObjectEntity> worldObjectEntities)

@@ -50,6 +50,8 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         void RemoveWorldObject(string worldObjectInstanceId);
 
+        void RemoveWallAtPosition(int x, int y);
+
         int GetTurnNumber();
 
         void AdvanceTurn();

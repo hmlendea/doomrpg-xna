@@ -61,4 +61,64 @@
     <MaximumExplosionDamage>0</MaximumExplosionDamage>
     <HealAmount>25</HealAmount>
   </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>red_key</Id>
+    <Name>Red Key</Name>
+    <Description>A red security keycard. Opens red-coded doors.</Description>
+    <SpritesheetName>key</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
+    <KeyId>red_key</KeyId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>blue_key</Id>
+    <Name>Blue Key</Name>
+    <Description>A blue security keycard. Opens blue-coded doors.</Description>
+    <SpritesheetName>key</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+    <KeyId>blue_key</KeyId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>green_key</Id>
+    <Name>Green Key</Name>
+    <Description>A green security keycard. Opens green-coded doors.</Description>
+    <SpritesheetName>key</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+    <KeyId>green_key</KeyId>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>yellow_key</Id>
+    <Name>Yellow Key</Name>
+    <Description>A yellow security keycard. Opens yellow-coded doors.</Description>
+    <SpritesheetName>key</SpritesheetName>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>0</HealAmount>
+    <SpritesheetTextureIndex>3</SpritesheetTextureIndex>
+    <KeyId>yellow_key</KeyId>
+  </WorldObjectEntity>
 </ArrayOfWorldObjectEntity>

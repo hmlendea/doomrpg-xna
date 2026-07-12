@@ -7,5 +7,7 @@ namespace DoomRPG.Models
         public int HealAmountReceived { get; set; }
 
         public string PickedUpWeaponId { get; set; }
+
+        public string PickedUpKeyId { get; set; }
     }
 }

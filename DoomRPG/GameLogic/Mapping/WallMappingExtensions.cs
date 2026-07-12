@@ -23,7 +23,8 @@ namespace DoomRPG.GameLogic.Mapping
             Description = wallEntity.Description,
             SpritesheetName = wallEntity.SpritesheetName,
             SpritesheetTextureIndex = wallEntity.SpritesheetTextureIndex,
-            IsDoor = wallEntity.IsDoor
+            IsDoor = wallEntity.IsDoor,
+            RequiredKeyId = wallEntity.RequiredKeyId
         };
 
         /// <summary>
@@ -38,7 +39,8 @@ namespace DoomRPG.GameLogic.Mapping
             Description = wall.Description,
             SpritesheetName = wall.SpritesheetName,
             SpritesheetTextureIndex = wall.SpritesheetTextureIndex,
-            IsDoor = wall.IsDoor
+            IsDoor = wall.IsDoor,
+            RequiredKeyId = wall.RequiredKeyId
         };
 
         /// <summary>

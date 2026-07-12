@@ -38,7 +38,7 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         TerminalInstance GetTerminalAtPosition(int x, int y);
 
-        bool InteractWithDoor();
+        string InteractWithDoor();
 
         string InteractWithTerminal();
 

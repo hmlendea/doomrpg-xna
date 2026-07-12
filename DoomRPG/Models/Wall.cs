@@ -33,5 +33,7 @@
         public int SpritesheetTextureIndex { get; set; }
 
         public bool IsDoor { get; set; }
+
+        public string RequiredKeyId { get; set; }
     }
 }

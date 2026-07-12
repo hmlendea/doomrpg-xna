@@ -51,6 +51,10 @@ namespace DoomRPG.GameLogic.GameManagers.Interfaces
 
         bool AllocateStat(StatType stat);
 
+        void GiveKey(string keyId);
+
+        bool HasKey(string keyId);
+
         Player GetPlayer();
     }
 }

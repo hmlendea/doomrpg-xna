@@ -8,6 +8,8 @@ namespace DoomRPG.Models
 
         public string SpritesheetName { get; set; }
 
+        public int SpritesheetTextureIndex { get; set; }
+
         public int Health { get; set; }
 
         public bool IsExplosive { get; set; }
@@ -23,5 +25,7 @@ namespace DoomRPG.Models
         public int HealAmount { get; set; }
 
         public string WeaponId { get; set; }
+
+        public string KeyId { get; set; }
     }
 }

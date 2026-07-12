@@ -27,6 +27,8 @@ namespace DoomRPG.Models
 
         public Dictionary<string, int> AmmoCounts { get; set; } = [];
 
+        public List<string> Keys { get; set; } = [];
+
         public int Strength { get; set; }
 
         public int Agility { get; set; }

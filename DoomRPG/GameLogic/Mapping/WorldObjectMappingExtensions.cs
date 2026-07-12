@@ -13,6 +13,7 @@ namespace DoomRPG.GameLogic.Mapping
             Id = worldObjectEntity.Id,
             Name = worldObjectEntity.Name,
             SpritesheetName = worldObjectEntity.SpritesheetName,
+            SpritesheetTextureIndex = worldObjectEntity.SpritesheetTextureIndex,
             Health = worldObjectEntity.Health,
             IsExplosive = worldObjectEntity.IsExplosive,
             BlocksProjectiles = worldObjectEntity.BlocksProjectiles,
@@ -20,7 +21,8 @@ namespace DoomRPG.GameLogic.Mapping
             MinimumExplosionDamage = worldObjectEntity.MinimumExplosionDamage,
             MaximumExplosionDamage = worldObjectEntity.MaximumExplosionDamage,
             HealAmount = worldObjectEntity.HealAmount,
-            WeaponId = worldObjectEntity.WeaponId
+            WeaponId = worldObjectEntity.WeaponId,
+            KeyId = worldObjectEntity.KeyId
         };
 
         internal static WorldObjectEntity ToDataObject(this WorldObject worldObject) => new()
@@ -28,6 +30,7 @@ namespace DoomRPG.GameLogic.Mapping
             Id = worldObject.Id,
             Name = worldObject.Name,
             SpritesheetName = worldObject.SpritesheetName,
+            SpritesheetTextureIndex = worldObject.SpritesheetTextureIndex,
             Health = worldObject.Health,
             IsExplosive = worldObject.IsExplosive,
             BlocksProjectiles = worldObject.BlocksProjectiles,
@@ -35,7 +38,8 @@ namespace DoomRPG.GameLogic.Mapping
             MinimumExplosionDamage = worldObject.MinimumExplosionDamage,
             MaximumExplosionDamage = worldObject.MaximumExplosionDamage,
             HealAmount = worldObject.HealAmount,
-            WeaponId = worldObject.WeaponId
+            WeaponId = worldObject.WeaponId,
+            KeyId = worldObject.KeyId
         };
 
         internal static IEnumerable<WorldObject> ToDomainModels(this IEnumerable<WorldObjectEntity> worldObjectEntities)

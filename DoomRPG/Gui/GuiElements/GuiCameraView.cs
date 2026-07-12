@@ -281,9 +281,13 @@ namespace DoomRPG.Gui.GuiElements
                 {
                     Mob mobDefinition = game.GetMobDefinition(instance.MobId);
 
+                    Texture2D mobTexture = mobTextures[mobDefinition.SpritesheetName];
+
                     return new SpriteDrawEntry
                     {
-                        Texture = mobTextures[mobDefinition.SpritesheetName],
+                        Texture = mobTexture,
+                        FrameOffsetX = 0,
+                        FrameWidth = mobTexture.Width,
                         PositionX = instance.Position.X,
                         PositionY = instance.Position.Y,
                         SquaredDistance =
@@ -297,9 +301,15 @@ namespace DoomRPG.Gui.GuiElements
                 {
                     WorldObject worldObjectDefinition = game.GetWorldObjectDefinition(instance.WorldObjectId);
 
+                    Texture2D worldObjectTexture = worldObjectTextures[worldObjectDefinition.SpritesheetName];
+                    int frameWidth = worldObjectTexture.Height;
+                    int frameOffsetX = worldObjectDefinition.SpritesheetTextureIndex * frameWidth;
+
                     return new SpriteDrawEntry
                     {
-                        Texture = worldObjectTextures[worldObjectDefinition.SpritesheetName],
+                        Texture = worldObjectTexture,
+                        FrameOffsetX = frameOffsetX,
+                        FrameWidth = frameWidth,
                         PositionX = instance.Position.X,
                         PositionY = instance.Position.Y,
                         SquaredDistance =
@@ -396,9 +406,9 @@ namespace DoomRPG.Gui.GuiElements
                         continue;
                     }
 
-                    int textureX = Math.Clamp(
-                        (stripe - (-spriteWidth / 2 + spriteScreenX)) * entry.Texture.Width / spriteWidth,
-                        0, entry.Texture.Width - 1);
+                    int textureX = entry.FrameOffsetX + Math.Clamp(
+                        (stripe - (-spriteWidth / 2 + spriteScreenX)) * entry.FrameWidth / spriteWidth,
+                        0, entry.FrameWidth - 1);
 
                     int drawLength = drawEndY - drawStartY;
 

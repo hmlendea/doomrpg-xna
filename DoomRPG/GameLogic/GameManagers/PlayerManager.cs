@@ -185,6 +185,17 @@ namespace DoomRPG.GameLogic.GameManagers
             }
         }
 
+        public void GiveKey(string keyId)
+        {
+            if (!player.Keys.Contains(keyId))
+            {
+                player.Keys.Add(keyId);
+            }
+        }
+
+        public bool HasKey(string keyId)
+            => player.Keys.Contains(keyId);
+
         public bool SelectWeapon(string weaponId)
         {
             if (!weaponInventory.Contains(weaponId))

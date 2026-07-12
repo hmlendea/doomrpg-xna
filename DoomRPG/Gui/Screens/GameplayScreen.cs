@@ -106,16 +106,16 @@ namespace DoomRPG.Gui.Screens
             int viewHeight = ScreenManager.Instance.Size.Height - GameDefines.StatusBarHeight;
             bool clickInView = currentMouseState.Y < viewHeight;
 
-            if (currentMouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed
-                && previousMouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released
-                && clickInView)
+            if (currentMouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed &&
+                previousMouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
+                clickInView)
             {
                 PerformAttack();
             }
 
-            if (currentMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed
-                && previousMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Released
-                && clickInView)
+            if (currentMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed &&
+                previousMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
+                clickInView)
             {
                 PerformInteraction();
             }
@@ -152,8 +152,15 @@ namespace DoomRPG.Gui.Screens
 
         private void PerformInteraction()
         {
-            if (game.InteractWithDoor())
+            string doorResult = game.InteractWithDoor();
+
+            if (doorResult is not null)
             {
+                if (!string.IsNullOrEmpty(doorResult))
+                {
+                    ShowNotification(doorResult, Colour.Red);
+                }
+
                 return;
             }
 
@@ -265,7 +272,7 @@ namespace DoomRPG.Gui.Screens
                     pickupMessage += $" +{result.HealAmountReceived} HP";
                 }
 
-                ShowNotification(pickupMessage, Colour.Green);
+                ShowNotification(pickupMessage, string.IsNullOrEmpty(result.PickedUpKeyId) ? Colour.Green : Colour.Yellow);
             }
         }
 

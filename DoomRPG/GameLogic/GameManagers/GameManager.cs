@@ -152,7 +152,7 @@ namespace DoomRPG.GameLogic.GameManagers
             WorldObject worldObjectDefinition = worldObjectDefinitions
                 .FirstOrDefault(worldObject => worldObject.Id.Equals(worldObjectAtTile.WorldObjectId));
 
-            if (worldObjectDefinition is null || (worldObjectDefinition.HealAmount <= 0 && string.IsNullOrEmpty(worldObjectDefinition.WeaponId)))
+            if (worldObjectDefinition is null || (worldObjectDefinition.HealAmount <= 0 && string.IsNullOrEmpty(worldObjectDefinition.WeaponId) && string.IsNullOrEmpty(worldObjectDefinition.KeyId)))
             {
                 return new MoveResult();
             }
@@ -166,6 +166,18 @@ namespace DoomRPG.GameLogic.GameManagers
                 {
                     PickedUpObjectName = worldObjectDefinition.Name,
                     PickedUpWeaponId = worldObjectDefinition.WeaponId
+                };
+            }
+
+            if (!string.IsNullOrEmpty(worldObjectDefinition.KeyId))
+            {
+                playerManager.GiveKey(worldObjectDefinition.KeyId);
+                levelManager.RemoveWorldObject(worldObjectAtTile.Id);
+
+                return new MoveResult
+                {
+                    PickedUpObjectName = worldObjectDefinition.Name,
+                    PickedUpKeyId = worldObjectDefinition.KeyId
                 };
             }
 
@@ -714,7 +726,7 @@ namespace DoomRPG.GameLogic.GameManagers
         public TerminalInstance GetTerminalAtPosition(int x, int y)
             => levelManager.GetTerminalAtPosition(x, y);
 
-        public bool InteractWithDoor()
+        public string InteractWithDoor()
         {
             Player player = playerManager.GetPlayer();
 
@@ -724,7 +736,7 @@ namespace DoomRPG.GameLogic.GameManagers
 
             if (magnitude < 0.0001f)
             {
-                return false;
+                return null;
             }
 
             directionX /= magnitude;
@@ -737,12 +749,22 @@ namespace DoomRPG.GameLogic.GameManagers
 
             if (door is null)
             {
-                return false;
+                return null;
+            }
+
+            Wall doorDefinition = wallDefinitions.FirstOrDefault(w => w.Id.Equals(door.WallId));
+
+            if (doorDefinition is not null && !string.IsNullOrEmpty(doorDefinition.RequiredKeyId))
+            {
+                if (!playerManager.HasKey(doorDefinition.RequiredKeyId))
+                {
+                    return $"Authorization required, but no {doorDefinition.Name.ToLower().Replace(" door", "")} key found.";
+                }
             }
 
             door.IsOpen = !door.IsOpen;
 
-            return true;
+            return string.Empty;
         }
 
         public string InteractWithTerminal()
@@ -794,8 +816,11 @@ namespace DoomRPG.GameLogic.GameManagers
             int tileY = (int)Math.Floor(player.Position.Y + directionY);
 
             MobInstance targetMob = levelManager.GetMobs()
-                .FirstOrDefault(mobInstance => mobInstance.Position.X == tileX && mobInstance.Position.Y == tileY
-                    && mobInstance.IsFriendly && !string.IsNullOrEmpty(mobInstance.Dialogue));
+                .FirstOrDefault(mobInstance =>
+                    mobInstance.Position.X == tileX &&
+                    mobInstance.Position.Y == tileY &&
+                    mobInstance.IsFriendly &&
+                    !string.IsNullOrEmpty(mobInstance.Dialogue));
 
             if (targetMob is null)
             {

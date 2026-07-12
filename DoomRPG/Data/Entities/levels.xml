@@ -4,8 +4,8 @@
     <Id>test</Id>
     <Name>Test Level</Name>
     <Description>This is just a test map. Nothing to see here. Move along.</Description>
-    <Width>14</Width>
-    <Height>14</Height>
+    <Width>16</Width>
+    <Height>16</Height>
     <CeilingColourHex>#7A784F</CeilingColourHex>
     <FloorColourHex>#3D3A35</FloorColourHex>
     <Walls>
@@ -67,15 +67,35 @@
       <WallInstanceEntity><WallId>metal_wall</WallId><X>11</X><Y>9</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>12</X><Y>9</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>9</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>10</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>green_door</WallId><X>13</X><Y>10</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>11</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>12</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>yellow_door</WallId><X>13</X><Y>12</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>13</X><Y>13</Y></WallInstanceEntity>
+      <!-- Green room walls (east of green door at 13,10) -->
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>14</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>15</X><Y>9</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>15</X><Y>10</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>14</X><Y>11</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>15</X><Y>11</Y></WallInstanceEntity>
+      <!-- Yellow room walls (east of yellow door at 13,12) -->
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>15</X><Y>12</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>14</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>15</X><Y>13</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>8</X><Y>13</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>9</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>red_door</WallId><X>9</X><Y>13</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>10</X><Y>13</Y></WallInstanceEntity>
-      <WallInstanceEntity><WallId>metal_wall</WallId><X>11</X><Y>13</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>blue_door</WallId><X>11</X><Y>13</Y></WallInstanceEntity>
       <WallInstanceEntity><WallId>metal_wall</WallId><X>12</X><Y>13</Y></WallInstanceEntity>
+      <!-- Red room walls (south of red door at 9,13) -->
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>8</X><Y>14</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>10</X><Y>14</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>8</X><Y>15</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>9</X><Y>15</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>10</X><Y>15</Y></WallInstanceEntity>
+      <!-- Blue room walls (south of blue door at 11,13) -->
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>12</X><Y>14</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>11</X><Y>15</Y></WallInstanceEntity>
+      <WallInstanceEntity><WallId>metal_wall</WallId><X>12</X><Y>15</Y></WallInstanceEntity>
     </Walls>
     <Mobs>
       <MobInstanceEntity><Id>zombie_pvt_1</Id><MobId>zombie_private</MobId><X>5</X><Y>3</Y><IsFriendly>false</IsFriendly></MobInstanceEntity>
@@ -100,6 +120,10 @@
       <WorldObjectInstanceEntity><Id>lamp_1</Id><WorldObjectId>lamp</WorldObjectId><X>6</X><Y>3</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>medikit_1</Id><WorldObjectId>medikit</WorldObjectId><X>4</X><Y>2</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>medikit_2</Id><WorldObjectId>medikit</WorldObjectId><X>5</X><Y>10</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>red_key_1</Id><WorldObjectId>red_key</WorldObjectId><X>10</X><Y>11</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>blue_key_1</Id><WorldObjectId>blue_key</WorldObjectId><X>9</X><Y>14</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>green_key_1</Id><WorldObjectId>green_key</WorldObjectId><X>11</X><Y>14</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>yellow_key_1</Id><WorldObjectId>yellow_key</WorldObjectId><X>14</X><Y>10</Y></WorldObjectInstanceEntity>
     </WorldObjects>
   </LevelEntity>
 </ArrayOfLevelEntity>

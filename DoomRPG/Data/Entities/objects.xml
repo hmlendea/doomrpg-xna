@@ -112,15 +112,43 @@
     <HealAmount>0</HealAmount>
   </WorldObjectEntity>
   <WorldObjectEntity>
-    <Id>medikit</Id>
-    <Name>Medkit</Name>
-    <SpritesheetName>medikit</SpritesheetName>
+    <Id>health_vial</Id>
+    <Name>Health Vial</Name>
+    <SpritesheetName>health</SpritesheetName>
+    <SpritesheetTextureIndex>0</SpritesheetTextureIndex>
     <Health>1</Health>
     <IsExplosive>false</IsExplosive>
     <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>10</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>sm_medikit</Id>
+    <Name>Sm Medkit</Name>
+    <SpritesheetName>health</SpritesheetName>
+    <SpritesheetTextureIndex>1</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
     <MinimumExplosionDamage>0</MinimumExplosionDamage>
     <MaximumExplosionDamage>0</MaximumExplosionDamage>
     <HealAmount>25</HealAmount>
+  </WorldObjectEntity>
+  <WorldObjectEntity>
+    <Id>lg_medikit</Id>
+    <Name>Lg Medkit</Name>
+    <SpritesheetName>health</SpritesheetName>
+    <SpritesheetTextureIndex>2</SpritesheetTextureIndex>
+    <Health>1</Health>
+    <IsExplosive>false</IsExplosive>
+    <BlocksProjectiles>false</BlocksProjectiles>
+    <BlocksMovement>false</BlocksMovement>
+    <MinimumExplosionDamage>0</MinimumExplosionDamage>
+    <MaximumExplosionDamage>0</MaximumExplosionDamage>
+    <HealAmount>50</HealAmount>
   </WorldObjectEntity>
   <WorldObjectEntity>
     <Id>red_key</Id>

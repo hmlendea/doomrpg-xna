@@ -334,7 +334,7 @@
 /processorParam:TextureFormat=Color
 /build:objects/lamp.png
 
-#begin objects/medikit.png
+#begin objects/health.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -344,4 +344,4 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:objects/medikit.png
+/build:objects/health.png

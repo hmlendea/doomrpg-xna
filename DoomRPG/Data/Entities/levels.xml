@@ -123,8 +123,9 @@
       <WorldObjectInstanceEntity><Id>fire_extinguisher_1</Id><WorldObjectId>fire_extinguisher</WorldObjectId><X>2</X><Y>4</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>bullet_clip_1</Id><WorldObjectId>bullet_clip</WorldObjectId><X>4</X><Y>4</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>lamp_1</Id><WorldObjectId>lamp</WorldObjectId><X>6</X><Y>3</Y></WorldObjectInstanceEntity>
-      <WorldObjectInstanceEntity><Id>medikit_1</Id><WorldObjectId>medikit</WorldObjectId><X>4</X><Y>2</Y></WorldObjectInstanceEntity>
-      <WorldObjectInstanceEntity><Id>medikit_2</Id><WorldObjectId>medikit</WorldObjectId><X>5</X><Y>10</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>health_vial_1</Id><WorldObjectId>health_vial</WorldObjectId><X>4</X><Y>2</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>sm_medikit_1</Id><WorldObjectId>sm_medikit</WorldObjectId><X>5</X><Y>10</Y></WorldObjectInstanceEntity>
+      <WorldObjectInstanceEntity><Id>lg_medikit_1</Id><WorldObjectId>lg_medikit</WorldObjectId><X>1</X><Y>12</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>red_key_1</Id><WorldObjectId>red_key</WorldObjectId><X>10</X><Y>11</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>blue_key_1</Id><WorldObjectId>blue_key</WorldObjectId><X>9</X><Y>14</Y></WorldObjectInstanceEntity>
       <WorldObjectInstanceEntity><Id>green_key_1</Id><WorldObjectId>green_key</WorldObjectId><X>11</X><Y>14</Y></WorldObjectInstanceEntity>

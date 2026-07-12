@@ -709,8 +709,7 @@ namespace DoomRPG.GameLogic.GameManagers
                 return AttackOutcome.Missed;
             }
 
-            // Crit threshold: hitChance * 8 / 5120 (rare at low levels, scales with accuracy investment)
-            int criticalHitThreshold = hitChance * 8 / 5120;
+            int criticalHitThreshold = hitChance * 256 / 5120;
 
             if (roll < criticalHitThreshold)
             {
